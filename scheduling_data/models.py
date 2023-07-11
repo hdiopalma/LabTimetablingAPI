@@ -72,3 +72,14 @@ class GroupMembership(models.Model):
     
     def __str__(self) -> str:
         return f"Group Membership for Participant: {self.participant}, Group: {self.group}, Module: {self.module}, Laboratory: {self.laboratory}"
+    
+class AssistantMembership(models.Model):
+    id = models.AutoField(primary_key=True)
+    assistant = models.ForeignKey(Assistant, on_delete=models.CASCADE)
+    module = models.ForeignKey(Module, on_delete=models.CASCADE)
+    laboratory = models.ForeignKey(Laboratory, on_delete=models.CASCADE)
+    
+    def __str__(self) -> str:
+        return f"Assistant Membership for Assistant: {self.assistant}, Module: {self.module}, Laboratory: {self.laboratory}"
+
+    

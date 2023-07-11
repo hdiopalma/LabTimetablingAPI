@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 #Importing PythonGeeks function from Views.py file
 from LabTimetablingAPI.views import PythonGeeks
@@ -22,4 +22,5 @@ from LabTimetablingAPI.views import PythonGeeks
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('home/', PythonGeeks),
+    path('scheduling/', include('scheduling_data.urls')),
 ]

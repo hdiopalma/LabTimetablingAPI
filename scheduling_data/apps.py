@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class SchedulingConfig(AppConfig):
+class SchedulingDataConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "scheduling"
+    name = "scheduling_data"
