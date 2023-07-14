@@ -18,7 +18,8 @@ class Laboratory(models.Model):
 class Module(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=32)
-    duration = models.DateTimeField(("dd-mm-YYYY"), auto_now=False, auto_now_add=False)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
     laboratory = models.ForeignKey(Laboratory, on_delete=models.CASCADE)
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE)
     
@@ -27,7 +28,7 @@ class Module(models.Model):
 
 class Chapter(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=32)
+    name = models.CharField(max_length=100)
     module = models.ForeignKey(Module, on_delete=models.CASCADE)
     
     def __str__(self) -> str:
@@ -36,7 +37,6 @@ class Chapter(models.Model):
 class Group(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=10)
-    semester = models.ForeignKey(Semester, on_delete=models.CASCADE)
     module = models.ForeignKey(Module, on_delete=models.CASCADE)
     
     def __str__(self) -> str:
@@ -66,19 +66,16 @@ class Assistant(models.Model):
 
 class GroupMembership(models.Model):
     id = models.AutoField(primary_key=True)
-    participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
-    module = models.ForeignKey(Module, on_delete=models.CASCADE)
-    laboratory = models.ForeignKey(Laboratory, on_delete=models.CASCADE)
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name="group_memberships")
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="group_memberships")
     
     def __str__(self) -> str:
         return f"Group Membership for Participant: {self.participant}, Group: {self.group}, Module: {self.module}, Laboratory: {self.laboratory}"
     
 class AssistantMembership(models.Model):
     id = models.AutoField(primary_key=True)
-    assistant = models.ForeignKey(Assistant, on_delete=models.CASCADE)
-    module = models.ForeignKey(Module, on_delete=models.CASCADE)
-    laboratory = models.ForeignKey(Laboratory, on_delete=models.CASCADE)
+    assistant = models.ForeignKey(Assistant, on_delete=models.CASCADE, related_name="assistant_memberships")
+    module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name="assistant_memberships")
     
     def __str__(self) -> str:
         return f"Assistant Membership for Assistant: {self.assistant}, Module: {self.module}, Laboratory: {self.laboratory}"
