@@ -38,9 +38,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "scheduling_data",
-    "scheduling_algorithm",
     "scheduling_api",
+    "scheduling_algorithm",
+    "scheduling_algorithm_api",
     "django_extensions",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -129,3 +131,9 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

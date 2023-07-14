@@ -21,6 +21,5 @@ from LabTimetablingAPI.views import PythonGeeks
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('home/', PythonGeeks),
     path('scheduling/', include('scheduling_data.urls')),
 ]
