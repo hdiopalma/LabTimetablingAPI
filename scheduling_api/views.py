@@ -5,14 +5,30 @@ from rest_framework.response import Response
 # Create your views here.
 
 #serializer
-from .serializer import SemesterSerializer, ParticipantSerializer
+from .serializer import SemesterSerializer, ParticipantSerializer, LaboratorySerializer, ModuleSerializer, ChapterSerialzer, GroupSerializer, AssistantSerializer, GroupMembershipSerializer
 
 #viewset
-from scheduling_data.models import Semester, Participant
+from scheduling_data.models import Semester, Participant, Laboratory, Module, Chapter, Group, Assistant, GroupMembership
 
 class SemesterViewSet(viewsets.ModelViewSet):
     queryset = Semester.objects.all()
     serializer_class = SemesterSerializer
+    
+class LaboratoryViewSet(viewsets.ModelViewSet):
+    queryset = Laboratory.objects.all()
+    serializer_class = LaboratorySerializer
+
+class ModuleViewSet(viewsets.ModelViewSet):
+    queryset = Module.objects.all()
+    serializer_class = ModuleSerializer
+    
+class ChapterViewSet(viewsets.ModelViewSet):
+    queryset = Chapter.objects.all()
+    serializer_class = ChapterSerialzer
+    
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
 
 class ParticipantViewSet(viewsets.ModelViewSet):
     queryset = Participant.objects.all()
@@ -34,3 +50,11 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         
         data['group_membership'] = group_membership_data
         return Response(data)
+
+class AssistantViewSet(viewsets.ModelViewSet):
+    queryset = Assistant.objects.all()
+    serializer_class = AssistantSerializer
+
+class GroupMembershipViewSet(viewsets.ModelViewSet):
+    queryset = GroupMembership.objects.all()
+    serializer_class = GroupMembershipSerializer
