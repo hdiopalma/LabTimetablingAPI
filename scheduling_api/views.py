@@ -29,11 +29,28 @@ class ChapterViewSet(viewsets.ModelViewSet):
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    """
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        data = serializer.data
+        
+        group_memberships = instance.group_memberships.all()
+        group_memberships_data = [
+            {
+                'participant_name' : group_membership.participant.name,
+                'participant_nim' : group_membership.participant.nim
+            }
+            for group_membership in group_memberships
+        ]
+        data['group_membership'] = group_memberships_data
+        return Response(data)
+    """
 
 class ParticipantViewSet(viewsets.ModelViewSet):
     queryset = Participant.objects.all()
     serializer_class = ParticipantSerializer
-    
+    """
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
@@ -50,7 +67,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         
         data['group_membership'] = group_membership_data
         return Response(data)
-
+    """
 class AssistantViewSet(viewsets.ModelViewSet):
     queryset = Assistant.objects.all()
     serializer_class = AssistantSerializer
