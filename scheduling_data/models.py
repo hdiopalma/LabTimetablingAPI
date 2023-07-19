@@ -70,7 +70,7 @@ class GroupMembership(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="group_memberships")
     
     def __str__(self) -> str:
-        return f"Group Membership for Participant: {self.participant}, Group: {self.group}, Module: {self.module}, Laboratory: {self.laboratory}"
+        return f"Group Membership for Participant: {self.participant}, Group: {self.group}"
     
 class AssistantMembership(models.Model):
     id = models.AutoField(primary_key=True)
