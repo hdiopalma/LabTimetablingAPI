@@ -5,7 +5,7 @@ class GeneticAlgorithm(Algorithm):
     def __init__(self) -> None:
         super().__init__()
         
-    def initialize(self):
+    def initialize_solution(self):
         pass
     
     def evaluate_fitness(self, solution):

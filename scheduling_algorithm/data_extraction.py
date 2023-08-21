@@ -1,9 +1,40 @@
 from scheduling_data.models import *
 
+class LaboratoryData:
+    def get_laboratory(self):
+        laboratory = Laboratory.objects.all()
+        return laboratory
+    
+    def get_laboratory_assistant(self,id):
+        laboratory = Laboratory.objects.filter(id=id).first()
+        assistants = laboratory.assistants.all()
+        assistants = [assistant for assistant in assistants]
+        return assistants
+    
+    def get_laboratory_module(self,id):
+        laboratory = Laboratory.objects.filter(id=id).first()
+        modules = laboratory.modules.all()
+        modules = [module for module in modules]
+        return modules
+    
+class ModuleData:
+    def get_module(self):
+        modules = Module.objects.all()
+        return modules
+
 class ParticipantData:
     def get_participants(self):
         participants = Participant.objects.all()
         return participants
+    
+    def get_group(self, id):
+        participant = Participant.objects.filter(id=id).first()
+        group_memberships = participant.group_memberships.all()
+        groups = []
+        for group_membership in group_memberships:
+            group = group_membership.group
+            groups.append(group)
+        return groups
 
 class GroupData:
     def get_groups(self):
