@@ -1,0 +1,7 @@
+from scheduling_algorithm.data_parser.laboratory_data import LaboratoryData
+from scheduling_algorithm.data_parser.module_data import ModuleData
+from scheduling_algorithm.data_parser.chapter_data import ChapterData
+from scheduling_algorithm.data_parser.group_data import GroupData
+from scheduling_algorithm.data_parser.assistant_data import AssistantData
+from scheduling_algorithm.data_parser.participant_data import ParticipantData
+from scheduling_algorithm.data_parser.constant import Constant

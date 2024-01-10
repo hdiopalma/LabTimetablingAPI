@@ -1,0 +1,3 @@
+from scheduling_algorithm.fitness_function.assistant_distribution import AssistantDistributionFitness
+from scheduling_algorithm.fitness_function.group_assignment_conflict import GroupAssignmentConflictFitness
+from scheduling_algorithm.fitness_function.manager import FitnessManager
