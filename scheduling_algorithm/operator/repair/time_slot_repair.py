@@ -2,7 +2,11 @@ import random
 from math import floor
 from datetime import timedelta
 
-from scheduling_algorithm.structure import Chromosome, TimeSlot
+#Simple data structure for timeslot
+from collections import namedtuple
+TimeSlot = namedtuple("TimeSlot", ["date", "day", "shift"])
+
+from scheduling_algorithm.structure import Chromosome
 from scheduling_algorithm.data_parser import ModuleData, GroupData, Constant
 
 from scheduling_algorithm.operator.repair.base_repair import BaseRepair

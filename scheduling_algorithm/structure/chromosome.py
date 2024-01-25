@@ -1,5 +1,7 @@
 import copy
-from scheduling_algorithm.data_parser.constant import Constant
+#Simple data structure for timeslot
+from collections import namedtuple
+TimeSlot = namedtuple("TimeSlot", ["date", "day", "shift"])
 
 class Chromosome:
     def __init__(self, genes: list = []):
@@ -49,7 +51,7 @@ class Chromosome:
         new_chromosome.fitness = self.fitness
         return new_chromosome
 
-    def add_gene(self, laboratory: int, module: int, chapter: int, group: int, assistant: int = None, time_slot: Constant.TimeSlot = None):
+    def add_gene(self, laboratory: int, module: int, chapter: int, group: int, assistant: int = None, time_slot: TimeSlot = None):
         self._gene_data_list.append({"laboratory": laboratory, "module": module, "chapter": chapter, "group": group, "assistant": assistant, "time_slot": time_slot})
 
     def get_gene(self, index):

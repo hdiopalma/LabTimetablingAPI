@@ -23,7 +23,7 @@ class GeneticAlgorithm:
         self.crossover_manager = CrossoverManager([SinglePointCrossover(), TwoPointCrossover(), UniformCrossover()])
         self.mutation_manager = MutationManager([SwapMutation(), ShiftMutation(), RandomMutation()])
         self.repair_manager = RepairManager([TimeSlotRepair()])
-        self.elitism_size = 1
+        self.elitism_size = 2
         self.elitism_selection = ElitismSelection()
 
         self.initial_solution = None
@@ -77,7 +77,7 @@ class GeneticAlgorithm:
     
     def _evolve_population(self, population: Population):
     
-        elitism = self.__elitism(population)
+        elitism = self.__elitism(population).copy()
         children = []
 
         while len(children) < len(population) - self.elitism_size:
@@ -86,9 +86,6 @@ class GeneticAlgorithm:
             children.append(child2)
             
         return Population(children, population.fitness_manager), elitism
-    
-    def log_detail(self, i, best_chromosome, worst_chromosome):
-        self.log[i] = {"best_chromosome": best_chromosome, "worst_chromosome": worst_chromosome}
 
     def run(self, max_iteration: int, population_size: int):
         population = self._init_population(population_size)
@@ -103,7 +100,6 @@ class GeneticAlgorithm:
 
             # Sort the population based on fitness
             population = Population(sorted(population, key=lambda chromosome: chromosome.fitness), population.fitness_manager)
-            self.log_detail(i, population[0].fitness, population[-1].fitness)
             if population[0].fitness == 0:
                 break
         return population[0]

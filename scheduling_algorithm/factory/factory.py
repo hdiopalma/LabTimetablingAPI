@@ -3,11 +3,13 @@ from math import ceil, floor
 import random
 from datetime import timedelta
 
+#Simple data structure for timeslot
 from collections import namedtuple
+TimeSlot = namedtuple("TimeSlot", ["date", "day", "shift"])
 
 from scheduling_algorithm.structure import Chromosome, Population
 from scheduling_algorithm.fitness_function import FitnessManager, AssistantDistributionFitness, GroupAssignmentConflictFitness
-from scheduling_algorithm.structure import Gene, TimeSlot
+from scheduling_algorithm.structure import Gene
 from scheduling_algorithm.data_parser import LaboratoryData, ModuleData, ChapterData, GroupData, ParticipantData, AssistantData, Constant
 
 class Factory:

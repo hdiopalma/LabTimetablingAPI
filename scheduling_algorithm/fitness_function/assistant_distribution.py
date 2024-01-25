@@ -7,7 +7,7 @@ class AssistantDistributionFitness(BaseFitness):
     def __init__(self):
         super().__init__("AssistantDistributionFitness")
         self.max_group_threshold = 15 # Maximum number of groups that can be assigned to a single assistant
-        self.max_shift_threshold = 15 # Maximum number of shifts that can be assigned to a single assistant
+        self.max_shift_threshold = 50 # Maximum number of shifts that can be assigned to a single assistant
         self.group_penalty = 1 # Penalty for each group that exceeds the maximum threshold
         self.shift_penalty = 1 # Penalty for each shift that exceeds the maximum threshold
 

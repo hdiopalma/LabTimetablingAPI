@@ -7,7 +7,7 @@ class GroupAssignmentConflictFitness(BaseFitness):
     """Count the number of groups assigned to a time slot in a lab, and penalize the chromosome if the number of groups exceeds the maximum threshold"""
     def __init__(self):
         super().__init__("GroupAssignmentConflictFitness")
-        self.max_threshold = 2 # Maximum number of groups that can be assigned to a single time slot in lab
+        self.max_threshold = 3 # Maximum number of groups that can be assigned to a single time slot in lab
         self.conflict_penalty = 1 # Penalty for each group that exceeds the maximum threshold
         
         #conflicts[laboratory][module][time_slot] = [groups]

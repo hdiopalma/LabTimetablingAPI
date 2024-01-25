@@ -1,22 +1,77 @@
 from django.shortcuts import render
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 
-from scheduling_data.models import Semester, Laboratory, Module, Chapter, Group, Participant, Assistant
-
+from rest_framework import viewsets
+from rest_framework.response import Response
 # Create your views here.
 
-@csrf_exempt
-def schedule_practicum(request):
-    if request.method == "POST":
-        return JsonResponse({"message": "Hello, world!"})
-    else:
-        return JsonResponse({"error": "Invalid request method"}, status=405)
+#serializer
+from .serializer import SemesterSerializer, ParticipantSerializer, LaboratorySerializer, ModuleSerializer, ChapterSerialzer, GroupSerializer, AssistantSerializer, GroupMembershipSerializer
 
-@csrf_exempt
-def participant_list(request):
-    if request.method == "GET":
-        participants = Participant.objects.all()
-        data = [{'name' : participant.name,'nim' : participant.nim, 'semester' : participant.semester.name, 'regular_schedule': participant.regular_schedule} for participant in participants]
+#viewset
+from scheduling_data.models import Semester, Participant, Laboratory, Module, Chapter, Group, Assistant, GroupMembership
+
+class SemesterViewSet(viewsets.ModelViewSet):
+    queryset = Semester.objects.all()
+    serializer_class = SemesterSerializer
+    
+class LaboratoryViewSet(viewsets.ModelViewSet):
+    queryset = Laboratory.objects.all()
+    serializer_class = LaboratorySerializer
+
+class ModuleViewSet(viewsets.ModelViewSet):
+    queryset = Module.objects.all()
+    serializer_class = ModuleSerializer
+    
+class ChapterViewSet(viewsets.ModelViewSet):
+    queryset = Chapter.objects.all()
+    serializer_class = ChapterSerialzer
+    
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    """
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        data = serializer.data
         
-        return JsonResponse(data, safe=False)
+        group_memberships = instance.group_memberships.all()
+        group_memberships_data = [
+            {
+                'participant_name' : group_membership.participant.name,
+                'participant_nim' : group_membership.participant.nim
+            }
+            for group_membership in group_memberships
+        ]
+        data['group_membership'] = group_memberships_data
+        return Response(data)
+    """
+
+class ParticipantViewSet(viewsets.ModelViewSet):
+    queryset = Participant.objects.all()
+    serializer_class = ParticipantSerializer
+    """
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        data = serializer.data
+
+        group_memberships = instance.group_memberships.all()
+        group_membership_data = [
+            {
+                'group_name':group_membership.group.name,
+                'module_name': group_membership.group.module.name
+             } 
+            for group_membership in group_memberships
+            ]
+        
+        data['group_membership'] = group_membership_data
+        return Response(data)
+    """
+class AssistantViewSet(viewsets.ModelViewSet):
+    queryset = Assistant.objects.all()
+    serializer_class = AssistantSerializer
+
+class GroupMembershipViewSet(viewsets.ModelViewSet):
+    queryset = GroupMembership.objects.all()
+    serializer_class = GroupMembershipSerializer

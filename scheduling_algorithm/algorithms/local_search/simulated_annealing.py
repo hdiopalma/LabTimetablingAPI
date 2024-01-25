@@ -15,7 +15,7 @@ from scheduling_algorithm.algorithms.neighborhood import RandomSwapNeighborhood,
 
 from scheduling_algorithm.operator.repair import RepairManager, TimeSlotRepair
 
-from scheduling_algorithm.fitness_function import FitnessManager
+from scheduling_algorithm.fitness_function import FitnessManager, GroupAssignmentConflictFitness, AssistantDistributionFitness
 
 class SimulatedAnnealing(BaseSearch):
     def __init__(self):
@@ -24,7 +24,7 @@ class SimulatedAnnealing(BaseSearch):
         self.initial_temperature = 100
         self.temperature = 100
         self.temperature_threshold = 0.1
-        self.cooling_rate = 0.01
+        self.cooling_rate = 0.1
         self.max_iteration = 1000
         self.iteration_without_improvement = 0
         self.max_iteration_without_improvement = 100
@@ -42,6 +42,7 @@ class SimulatedAnnealing(BaseSearch):
         self.termination_reason = None
 
         self.repair_manager = RepairManager([TimeSlotRepair()])
+        self.fitness_manager = FitnessManager([GroupAssignmentConflictFitness(), AssistantDistributionFitness()])
 
     def __call__(self, chromosome: Chromosome):
         return self.run(chromosome)

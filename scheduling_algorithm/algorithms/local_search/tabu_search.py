@@ -9,17 +9,17 @@ from scheduling_algorithm.algorithms.neighborhood import BaseNeighborhood, Rando
 
 from scheduling_algorithm.operator.repair import RepairManager, TimeSlotRepair
 
-from scheduling_algorithm.fitness_function import FitnessManager
+from scheduling_algorithm.fitness_function import FitnessManager, GroupAssignmentConflictFitness, AssistantDistributionFitness
 
 class TabuSearch(BaseSearch):
     def __init__(self):
         super().__init__("TabuSearch")
-        self.tabu_list = TabuList(10)
+        self.tabu_list = TabuList(50)
         self.neighborhood = RandomSwapNeighborhood()
         self.max_iteration = 1000
         self.max_time = 60
         self.max_iteration_without_improvement = 100
-        self.max_time_without_improvement = 10
+        self.max_time_without_improvement = 5
         self.iteration = 0
         self.time = 0
         self.iteration_without_improvement = 0
@@ -33,6 +33,7 @@ class TabuSearch(BaseSearch):
         self.debug = False
 
         self.repair_manager = RepairManager([TimeSlotRepair()])
+        self.fitness_manager = FitnessManager([GroupAssignmentConflictFitness(), AssistantDistributionFitness()])
 
     def __call__(self, chromosome: Chromosome):
         return self.run(chromosome)
@@ -64,12 +65,7 @@ class TabuSearch(BaseSearch):
         # Start the search
         start = time.time()
         while self.iteration < self.max_iteration and self.time < self.max_time and self.iteration_without_improvement < self.max_iteration_without_improvement and self.time_without_improvement < self.max_time_without_improvement:
-            #self.log.append({"iteration": self.iteration, "time": self.time, "iteration_without_improvement": self.iteration_without_improvement, "time_without_improvement": self.time_without_improvement, "fitness": self.best_fitness})
-            #self.log_detail.append({"iteration": self.iteration, "time": self.time, "iteration_without_improvement": self.iteration_without_improvement, "time_without_improvement": self.time_without_improvement, "fitness": self.best_fitness, "chromosome": self.best_chromosome})
-            # Get the neighbors
             neighbors = self.get_neighbors(self.best_chromosome)
-            # Repair the neighbors
-            # Calculate the fitness of the neighbors
             self.calculate_fitness(neighbors)
             # Select the best neighbor
             best_neighbor = self.select_best_neighbor(neighbors)
