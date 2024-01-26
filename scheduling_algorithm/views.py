@@ -142,13 +142,7 @@ class GenerateTimetabling(APIView):
                                     max_time_without_improvement=data['local_search'].get('max_time_without_improvement', 5))
             
         else:
-            local_search = SimulatedAnnealing()
-            local_search.configure(fitness_manager=fitness_manager, 
-                                    neighborhood=neighborhood, 
-                                    initial_temperature=data['local_search'].get('initial_temperature', 100),
-                                    cooling_rate=data['local_search'].get('cooling_rate', 0.1),
-                                    max_iteration=data['local_search'].get('max_iteration', 1000),
-                                    max_time=data['local_search'].get('max_time', 60))
+            return Response({"error": "No local search is selected"}, status=status.HTTP_400_BAD_REQUEST)
             
         return local_search
     
@@ -170,7 +164,6 @@ class GenerateTimetabling(APIView):
         elitism_size = data.get('elitism_size', 2)
 
         # Initialize the algorithm
-        # If the algorithm is genetic algorithm
         if data['algorithm']['genetic_algorithm']:
             algorithm = GeneticAlgorithm()
             algorithm.configure(factory=factory, 
@@ -182,8 +175,8 @@ class GenerateTimetabling(APIView):
                                 elitism_selection=elitism,
                                 elitism_size= elitism_size)
             
-        # If the algorithm is genetic local search
         elif data['algorithm']['genetic_local_search']:
+            # Configure the local search
             neighborhood = self.configure_neighborhood(data)
             local_search = self.configure_local_search(data, fitness_manager, neighborhood)
             # Main Algorithm   
@@ -199,15 +192,7 @@ class GenerateTimetabling(APIView):
                                 local_search=local_search)
             
         else:
-            algorithm = GeneticAlgorithm()
-            algorithm.configure(factory=factory, 
-                                fitness_manager=fitness_manager, 
-                                selection_manager=selection_manager, 
-                                crossover_manager=crossover_manager, 
-                                mutation_manager=mutation_manager, 
-                                repair_manager=repair_manager, 
-                                elitism_selection=elitism,
-                                elitism_size= elitism_size)
+            return Response({"error": "No algorithm is selected"}, status=status.HTTP_400_BAD_REQUEST)
             
         # Run the algorithm
         try:
