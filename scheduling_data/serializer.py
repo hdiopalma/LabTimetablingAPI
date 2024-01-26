@@ -31,16 +31,29 @@ class ChapterSerialzer(serializers.HyperlinkedModelSerializer):
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     #module = ModuleSerializer()
     participants = serializers.SerializerMethodField()
+    regular_schedule = serializers.SerializerMethodField()
     
     def get_participants(self, instance):
         group_memberships = instance.group_memberships.all()
         participants = [gm.participant for gm in group_memberships]
         return ParticipantSerializer(participants, many=True, context=self.context).data
         
+    def get_regular_schedule(self, instance):
+        group_memberships = instance.group_memberships.all()
+        participants = [gm.participant for gm in group_memberships]
+        schedules = [p.regular_schedule for p in participants]
+        days = schedules[0].keys()
+        merged_schedule = {day:{} for day in days}
+        for day in days:
+            for shift in schedules[0][day]:
+                is_available = all([schedule[day][shift] for schedule in schedules])
+                merged_schedule[day][shift] = is_available
+        return merged_schedule
+
     class Meta:
         model = Group
         id = serializers.ReadOnlyField()
-        fields = ['url','name','module','participants']
+        fields = ['url','name','module','participants','regular_schedule']
         
 class ParticipantSerializer(serializers.HyperlinkedModelSerializer):
     #semester = SemesterSerializer()
@@ -52,7 +65,7 @@ class ParticipantSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Participant
         id = serializers.ReadOnlyField()
-        fields = ['url','name','nim','semester','groups']
+        fields = ['url','name','nim','semester','groups','regular_schedule']
 
 class AssistantSerializer(serializers.HyperlinkedModelSerializer):
     laboratory = LaboratorySerializer()

@@ -14,6 +14,7 @@ class SemesterViewSet(viewsets.ModelViewSet):
     queryset = Semester.objects.all()
     serializer_class = SemesterSerializer
     
+    
 class LaboratoryViewSet(viewsets.ModelViewSet):
     queryset = Laboratory.objects.all()
     serializer_class = LaboratorySerializer
@@ -50,24 +51,16 @@ class GroupViewSet(viewsets.ModelViewSet):
 class ParticipantViewSet(viewsets.ModelViewSet):
     queryset = Participant.objects.all()
     serializer_class = ParticipantSerializer
-    """
-    def retrieve(self, request, *args, **kwargs):
+    
+    #update
+    def update(self, request, *args, **kwargs):
         instance = self.get_object()
+        data = request.data
+        instance.name = data['name']
+        instance.save()
         serializer = self.get_serializer(instance)
-        data = serializer.data
-
-        group_memberships = instance.group_memberships.all()
-        group_membership_data = [
-            {
-                'group_name':group_membership.group.name,
-                'module_name': group_membership.group.module.name
-             } 
-            for group_membership in group_memberships
-            ]
-        
-        data['group_membership'] = group_membership_data
-        return Response(data)
-    """
+        return Response(serializer.data)
+    
 class AssistantViewSet(viewsets.ModelViewSet):
     queryset = Assistant.objects.all()
     serializer_class = AssistantSerializer

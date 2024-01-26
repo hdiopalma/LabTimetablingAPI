@@ -54,7 +54,7 @@ class GroupData:
             schedule = []
             for participant in participants:
                 schedule.append(participant.regular_schedule)
-            return schedule
+            return schedule 
         return None
     
     @classmethod

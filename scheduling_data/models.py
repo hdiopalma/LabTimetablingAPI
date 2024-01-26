@@ -24,7 +24,8 @@ class Module(models.Model):
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='modules')
     
     def __str__(self) -> str:
-        return self.name
+        return f"{self.name} - {self.laboratory.name} - {self.semester.name}"
+        #return self.name
 
 class Chapter(models.Model):
     id = models.AutoField(primary_key=True)
@@ -47,7 +48,7 @@ class Participant(models.Model):
     name = models.CharField(max_length=50)
     nim = models.CharField(max_length=12)
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='participants')
-    regular_schedule = models.JSONField() 
+    regular_schedule = models.JSONField() # {day: {shift: True/False}}
     
     def __str__(self) -> str:
         return self.name
