@@ -106,5 +106,6 @@ class CrossoverManager:
     def get_random_crossover(self):
         return random.choices(self.crossover_functions, weights=[crossover.probability_weight for crossover in self.crossover_functions])[0]
     
-    def configure(self, crossover_functions: List[BaseCrossover]):
-        self.crossover_functions = crossover_functions
+    def configure(self, crossover_probability):
+        self.crossover_probability = crossover_probability
+        return self

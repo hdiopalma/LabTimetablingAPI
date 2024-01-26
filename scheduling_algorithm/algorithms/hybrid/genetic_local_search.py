@@ -17,6 +17,8 @@ from scheduling_algorithm.operator.mutation import MutationManager
 from scheduling_algorithm.operator.repair import RepairManager
 from scheduling_algorithm.operator.selection import SelectionManager, ElitismSelection
 
+import time
+
 class GeneticLocalSearch(GeneticAlgorithm):
     def __init__(self):
         super().__init__()
@@ -29,6 +31,9 @@ class GeneticLocalSearch(GeneticAlgorithm):
         return self.__str__()
     
     def run(self, max_iteration: int, population_size: int):
+        '''Run the hybrid algorithm.
+        '''
+        time_start = time.time()
         # Initialize the population
         population = self._init_population(population_size)
         # Calculate the fitness of the population
@@ -61,6 +66,8 @@ class GeneticLocalSearch(GeneticAlgorithm):
                 best_chromosome = population[0].copy()
 
             iteration += 1
+        time_end = time.time()
+        self.log['time_elapsed'] = time_end - time_start
         return best_chromosome
     
     def configure(self, factory: Factory = None, fitness_manager: FitnessManager = None, selection_manager: SelectionManager = None, crossover_manager: CrossoverManager = None, mutation_manager: MutationManager = None, repair_manager: RepairManager = None, elitism_selection: ElitismSelection = None, elitism_size: int = 1, local_search: TabuSearch = None):

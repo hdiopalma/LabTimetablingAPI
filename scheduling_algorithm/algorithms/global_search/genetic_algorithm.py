@@ -14,6 +14,7 @@ from scheduling_algorithm.operator.crossover import CrossoverManager, SinglePoin
 from scheduling_algorithm.operator.mutation import MutationManager, SwapMutation, ShiftMutation, RandomMutation
 from scheduling_algorithm.operator.repair import RepairManager, TimeSlotRepair
 
+import time
 
 class GeneticAlgorithm:
     def __init__(self):
@@ -88,6 +89,7 @@ class GeneticAlgorithm:
         return Population(children, population.fitness_manager), elitism
 
     def run(self, max_iteration: int, population_size: int):
+        time_start = time.time()
         population = self._init_population(population_size)
         population.calculate_fitness()
         population = Population(sorted(population, key=lambda chromosome: chromosome.fitness), population.fitness_manager)
@@ -102,6 +104,8 @@ class GeneticAlgorithm:
             population = Population(sorted(population, key=lambda chromosome: chromosome.fitness), population.fitness_manager)
             if population[0].fitness == 0:
                 break
+        time_end = time.time()
+        self.log['time_elapsed'] = time_end - time_start
         return population[0]
     
     def configure(self, factory: Factory = None, fitness_manager: FitnessManager = None, selection_manager: SelectionManager = None, crossover_manager: CrossoverManager = None, mutation_manager: MutationManager = None, repair_manager: RepairManager = None, elitism_selection: ElitismSelection = None, elitism_size: int = 1):

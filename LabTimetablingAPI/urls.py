@@ -23,4 +23,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # path('scheduling/', include('scheduling_data.urls')),
     path('data/', include('scheduling_data.urls')),
+    path('algorithm/', include('scheduling_algorithm.urls')),
 ]   

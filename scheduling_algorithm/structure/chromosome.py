@@ -65,3 +65,6 @@ class Chromosome:
 
     def set_time_slot(self, index, time_slot):
         self._gene_data_list[index]["time_slot"] = time_slot
+
+    def to_json(self):
+        return {"gene_data": self._gene_data_list, "fitness": self.fitness}

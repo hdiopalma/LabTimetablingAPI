@@ -116,5 +116,6 @@ class MutationManager:
     def get_random_mutation(self):
         return random.choices(self.mutation_functions, weights=[mutation.probability_weight for mutation in self.mutation_functions])[0]
     
-    def configure(self, mutation_functions: List[BaseMutation]):
-        self.mutation_functions = mutation_functions
+    def configure(self, mutation_probability):
+        self.mutation_probability = mutation_probability
+        return self
