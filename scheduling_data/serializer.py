@@ -11,7 +11,7 @@ class LaboratorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Laboratory
         id = serializers.ReadOnlyField()
-        fields = ['url','name']
+        fields = ['id','url','name']
         
 class ModuleSerializer(serializers.HyperlinkedModelSerializer):
     #laboratory = LaboratorySerializer()
