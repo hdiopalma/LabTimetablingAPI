@@ -49,6 +49,7 @@ class Participant(models.Model):
     nim = models.CharField(max_length=12)
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='participants')
     regular_schedule = models.JSONField() # {day: {shift: True/False}}
+    groups = models.ManyToManyField(Group, through='GroupMembership', related_name='participants')
     
     def __str__(self) -> str:
         return self.name
