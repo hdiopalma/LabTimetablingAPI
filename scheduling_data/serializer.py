@@ -5,7 +5,7 @@ class SemesterSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Semester
         id = serializers.ReadOnlyField()
-        fields = ['id','url','name']
+        fields = ['id','url','name','status']
         
 class LaboratorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
