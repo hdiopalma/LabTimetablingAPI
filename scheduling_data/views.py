@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from rest_framework import viewsets
 from rest_framework.response import Response
+from rest_framework import status
 # Create your views here.
 
 #serializer
@@ -13,6 +14,13 @@ from scheduling_data.models import Semester, Participant, Laboratory, Module, Ch
 class SemesterViewSet(viewsets.ModelViewSet):
     queryset = Semester.objects.all()
     serializer_class = SemesterSerializer
+
+    #post
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        semester = Semester.objects.create(name=data['name'], status=data['status'])
+        serializer = self.get_serializer(semester)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=self.get_success_headers(serializer.data))
     
     
 class LaboratoryViewSet(viewsets.ModelViewSet):

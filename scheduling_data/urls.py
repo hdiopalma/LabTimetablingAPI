@@ -18,7 +18,7 @@ router.register(r'memberships', views.GroupMembershipViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('semester/', views.SemesterViewSet.as_view({'get': 'list'})),
+    path('semester/', views.SemesterViewSet.as_view({'get': 'list', 'post': 'create'})),
     path('lab/', views.LaboratoryViewSet.as_view({'get':'list'})),
     path('module/', views.ModuleViewSet.as_view({'get':'list'})),
     path('chapter/', views.ChapterViewSet.as_view({'get':'list'})),
