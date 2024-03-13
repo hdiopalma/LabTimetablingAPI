@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from rest_framework import viewsets
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
 from rest_framework import status
 # Create your views here.
 
@@ -11,6 +12,11 @@ from .serializer import SemesterSerializer, ParticipantSerializer, LaboratorySer
 #viewset
 from scheduling_data.models import Semester, Participant, Laboratory, Module, Chapter, Group, Assistant, GroupMembership
 
+class CustomPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
+
 class SemesterViewSet(viewsets.ModelViewSet):
     queryset = Semester.objects.all()
     serializer_class = SemesterSerializer
@@ -18,9 +24,17 @@ class SemesterViewSet(viewsets.ModelViewSet):
     #post
     def create(self, request, *args, **kwargs):
         data = request.data
-        semester = Semester.objects.create(name=data['name'], status=data['status'])
+        name = data['name']
+        status_semester = data['status'].capitalize()
+        semester = Semester.objects.create(name=name, status=status_semester)
         serializer = self.get_serializer(semester)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=self.get_success_headers(serializer.data))
+    
+    #delete
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
     
     
 class LaboratoryViewSet(viewsets.ModelViewSet):
@@ -59,6 +73,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 class ParticipantViewSet(viewsets.ModelViewSet):
     queryset = Participant.objects.all()
     serializer_class = ParticipantSerializer
+    pagination_class = CustomPagination
     
     #update
     def update(self, request, *args, **kwargs):
