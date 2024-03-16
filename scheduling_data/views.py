@@ -20,6 +20,7 @@ class CustomPagination(PageNumberPagination):
 class SemesterViewSet(viewsets.ModelViewSet):
     queryset = Semester.objects.all()
     serializer_class = SemesterSerializer
+    pagination_class = CustomPagination
 
     #post
     def create(self, request, *args, **kwargs):
@@ -28,7 +29,36 @@ class SemesterViewSet(viewsets.ModelViewSet):
         status_semester = data['status'].capitalize()
         semester = Semester.objects.create(name=name, status=status_semester)
         serializer = self.get_serializer(semester)
+        #if status_semester is true, then set other semester status to false
+        if status_semester == 'True':
+            #Get all semester with status true
+            semesters = Semester.objects.filter(status=True)
+            for sem in semesters:
+                if sem.id != semester.id:
+                    sem.status = False
+                    sem.save()
+
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=self.get_success_headers(serializer.data))
+    
+    #update
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        data = request.data
+        instance.name = data['name']
+        instance.status = data['status'].capitalize()
+        instance.save()
+
+        #if status_semester is true, then set other semester status to false
+        if instance.status == 'True':
+            #Get all semester with status true
+            semesters = Semester.objects.filter(status=True)
+            for sem in semesters:
+                if sem.id != instance.id:
+                    sem.status = False
+                    sem.save()
+
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
     #delete
     def destroy(self, request, *args, **kwargs):
