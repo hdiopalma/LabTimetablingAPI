@@ -6,6 +6,9 @@ class SemesterSerializer(serializers.HyperlinkedModelSerializer):
         model = Semester
         id = serializers.ReadOnlyField()
         fields = ['id','url','name','status']
+
+    def children(self, instance):
+        return [module for module in instance.modules.all()]
         
 class LaboratorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

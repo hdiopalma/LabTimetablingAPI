@@ -40,6 +40,7 @@ class SemesterViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=self.get_success_headers(serializer.data))
     
+    
     #update
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -63,8 +64,18 @@ class SemesterViewSet(viewsets.ModelViewSet):
     #delete
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
-        instance.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        
+        # Check if semester has child objects
+        
+        if instance.has_children():
+            #return status 400 bad request and message
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message':'Semester has child objects'})
+        
+        try:
+            self.perform_destroy(instance)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message':'Failed to delete semester'})
     
     
 class LaboratoryViewSet(viewsets.ModelViewSet):

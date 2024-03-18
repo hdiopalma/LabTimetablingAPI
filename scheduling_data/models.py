@@ -5,6 +5,12 @@ class Semester(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=24)
     status = models.BooleanField(default=False)
+
+    def children(self):
+        return [module for module in self.modules.all()]
+    
+    def has_children(self):
+        return self.modules.count() > 0
     
     def __str__(self) -> str:
         return self.name
