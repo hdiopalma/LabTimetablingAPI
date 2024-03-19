@@ -27,6 +27,27 @@ class Semester(models.Model):
 class Laboratory(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=32)
+
+    def has_module(self):
+        return self.modules.count() > 0
+    
+    def has_assistant(self):
+        return self.assistants.count() > 0
+    
+    def has_children(self):
+        return self.modules.count() > 0 or self.assistants.count() > 0
+    
+    def module_count(self):
+        return self.modules.count()
+    
+    def assistant_count(self):
+        return self.assistants.count()
+    
+    def group_count(self):
+        return sum([module.groups.count() for module in self.modules.all()])
+    
+    def participant_count(self):
+        return sum([group.participants.count() for module in self.modules.all() for group in module.groups.all()])
     
     def __str__(self) -> str:
         return self.name

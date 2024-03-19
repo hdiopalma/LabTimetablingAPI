@@ -64,9 +64,11 @@ class SemesterViewSet(viewsets.ModelViewSet):
     #delete
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
+
+        if instance.status:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message':'Semester aktif tidak dapat dihapus'})
         
         # Check if semester has child objects
-        
         if instance.has_children():
             #return status 400 bad request and message
             return Response(status=status.HTTP_400_BAD_REQUEST, data={'message':'Semester masih terikat dengan data modul'})
@@ -113,6 +115,38 @@ class SemesterViewSet(viewsets.ModelViewSet):
 class LaboratoryViewSet(viewsets.ModelViewSet):
     queryset = Laboratory.objects.all()
     serializer_class = LaboratorySerializer
+
+    def count(self, request, *args, **kwargs):
+        laboratory_count = self.queryset.count()
+        return Response({'laboratory_count':laboratory_count})
+    
+    def count_module(self, request, *args, **kwargs):
+        instance = self.get_object()
+        module_count = instance.module_count()
+        return Response({'module_count':module_count})
+    
+    def count_assistant(self, request, *args, **kwargs):
+        instance = self.get_object()
+        assistant_count = instance.assistant_count()
+        return Response({'assistant_count':assistant_count})
+    
+    def count_group(self, request, *args, **kwargs):
+        instance = self.get_object()
+        group_count = instance.group_count()
+        return Response({'group_count':group_count})
+    
+    def count_participant(self, request, *args, **kwargs):
+        instance = self.get_object()
+        participant_count = instance.participant_count()
+        return Response({'participant_count':participant_count})
+    
+    def count_all(self, request, *args, **kwargs):
+        instance = self.get_object()
+        module_count = instance.module_count()
+        assistant_count = instance.assistant_count()
+        group_count = instance.group_count()
+        participant_count = instance.participant_count()
+        return Response({'module_count':module_count, 'assistant_count':assistant_count, 'group_count':group_count, 'participant_count':participant_count})
 
 class ModuleViewSet(viewsets.ModelViewSet):
     queryset = Module.objects.all()
