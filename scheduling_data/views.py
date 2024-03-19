@@ -69,13 +69,45 @@ class SemesterViewSet(viewsets.ModelViewSet):
         
         if instance.has_children():
             #return status 400 bad request and message
-            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message':'Semester has child objects'})
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message':'Semester masih terikat dengan data modul'})
         
         try:
             self.perform_destroy(instance)
             return Response(status=status.HTTP_204_NO_CONTENT)
         except:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={'message':'Failed to delete semester'})
+        
+    #custom method
+    #count semester
+    def count(self, request, *args, **kwargs):
+        semester_count = self.queryset.count()
+        return Response({'semester_count':semester_count})
+    
+    #count module
+    def count_module(self, request, *args, **kwargs):
+        instance = self.get_object()
+        module_count = instance.module_count()
+        return Response({'module_count':module_count})
+    
+    #count group
+    def count_group(self, request, *args, **kwargs):
+        instance = self.get_object()
+        group_count = instance.group_count()
+        return Response({'group_count':group_count})
+    
+    #count participant
+    def count_participant(self, request, *args, **kwargs):
+        instance = self.get_object()
+        participant_count = instance.participant_count()
+        return Response({'participant_count':participant_count})
+    
+    #count all
+    def count_all(self, request, *args, **kwargs):
+        instance = self.get_object()
+        module_count = instance.module_count()
+        group_count = instance.group_count()
+        participant_count = instance.participant_count()
+        return Response({'module_count':module_count, 'group_count':group_count, 'participant_count':participant_count})
     
     
 class LaboratoryViewSet(viewsets.ModelViewSet):

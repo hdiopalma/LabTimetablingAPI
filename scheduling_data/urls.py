@@ -18,7 +18,6 @@ router.register(r'memberships', views.GroupMembershipViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('semester/', views.SemesterViewSet.as_view({'get': 'list', 'post': 'create'})),
     path('lab/', views.LaboratoryViewSet.as_view({'get':'list'})),
     path('module/', views.ModuleViewSet.as_view({'get':'list'})),
     path('chapter/', views.ChapterViewSet.as_view({'get':'list'})),
@@ -28,7 +27,6 @@ urlpatterns = [
     path('memberships/', views.GroupMembershipViewSet.as_view({'get':'list'})),
 
     #save data
-    path('semester/save/', views.SemesterViewSet.as_view({'post':'create'})),
     path('lab/save/', views.LaboratoryViewSet.as_view({'post':'create'})),
     path('module/save/', views.ModuleViewSet.as_view({'post':'create'})),
     path('chapter/save/', views.ChapterViewSet.as_view({'post':'create'})),
@@ -36,7 +34,6 @@ urlpatterns = [
     path('participant/save/', views.ParticipantViewSet.as_view({'post':'create'})),
 
     #update data
-    path('semester/update/<int:pk>/', views.SemesterViewSet.as_view({'put':'update'})),
     path('lab/update/<int:pk>/', views.LaboratoryViewSet.as_view({'put':'update'})),
     path('module/update/<int:pk>/', views.ModuleViewSet.as_view({'put':'update'})),
     path('chapter/update/<int:pk>/', views.ChapterViewSet.as_view({'put':'update'})),
@@ -44,6 +41,17 @@ urlpatterns = [
     path('participant/<int:pk>/update/', views.ParticipantViewSet.as_view({'put':'update'})),
     path('assistant/update/<int:pk>/', views.AssistantViewSet.as_view({'put':'update'})),
     path('memberships/update/<int:pk>/', views.GroupMembershipViewSet.as_view({'put':'update'})),
+
+    #semester
+    path('semester/', views.SemesterViewSet.as_view({'get': 'list', 'post': 'create'})),
+    path('semester/save/', views.SemesterViewSet.as_view({'post':'create'})),
+    path('semester/update/<int:pk>/', views.SemesterViewSet.as_view({'put':'update'})),
+    path('semester/count/', views.SemesterViewSet.as_view({'get':'count'})),
+    path('semester/<int:pk>/count/module/', views.SemesterViewSet.as_view({'get':'count_module'})),
+    path('semester/<int:pk>/count/group/', views.SemesterViewSet.as_view({'get':'count_group'})),
+    path('semester/<int:pk>/count/participant/', views.SemesterViewSet.as_view({'get':'count_participant'})),
+    path('semester/<int:pk>/count/all', views.SemesterViewSet.as_view({'get':'count_all'})),
+    path('semester/<int:pk>/count/', views.SemesterViewSet.as_view({'get':'count_all'})),
     
 
 ]

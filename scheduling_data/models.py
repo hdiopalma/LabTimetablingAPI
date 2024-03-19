@@ -12,6 +12,15 @@ class Semester(models.Model):
     def has_children(self):
         return self.modules.count() > 0
     
+    def module_count(self):
+        return self.modules.count()
+    
+    def group_count(self):
+        return sum([module.groups.count() for module in self.modules.all()])
+    
+    def participant_count(self):
+        return self.participants.count()
+    
     def __str__(self) -> str:
         return self.name
 
