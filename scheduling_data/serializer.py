@@ -6,13 +6,6 @@ class SemesterSerializer(serializers.ModelSerializer):
         model = Semester
         id = serializers.ReadOnlyField()
         fields = ['id','url','name','status']
-        
-class LaboratorySerializer(serializers.ModelSerializer):
-    semester = SemesterSerializer()
-    class Meta:
-        model = Laboratory
-        id = serializers.ReadOnlyField()
-        fields = ['id','url','name','semester']
 
 class LaboratoryWriteSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,7 +21,7 @@ class LaboratoryReadSerializer(serializers.ModelSerializer):
         fields = ['id','url','name','semester']
         
 class ModuleSerializer(serializers.ModelSerializer):
-    laboratory = LaboratorySerializer()
+    laboratory = LaboratoryReadSerializer()
     semester = SemesterSerializer()
     class Meta:
         model = Module
@@ -87,7 +80,7 @@ class ParticipantSerializer(serializers.ModelSerializer):
         fields = ['id','url','name','nim','semester','groups','regular_schedule']
 
 class AssistantSerializer(serializers.ModelSerializer):
-    laboratory = LaboratorySerializer()
+    laboratory = LaboratoryReadSerializer()
     semester = SemesterSerializer()
 
     class Meta:

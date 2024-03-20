@@ -4,10 +4,12 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import status
+
+from .mixin import ReadWriteSerializerMixin
 # Create your views here.
 
 #serializer
-from .serializer import SemesterSerializer, ParticipantSerializer, LaboratorySerializer, ModuleSerializer, ChapterSerialzer, GroupSerializer, AssistantSerializer, GroupMembershipSerializer
+from .serializer import *
 
 #viewset
 from scheduling_data.models import Semester, Participant, Laboratory, Module, Chapter, Group, Assistant, GroupMembership
@@ -112,11 +114,24 @@ class SemesterViewSet(viewsets.ModelViewSet):
         return Response({'module_count':module_count, 'group_count':group_count, 'participant_count':participant_count})
     
     
-class LaboratoryViewSet(viewsets.ModelViewSet):
+class LaboratoryViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     queryset = Laboratory.objects.all()
-    serializer_class = LaboratorySerializer
     pagination_class = CustomPagination
 
+    read_serializer_class = LaboratoryReadSerializer
+    write_serializer_class = LaboratoryWriteSerializer
+
+    def update(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()
+            serializer = self.get_serializer(instance, data=request.data, partial=True)
+            serializer.is_valid(raise_exception=True)
+            updated_instance = serializer.save()
+            updated_serializer = self.get_read_serializer_class()(updated_instance, context=self.get_serializer_context())
+            return Response(updated_serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': str(e)})
+        
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         # Check if laboratory has child objects
