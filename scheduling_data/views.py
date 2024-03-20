@@ -71,7 +71,7 @@ class SemesterViewSet(viewsets.ModelViewSet):
         # Check if semester has child objects
         if instance.has_children():
             #return status 400 bad request and message
-            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message':'Semester masih terikat dengan data modul'})
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message':'Semester masih terikat dengan laboratorium'})
         
         try:
             self.perform_destroy(instance)
@@ -115,6 +115,20 @@ class SemesterViewSet(viewsets.ModelViewSet):
 class LaboratoryViewSet(viewsets.ModelViewSet):
     queryset = Laboratory.objects.all()
     serializer_class = LaboratorySerializer
+    pagination_class = CustomPagination
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        # Check if laboratory has child objects
+        if instance.has_children():
+            #return status 400 bad request and message
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message':'Laboratorium masih terikat dengan modul atau asisten'})
+        
+        try:
+            self.perform_destroy(instance)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message':'Failed to delete laboratory'})
 
     def count(self, request, *args, **kwargs):
         laboratory_count = self.queryset.count()

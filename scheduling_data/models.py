@@ -7,16 +7,16 @@ class Semester(models.Model):
     status = models.BooleanField(default=False)
 
     def children(self):
-        return [module for module in self.modules.all()]
+        return [laboratory for laboratory in self.laboratories.all()]
     
     def has_children(self):
-        return self.modules.count() > 0
+        return self.laboratories.exists()
     
     def module_count(self):
-        return self.modules.count()
+        return sum([lab.module_count() for lab in self.laboratories.all()])
     
     def group_count(self):
-        return sum([module.groups.count() for module in self.modules.all()])
+        return sum([lab.group_count() for lab in self.laboratories.all()])
     
     def participant_count(self):
         return self.participants.count()
@@ -27,15 +27,16 @@ class Semester(models.Model):
 class Laboratory(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=32)
+    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='laboratories')
 
     def has_module(self):
-        return self.modules.count() > 0
+        return self.modules.exists()
     
     def has_assistant(self):
-        return self.assistants.count() > 0
+        return self.assistants.exists()
     
     def has_children(self):
-        return self.modules.count() > 0 or self.assistants.count() > 0
+        return self.has_module() or self.has_assistant()
     
     def module_count(self):
         return self.modules.count()
@@ -44,10 +45,10 @@ class Laboratory(models.Model):
         return self.assistants.count()
     
     def group_count(self):
-        return sum([module.groups.count() for module in self.modules.all()])
+        return sum([module.group_count() for module in self.modules.all()])
     
     def participant_count(self):
-        return sum([group.participants.count() for module in self.modules.all() for group in module.groups.all()])
+        return sum([module.participant_count() for module in self.modules.all()])
     
     def __str__(self) -> str:
         return self.name
@@ -58,7 +59,15 @@ class Module(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     laboratory = models.ForeignKey(Laboratory, on_delete=models.CASCADE, related_name='modules')
-    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='modules')
+
+    def group_count(self):
+        return self.groups.count()
+    
+    def participant_count(self):
+        return sum([group.participant_count() for group in self.groups.all()])
+    
+    def chapter_count(self):
+        return self.chapters.count()
     
     def __str__(self) -> str:
         return f"{self.name} - {self.laboratory.name} - {self.semester.name}"
@@ -76,6 +85,9 @@ class Group(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=10)
     module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='groups')
+
+    def participant_count(self):
+        return self.participants.count()
     
     def __str__(self) -> str:
         return self.name
