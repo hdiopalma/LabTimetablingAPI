@@ -85,10 +85,15 @@ class ParticipantSerializer(serializers.ModelSerializer):
         id = serializers.ReadOnlyField()
         fields = ['id','url','name','nim','semester','groups','regular_schedule']
 
-class AssistantSerializer(serializers.ModelSerializer):
+class AssistantWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Assistant
+        id = serializers.ReadOnlyField()
+        fields = ['id','name','nim','laboratory','semester','regular_schedule','prefered_schedule']
+
+class AssistantReadSerializer(serializers.ModelSerializer):
     laboratory = LaboratoryReadSerializer()
     semester = SemesterReadSerializer()
-
     class Meta:
         model = Assistant
         id = serializers.ReadOnlyField()

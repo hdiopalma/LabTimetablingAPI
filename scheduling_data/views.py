@@ -1,12 +1,14 @@
+# Author: Sazzad Hissain Khan
 from django.shortcuts import render
 
+# rest_framework
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import status
 
+#mixin
 from .mixin import ReadWriteSerializerMixin
-# Create your views here.
 
 #serializer
 from .serializer import *
@@ -139,7 +141,6 @@ class LaboratoryViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
         if instance.has_children():
             #return status 400 bad request and message
             return Response(status=status.HTTP_400_BAD_REQUEST, data={'message':'Laboratorium masih terikat dengan modul atau asisten'})
-        
         try:
             self.perform_destroy(instance)
             return Response(status=status.HTTP_204_NO_CONTENT)
@@ -189,12 +190,12 @@ class ChapterViewSet(viewsets.ModelViewSet):
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
     """
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         data = serializer.data
-        
         group_memberships = instance.group_memberships.all()
         group_memberships_data = [
             {
@@ -221,9 +222,33 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
     
-class AssistantViewSet(viewsets.ModelViewSet):
+class AssistantViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     queryset = Assistant.objects.all()
-    serializer_class = AssistantSerializer
+    pagination_class = CustomPagination
+    read_serializer_class = AssistantReadSerializer
+    write_serializer_class = AssistantWriteSerializer
+
+    #partial update, only update partial data
+    def partial_update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        data = request.data
+        serializer = self.get_serializer(instance, data=data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    
+    #update, update all data
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        data = request.data
+        serializer = self.get_serializer(instance, data=data, partial=True)
+        try :
+            serializer.is_valid(raise_exception=True)
+            updated_instance = serializer.save()
+            updated_serializer = self.get_read_serializer_class()(updated_instance, context=self.get_serializer_context())
+            return Response(updated_serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': str(e)})
 
 class GroupMembershipViewSet(viewsets.ModelViewSet):
     queryset = GroupMembership.objects.all()
