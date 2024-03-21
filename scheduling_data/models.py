@@ -60,6 +60,15 @@ class Module(models.Model):
     end_date = models.DateTimeField()
     laboratory = models.ForeignKey(Laboratory, on_delete=models.CASCADE, related_name='modules')
 
+    def has_chapter(self):
+        return self.chapters.exists()
+    
+    def has_group(self):
+        return self.groups.exists()
+    
+    def has_children(self):
+        return self.has_chapter() or self.has_group()
+
     def group_count(self):
         return self.groups.count()
     
@@ -111,6 +120,12 @@ class Assistant(models.Model):
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='assistants')
     regular_schedule = models.JSONField()
     prefered_schedule = models.JSONField()
+
+    def is_available(self, day, shift):
+        return self.regular_schedule[day][shift] and self.prefered_schedule[day][shift]
+    
+    def has_membership(self):
+        return self.assistant_memberships.exists()
     
     def __str__(self) -> str:
         return self.name

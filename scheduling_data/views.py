@@ -182,10 +182,13 @@ class LaboratoryViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
 class ModuleViewSet(viewsets.ModelViewSet):
     queryset = Module.objects.all()
     serializer_class = ModuleSerializer
+    pagination_class = CustomPagination
     
-class ChapterViewSet(viewsets.ModelViewSet):
+class ChapterViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     queryset = Chapter.objects.all()
-    serializer_class = ChapterSerialzer
+    pagination_class = CustomPagination
+    read_serializer_class = ChapterReadSerializer
+    write_serializer_class = ChapterWriteSerializer
     
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()

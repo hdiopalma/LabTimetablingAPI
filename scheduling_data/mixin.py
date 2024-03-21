@@ -6,7 +6,7 @@ class ReadWriteSerializerMixin(object):
     Set read_serializer_class and write_serializer_class attributes on a
     viewset. 
     """
-
+    
     read_serializer_class = None
     write_serializer_class = None
 

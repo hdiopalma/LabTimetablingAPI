@@ -33,8 +33,14 @@ class ModuleSerializer(serializers.ModelSerializer):
         model = Module
         id = serializers.ReadOnlyField()
         fields = ['id','url','name', 'start_date','end_date','laboratory']
-        
-class ChapterSerialzer(serializers.ModelSerializer):
+
+class ChapterWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chapter
+        id = serializers.ReadOnlyField()
+        fields = ['id','name','module']
+
+class ChapterReadSerializer(serializers.ModelSerializer):
     module = ModuleSerializer()
     class Meta:
         model = Chapter
