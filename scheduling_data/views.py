@@ -19,9 +19,10 @@ class CustomPagination(PageNumberPagination):
     page_size_query_param = 'page_size'
     max_page_size = 1000
 
-class SemesterViewSet(viewsets.ModelViewSet):
+class SemesterViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     queryset = Semester.objects.all()
-    serializer_class = SemesterSerializer
+    read_serializer_class = SemesterReadSerializer
+    write_serializer_class = SemesterWriteSerializer
     pagination_class = CustomPagination
 
     #post

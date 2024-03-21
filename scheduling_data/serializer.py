@@ -1,7 +1,13 @@
 from rest_framework import serializers
 from .models import Semester, Laboratory, Module, Chapter, Group, Participant, Assistant, GroupMembership
 
-class SemesterSerializer(serializers.ModelSerializer):
+class SemesterWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Semester
+        id = serializers.ReadOnlyField()
+        fields = ['id','name','status']
+
+class SemesterReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Semester
         id = serializers.ReadOnlyField()
@@ -14,7 +20,7 @@ class LaboratoryWriteSerializer(serializers.ModelSerializer):
         fields = ['id','name','semester']
 
 class LaboratoryReadSerializer(serializers.ModelSerializer):
-    semester = SemesterSerializer()
+    semester = SemesterReadSerializer()
     class Meta:
         model = Laboratory
         id = serializers.ReadOnlyField()
@@ -22,11 +28,11 @@ class LaboratoryReadSerializer(serializers.ModelSerializer):
         
 class ModuleSerializer(serializers.ModelSerializer):
     laboratory = LaboratoryReadSerializer()
-    semester = SemesterSerializer()
+
     class Meta:
         model = Module
         id = serializers.ReadOnlyField()
-        fields = ['id','url','name', 'start_date','end_date','laboratory','semester']
+        fields = ['id','url','name', 'start_date','end_date','laboratory']
         
 class ChapterSerialzer(serializers.ModelSerializer):
     module = ModuleSerializer()
@@ -68,7 +74,7 @@ class GroupSerializer(serializers.ModelSerializer):
 class ParticipantSerializer(serializers.ModelSerializer):
     #semester = SemesterSerializer()
     groups = serializers.SerializerMethodField()
-    semester = SemesterSerializer()
+    semester = SemesterReadSerializer()
     
     def get_groups(self, instance):
         group_memberships = instance.group_memberships.all()
@@ -81,7 +87,7 @@ class ParticipantSerializer(serializers.ModelSerializer):
 
 class AssistantSerializer(serializers.ModelSerializer):
     laboratory = LaboratoryReadSerializer()
-    semester = SemesterSerializer()
+    semester = SemesterReadSerializer()
 
     class Meta:
         model = Assistant
