@@ -1,5 +1,8 @@
 from django.db import models
 
+def default_schedule():
+    return dict({"Friday": {"Shift1": True, "Shift2": True, "Shift3": True, "Shift4": False, "Shift5": True, "Shift6": False}, "Monday": {"Shift1": True, "Shift2": True, "Shift3": True, "Shift4": False, "Shift5": True, "Shift6": False}, "Tuesday": {"Shift1": True, "Shift2": False, "Shift3": False, "Shift4": True, "Shift5": True, "Shift6": True}, "Saturday": {"Shift1": True, "Shift2": True, "Shift3": False, "Shift4": False, "Shift5": False, "Shift6": True}, "Thursday": {"Shift1": False, "Shift2": False, "Shift3": False, "Shift4": True, "Shift5": True, "Shift6": False}, "Wednesday": {"Shift1": True, "Shift2": False, "Shift3": True, "Shift4": True, "Shift5": True, "Shift6": True}})
+
 # Create your models here.
 class Semester(models.Model):
     id = models.AutoField(primary_key=True)
@@ -106,7 +109,7 @@ class Participant(models.Model):
     name = models.CharField(max_length=50)
     nim = models.CharField(max_length=12)
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='participants')
-    regular_schedule = models.JSONField() # {day: {shift: True/False}}
+    regular_schedule = models.JSONField(default=default_schedule)
     groups = models.ManyToManyField(Group, through='GroupMembership', related_name='participants')
     
     def __str__(self) -> str:
@@ -118,9 +121,8 @@ class Assistant(models.Model):
     nim = models.CharField(max_length=12)
     laboratory = models.ForeignKey(Laboratory, on_delete=models.CASCADE, related_name='assistants')
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='assistants')
-    regular_schedule = models.JSONField()
-    prefered_schedule = models.JSONField()
-
+    regular_schedule = models.JSONField(default=default_schedule)
+    prefered_schedule = models.JSONField(default=default_schedule)
     def is_available(self, day, shift):
         return self.regular_schedule[day][shift] and self.prefered_schedule[day][shift]
     
@@ -146,4 +148,3 @@ class AssistantMembership(models.Model):
     def __str__(self) -> str:
         return f"Assistant Membership for Assistant: {self.assistant}, Module: {self.module}, Laboratory: {self.laboratory}"
 
-    
