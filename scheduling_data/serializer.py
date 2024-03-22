@@ -76,8 +76,14 @@ class GroupSerializer(serializers.ModelSerializer):
         model = Group
         id = serializers.ReadOnlyField()
         fields = ['id','url','name','module','participants','regular_schedule']
-        
-class ParticipantSerializer(serializers.ModelSerializer):
+
+class ParticipantWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Participant
+        id = serializers.ReadOnlyField()
+        fields = ['id','name','nim','semester','regular_schedule']
+
+class ParticipantReadSerializer(serializers.ModelSerializer):
     #semester = SemesterSerializer()
     groups = serializers.SerializerMethodField()
     semester = SemesterReadSerializer()

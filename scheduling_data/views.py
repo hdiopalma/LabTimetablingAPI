@@ -211,10 +211,11 @@ class GroupViewSet(viewsets.ModelViewSet):
         return Response(data)
     """
 
-class ParticipantViewSet(viewsets.ModelViewSet):
+class ParticipantViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     queryset = Participant.objects.all()
-    serializer_class = ParticipantSerializer
     pagination_class = CustomPagination
+    read_serializer_class = ParticipantReadSerializer
+    write_serializer_class = ParticipantWriteSerializer
     
     #update
     def update(self, request, *args, **kwargs):
