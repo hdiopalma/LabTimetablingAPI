@@ -179,10 +179,35 @@ class LaboratoryViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
         participant_count = instance.participant_count()
         return Response({'module_count':module_count, 'assistant_count':assistant_count, 'group_count':group_count, 'participant_count':participant_count})
 
-class ModuleViewSet(viewsets.ModelViewSet):
+class ModuleViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     queryset = Module.objects.all()
-    serializer_class = ModuleSerializer
     pagination_class = CustomPagination
+    read_serializer_class = ModuleReadSerializer
+    write_serializer_class = ModuleWriteSerializer
+
+    def update(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()
+            serializer = self.get_serializer(instance, data=request.data, partial=True)
+            serializer.is_valid(raise_exception=True)
+            updated_instance = serializer.save()
+            updated_serializer = self.get_read_serializer_class()(updated_instance, context=self.get_serializer_context())
+            return Response(updated_serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': str(e)})
+
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        # Check if module has child objects
+        if instance.has_children():
+            #return status 400 bad request and message
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message':'Modul masih terikat dengan chapter atau group'})
+        try:
+            self.perform_destroy(instance)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message':'Failed to delete module'})
     
 class ChapterViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     queryset = Chapter.objects.all()

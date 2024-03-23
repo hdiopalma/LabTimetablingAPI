@@ -26,13 +26,19 @@ class LaboratoryReadSerializer(serializers.ModelSerializer):
         id = serializers.ReadOnlyField()
         fields = ['id','url','name','semester']
         
-class ModuleSerializer(serializers.ModelSerializer):
-    laboratory = LaboratoryReadSerializer()
 
+class ModuleWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Module
         id = serializers.ReadOnlyField()
-        fields = ['id','url','name', 'start_date','end_date','laboratory']
+        fields = ['id','name','start_date','end_date','laboratory']
+
+class ModuleReadSerializer(serializers.ModelSerializer):
+    laboratory = LaboratoryReadSerializer()
+    class Meta:
+        model = Module
+        id = serializers.ReadOnlyField()
+        fields = ['id','url','name','start_date','end_date','laboratory']
 
 class ChapterWriteSerializer(serializers.ModelSerializer):
     class Meta:
@@ -41,7 +47,7 @@ class ChapterWriteSerializer(serializers.ModelSerializer):
         fields = ['id','name','module']
 
 class ChapterReadSerializer(serializers.ModelSerializer):
-    module = ModuleSerializer()
+    module = ModuleReadSerializer()
     class Meta:
         model = Chapter
         id = serializers.ReadOnlyField()
@@ -51,7 +57,7 @@ class GroupSerializer(serializers.ModelSerializer):
     #module = ModuleSerializer()
     participants = serializers.SerializerMethodField()
     regular_schedule = serializers.SerializerMethodField()
-    module = ModuleSerializer()
+    module = ModuleReadSerializer()
     
     def get_participants(self, instance):
         group_memberships = instance.group_memberships.all()
