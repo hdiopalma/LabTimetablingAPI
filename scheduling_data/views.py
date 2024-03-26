@@ -246,7 +246,6 @@ class ParticipantViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance, data=request.data)
-        print(request.data)
         serializer.is_valid(raise_exception=True)
 
         try:
@@ -262,22 +261,13 @@ class AssistantViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     read_serializer_class = AssistantReadSerializer
     write_serializer_class = AssistantWriteSerializer
 
-    #partial update, only update partial data
-    def partial_update(self, request, *args, **kwargs):
-        instance = self.get_object()
-        data = request.data
-        serializer = self.get_serializer(instance, data=data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
-    
     #update, update all data
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
         data = request.data
         serializer = self.get_serializer(instance, data=data, partial=True)
+        serializer.is_valid(raise_exception=True)
         try :
-            serializer.is_valid(raise_exception=True)
             updated_instance = serializer.save()
             updated_serializer = self.get_read_serializer_class()(updated_instance, context=self.get_serializer_context())
             return Response(updated_serializer.data, status=status.HTTP_200_OK)

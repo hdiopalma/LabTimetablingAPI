@@ -104,7 +104,7 @@ class ParticipantWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Participant
         id = serializers.ReadOnlyField()
-        fields = ['id','name','nim','semester','regular_schedule']
+        fields = ['id','name','nim','semester','regular_schedule','ipk']
 
     def validate_regular_schedule(self, value):
         validate_schedule(value)
@@ -136,7 +136,7 @@ class ParticipantReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Participant
         id = serializers.ReadOnlyField()
-        fields = ['id','url','name','nim','semester','groups','regular_schedule']
+        fields = ['id','url','name','nim','semester','groups','regular_schedule', 'ipk']
 
 class AssistantWriteSerializer(serializers.ModelSerializer):
     class Meta:
@@ -151,6 +151,23 @@ class AssistantReadSerializer(serializers.ModelSerializer):
         model = Assistant
         id = serializers.ReadOnlyField()
         fields = ['id','url','name','nim','laboratory','semester','regular_schedule','prefered_schedule']
+
+    def validate_regular_schedule(self, value):
+        validate_schedule(value)
+        return value
+    
+    def is_valid(self, raise_exception=False):
+        #Override is_valid method to validate schedule
+        valid = super().is_valid(raise_exception=raise_exception)
+        if not valid:
+            return False #If the serializer is not valid, return False
+        #If the serializer is valid, validate the schedule
+        try:
+            validate_schedule(self.validated_data['regular_schedule'])
+        except serializers.ValidationError as e:
+            self._errors['regular_schedule'] = e.detail
+            return False
+        return True
         
 class GroupMembershipSerializer(serializers.ModelSerializer):
     group = serializers.SerializerMethodField()
