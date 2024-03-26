@@ -1,5 +1,22 @@
 from rest_framework import serializers
-from .models import Semester, Laboratory, Module, Chapter, Group, Participant, Assistant, GroupMembership
+from .models import Semester, Laboratory, Module, Chapter, Group, Participant, Assistant, GroupMembership, default_schedule
+
+
+def validate_schedule(value):
+    default_structure = default_schedule()
+    # Check if the incoming value have the same key (day) as the default structure
+    if value.keys() != default_structure.keys():
+        raise serializers.ValidationError("Invalid schedule structure, must be a dictionary with keys:"+str(default_structure.keys()))
+    
+    # Check if the value of each day have the same key (shift) as the default structure
+    for day, shifts in value.items():
+        if shifts.keys() != default_structure[day].keys():
+            raise serializers.ValidationError("Invalid schedule structure, must be a dictionary with keys:"+str(default_structure[day].keys()))
+        
+        # Check if the value of each shift is a boolean
+        for shift, availability in shifts.items():
+            if not isinstance(availability, bool):
+                raise serializers.ValidationError("Invalid schedule structure, must be a boolean value")
 
 class SemesterWriteSerializer(serializers.ModelSerializer):
     class Meta:
@@ -88,6 +105,24 @@ class ParticipantWriteSerializer(serializers.ModelSerializer):
         model = Participant
         id = serializers.ReadOnlyField()
         fields = ['id','name','nim','semester','regular_schedule']
+
+    def validate_regular_schedule(self, value):
+        validate_schedule(value)
+        return value
+    
+    def is_valid(self, raise_exception=False):
+        #Override is_valid method to validate schedule
+        valid = super().is_valid(raise_exception=raise_exception)
+        if not valid:
+            return False #If the serializer is not valid, return False
+        #If the serializer is valid, validate the schedule
+        try:
+            validate_schedule(self.validated_data['regular_schedule'])
+        except serializers.ValidationError as e:
+            self._errors['regular_schedule'] = e.detail
+            return False
+        return True
+        
 
 class ParticipantReadSerializer(serializers.ModelSerializer):
     #semester = SemesterSerializer()
