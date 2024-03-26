@@ -108,6 +108,7 @@ class Participant(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     nim = models.CharField(max_length=12)
+    ipk = models.FloatField(default=0)
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='participants')
     regular_schedule = models.JSONField(default=default_schedule)
     groups = models.ManyToManyField(Group, through='GroupMembership', related_name='participants')
