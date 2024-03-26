@@ -245,11 +245,16 @@ class ParticipantViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     #update
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
-        data = request.data
-        instance.name = data['name']
-        instance.save()
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+        serializer = self.get_serializer(instance, data=request.data)
+        print(request.data)
+        serializer.is_valid(raise_exception=True)
+
+        try:
+            updated_instance = serializer.save()
+            updated_serializer = self.get_read_serializer_class()(updated_instance, context=self.get_serializer_context())
+            return Response(updated_serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': str(e)})
     
 class AssistantViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     queryset = Assistant.objects.all()
