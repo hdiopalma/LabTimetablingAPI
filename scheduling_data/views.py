@@ -2,10 +2,12 @@
 from django.shortcuts import render
 
 # rest_framework
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import status
+
+from django_filters.rest_framework import DjangoFilterBackend
 
 #mixin
 from .mixin import ReadWriteSerializerMixin
@@ -26,6 +28,9 @@ class SemesterViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     read_serializer_class = SemesterReadSerializer
     write_serializer_class = SemesterWriteSerializer
     pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    search_fields = ['name', 'status']
+    filterset_fields = ['name', 'status']
 
     #post
     def create(self, request, *args, **kwargs):
