@@ -30,11 +30,44 @@ class SemesterReadSerializer(serializers.ModelSerializer):
         id = serializers.ReadOnlyField()
         fields = ['id','url','name','status']
 
+    def to_representation(self, instance: Semester):
+        data = super().to_representation(instance)
+        include_count = self.context.get('include_count')
+        count_method = {
+            'laboratory': instance.laboratory_count,
+            'module': instance.module_count,
+            'group': instance.group_count,
+            'participant': instance.participant_count,
+            'assistant': instance.assistant_count,
+            'all': lambda: {
+                'laboratory': instance.laboratory_count(),
+                'module': instance.module_count(),
+                'group': instance.group_count(),
+                'participant': instance.participant_count(),
+                'assistant': instance.assistant_count(),
+            }
+        }
+        if include_count and include_count in count_method:
+            count_method = count_method[include_count]
+            data['count'] = count_method() if callable(count_method) else count_method
+        return data
+
 class LaboratoryWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Laboratory
         id = serializers.ReadOnlyField()
         fields = ['id','name','semester']
+
+    def to_representation(self, instance: Laboratory):
+        data = super().to_representation(instance)
+        if self.context.get('include_count', False):
+            data['count'] = {
+                'module': instance.module_count(),
+                'group': instance.group_count(),
+                'participant': instance.participant_count(),
+                'assistant': instance.assistant_count(),
+            }
+        return data
 
 class LaboratoryReadSerializer(serializers.ModelSerializer):
     semester = SemesterReadSerializer()
