@@ -32,6 +32,13 @@ class SemesterViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     search_fields = ['name', 'status']
     filterset_fields = ['name', 'status']
 
+    #retrieve
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        include_count = request.query_params.get('include_count', '')
+        serializer = self.get_serializer(instance, context={'include_count': include_count, 'request': request})
+        return Response(serializer.data)
+
     #post
     def create(self, request, *args, **kwargs):
         data = request.data
@@ -49,7 +56,6 @@ class SemesterViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
                     sem.save()
 
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=self.get_success_headers(serializer.data))
-    
     
     #update
     def update(self, request, *args, **kwargs):
@@ -88,39 +94,19 @@ class SemesterViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={'message':'Failed to delete semester'})
+    
+    #get active semester
+    def active(self, request, *args, **kwargs):
+        include_count = request.query_params.get('include_count', '')
+        active_semester = Semester.objects.filter(status=True)
+        #count all child
+        if active_semester.exists():
+            active_semester = active_semester[0]
+            serializer = self.get_serializer(active_semester, context={'include_count': include_count, 'request': request})
+            return Response(status=status.HTTP_200_OK, data=serializer.data)
         
-    #custom method
-    #count semester
-    def count(self, request, *args, **kwargs):
-        semester_count = self.queryset.count()
-        return Response({'semester_count':semester_count})
-    
-    #count module
-    def count_module(self, request, *args, **kwargs):
-        instance = self.get_object()
-        module_count = instance.module_count()
-        return Response({'module_count':module_count})
-    
-    #count group
-    def count_group(self, request, *args, **kwargs):
-        instance = self.get_object()
-        group_count = instance.group_count()
-        return Response({'group_count':group_count})
-    
-    #count participant
-    def count_participant(self, request, *args, **kwargs):
-        instance = self.get_object()
-        participant_count = instance.participant_count()
-        return Response({'participant_count':participant_count})
-    
-    #count all
-    def count_all(self, request, *args, **kwargs):
-        instance = self.get_object()
-        module_count = instance.module_count()
-        group_count = instance.group_count()
-        participant_count = instance.participant_count()
-        return Response({'module_count':module_count, 'group_count':group_count, 'participant_count':participant_count})
-    
+        return Response(status=status.HTTP_404_NOT_FOUND, data={'message':'Semester aktif tidak ditemukan'})
+
     
 class LaboratoryViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     queryset = Laboratory.objects.all()
@@ -151,38 +137,6 @@ class LaboratoryViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={'message':'Failed to delete laboratory'})
-
-    def count(self, request, *args, **kwargs):
-        laboratory_count = self.queryset.count()
-        return Response({'laboratory_count':laboratory_count})
-    
-    def count_module(self, request, *args, **kwargs):
-        instance = self.get_object()
-        module_count = instance.module_count()
-        return Response({'module_count':module_count})
-    
-    def count_assistant(self, request, *args, **kwargs):
-        instance = self.get_object()
-        assistant_count = instance.assistant_count()
-        return Response({'assistant_count':assistant_count})
-    
-    def count_group(self, request, *args, **kwargs):
-        instance = self.get_object()
-        group_count = instance.group_count()
-        return Response({'group_count':group_count})
-    
-    def count_participant(self, request, *args, **kwargs):
-        instance = self.get_object()
-        participant_count = instance.participant_count()
-        return Response({'participant_count':participant_count})
-    
-    def count_all(self, request, *args, **kwargs):
-        instance = self.get_object()
-        module_count = instance.module_count()
-        assistant_count = instance.assistant_count()
-        group_count = instance.group_count()
-        participant_count = instance.participant_count()
-        return Response({'module_count':module_count, 'assistant_count':assistant_count, 'group_count':group_count, 'participant_count':participant_count})
 
 class ModuleViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     queryset = Module.objects.all()
