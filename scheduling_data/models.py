@@ -16,13 +16,33 @@ class Semester(models.Model):
         return self.laboratories.exists()
     
     def module_count(self):
+        '''Count the total module in this semester
+        '''
         return sum([lab.module_count() for lab in self.laboratories.all()])
     
     def group_count(self):
+        '''Count the total group in this semester
+        '''
         return sum([lab.group_count() for lab in self.laboratories.all()])
     
     def participant_count(self):
+        '''Count the total participant in this semester
+        '''
         return self.participants.count()
+    
+    def laboratory_count(self):
+        '''Count the total laboratory in this semester'''
+        return self.laboratories.count()
+    
+    def assistant_count(self):
+        '''Count the total assistant in this semester'''
+        return self.assistants.count()
+    
+    def count_all(self):
+        module_count = self.module_count()
+        group_count = self.group_count()
+        participant_count = self.participant_count()
+        return module_count, group_count, participant_count
     
     def __str__(self) -> str:
         return self.name
