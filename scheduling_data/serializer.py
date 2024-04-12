@@ -50,6 +50,7 @@ class SemesterReadSerializer(serializers.ModelSerializer):
         if include_count and include_count in count_method:
             count_method = count_method[include_count]
             data['count'] = count_method() if callable(count_method) else count_method
+
         return data
 
 class LaboratoryWriteSerializer(serializers.ModelSerializer):

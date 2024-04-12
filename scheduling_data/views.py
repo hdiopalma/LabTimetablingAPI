@@ -17,6 +17,8 @@ from .serializer import *
 
 #viewset
 from scheduling_data.models import Semester, Participant, Laboratory, Module, Chapter, Group, Assistant, GroupMembership
+#filter
+from scheduling_data.filters import *
 
 class CustomPagination(PageNumberPagination):
     page_size = 10
@@ -28,9 +30,8 @@ class SemesterViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     read_serializer_class = SemesterReadSerializer
     write_serializer_class = SemesterWriteSerializer
     pagination_class = CustomPagination
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    search_fields = ['name', 'status']
-    filterset_fields = ['name', 'status']
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = SemesterFilter
 
     #retrieve
     def retrieve(self, request, *args, **kwargs):
@@ -112,6 +113,9 @@ class LaboratoryViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     queryset = Laboratory.objects.all()
     pagination_class = CustomPagination
 
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filterset_class = LaboratoryFilter
+
     read_serializer_class = LaboratoryReadSerializer
     write_serializer_class = LaboratoryWriteSerializer
 
@@ -141,6 +145,8 @@ class LaboratoryViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
 class ModuleViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     queryset = Module.objects.all()
     pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filterset_class = ModuleFilter
     read_serializer_class = ModuleReadSerializer
     write_serializer_class = ModuleWriteSerializer
 
@@ -171,12 +177,19 @@ class ModuleViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
 class ChapterViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     queryset = Chapter.objects.all()
     pagination_class = CustomPagination
+
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filterset_class = ChapterFilter
+
     read_serializer_class = ChapterReadSerializer
     write_serializer_class = ChapterWriteSerializer
     
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = GroupFilter
 
     """
     def retrieve(self, request, *args, **kwargs):
@@ -198,6 +211,8 @@ class GroupViewSet(viewsets.ModelViewSet):
 class ParticipantViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     queryset = Participant.objects.all()
     pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = ParticipantFilter
     read_serializer_class = ParticipantReadSerializer
     write_serializer_class = ParticipantWriteSerializer
     
@@ -217,6 +232,8 @@ class ParticipantViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
 class AssistantViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
     queryset = Assistant.objects.all()
     pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = AssistantFilter
     read_serializer_class = AssistantReadSerializer
     write_serializer_class = AssistantWriteSerializer
 
