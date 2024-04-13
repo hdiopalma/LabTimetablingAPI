@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 def default_schedule():
     return dict({"Friday": {"Shift1": True, "Shift2": True, "Shift3": True, "Shift4": False, "Shift5": True, "Shift6": False}, "Monday": {"Shift1": True, "Shift2": True, "Shift3": True, "Shift4": False, "Shift5": True, "Shift6": False}, "Tuesday": {"Shift1": True, "Shift2": False, "Shift3": False, "Shift4": True, "Shift5": True, "Shift6": True}, "Saturday": {"Shift1": True, "Shift2": True, "Shift3": False, "Shift4": False, "Shift5": False, "Shift6": True}, "Thursday": {"Shift1": False, "Shift2": False, "Shift3": False, "Shift4": True, "Shift5": True, "Shift6": False}, "Wednesday": {"Shift1": True, "Shift2": False, "Shift3": True, "Shift4": True, "Shift5": True, "Shift6": True}})
@@ -169,3 +170,53 @@ class AssistantMembership(models.Model):
     def __str__(self) -> str:
         return f"Assistant Membership for Assistant: {self.assistant}, Module: {self.module}, Laboratory: {self.laboratory}"
 
+class Solution(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='solutions')
+    start_time = models.DateTimeField(auto_now_add=True)
+    end_time = models.DateTimeField(default=timezone.now)
+    status = models.CharField(max_length=32, default="Pending")
+    #iteration log that contains the fitness value for each iteration
+    iteration_log = models.JSONField(default=list)
+    # configuration
+    fitness = models.JSONField(default=dict)
+    selection = models.JSONField(default=dict)
+    crossover = models.JSONField(default=dict)
+    mutation = models.JSONField(default=dict)
+    repair = models.JSONField(default=dict)
+    neighborhood = models.JSONField(default=dict)
+    algorithm = models.JSONField(default=dict)
+    local_search = models.JSONField(default=dict)
+    max_iteration = models.IntegerField(default=500)
+    population_size = models.IntegerField(default=25)
+    elitism_size = models.IntegerField(default=2)
+    # solution
+    best_fitness = models.FloatField(null=True, blank=True)
+    time_elapsed = models.FloatField(null=True, blank=True)
+    # best_solution = models.JSONField(null=True, blank=True)
+    gene_count = models.IntegerField(null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.end_time = timezone.now()
+        super(Solution, self).save(*args, **kwargs)
+    
+    def __str__(self) -> str:
+        return f"Solution for {self.semester.name} - {self.name}"
+    
+class ScheduleData(models.Model):
+    '''Model for storing the schedule solution, daily schedule for each semester. Probably will be filled with huge data.'''
+    id = models.AutoField(primary_key=True)
+    process_data = models.OneToOneField(Solution, on_delete=models.CASCADE, related_name='schedule_data')
+    date = models.DateTimeField() # Date of the schedule.
+    day = models.CharField(max_length=10) # Monday, Tuesday, etc.
+    shift = models.CharField(max_length=10) # Shift1, Shift2, etc.
+    laboratory = models.ForeignKey(Laboratory, on_delete=models.CASCADE, related_name='schedules')
+    module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='schedules')
+    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE, related_name='schedules')
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='schedules')
+    assistant = models.ForeignKey(Assistant, on_delete=models.CASCADE, related_name='schedules')
+    # time_slot = models.JSONField(default=dict)
+
+    def __str__(self) -> str:
+        return f"Schedule Solution for {self.process_data.semester.name}"
