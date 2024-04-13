@@ -1,9 +1,8 @@
 from rest_framework.permissions import AllowAny
-from django.utils import timezone
 import time
-import json
-import datetime
-import pytz
+
+from django.db import transaction
+
 
 # Create your views here.
 from rest_framework.response import Response
@@ -90,8 +89,8 @@ class GenerateTimetabling(APIView):
         solution.save()
         return solution
     
-    def update_solution(self, solution: Solution, best_chromosome: Chromosome, algorithm: GeneticAlgorithm):
-        solution.status = "Completed"
+    def update_solution(self, solution: Solution, best_chromosome: Chromosome, algorithm: GeneticAlgorithm, status="Completed"):
+        solution.status = status
         # solution.iteration_log = algorithm.log['iteration_log']
         solution.best_fitness = best_chromosome.fitness
         solution.time_elapsed = algorithm.log['time_elapsed']
@@ -99,6 +98,24 @@ class GenerateTimetabling(APIView):
         solution.gene_count = len(best_chromosome)
         solution.save()
         return solution
+    
+    def create_schedule_data(self, solution: Solution, best_chromosome: Chromosome):
+        schedule_data_list = []
+        for gene in best_chromosome:
+            schedule_data_list.append(ScheduleData(
+                solution=solution,
+                laboratory_id=gene['laboratory'],
+                module_id=gene['module'],
+                chapter_id=gene['chapter'],
+                group_id=gene['group'],
+                assistant_id=gene['assistant'],
+                date=gene['time_slot'].date,
+                day=gene['time_slot'].day,
+                shift=gene['time_slot'].shift
+            ))
+
+        with transaction.atomic():
+            ScheduleData.objects.bulk_create(schedule_data_list)
 
     def configure_fitness_manager(self, fitness_config):
         group_assignment_conflict_fitness = GroupAssignmentConflictFitness().configure(
@@ -276,7 +293,12 @@ class GenerateTimetabling(APIView):
             best_chromosome: Chromosome = algorithm.run(max_iteration=data.get_max_iteration(),
                                                         population_size=data.get_population_size())
             # Update the solution
-            solution = self.update_solution(solution, best_chromosome, algorithm)
+            solution = self.update_solution(solution, best_chromosome, algorithm, status="Saving")
+            # Create the schedule data
+            self.create_schedule_data(solution, best_chromosome)
+            # Update the solution
+            solution.status = "Completed"
+            solution.save()
             return Response({
                 "best_fitness": best_chromosome.fitness,
                 "time_elapsed": algorithm.log['time_elapsed'],
@@ -284,7 +306,7 @@ class GenerateTimetabling(APIView):
             }, status=status.HTTP_200_OK)
         
         except Exception as e:
+            #set the status to error
             solution.status = "Error"
             solution.save()
-            print(e)
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
