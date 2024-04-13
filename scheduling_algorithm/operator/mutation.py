@@ -96,6 +96,7 @@ class DynamicMutation(BaseMutation):
         return self.mutation_function(chromosome)
     
 class MutationManager:
+    '''Class to manage multiple mutation functions.'''
     def __init__(self, mutation_functions: List[BaseMutation]):
         self.mutation_functions = mutation_functions
         self.mutation_probability = 0.1

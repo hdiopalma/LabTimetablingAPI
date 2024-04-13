@@ -187,7 +187,7 @@ class ChapterViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    pagination_class = CustomPagination
+    # pagination_class = CustomPagination
     filter_backends = [DjangoFilterBackend]
     filterset_class = GroupFilter
 

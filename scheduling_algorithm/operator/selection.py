@@ -77,6 +77,7 @@ class DynamicSelection(BaseSelection):
         return self.selection_function(population)
     
 class SelectionManager:
+    '''Class to manage multiple selection functions.'''
     def __init__(self, selection_functions: List[BaseSelection]):
         self.selection_functions = selection_functions
         self.selection_probability = 0.1

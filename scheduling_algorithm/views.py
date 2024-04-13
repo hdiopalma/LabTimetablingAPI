@@ -7,102 +7,137 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 
-from scheduling_algorithm.algorithms.global_search.genetic_algorithm import GeneticAlgorithm
-from scheduling_algorithm.algorithms.hybrid.genetic_local_search import GeneticLocalSearch
-from scheduling_algorithm.algorithms.local_search.simulated_annealing import SimulatedAnnealing
-from scheduling_algorithm.algorithms.local_search.tabu_search import TabuSearch 
+#Algorithm
+from .algorithms.global_search.genetic_algorithm import GeneticAlgorithm
+from .algorithms.hybrid.genetic_local_search import GeneticLocalSearch
+from .algorithms.local_search import (
+    TabuSearch,
+    SimulatedAnnealing
+)
 
-from scheduling_algorithm.factory.factory import Factory
+from .factory import Factory
 
-from scheduling_algorithm.fitness_function import FitnessManager, AssistantDistributionFitness, GroupAssignmentConflictFitness
+#Fitness function
+from scheduling_algorithm.fitness_function import (
+    FitnessManager,
+    AssistantDistributionFitness,
+    GroupAssignmentConflictFitness
+)
 
 #operator
-from scheduling_algorithm.operator.selection import SelectionManager, RouletteWheelSelection, TournamentSelection, ElitismSelection
-from scheduling_algorithm.operator.crossover import CrossoverManager, SinglePointCrossover, TwoPointCrossover, UniformCrossover
-from scheduling_algorithm.operator.mutation import MutationManager, SwapMutation, ShiftMutation, RandomMutation
-from scheduling_algorithm.operator.repair import RepairManager, TimeSlotRepair
+from .operator.selection import (
+    SelectionManager,
+    RouletteWheelSelection,
+    TournamentSelection,
+    ElitismSelection
+)
+from .operator.crossover import (
+    CrossoverManager, 
+    SinglePointCrossover, 
+    TwoPointCrossover, 
+    UniformCrossover
+)
+from .operator.mutation import (
+    MutationManager, 
+    SwapMutation, 
+    ShiftMutation, 
+    RandomMutation
+
+)
+from .operator.repair import (
+    RepairManager, 
+    TimeSlotRepair
+)
 
 #Neighborhood for local search
-from scheduling_algorithm.algorithms.neighborhood import RandomSwapNeighborhood
+from .algorithms.neighborhood import RandomSwapNeighborhood
 
 #Tabu list
-from scheduling_algorithm.structure import Chromosome, TabuList
+from .structure import Chromosome, TabuList
+
+#Json schema for configuration, used for validation and default value
+
+from .config_schema import ScheduleConfiguration
 
 class GenerateTimetabling(APIView):
     permission_classes = [AllowAny]
 
-    def configure_fitness_manager(self, data):
-        group_assignment_conflict_fitness = GroupAssignmentConflictFitness().configure(max_threshold=data['fitness'].get('max_threshold', 3),
-                                                                                    conflict_penalty=data['fitness'].get('conflict_penalty', 1))
+    def configure_fitness_manager(self, fitness_config):
+        group_assignment_conflict_fitness = GroupAssignmentConflictFitness().configure(
+            max_threshold=fitness_config['group_assignment_conflict'].get('max_threshold'),
+            conflict_penalty=fitness_config['group_assignment_conflict'].get('conflict_penalty')
+            )
         
-        assistant_distribution_fitness = AssistantDistributionFitness().configure(max_group_threshold=data['fitness'].get('max_group_threshold', 15),
-                                                                                max_shift_threshold=data['fitness'].get('max_shift_threshold', 50),
-                                                                                group_penalty=data['fitness'].get('group_penalty', 1),
-                                                                                shift_penalty=data['fitness'].get('shift_penalty', 1))
+        assistant_distribution_fitness = AssistantDistributionFitness().configure(
+            max_group_threshold=fitness_config['assistant_distribution'].get('max_group_threshold'),
+            max_shift_threshold=fitness_config['assistant_distribution'].get('max_shift_threshold'),
+            group_penalty=fitness_config['assistant_distribution'].get('group_penalty'),
+            shift_penalty=fitness_config['assistant_distribution'].get('shift_penalty')
+            )
         
         fitness_manager = FitnessManager([group_assignment_conflict_fitness, assistant_distribution_fitness])
         return fitness_manager
     
-    def configure_selection_manager(self, data):
+    def configure_selection_manager(self, selection_config):
         selection = []
-        if data['selection']['roulette_wheel']:
+        if selection_config['roulette_wheel']:
             selection.append(RouletteWheelSelection())
 
-        if data['selection']['tournament']:
+        if selection_config['tournament']:
             tournament = TournamentSelection()
-            tournament.configure(tournament_size=data.get('tournament_size', 2))
+            tournament.configure(tournament_size=selection_config.get('tournament_size'))
             selection.append(tournament)
 
-        if data['selection']['elitism']:
+        if selection_config['elitism']:
             elitism = ElitismSelection()
             elitism.configure(elitism_size=1)
             selection.append(elitism)
 
-        if selection == []:
+        if not selection:
             selection.append(RouletteWheelSelection())
 
         selection_manager = SelectionManager(selection)
         return selection_manager
     
-    def configure_crossover_manager(self, data):
+    def configure_crossover_manager(self, crossover_config):
         crossover = []
-        if data['crossover']['single_point']:
+        if crossover_config['single_point']:
             crossover.append(SinglePointCrossover())
 
-        if data['crossover']['two_point']:
+        if crossover_config['two_point']:
             crossover.append(TwoPointCrossover())
 
-        if data['crossover']['uniform']:
+        if crossover_config['uniform']:
             uniform = UniformCrossover()
-            uniform.configure(uniform_probability=data['crossover'].get('uniform_probability', 0.5))
+            uniform.configure(uniform_probability=crossover_config.get('uniform_probability'))
             crossover.append(uniform)
 
-        if crossover == []:
+        if not crossover:
             crossover.append(SinglePointCrossover())
 
-        crossover_manager = CrossoverManager(crossover).configure(crossover_probability=data['crossover'].get('crossover_probability', 0.1))
+        crossover_manager = CrossoverManager(crossover).configure(crossover_probability=crossover_config.get('crossover_probability'))
         return crossover_manager
     
-    def configure_mutation_manager(self, data):
+    def configure_mutation_manager(self, mutation_config):
         mutation = []
-        if data['mutation']['swap']:
+        if mutation_config['swap']:
             mutation.append(SwapMutation())
 
-        if data['mutation']['shift']:
+        if mutation_config['shift']:
             mutation.append(ShiftMutation())
 
-        if data['mutation']['random']:
+        if mutation_config['random']:
             mutation.append(RandomMutation())
 
         if mutation == []:
             mutation.append(SwapMutation())
 
-        mutation_manager = MutationManager(mutation).configure(mutation_probability=data['mutation'].get('mutation_probability', 0.1))
+        mutation_manager = MutationManager(mutation).configure(mutation_probability=mutation_config.get('mutation_probability'))
         return mutation_manager
     
-    def configure_repair_manager(self, data):
+    def configure_repair_manager(self, repair_config):
         repair = []
-        if data['repair']['time_slot']:
+        if repair_config['time_slot']:
             repair.append(TimeSlotRepair())
 
         if repair == []:
@@ -111,35 +146,38 @@ class GenerateTimetabling(APIView):
         repair_manager = RepairManager(repair)
         return repair_manager
     
-    def configure_neighborhood(self, data):
-        if data['neighborhood']['random_swap']:
+    def configure_neighborhood(self, neighborhood_config):
+        if neighborhood_config['random_swap']:
             neighborhood = RandomSwapNeighborhood()
-            neighborhood.configure(neighborhood_size=data['neighborhood'].get('neighborhood_size', 100))
+            neighborhood.configure(neighborhood_size=neighborhood_config.get('neighborhood_size', 100))
         else:
             neighborhood = RandomSwapNeighborhood()
-            neighborhood.configure(neighborhood_size=data['neighborhood'].get('neighborhood_size', 100))
+            neighborhood.configure(neighborhood_size=neighborhood_config.get('neighborhood_size', 100))
         return neighborhood
 
-    def configure_local_search(self, data, fitness_manager, neighborhood):
-        if data['local_search']['simulated_annealing']:
+    def configure_local_search(self, local_search_config, fitness_manager, neighborhood):
+        if local_search_config['simulated_annealing']:
+            config = local_search_config.get('simulated_annealing_config')
             local_search = SimulatedAnnealing()
             local_search.configure(fitness_manager=fitness_manager,
                                     neighborhood=neighborhood, 
-                                    initial_temperature=data['local_search'].get('initial_temperature', 100),
-                                    cooling_rate=data['local_search'].get('cooling_rate', 0.1),
-                                    max_iteration=data['local_search'].get('max_iteration', 1000),
-                                    max_time=data['local_search'].get('max_time', 60))
+                                    initial_temperature=config.get('initial_temperature'),
+                                    cooling_rate=config.get('cooling_rate'),
+                                    max_iteration=config.get('max_iteration'),
+                                    max_time=config.get('max_time') 
+                                    )
             
-        elif data['local_search']['tabu_search']:
+        elif local_search_config['tabu_search']:
+            config = local_search_config.get('tabu_search_config')
             local_search = TabuSearch()
-            tabu_list = TabuList(tabu_list_size=data['local_search'].get('tabu_list_size', 50))
+            tabu_list = TabuList(tabu_list_size=config.get('tabu_list_size'))
             local_search.configure(fitness_manager=fitness_manager, 
                                     neighborhood=neighborhood, 
                                     tabu_list=tabu_list,
-                                    max_iteration=data['local_search'].get('max_iteration', 1000),
-                                    max_time=data['local_search'].get('max_time', 60),
-                                    max_iteration_without_improvement=data['local_search'].get('max_iteration_without_improvement', 100),
-                                    max_time_without_improvement=data['local_search'].get('max_time_without_improvement', 5))
+                                    max_iteration=config.get('max_iteration'),
+                                    max_time=config.get('max_time'),
+                                    max_iteration_without_improvement=config.get('max_iteration_without_improvement'),
+                                    max_time_without_improvement=config.get('max_time_without_improvement'))
             
         else:
             return Response({"error": "No local search is selected"}, status=status.HTTP_400_BAD_REQUEST)
@@ -147,24 +185,21 @@ class GenerateTimetabling(APIView):
         return local_search
     
     def post(self, request):
-        data = request.data
-
-        #For testing, if there is a test key in the request data, return the data
-        if 'test' in data:
-            return Response(data, status=status.HTTP_200_OK)
+        data = ScheduleConfiguration.from_data(request.data)
+        data.save("config.json")
         
         # Initialize the configuration
         factory = Factory()
-        fitness_manager = self.configure_fitness_manager(data)
-        selection_manager = self.configure_selection_manager(data)
-        crossover_manager = self.configure_crossover_manager(data)
-        mutation_manager = self.configure_mutation_manager(data)
-        repair_manager = self.configure_repair_manager(data)
+        fitness_manager = self.configure_fitness_manager(data.get_fitness_config())
+        selection_manager = self.configure_selection_manager(data.get_selection_config())
+        crossover_manager = self.configure_crossover_manager(data.get_crossover_config())
+        mutation_manager = self.configure_mutation_manager(data.get_mutation_config())
+        repair_manager = self.configure_repair_manager(data.get_repair_config())
         elitism = ElitismSelection()
-        elitism_size = data.get('elitism_size', 2)
+        elitism_size = data.get_elitism_size()
 
         # Initialize the algorithm
-        if data['algorithm']['genetic_algorithm']:
+        if data.is_genetic_algorithm():
             algorithm = GeneticAlgorithm()
             algorithm.configure(factory=factory, 
                                 fitness_manager=fitness_manager, 
@@ -175,10 +210,10 @@ class GenerateTimetabling(APIView):
                                 elitism_selection=elitism,
                                 elitism_size= elitism_size)
             
-        elif data['algorithm']['genetic_local_search']:
+        elif data.is_genetic_local_search():
             # Configure the local search
-            neighborhood = self.configure_neighborhood(data)
-            local_search = self.configure_local_search(data, fitness_manager, neighborhood)
+            neighborhood = self.configure_neighborhood(data.get_neighborhood_config())
+            local_search = self.configure_local_search(data.get_local_search_config(), fitness_manager, neighborhood)
             # Main Algorithm   
             algorithm = GeneticLocalSearch()
             algorithm.configure(factory=factory,
@@ -196,10 +231,12 @@ class GenerateTimetabling(APIView):
             
         # Run the algorithm
         try:
-            best_chromosome: Chromosome = algorithm.run(max_iteration=data.get('max_iteration', 500),
-                                                        population_size=data.get('population_size', 25))
+            best_chromosome: Chromosome = algorithm.run(max_iteration=data.get_max_iteration(),
+                                                        population_size=data.get_population_size())
+            #turn the chromosome into json
+
             return Response({
-                # "best_chromosome": best_chromosome.to_json(),
+                "best_chromosome": best_chromosome.to_json(),
                 "best_fitness": best_chromosome.fitness,
                 "time_elapsed": algorithm.log['time_elapsed'],
             }, status=status.HTTP_200_OK)

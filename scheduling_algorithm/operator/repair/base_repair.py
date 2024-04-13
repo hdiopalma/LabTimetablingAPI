@@ -24,6 +24,7 @@ class DynamicRepair(BaseRepair):
         return self.repair_function(chromosome)
     
 class RepairManager:
+    '''Class to manage multiple repair functions.'''
     def __init__(self, repair_functions: List[BaseRepair]):
         self.repair_functions = repair_functions
     

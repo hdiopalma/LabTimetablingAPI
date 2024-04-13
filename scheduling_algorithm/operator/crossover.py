@@ -86,6 +86,7 @@ class DynamicCrossover(BaseCrossover):
         return self.crossover_function(parent1, parent2)
     
 class CrossoverManager:
+    '''Class to manage multiple crossover functions.'''
     def __init__(self, crossover_functions: List[BaseCrossover]):
         self.crossover_functions = crossover_functions
         self.crossover_probability = 0.1
