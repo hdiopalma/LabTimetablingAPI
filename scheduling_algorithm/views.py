@@ -1,15 +1,23 @@
-from django.shortcuts import render
-
 from rest_framework.permissions import AllowAny
+from django.utils import timezone
+import time
+import json
+import datetime
+import pytz
 
 # Create your views here.
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 
+#Model
+from scheduling_data.models import Solution, ScheduleData, Semester
+
 #Algorithm
-from .algorithms.global_search.genetic_algorithm import GeneticAlgorithm
-from .algorithms.hybrid.genetic_local_search import GeneticLocalSearch
+from .algorithms import (
+    GeneticAlgorithm,
+    GeneticLocalSearch
+)
 from .algorithms.local_search import (
     TabuSearch,
     SimulatedAnnealing
@@ -18,7 +26,7 @@ from .algorithms.local_search import (
 from .factory import Factory
 
 #Fitness function
-from scheduling_algorithm.fitness_function import (
+from .fitness_function import (
     FitnessManager,
     AssistantDistributionFitness,
     GroupAssignmentConflictFitness
@@ -61,6 +69,36 @@ from .config_schema import ScheduleConfiguration
 
 class GenerateTimetabling(APIView):
     permission_classes = [AllowAny]
+
+    def create_solution(self, data: ScheduleConfiguration):
+        solution = Solution()
+        semester_id = data['semester']
+        semester_instance = Semester.objects.get(pk=semester_id)
+        solution.name = "Generated on " + str(time.ctime())
+        solution.semester = semester_instance
+        solution.fitness = data.get_fitness_config()
+        solution.selection = data.get_selection_config()
+        solution.crossover = data.get_crossover_config()
+        solution.mutation = data.get_mutation_config()
+        solution.repair = data.get_repair_config()
+        solution.neighborhood = data.get_neighborhood_config()
+        solution.algorithm = data.get_algorithm()
+        solution.local_search = data.get_local_search_config()
+        solution.max_iteration = data.get_max_iteration()
+        solution.population_size = data.get_population_size()
+        solution.elitism_size = data.get_elitism_size()
+        solution.save()
+        return solution
+    
+    def update_solution(self, solution: Solution, best_chromosome: Chromosome, algorithm: GeneticAlgorithm):
+        solution.status = "Completed"
+        # solution.iteration_log = algorithm.log['iteration_log']
+        solution.best_fitness = best_chromosome.fitness
+        solution.time_elapsed = algorithm.log['time_elapsed']
+        # solution.best_solution = best_chromosome.to_json()
+        solution.gene_count = len(best_chromosome)
+        solution.save()
+        return solution
 
     def configure_fitness_manager(self, fitness_config):
         group_assignment_conflict_fitness = GroupAssignmentConflictFitness().configure(
@@ -129,7 +167,7 @@ class GenerateTimetabling(APIView):
         if mutation_config['random']:
             mutation.append(RandomMutation())
 
-        if mutation == []:
+        if not mutation:
             mutation.append(SwapMutation())
 
         mutation_manager = MutationManager(mutation).configure(mutation_probability=mutation_config.get('mutation_probability'))
@@ -140,7 +178,7 @@ class GenerateTimetabling(APIView):
         if repair_config['time_slot']:
             repair.append(TimeSlotRepair())
 
-        if repair == []:
+        if not repair:
             repair.append(TimeSlotRepair())
 
         repair_manager = RepairManager(repair)
@@ -149,25 +187,15 @@ class GenerateTimetabling(APIView):
     def configure_neighborhood(self, neighborhood_config):
         if neighborhood_config['random_swap']:
             neighborhood = RandomSwapNeighborhood()
-            neighborhood.configure(neighborhood_size=neighborhood_config.get('neighborhood_size', 100))
+            neighborhood.configure(neighborhood_size=neighborhood_config.get('neighborhood_size'))
         else:
             neighborhood = RandomSwapNeighborhood()
-            neighborhood.configure(neighborhood_size=neighborhood_config.get('neighborhood_size', 100))
+            neighborhood.configure(neighborhood_size=neighborhood_config.get('neighborhood_size'))
         return neighborhood
 
     def configure_local_search(self, local_search_config, fitness_manager, neighborhood):
-        if local_search_config['simulated_annealing']:
-            config = local_search_config.get('simulated_annealing_config')
-            local_search = SimulatedAnnealing()
-            local_search.configure(fitness_manager=fitness_manager,
-                                    neighborhood=neighborhood, 
-                                    initial_temperature=config.get('initial_temperature'),
-                                    cooling_rate=config.get('cooling_rate'),
-                                    max_iteration=config.get('max_iteration'),
-                                    max_time=config.get('max_time') 
-                                    )
-            
-        elif local_search_config['tabu_search']:
+
+        if local_search_config['tabu_search']:
             config = local_search_config.get('tabu_search_config')
             local_search = TabuSearch()
             tabu_list = TabuList(tabu_list_size=config.get('tabu_list_size'))
@@ -178,6 +206,17 @@ class GenerateTimetabling(APIView):
                                     max_time=config.get('max_time'),
                                     max_iteration_without_improvement=config.get('max_iteration_without_improvement'),
                                     max_time_without_improvement=config.get('max_time_without_improvement'))
+
+        elif local_search_config['simulated_annealing']:
+            config = local_search_config.get('simulated_annealing_config')
+            local_search = SimulatedAnnealing()
+            local_search.configure(fitness_manager=fitness_manager,
+                                    neighborhood=neighborhood, 
+                                    initial_temperature=config.get('initial_temperature'),
+                                    cooling_rate=config.get('cooling_rate'),
+                                    max_iteration=config.get('max_iteration'),
+                                    max_time=config.get('max_time') 
+                                    )
             
         else:
             return Response({"error": "No local search is selected"}, status=status.HTTP_400_BAD_REQUEST)
@@ -186,7 +225,7 @@ class GenerateTimetabling(APIView):
     
     def post(self, request):
         data = ScheduleConfiguration.from_data(request.data)
-        data.save("config.json")
+        data.save("last_config.json")
         
         # Initialize the configuration
         factory = Factory()
@@ -228,18 +267,24 @@ class GenerateTimetabling(APIView):
             
         else:
             return Response({"error": "No algorithm is selected"}, status=status.HTTP_400_BAD_REQUEST)
-            
+        
+        # Create the solution
+        solution = self.create_solution(data)
+
         # Run the algorithm
         try:
             best_chromosome: Chromosome = algorithm.run(max_iteration=data.get_max_iteration(),
                                                         population_size=data.get_population_size())
-            #turn the chromosome into json
-
+            # Update the solution
+            solution = self.update_solution(solution, best_chromosome, algorithm)
             return Response({
-                "best_chromosome": best_chromosome.to_json(),
                 "best_fitness": best_chromosome.fitness,
                 "time_elapsed": algorithm.log['time_elapsed'],
+                "best_solution": best_chromosome.to_json(),
             }, status=status.HTTP_200_OK)
         
         except Exception as e:
+            solution.status = "Error"
+            solution.save()
+            print(e)
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)

@@ -206,7 +206,7 @@ class ScheduleConfiguration:
 
     @classmethod
     def from_data(cls, data):
-        # load configuration
+        '''Create instance from data'''
         instance = cls(data)
         instance.load_config(data)
         return instance
@@ -239,6 +239,9 @@ class ScheduleConfiguration:
     def get_neighborhood_config(self):
         '''Return neighborhood configuration'''
         return self.data["neighborhood"]
+    
+    def get_algorithm(self):
+        return self.data['algorithm']
 
     def get_local_search_config(self):
         return self.data["local_search"]
