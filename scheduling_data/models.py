@@ -207,7 +207,7 @@ class Solution(models.Model):
 class ScheduleData(models.Model):
     '''Model for storing the schedule solution, daily schedule for each semester. Probably will be filled with huge data.'''
     id = models.AutoField(primary_key=True)
-    process_data = models.OneToOneField(Solution, on_delete=models.CASCADE, related_name='schedule_data')
+    solution = models.ForeignKey(Solution, on_delete=models.CASCADE, related_name='schedule_data')
     date = models.DateTimeField() # Date of the schedule.
     day = models.CharField(max_length=10) # Monday, Tuesday, etc.
     shift = models.CharField(max_length=10) # Shift1, Shift2, etc.
@@ -218,5 +218,11 @@ class ScheduleData(models.Model):
     assistant = models.ForeignKey(Assistant, on_delete=models.CASCADE, related_name='schedules')
     # time_slot = models.JSONField(default=dict)
 
+    class Meta:
+        # unique_together = ['date', 'day', 'shift', 'laboratory', 'module', 'chapter', 'group', 'assistant']
+        indexes = [
+            models.Index(fields=['laboratory', 'module', 'chapter', 'group', 'assistant'])
+        ]
+
     def __str__(self) -> str:
-        return f"Schedule Solution for {self.process_data.semester.name}"
+        return f"Schedule Solution for {self.date} - {self.day} - {self.shift} - {self.laboratory.name} - {self.module.name} - {self.chapter.name} - {self.group.name} - {self.assistant.name}"
