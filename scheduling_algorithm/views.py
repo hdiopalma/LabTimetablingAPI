@@ -212,7 +212,7 @@ class GenerateTimetabling(APIView):
 
     def configure_local_search(self, local_search_config, fitness_manager, neighborhood):
 
-        if local_search_config['tabu_search']:
+        if local_search_config['algorithm'] == "tabu_search":
             config = local_search_config.get('tabu_search_config')
             local_search = TabuSearch()
             tabu_list = TabuList(tabu_list_size=config.get('tabu_list_size'))
@@ -224,7 +224,7 @@ class GenerateTimetabling(APIView):
                                     max_iteration_without_improvement=config.get('max_iteration_without_improvement'),
                                     max_time_without_improvement=config.get('max_time_without_improvement'))
 
-        elif local_search_config['simulated_annealing']:
+        elif local_search_config['algorithm'] == "simulated_annealing":
             config = local_search_config.get('simulated_annealing_config')
             local_search = SimulatedAnnealing()
             local_search.configure(fitness_manager=fitness_manager,

@@ -38,8 +38,7 @@
         "neighborhood_size": 100
     },
     "local_search": {
-        "simulated_annealing": true,
-        "tabu_search": false,
+        "algorithm": "simulated_annealing",
         "simulated_annealing_config": {
             "initial_temperature": 100,
             "cooling_rate": 0.1,
@@ -54,10 +53,7 @@
             "max_time_without_improvement": 5
         }
     },
-    "algorithm": {
-        "genetic_algorithm": false,
-        "genetic_local_search": true
-    },
+    "algorithm": "genetic_local_search",
     "max_iteration": 500,
     "population_size": 25,
     "elitism_size": 2,

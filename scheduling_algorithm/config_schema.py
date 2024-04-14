@@ -75,8 +75,12 @@ config_schema = {
         "local_search": {
             "type": "object",
             "properties": {
-                "simulated_annealing": {"type": "boolean"},
-                "tabu_search": {"type": "boolean"},
+                # "simulated_annealing": {"type": "boolean"},
+                # "tabu_search": {"type": "boolean"},
+                "algorithm": {
+                    "type": "string",
+                    "enum": ["simulated_annealing", "tabu_search"]
+                },
                 "simulated_annealing_config": {
                     "type": "object",
                     "properties": {
@@ -97,15 +101,11 @@ config_schema = {
                     }
                 }
             },
-            "required": ["simulated_annealing", "tabu_search"]
+            "required": ["algorithm"]
         },
         "algorithm": {
-            "type": "object",
-            "properties": {
-                "genetic_algorithm": {"type": "boolean"},
-                "genetic_local_search": {"type": "boolean"}
-            },
-            "required": ["genetic_algorithm", "genetic_local_search"]
+            "type": "string",
+            "enum": ["genetic_algorithm", "genetic_local_search"]
         },
         "max_iteration": {"type": "number"},
         "population_size": {"type": "number"},
@@ -154,8 +154,9 @@ default_config = {
         "neighborhood_size": 100
     },
     "local_search": {
-        "simulated_annealing": True,
-        "tabu_search": False,
+        # "simulated_annealing": True,
+        # "tabu_search": False,
+        "algorithm": "simulated_annealing",
         "simulated_annealing_config": {
             "initial_temperature": 100,
             "cooling_rate": 0.1,
@@ -170,10 +171,7 @@ default_config = {
             "max_time_without_improvement": 5
         }
     },
-    "algorithm": {
-        "genetic_algorithm": False,
-        "genetic_local_search": True
-    },
+    "algorithm": "genetic_local_search",
     "max_iteration": 500,
     "population_size": 25,
     "elitism_size": 2
@@ -248,10 +246,10 @@ class ScheduleConfiguration:
         
     
     def is_genetic_algorithm(self):
-        return self.data["algorithm"]["genetic_algorithm"]
+        return self.data["algorithm"] == "genetic_algorithm"
     
     def is_genetic_local_search(self):
-        return self.data["algorithm"]["genetic_local_search"]
+        return self.data["algorithm"] == "genetic_local_search"
     
     def get_max_iteration(self):
         return self.data["max_iteration"]
