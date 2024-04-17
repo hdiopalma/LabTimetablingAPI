@@ -1,6 +1,7 @@
 #Base Fitness Class
 from scheduling_algorithm.structure import Chromosome
 
+
 class BaseFitness:
     def __init__(self, name):
         self.name = name
@@ -13,3 +14,8 @@ class BaseFitness:
     
     def __call__(self, chromosome: Chromosome):
         raise NotImplementedError("Fitness function not implemented")
+    
+    @classmethod
+    def create(cls, name, config):
+        '''Create fitness function from name and configuration, make sure the order of config is correct'''
+        raise NotImplementedError("Create function not implemented")

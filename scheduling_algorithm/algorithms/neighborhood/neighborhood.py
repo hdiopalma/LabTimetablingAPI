@@ -17,6 +17,44 @@ class BaseNeighborhood:
     def __call__(self, chromosome: Chromosome):
         raise NotImplementedError("Neighborhood function not implemented")
     
+    def configure(self, **kwargs):
+        '''Configure the neighborhood'''
+        raise NotImplementedError("Neighborhood configuration not implemented")
+    
+class NeighborhoodManager:
+    def __init__(self, neighborhood: BaseNeighborhood):
+        self.neighborhood = neighborhood
+    
+    def __call__(self, chromosome: Chromosome):
+        return self.neighborhood(chromosome)
+    
+    def configure(self, **kwargs):
+        self.neighborhood.configure(**kwargs)
+        return self
+    
+    def __str__(self):
+        return f"NeighborhoodManager(neighborhood={self.neighborhood})"
+    
+    def __repr__(self):
+        return self.__str__()
+    
+    @classmethod
+    def create(cls, neighborhood_config: dict):
+        '''Create the neighborhood
+        args:
+            neighborhood_config: dict'''
+        neighborhood = neighborhood_config['neighborhood']
+        if neighborhood == "SwapNeighborhood":
+            return SwapNeighborhood()
+        elif neighborhood == "RandomSwapNeighborhood":
+            return RandomSwapNeighborhood()
+        elif neighborhood == "RandomRangeSwapNeighborhood":
+            return RandomRangeSwapNeighborhood()
+        elif neighborhood == "DistanceSwapNeighborhood":
+            return DistanceSwapNeighborhood()
+        else:
+            raise ValueError(f"Neighborhood {neighborhood} not found")
+    
 class SwapNeighborhood(BaseNeighborhood):
     def __init__(self):
         super().__init__("SwapNeighborhood")
@@ -79,6 +117,7 @@ class RandomRangeSwapNeighborhood(BaseNeighborhood):
             neighbors.append(neighbor)
         return neighbors
     
+    
     def configure(self, neighborhood_size_factor = None, range_size_factor = None):
         self.neighborhood_size_factor = neighborhood_size_factor or self.neighborhood_size_factor
         self.range_size_factor = range_size_factor or self.range_size_factor
@@ -135,3 +174,37 @@ class DistanceSwapNeighborhood(BaseNeighborhood):
     def configure(self, distance_percentage = None):
         self.distance_percentage = distance_percentage or self.distance_percentage
         return self
+    
+class NeighborhoodManager:
+    def __init__(self, neighborhood: BaseNeighborhood):
+        self.neighborhood = neighborhood
+    
+    def __call__(self, chromosome: Chromosome):
+        return self.neighborhood(chromosome)
+    
+    def configure(self, **kwargs):
+        self.neighborhood.configure(**kwargs)
+        return self
+    
+    def __str__(self):
+        return f"NeighborhoodManager(neighborhood={self.neighborhood})"
+    
+    def __repr__(self):
+        return self.__str__()
+    
+    @classmethod
+    def create(cls, neighborhood_config: dict):
+        '''Create the neighborhood
+        args:
+            neighborhood_config: dict'''
+        neighborhood = neighborhood_config['neighborhood']
+        if neighborhood == "SwapNeighborhood":
+            return SwapNeighborhood()
+        elif neighborhood == "RandomSwapNeighborhood":
+            return RandomSwapNeighborhood()
+        elif neighborhood == "RandomRangeSwapNeighborhood":
+            return RandomRangeSwapNeighborhood()
+        elif neighborhood == "DistanceSwapNeighborhood":
+            return DistanceSwapNeighborhood()
+        else:
+            raise ValueError(f"Neighborhood {neighborhood} not found")

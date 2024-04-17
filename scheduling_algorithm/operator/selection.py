@@ -17,6 +17,18 @@ class BaseSelection:
     
     def __call__(self, population: Population):
         raise NotImplementedError("Selection function not implemented")
+    
+    # @classmethod
+    # def create(cls, name, config):
+    #     '''Create selection function from name and configuration, make sure the order of config is correct'''
+    #     if name == "RouletteWheelSelection":
+    #         return RouletteWheelSelection()
+    #     elif name == "TournamentSelection":
+    #         return TournamentSelection.create(config)
+    #     elif name == "ElitismSelection":
+    #         return ElitismSelection.create(config)
+    #     else:
+    #         raise ValueError(f"Invalid selection function: {name}")
         
     
 class RouletteWheelSelection(BaseSelection):
@@ -50,6 +62,10 @@ class TournamentSelection(BaseSelection):
     def configure(self, tournament_size):
         self.tournament_size = tournament_size
 
+    @classmethod
+    def create(cls, config):
+        return TournamentSelection().configure(config["tournament_size"])
+
 class ElitismSelection(BaseSelection):
     def __init__(self):
         super().__init__("ElitismSelection")
@@ -67,6 +83,10 @@ class ElitismSelection(BaseSelection):
     
     def configure(self, elitism_size):
         self.elitism_size = elitism_size
+
+    @classmethod
+    def create(cls, config):
+        return ElitismSelection().configure(config["elitism_size"])
 
 class DynamicSelection(BaseSelection):
     def __init__(self, name, selection_function):
@@ -100,3 +120,30 @@ class SelectionManager:
     
     def configure(self, selection_functions: List[BaseSelection]):
         self.selection_functions = selection_functions
+
+    @classmethod
+    def create(cls, config):
+        selection_functions = []
+        if config["roulette_wheel"]:
+            selection_functions.append(RouletteWheelSelection())
+        if config["tournament"]:
+            selection_functions.append(TournamentSelection.create(config))
+        if config["elitism"]:
+            selection_functions.append(ElitismSelection.create(config))
+        if not selection_functions:
+            raise ValueError("At least one selection function must be enabled")
+        return SelectionManager(selection_functions)
+
+
+config_schema = {
+    # Selection configuration, for reference only
+    "type": "object",
+    "properties": {
+        "roulette_wheel": {"type": "boolean"},
+        "tournament": {"type": "boolean"},
+        "elitism": {"type": "boolean"},
+        "tournament_size": {"type": "number"},
+        "elitism_size": {"type": "number"}
+    },
+    "required": ["roulette_wheel", "tournament", "elitism"]
+}

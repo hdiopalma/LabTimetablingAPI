@@ -3,6 +3,8 @@
 from typing import List
 from scheduling_algorithm.structure import Chromosome
 from scheduling_algorithm.fitness_function.base_fitness import BaseFitness
+from scheduling_algorithm.fitness_function.group_assignment_conflict import GroupAssignmentConflictFitness
+from scheduling_algorithm.fitness_function.assistant_distribution import AssistantDistributionFitness
 
 class FitnessManager:
     '''FitnessManager is a class that manages all fitness functions and their respective fitness values'''
@@ -29,3 +31,40 @@ class FitnessManager:
     def grouped_fitness(self, chromosome: Chromosome):
         """Return a dictionary of fitness functions and their respective fitness value"""
         return {fitness_function.name: fitness_function(chromosome) for fitness_function in self.fitness_functions}
+    
+    def create(self, config: dict):
+        """Create a FitnessManager instance from configuration"""
+        fitness_functions = []
+        for name, config in config.items():
+            if name == "group_assignment_conflict":
+                fitness_functions.append(GroupAssignmentConflictFitness.create(config))
+            elif name == "assistant_distribution":
+                fitness_functions.append(AssistantDistributionFitness.create(config))
+        if not fitness_functions:
+            raise ValueError("No fitness functions found in configuration")
+        return FitnessManager(fitness_functions)
+    
+
+config_schema = {
+    # Fitness configuration, for reference only
+    "type": "object",
+    "properties": {
+        "group_assignment_conflict": {
+            "type": "object",
+            "properties": {
+                "max_threshold": {"type": "number"},
+                "conflict_penalty": {"type": "number"}
+            }
+        },
+        "assistant_distribution": {
+            "type": "object",
+            "properties": {
+                "max_group_threshold": {"type": "number"},
+                "max_shift_threshold": {"type": "number"},
+                "group_penalty": {"type": "number"},
+                "shift_penalty": {"type": "number"}
+            }
+        },
+    },
+    "required": ["group_assignment_conflict", "assistant_distribution"]
+}

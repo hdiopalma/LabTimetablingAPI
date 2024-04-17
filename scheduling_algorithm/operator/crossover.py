@@ -110,3 +110,33 @@ class CrossoverManager:
     def configure(self, crossover_probability):
         self.crossover_probability = crossover_probability
         return self
+    
+    @classmethod
+    def create(cls, config):
+        '''Create crossover manager from configuration'''
+        crossover_functions = []
+        if config.get("single_point", False):
+            crossover_functions.append(SinglePointCrossover())
+        if config.get("two_point", False):
+            crossover_functions.append(TwoPointCrossover())
+        if config.get("uniform", False):
+            uniform_crossover = UniformCrossover()
+            if "uniform_probability" in config:
+                uniform_crossover.configure(config["uniform_probability"])
+            crossover_functions.append(uniform_crossover)
+        if not crossover_functions:
+            raise ValueError("At least one crossover function must be enabled")
+        
+        return CrossoverManager(crossover_functions).configure(config.get("crossover_probability", 0.1))
+    
+config_schema = {
+    # Crossover configuration, for reference only
+    "type": "object",
+    "properties": {
+        "single_point": {"type": "boolean"},
+        "two_point": {"type": "boolean"},
+        "uniform": {"type": "boolean"},
+        "uniform_probability": {"type": "number"},
+        "crossover_probability": {"type": "number"}
+    }
+}

@@ -1,2 +1,3 @@
-from scheduling_algorithm.operator.repair.base_repair import RepairManager, DynamicRepair
+from scheduling_algorithm.operator.repair.base_repair import DynamicRepair
 from scheduling_algorithm.operator.repair.time_slot_repair import TimeSlotRepair
+from scheduling_algorithm.operator.repair.manager import RepairManager

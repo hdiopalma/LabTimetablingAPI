@@ -51,3 +51,16 @@ class GroupAssignmentConflictFitness(BaseFitness):
         self.max_threshold = max_threshold
         self.conflict_penalty = conflict_penalty
         return self
+    
+    @classmethod
+    def create(cls, config):
+        """Create GroupAssignmentConflictFitness instance from configuration
+        Args:
+            config (dict): Configuration for the fitness function
+            config = {
+                "max_threshold": 3,
+                "conflict_penalty": 1
+            }
+        """
+        fitness = cls()
+        return fitness.configure(**config)

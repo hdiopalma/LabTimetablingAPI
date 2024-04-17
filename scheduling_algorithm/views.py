@@ -82,7 +82,7 @@ class GenerateTimetabling(APIView):
         solution.repair = data.get_repair_config()
         solution.neighborhood = data.get_neighborhood_config()
         solution.algorithm = data.get_algorithm()
-        solution.local_search = data.get_local_search_config()
+        solution.local_search = data.get_local_search()
         solution.max_iteration = data.get_max_iteration()
         solution.population_size = data.get_population_size()
         solution.elitism_size = data.get_elitism_size()
@@ -202,7 +202,7 @@ class GenerateTimetabling(APIView):
         return repair_manager
     
     def configure_neighborhood(self, neighborhood_config):
-        if neighborhood_config['random_swap']:
+        if neighborhood_config['algorithm'] == "random_swap":
             neighborhood = RandomSwapNeighborhood()
             neighborhood.configure(neighborhood_size=neighborhood_config.get('neighborhood_size'))
         else:
@@ -213,7 +213,7 @@ class GenerateTimetabling(APIView):
     def configure_local_search(self, local_search_config, fitness_manager, neighborhood):
 
         if local_search_config['algorithm'] == "tabu_search":
-            config = local_search_config.get('tabu_search_config')
+            config = local_search_config.get('tabu_search')
             local_search = TabuSearch()
             tabu_list = TabuList(tabu_list_size=config.get('tabu_list_size'))
             local_search.configure(fitness_manager=fitness_manager, 
@@ -225,7 +225,7 @@ class GenerateTimetabling(APIView):
                                     max_time_without_improvement=config.get('max_time_without_improvement'))
 
         elif local_search_config['algorithm'] == "simulated_annealing":
-            config = local_search_config.get('simulated_annealing_config')
+            config = local_search_config.get('simulated_annealing')
             local_search = SimulatedAnnealing()
             local_search.configure(fitness_manager=fitness_manager,
                                     neighborhood=neighborhood, 
@@ -269,7 +269,7 @@ class GenerateTimetabling(APIView):
         elif data.is_genetic_local_search():
             # Configure the local search
             neighborhood = self.configure_neighborhood(data.get_neighborhood_config())
-            local_search = self.configure_local_search(data.get_local_search_config(), fitness_manager, neighborhood)
+            local_search = self.configure_local_search(data.get_local_search(), fitness_manager, neighborhood)
             # Main Algorithm   
             algorithm = GeneticLocalSearch()
             algorithm.configure(factory=factory,

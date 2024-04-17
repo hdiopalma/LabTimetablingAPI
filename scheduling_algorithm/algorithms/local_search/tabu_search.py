@@ -121,3 +121,22 @@ class TabuSearch(BaseSearch):
         self.max_iteration_without_improvement = max_iteration_without_improvement or self.max_iteration_without_improvement
         self.max_time_without_improvement = max_time_without_improvement or self.max_time_without_improvement
         return self
+    
+    @classmethod
+    def create(cls, fitness_config: dict, neighborhood_config: dict, tabu_search_config: dict):
+        '''Create the search
+        
+        args:
+            fitness_config: dict
+            tabu_search_config: dict
+            neighborhood: BaseNeighborhood'''
+        
+        pass
+        
+        # fitness_manager = FitnessManager.create(fitness_config)
+        # tabu_list = TabuList(tabu_search_config["tabu_list_size"])
+        # max_iteration = tabu_search_config["max_iteration"]
+        # max_time = tabu_search_config["max_time"]
+        # max_iteration_without_improvement = tabu_search_config["max_iteration_without_improvement"]
+        # max_time_without_improvement = tabu_search_config["max_time_without_improvement"]
+        # return cls().configure(fitness_manager, tabu_list, neighborhood, max_iteration, max_time, max_iteration_without_improvement, max_time_without_improvement)

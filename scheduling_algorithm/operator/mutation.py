@@ -120,3 +120,29 @@ class MutationManager:
     def configure(self, mutation_probability):
         self.mutation_probability = mutation_probability
         return self
+    
+    @classmethod
+    def create(cls, config):
+        mutation_functions = []
+        if config.get("swap"):
+            mutation_functions.append(SwapMutation())
+        if config.get("shift"):
+            mutation_functions.append(ShiftMutation())
+        if config.get("random"):
+            mutation_functions.append(RandomMutation())
+        if not mutation_functions:
+            raise ValueError("At least one mutation function must be enabled")
+        return MutationManager(mutation_functions).configure(config["mutation_probability"])
+    
+
+config_schema = {
+    # Selection configuration, for reference only
+    "type": "object",
+    "properties": {
+        "swap": {"type": "boolean"},
+        "shift": {"type": "boolean"},
+        "random": {"type": "boolean"},
+        "mutation_probability": {"type": "number"}
+    },
+    "required": ["swap", "shift", "random"]
+}

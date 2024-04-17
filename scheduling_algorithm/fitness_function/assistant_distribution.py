@@ -60,3 +60,17 @@ class AssistantDistributionFitness(BaseFitness):
         self.group_penalty = group_penalty
         self.shift_penalty = shift_penalty
         return self
+    
+    @classmethod
+    def create(cls, config):
+        """Create AssistantDistributionFitness instance from configuration
+        Args:
+            config (dict): Configuration for the fitness function
+            config = {
+                "max_group_threshold": 15,
+                "max_shift_threshold": 50,
+                "group_penalty": 1,
+                "shift_penalty": 1
+            }
+        """
+        return cls().configure(**config)
