@@ -170,7 +170,7 @@ class GeneticAlgorithm:
         return self
 
     @classmethod
-    def create(cls, config):
+    def create(cls, config: dict):
         '''Create a genetic algorithm object from the configuration file.
         '''
         # factory = Factory.create(config)
