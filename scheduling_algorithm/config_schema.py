@@ -100,8 +100,11 @@ class ScheduleConfiguration:
     def get_neighborhood_config(self):
         '''Return neighborhood configuration'''
         return self.data["local_search"]["config"]["neighborhood"]
-
+    
     def get_algorithm(self):
+        return self.data['algorithm']
+
+    def get_main_algorithm(self):
         return self.data['algorithm']['main']
     
     def get_algorithm_config(self):
@@ -110,8 +113,8 @@ class ScheduleConfiguration:
     def get_local_search(self):
         return self.data["local_search"]
 
-    def get_local_search_config(self, algorithm):
-        return self.data["local_search"][algorithm]
+    def get_local_search_config(self):
+        return self.data["local_search"]
 
     def get_simulated_annealing_config(self):
         return self.data["local_search"]["simulated_annealing"]

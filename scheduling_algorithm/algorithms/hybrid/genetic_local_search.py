@@ -74,6 +74,7 @@ class GeneticLocalSearch(GeneticAlgorithm):
             iteration += 1
         time_end = time.time()
         self.log['time_elapsed'] = time_end - time_start
+        self.log['best_chromosome'] = best_chromosome
         return best_chromosome
     
     def configure(self, factory: Factory = None, fitness_manager: FitnessManager = None, selection_manager: SelectionManager = None, crossover_manager: CrossoverManager = None, mutation_manager: MutationManager = None, repair_manager: RepairManager = None, elitism_selection: ElitismSelection = None, elitism_size: int = 1, local_search: TabuSearch = None):

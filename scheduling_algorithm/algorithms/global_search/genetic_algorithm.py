@@ -45,7 +45,6 @@ class GeneticAlgorithm:
         self.elitism_selection = ElitismSelection()
 
         self.initial_solution = None
-
         self.log = {}
 
     def __str__(self):
@@ -144,6 +143,7 @@ class GeneticAlgorithm:
                 break
         time_end = time.time()
         self.log['time_elapsed'] = (time_end - time_start)
+        self.log['best_chromosome'] = population[0]
         return population[0]
 
     def configure(self,
