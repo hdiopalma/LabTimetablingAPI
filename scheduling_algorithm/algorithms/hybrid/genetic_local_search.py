@@ -31,9 +31,14 @@ class GeneticLocalSearch(GeneticAlgorithm):
     def __repr__(self):
         return self.__str__()
     
-    def run(self, max_iteration: int, population_size: int):
+    def run(self,  *args, **kwargs):
         '''Run the hybrid algorithm.
         '''
+        max_iteration = args[0] if len(args) > 0 else kwargs.get(
+            'max_iteration', self.iteration)
+        population_size = args[1] if len(args) > 1 else kwargs.get(
+            'population_size', self.population_size)
+        
         time_start = time.time()
         # Initialize the population
         population = self._init_population(population_size)
@@ -98,7 +103,11 @@ class GeneticLocalSearch(GeneticAlgorithm):
         """
         # factory = Factory.create(config)
         print("Creating Genetic Local Search Algorithm from configuration")
+        print("Population Size: ", main_config['population_size'])
+        print("Max Iteration: ", main_config['max_iteration'])
         factory = Factory()
+        cls.population_size = main_config['population_size']
+        cls.iteration = main_config['max_iteration']
         fitness_manager = FitnessManager.create(main_config["fitness"])
         selection_manager = SelectionManager.create(main_config["operator"]["selection"])
         crossover_manager = CrossoverManager.create(main_config["operator"]["crossover"])
