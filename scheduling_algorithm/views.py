@@ -66,6 +66,8 @@ from .structure import Chromosome, TabuList
 
 from .config_schema import ScheduleConfiguration
 
+from .utils.solution_generator import SolutionGenerator
+
 class GenerateTimetabling(APIView):
     permission_classes = [AllowAny]
 
@@ -256,34 +258,37 @@ class GenerateTimetabling(APIView):
 
         # Initialize the algorithm
         if data.is_genetic_algorithm():
-            algorithm = GeneticAlgorithm()
-            algorithm.configure(factory=factory, 
-                                fitness_manager=fitness_manager, 
-                                selection_manager=selection_manager, 
-                                crossover_manager=crossover_manager, 
-                                mutation_manager=mutation_manager, 
-                                repair_manager=repair_manager, 
-                                elitism_selection=elitism,
-                                elitism_size= elitism_size)
+            # algorithm = GeneticAlgorithm()
+            # algorithm.configure(factory=factory, 
+            #                     fitness_manager=fitness_manager, 
+            #                     selection_manager=selection_manager, 
+            #                     crossover_manager=crossover_manager, 
+            #                     mutation_manager=mutation_manager, 
+            #                     repair_manager=repair_manager, 
+            #                     elitism_selection=elitism,
+            #                     elitism_size= elitism_size)
             
-        elif data.is_genetic_local_search():
-            # Configure the local search
-            neighborhood = self.configure_neighborhood(data.get_neighborhood_config())
-            local_search = self.configure_local_search(data.get_local_search(), fitness_manager, neighborhood)
-            # Main Algorithm   
-            algorithm = GeneticLocalSearch()
-            algorithm.configure(factory=factory,
-                                fitness_manager=fitness_manager,
-                                selection_manager=selection_manager,
-                                crossover_manager=crossover_manager,
-                                mutation_manager=mutation_manager,
-                                repair_manager=repair_manager,
-                                elitism_selection=elitism,
-                                elitism_size= elitism_size,
-                                local_search=local_search)
+            config = data.get_algorithm_config()
+        algorithm = SolutionGenerator(request.data).configure_algorithm()
             
-        else:
-            return Response({"error": "No algorithm is selected"}, status=status.HTTP_400_BAD_REQUEST)
+        # elif data.is_genetic_local_search():
+        #     # Configure the local search
+        #     neighborhood = self.configure_neighborhood(data.get_neighborhood_config())
+        #     local_search = self.configure_local_search(data.get_local_search(), fitness_manager, neighborhood)
+        #     # Main Algorithm   
+        #     algorithm = GeneticLocalSearch()
+        #     algorithm.configure(factory=factory,
+        #                         fitness_manager=fitness_manager,
+        #                         selection_manager=selection_manager,
+        #                         crossover_manager=crossover_manager,
+        #                         mutation_manager=mutation_manager,
+        #                         repair_manager=repair_manager,
+        #                         elitism_selection=elitism,
+        #                         elitism_size= elitism_size,
+        #                         local_search=local_search)
+            
+        # else:
+        #     return Response({"error": "No algorithm is selected"}, status=status.HTTP_400_BAD_REQUEST)
         
         # Create the solution
         solution = self.create_solution(data)
@@ -293,12 +298,14 @@ class GenerateTimetabling(APIView):
             best_chromosome: Chromosome = algorithm.run(max_iteration=data.get_max_iteration(),
                                                         population_size=data.get_population_size())
             # Update the solution
+            print("Solution generated, saving the solution")
             solution = self.update_solution(solution, best_chromosome, algorithm, status="Saving")
             # Create the schedule data
             self.create_schedule_data(solution, best_chromosome)
             # Update the solution
             solution.status = "Completed"
             solution.save()
+            print("Solution saved")
             return Response({
                 "best_fitness": best_chromosome.fitness,
                 "time_elapsed": algorithm.log['time_elapsed'],

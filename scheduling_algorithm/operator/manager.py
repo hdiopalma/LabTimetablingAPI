@@ -58,7 +58,7 @@ class OperatorManager:
         crossover_manager = CrossoverManager.create(config.get("crossover"))
         mutation_manager = MutationManager.create(config.get("mutation"))
         selection_manager = SelectionManager.create(config.get("selection"))
-        return OperatorManager(repair_manager, crossover_manager, mutation_manager, selection_manager)
+        return cls(repair_manager, crossover_manager, mutation_manager, selection_manager)
     
 
 #config_schema, for reference

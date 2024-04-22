@@ -41,6 +41,7 @@ class RepairManager:
             repair_functions.append(TimeSlotRepair())
         if not repair_functions:
             raise ValueError("At least one repair function must be enabled")
+        print("Configuring repair operator: ", repair_functions)
         return RepairManager(repair_functions)
     
 #config_schema

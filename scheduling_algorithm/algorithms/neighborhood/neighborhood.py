@@ -74,6 +74,10 @@ class SwapNeighborhood(BaseNeighborhood):
                 neighbors.append(neighbor)
         return neighbors
     
+    @classmethod
+    def create(cls, config: dict):
+        return cls()
+    
 class RandomSwapNeighborhood(BaseNeighborhood):
     def __init__(self):
         super().__init__("RandomSwapNeighborhood")
@@ -95,6 +99,10 @@ class RandomSwapNeighborhood(BaseNeighborhood):
     def configure(self, neighborhood_size = None):
         self.neighborhood_size = neighborhood_size or self.neighborhood_size
         return self
+    
+    @classmethod
+    def create(cls, config: dict):
+        return cls().configure(**config)
     
 class RandomRangeSwapNeighborhood(BaseNeighborhood):
     def __init__(self):
@@ -122,6 +130,10 @@ class RandomRangeSwapNeighborhood(BaseNeighborhood):
         self.neighborhood_size_factor = neighborhood_size_factor or self.neighborhood_size_factor
         self.range_size_factor = range_size_factor or self.range_size_factor
         return self
+    
+    @classmethod
+    def create(cls, config: dict):
+        return cls().configure(**config)
     
 class DistanceSwapNeighborhood(BaseNeighborhood):
     def __init__(self):
@@ -175,6 +187,10 @@ class DistanceSwapNeighborhood(BaseNeighborhood):
         self.distance_percentage = distance_percentage or self.distance_percentage
         return self
     
+    @classmethod
+    def create(cls, config: dict):
+        return cls().configure(**config)
+    
 class NeighborhoodManager:
     def __init__(self, neighborhood: BaseNeighborhood):
         self.neighborhood = neighborhood
@@ -192,19 +208,51 @@ class NeighborhoodManager:
     def __repr__(self):
         return self.__str__()
     
-    @classmethod
-    def create(cls, neighborhood_config: dict):
+    @staticmethod
+    def create(neighborhood_config: dict):
         '''Create the neighborhood
         args:
             neighborhood_config: dict'''
-        neighborhood = neighborhood_config['neighborhood']
-        if neighborhood == "SwapNeighborhood":
-            return SwapNeighborhood()
-        elif neighborhood == "RandomSwapNeighborhood":
-            return RandomSwapNeighborhood()
-        elif neighborhood == "RandomRangeSwapNeighborhood":
-            return RandomRangeSwapNeighborhood()
-        elif neighborhood == "DistanceSwapNeighborhood":
-            return DistanceSwapNeighborhood()
+        algorithm = neighborhood_config['algorithm']
+        selected_neighborhood = None
+        if algorithm == "swap":
+            selected_neighborhood = SwapNeighborhood.create(neighborhood_config['swap'])
+        elif algorithm == "random_swap":
+            selected_neighborhood = RandomSwapNeighborhood.create(neighborhood_config['random_swap'])
+        elif algorithm == "random_range_swap":
+            selected_neighborhood = RandomRangeSwapNeighborhood.create(neighborhood_config['random_range_swap'])
+        elif algorithm == "distance_swap":
+            selected_neighborhood = DistanceSwapNeighborhood.create(neighborhood_config['distance_swap'])
         else:
-            raise ValueError(f"Neighborhood {neighborhood} not found")
+            raise ValueError(f"Neighborhood {algorithm} not found")
+        print(f"Creating NeighborhoodManager with neighborhood: {selected_neighborhood}")
+        return selected_neighborhood
+        
+        
+#Config schema for reference
+neighborhood_properties = {
+    "type": "object",
+    "properties": {
+        "algorithm": {
+            "type": "string",
+            "enum": ["swap", "random_swap", "random_range_swap", "distance_swap"]
+        },
+        "random_swap": {
+            "type": "object",
+            "properties": {"neighborhood_size": {"type": "number"}},
+            "required": ["neighborhood_size"]
+        },
+        "random_range_swap": {
+            "type": "object",
+            "properties": {"neighborhood_size_factor": {"type": "number"}, "range_size_factor": {"type": "number"}},
+            "required": ["neighborhood_size_factor", "range_size_factor"]
+        },
+        "distance_swap": {
+            "type": "object",
+            "properties": {"distance_percentage": {"type": "number"}},
+            "required": ["distance_percentage"]
+        },
+        "swap": {"type": "boolean", "default": False}
+    },
+    "required": ["algorithm"]
+}

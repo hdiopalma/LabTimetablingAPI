@@ -132,6 +132,7 @@ class MutationManager:
             mutation_functions.append(RandomMutation())
         if not mutation_functions:
             raise ValueError("At least one mutation function must be enabled")
+        print("Configuring mutation operator: ", mutation_functions)
         return MutationManager(mutation_functions).configure(config["mutation_probability"])
     
 

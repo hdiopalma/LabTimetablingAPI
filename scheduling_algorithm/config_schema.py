@@ -6,7 +6,7 @@ from .config.schema import config_schema
 from .config.default import default_config
 
 
-
+import copy
 
 class ScheduleConfiguration:
 
@@ -25,22 +25,31 @@ class ScheduleConfiguration:
     def load_config(self, data):
 
         # Set default values for missing fitness configuration
-        if data["local_search"]["simulated_annealing"].get("fitness") is None:
-            data["local_search"]["simulated_annealing"]["fitness"] = data["algorithm"]["config"]["fitness"]
-        if data["local_search"]["tabu_search"].get("fitness") is None:
-            data["local_search"]["tabu_search"]["fitness"] = data["algorithm"]["config"]["fitness"]
+        if data["local_search"]["config"].get("fitness") is None:
+            data["local_search"]["config"]["fitness"] = data["algorithm"]["config"]["fitness"]
 
-        config = self.default.copy()
-        config.update(data)
+        config = copy.deepcopy(self.default)
+        
+        
+        for key, value in data.items():
+            if key in config:
+                if isinstance(value, dict):
+                    config[key] = update_dict(config[key], value)
+                else:
+                    config[key] = value
+            else:
+                if key == "semester":
+                    config[key] = value
+                else:
+                    raise ValueError(f"Invalid configuration key: {key}")
+                
         # validate config
         print("Loading configuration...")
         is_valid, error_message = self.validate_config(config)
-        print("config", config)
         if not is_valid:
             raise ValueError(f"Invalid configuration: {error_message}")
         self.data = config
         print("Configuration loaded successfully.")
-
         return config
 
     @classmethod
@@ -93,7 +102,10 @@ class ScheduleConfiguration:
         return self.data["local_search"]["config"]["neighborhood"]
 
     def get_algorithm(self):
-        return self.data['algorithm']
+        return self.data['algorithm']['main']
+    
+    def get_algorithm_config(self):
+        return self.data["algorithm"]["config"]
 
     def get_local_search(self):
         return self.data["local_search"]
@@ -124,3 +136,15 @@ class ScheduleConfiguration:
 
     def __getitem__(self, key):
         return self.data[key]
+
+def update_dict(default_dict, user_dict):
+    # Update the default dictionary with values from the user dictionary
+    for key, value in user_dict.items():
+        if key in default_dict:
+            if isinstance(value, dict) and isinstance(default_dict[key], dict):
+                # Recursively update nested dictionaries
+                default_dict[key] = update_dict(default_dict[key], value)
+            else:
+                # Update non-dictionary values
+                default_dict[key] = value
+    return default_dict

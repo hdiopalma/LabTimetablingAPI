@@ -162,8 +162,39 @@ class SimulatedAnnealing(BaseSearch):
 
         return self
     
+    @classmethod
+    def create(cls, fitness_manager: FitnessManager, neighborhood: BaseNeighborhood, config: dict):
+        '''Create the search
+        
+        args:
+            fitness_manager: FitnessManager
+            neighborhood: BaseNeighborhood
+            config: dict'''
+            
+        fitness_manager = fitness_manager
+        neighborhood = neighborhood
+        initial_temperature = config["initial_temperature"]
+        cooling_rate = config["cooling_rate"]
+        max_iteration = config["max_iteration"]
+        max_iteration_without_improvement = config["max_iteration_without_improvement"]
+        max_time = config["max_time"]
+        
+        return cls().configure(fitness_manager, neighborhood, initial_temperature, cooling_rate, max_iteration, max_iteration_without_improvement, max_time)
+    
+    
     def get_log(self):
         return self.log
     
     def get_log_detail(self):
         return self.log_detail
+
+simulated_annealing_properties = {
+    "type": "object",
+    "properties": {
+        "initial_temperature": {"type": "number"},
+        "cooling_rate": {"type": "number"},
+        "max_iteration": {"type": "number"},
+        "max_time": {"type": "number"},
+        "max_iteration_without_improvement": {"type": "number"}
+    }
+}

@@ -6,6 +6,7 @@ from scheduling_algorithm.structure import Chromosome, Population
 
 from scheduling_algorithm.algorithms.global_search.genetic_algorithm import GeneticAlgorithm
 
+from scheduling_algorithm.algorithms.local_search.manager import LocalSearchManager
 from scheduling_algorithm.algorithms.local_search.tabu_search import TabuSearch
 from scheduling_algorithm.algorithms.local_search.simulated_annealing import SimulatedAnnealing
 
@@ -83,3 +84,27 @@ class GeneticLocalSearch(GeneticAlgorithm):
         self.repair_manager = repair_manager or self.repair_manager
         self.local_search = local_search or self.local_search
         return self
+    
+    @classmethod
+    def create(cls, main_config: dict, local_search_config: dict):
+        """_summary_
+
+        Args:
+            main_config (dict): The main configuration for the genetic algorithm such as max_iteration, population_size, etc.
+            local_search_config (dict): The configuration for the local search algorithm such as tabu_search or simulated_annealing
+
+        Returns:
+            GeneticLocalSearch: The configured genetic local search algorithm
+        """
+        # factory = Factory.create(config)
+        print("Creating Genetic Local Search Algorithm from configuration")
+        factory = Factory()
+        fitness_manager = FitnessManager.create(main_config["fitness"])
+        selection_manager = SelectionManager.create(main_config["operator"]["selection"])
+        crossover_manager = CrossoverManager.create(main_config["operator"]["crossover"])
+        mutation_manager = MutationManager.create(main_config["operator"]["mutation"])
+        repair_manager = RepairManager.create(main_config["operator"]["repair"])
+        elitism_selection = ElitismSelection()
+        elitism_size = main_config["elitism_size"]
+        local_search = LocalSearchManager.create(local_search_config)
+        return cls().configure(factory, fitness_manager, selection_manager, crossover_manager, mutation_manager, repair_manager, elitism_selection, elitism_size, local_search)

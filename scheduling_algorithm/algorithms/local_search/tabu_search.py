@@ -123,7 +123,7 @@ class TabuSearch(BaseSearch):
         return self
     
     @classmethod
-    def create(cls, fitness_config: dict, neighborhood_config: dict, tabu_search_config: dict):
+    def create(cls, fitness_manager: FitnessManager, neighborhood: BaseNeighborhood, config: dict):
         '''Create the search
         
         args:
@@ -131,12 +131,21 @@ class TabuSearch(BaseSearch):
             tabu_search_config: dict
             neighborhood: BaseNeighborhood'''
         
-        pass
+        tabu_list = TabuList(config["tabu_list_size"])
+        max_iteration = config["max_iteration"]
+        max_time = config["max_time"]
+        max_iteration_without_improvement = config["max_iteration_without_improvement"]
+        max_time_without_improvement = config["max_time_without_improvement"]
+        return cls().configure(fitness_manager, tabu_list, neighborhood, max_iteration, max_time, max_iteration_without_improvement, max_time_without_improvement)
         
-        # fitness_manager = FitnessManager.create(fitness_config)
-        # tabu_list = TabuList(tabu_search_config["tabu_list_size"])
-        # max_iteration = tabu_search_config["max_iteration"]
-        # max_time = tabu_search_config["max_time"]
-        # max_iteration_without_improvement = tabu_search_config["max_iteration_without_improvement"]
-        # max_time_without_improvement = tabu_search_config["max_time_without_improvement"]
-        # return cls().configure(fitness_manager, tabu_list, neighborhood, max_iteration, max_time, max_iteration_without_improvement, max_time_without_improvement)
+#reference
+tabu_search_properties = {
+    "type": "object",
+    "properties": {
+        "tabu_list_size": {"type": "number"},
+        "max_iteration": {"type": "number"},
+        "max_time": {"type": "number"},
+        "max_iteration_without_improvement": {"type": "number"},
+        "max_time_without_improvement": {"type": "number"}
+    }
+}

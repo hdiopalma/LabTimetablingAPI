@@ -126,7 +126,7 @@ class CrossoverManager:
             crossover_functions.append(uniform_crossover)
         if not crossover_functions:
             raise ValueError("At least one crossover function must be enabled")
-        
+        print("Configuring crossover operator: ", crossover_functions)
         return CrossoverManager(crossover_functions).configure(config.get("crossover_probability", 0.1))
     
 config_schema = {

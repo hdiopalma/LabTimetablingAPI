@@ -32,7 +32,8 @@ class FitnessManager:
         """Return a dictionary of fitness functions and their respective fitness value"""
         return {fitness_function.name: fitness_function(chromosome) for fitness_function in self.fitness_functions}
     
-    def create(self, config: dict):
+    @classmethod
+    def create(cls, config: dict):
         """Create a FitnessManager instance from configuration"""
         fitness_functions = []
         for name, config in config.items():
@@ -42,7 +43,8 @@ class FitnessManager:
                 fitness_functions.append(AssistantDistributionFitness.create(config))
         if not fitness_functions:
             raise ValueError("No fitness functions found in configuration")
-        return FitnessManager(fitness_functions)
+        print("Creating FitnessManager with fitness functions: ", fitness_functions)
+        return cls(fitness_functions)
     
 
 config_schema = {

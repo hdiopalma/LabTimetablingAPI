@@ -43,6 +43,10 @@ class RouletteWheelSelection(BaseSelection):
         # Select a chromosome based on the probability
         return random.choices(population, weights=probabilities)[0] # random.choices return a list, so we need to get the first element
     
+    @classmethod
+    def create(cls, config):
+        return cls()
+    
 class TournamentSelection(BaseSelection):
     def __init__(self):
         super().__init__("TournamentSelection")
@@ -64,7 +68,8 @@ class TournamentSelection(BaseSelection):
 
     @classmethod
     def create(cls, config):
-        return TournamentSelection().configure(config["tournament_size"])
+        cls.tournament_size = config["tournament_size"]
+        return cls()
 
 class ElitismSelection(BaseSelection):
     def __init__(self):
@@ -86,7 +91,8 @@ class ElitismSelection(BaseSelection):
 
     @classmethod
     def create(cls, config):
-        return ElitismSelection().configure(config["elitism_size"])
+        cls.elitism_size = config["elitism_size"]
+        return cls()
 
 class DynamicSelection(BaseSelection):
     def __init__(self, name, selection_function):
@@ -125,14 +131,18 @@ class SelectionManager:
     def create(cls, config):
         selection_functions = []
         if config["roulette_wheel"]:
-            selection_functions.append(RouletteWheelSelection())
+            selection_functions.append(RouletteWheelSelection.create(config))
         if config["tournament"]:
             selection_functions.append(TournamentSelection.create(config))
         if config["elitism"]:
-            selection_functions.append(ElitismSelection.create(config))
+            config["elitism_size"] = 1
+            elitism = ElitismSelection.create(config)
+            print("Elitism: ", elitism)
+            selection_functions.append(elitism)
         if not selection_functions:
             raise ValueError("At least one selection function must be enabled")
-        return SelectionManager(selection_functions)
+        print("Configured selection functions: ", selection_functions)
+        return cls(selection_functions)
 
 
 config_schema = {
