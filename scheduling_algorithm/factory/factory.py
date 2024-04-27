@@ -73,14 +73,15 @@ class Factory:
                         break
                     chromosome.add_gene(laboratory.id, module.id, chapter.id, group.id, assistant.id, time_slot)
         
-        data = self.time_slot_manager.to_dict()
-        with open("timeslot.json", "w") as f:
-            json.dump(data, f, indent=4)
+        # data = self.time_slot_manager.to_dict()
+        # with open("timeslot.json", "w") as f:
+        #     json.dump(data, f, indent=4)
         
         
         
-        # print(data)
-        raise ValueError("Not implemented")
+        # # print(data)
+        # raise ValueError("Not implemented")
+        self.time_slot_manager.clear()
         return chromosome
     
     def generate_chromosome_weekly(self) -> Chromosome:
@@ -106,6 +107,8 @@ class Factory:
     
     def generate_population(self, population_size: int, fitness_manager: FitnessManager = None, weekly = False) -> Population:
         """Generate a population based on the population size"""
+        
+        
 
         if fitness_manager:
             self.fitness_manager = fitness_manager

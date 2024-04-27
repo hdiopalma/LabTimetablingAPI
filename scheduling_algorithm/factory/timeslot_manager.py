@@ -1,9 +1,11 @@
 
-from collections import defaultdict, namedtuple
+from collections import namedtuple
 TimeSlot = namedtuple("TimeSlot", ["date", "day", "shift"]) #Simple data structure for timeslot, for reference
 
 from scheduling_algorithm.data_parser import Constant
 from scheduling_algorithm.data_parser import ModuleData, GroupData
+
+from scheduling_algorithm.structure import Chromosome
 
 import random
 from datetime import timedelta, datetime
@@ -135,7 +137,6 @@ class TimeSlotManager:
     
     def randomize_generate_available_time_slot(self, module_id: int, group_id: int) -> TimeSlot:
         module_date = ModuleData.get_dates(module_id)
-        
         selected_time_slot = self.select_time_slot_based_on_capacity(module_id, group_id)
         if selected_time_slot:
             for timeslot in selected_time_slot:
@@ -163,9 +164,6 @@ class TimeSlotManager:
         
         group_schedule = GroupData.get_schedule(group_id)
         available_time_slot = [timeslot for timeslot, data in self.time_slot_capacity[module_id].items() if group_schedule[timeslot.day][timeslot.shift]]
-        # for timeslot in self.time_slot_capacity[module_id].keys():
-        #     if group_schedule[timeslot.day][timeslot.shift]:
-        #         available_time_slot.append(timeslot)
         self.available_group_time_slot_cache[group_id] = available_time_slot
         return available_time_slot
     
@@ -201,20 +199,6 @@ class TimeSlotManager:
         if capacity == 0:
             weight = weight / (max_capacity * 1.25)
         self.weighted_cache[module_id][timeslot] = weight
-    
-    # def calculate_weighted_time_slot(self, module_id: int, group_id: int) -> dict: 
-    #     group_schedule = GroupData.get_schedule(group_id)
-    #     weight_time_slot = {}
-    #     for timeslot, data in self.time_slot_capacity[module_id].items():
-    #         if data["capacity"] < data["max_capacity"] and group_schedule[timeslot.day][timeslot.shift]:
-    #             # calculate the weight based on the capacity, the closer to the max capacity, the higher the weight
-    #             weight = 1.0 / (data["max_capacity"] - data["capacity"])
-    #             if data["capacity"] == 0:
-    #                 # Reduce the weight if the capacity is 0, to lessen the chance of the slot being selected, don't wanna the group feels lonely
-    #                 weight = weight / data["max_capacity"]
-    #             weight_time_slot[timeslot] = weight 
-    #     return weight_time_slot
-        
     
     @staticmethod
     def generate_random_time_slot(start_date: datetime, end_date: datetime) -> TimeSlot:
@@ -293,5 +277,23 @@ class TimeSlotManager:
         
         print(f"Total timeslot: {empty_capacity + full_capacity + partial_capacity}")
         return json_data
+    
+    def clear(self):
+        """Clear the time slot data."""
+        self.time_slot_capacity.clear()
+        self.capacity_data.clear()
+        self.weighted_cache.clear()
+        # self.available_group_time_slot_cache.clear()
+        
+    def from_chromosome(self, chromosome: Chromosome):
+        """Generate the time slot data from the chromosome."""
+        self.time_slot_capacity.clear()
+        for gene in chromosome:
+            laboratory = gene["laboratory"]
+            module = gene["module"]
+            group = gene["group"]
+            time_slot = gene["time_slot"]
+            self.add_group_to_time_slot(time_slot, module, group)
+        return self.time_slot_capacity
         
         

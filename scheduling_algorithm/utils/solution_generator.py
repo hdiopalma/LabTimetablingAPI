@@ -1,4 +1,5 @@
 import time
+import datetime
 
 #Algorithm
 from ..algorithms import (
@@ -90,7 +91,7 @@ class SolutionGenerator:
                 chapter_id=gene['chapter'],
                 group_id=gene['group'],
                 assistant_id=gene['assistant'],
-                date=gene['time_slot'].date,
+                date= datetime.datetime.fromtimestamp(gene['time_slot'].date, tz=datetime.timezone.utc),
                 day=gene['time_slot'].day,
                 shift=gene['time_slot'].shift
             ))

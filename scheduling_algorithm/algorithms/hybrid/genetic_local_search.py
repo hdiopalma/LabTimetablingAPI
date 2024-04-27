@@ -34,6 +34,7 @@ class GeneticLocalSearch(GeneticAlgorithm):
     def run(self,  *args, **kwargs):
         '''Run the hybrid algorithm.
         '''
+        
         max_iteration = args[0] if len(args) > 0 else kwargs.get(
             'max_iteration', self.iteration)
         population_size = args[1] if len(args) > 1 else kwargs.get(
@@ -42,6 +43,8 @@ class GeneticLocalSearch(GeneticAlgorithm):
         time_start = time.time()
         # Initialize the population
         population = self._init_population(population_size)
+        print("Population Initialized, time elapsed: ", time.time() - time_start)
+        
         # Calculate the fitness of the population
         population.calculate_fitness()
         # Sort the population based on fitness

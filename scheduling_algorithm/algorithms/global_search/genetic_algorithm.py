@@ -123,6 +123,7 @@ class GeneticAlgorithm:
             'population_size', self.population_size)
         time_start = time.time()
         population = self._init_population(population_size)
+        
         population.calculate_fitness()
         population = Population(
             sorted(population, key=lambda chromosome: chromosome.fitness),

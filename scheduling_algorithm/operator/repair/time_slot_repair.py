@@ -17,6 +17,8 @@ class TimeSlotRepair(BaseRepair):
         super().__init__("RepairTimeSlot")
         self.module_data = ModuleData
         self.group_data = GroupData
+        
+        self.time_slot_manager = TimeSlotManager()
     
     def __call__(self, chromosome: Chromosome):
         """
@@ -70,17 +72,9 @@ class TimeSlotRepair(BaseRepair):
         random_week = random.randint(0, week_duration)
         #calculate the date
         random_date = start_date + timedelta(days=random_week * 7 + Constant.days.index(random_time_slot.day))
+        random_date = random_date.timestamp()
         return TimeSlot(random_date, random_time_slot.day, random_time_slot.shift)
     
     def generate_time_slot(self, start_date, end_date):
         """Generate time slots based on the start date, end date, days and shifts"""
-        # #if start_date not start from Monday, then start from the next Monday
-        # if start_date.weekday() != 0:
-        #     start_date = start_date + timedelta(days=7 - start_date.weekday())
-        # duration = (end_date - start_date).days + 1
-        # weeks_duration = floor(duration / 7)
-        # random_weeks = random.randint(0, weeks_duration)
-        # random_days = random.choice(Constant.days)
-        # random_shifts = random.choice(Constant.shifts)
-        # random_date = start_date + timedelta(days=random_weeks * 7 + Constant.days.index(random_days))
         return TimeSlotManager.generate_random_time_slot(start_date, end_date)
