@@ -32,6 +32,9 @@ class TimeSlotManager:
         self.time_slot_capacity = {}
         self.capacity_data = {}
         
+        self.weighted_cache = {}
+        self.available_group_time_slot_cache = {}
+        
     def add_capacity(self, lab_id, module_id, capacity):
         """
         Add capacity data for a laboratory and module.
@@ -66,7 +69,7 @@ class TimeSlotManager:
         for week in range(weeks_duration):
             for day in Constant.days:
                 for shift in Constant.shifts:
-                    date = (start_date + timedelta(days=week * 7 + Constant.days.index(day))).date().isoformat().replace("-", "")
+                    date = (start_date + timedelta(days=week * 7 + Constant.days.index(day))).timestamp()
                     timeslot = TimeSlot(date, day, shift)
                     if module_id not in self.time_slot_capacity:
                         self.time_slot_capacity[module_id] = {}
@@ -75,7 +78,7 @@ class TimeSlotManager:
         #shuffle the time slot capacity
         return self.time_slot_capacity
     
-    def add_group_to_time_slot(self, timeslot: TimeSlot, module_id: int, group_id: int):
+    def add_group_to_time_slot(self, timeslot: TimeSlot, module_id: int, group_id: int, allow_duplicate: bool = False) -> bool:
         """
         Add a group to the time slot based on the module.
         
@@ -85,10 +88,11 @@ class TimeSlotManager:
             group_id (int): The group id.
         """
         # 
-        if group_id in self.time_slot_capacity[module_id][timeslot]["groups"]:
+        if group_id in self.time_slot_capacity[module_id][timeslot]["groups"] and not allow_duplicate:
             return False
         self.time_slot_capacity[module_id][timeslot]["capacity"] += 1
         self.time_slot_capacity[module_id][timeslot]["groups"].append(group_id)
+        
         return True
     
     def generate_available_time_slot(self, module_id: int, group_id: int, randomize: bool = False) -> TimeSlot:
@@ -125,40 +129,91 @@ class TimeSlotManager:
                 if self.add_group_to_time_slot(timeslot, module_id, group_id):
                     return timeslot
         print(f"No available time slot for group id: {group_id}, generate random time slot.")
-        return self.generate_random_time_slot(module_date.start_date, module_date.end_date)
+        time_slot = self.generate_random_time_slot(module_date.start_date, module_date.end_date)
+        self.add_group_to_time_slot(time_slot, module_id, group_id, allow_duplicate=True)
+        return time_slot
     
     def randomize_generate_available_time_slot(self, module_id: int, group_id: int) -> TimeSlot:
         module_date = ModuleData.get_dates(module_id)
-        group_schedule = GroupData.get_schedule(group_id)
         
-        selected_time_slot = self.select_time_slot_based_on_capacity(module_id, group_schedule)
+        selected_time_slot = self.select_time_slot_based_on_capacity(module_id, group_id)
         if selected_time_slot:
             for timeslot in selected_time_slot:
                 if self.add_group_to_time_slot(timeslot, module_id, group_id):
+                    self.update_weighted_time_slot(module_id, timeslot)
                     return timeslot
         print(f"No available time slot for group id: {group_id}, generate random time slot.")
-        return self.generate_random_time_slot(module_date.start_date, module_date.end_date)
+        time_slot = self.generate_random_time_slot(module_date.start_date, module_date.end_date)
+        self.add_group_to_time_slot(time_slot, module_id, group_id, allow_duplicate=True)
+        return time_slot
     
-    def select_time_slot_based_on_capacity(self, module_id: int, group_schedule: dict) -> list:
-        weight_time_slot = self.calculate_weighted_time_slot(module_id, group_schedule)
+    def select_time_slot_based_on_capacity(self, module_id: int, group_id: int) -> list:
+        available_time_slot = self.get_available_group_time_slot(module_id, group_id)
+        weight_time_slot = [self.calculate_weighted_time_slot(module_id)[timeslot] for timeslot in available_time_slot]
         if weight_time_slot:
-            #Select at most 10 time slot based on the weight, to reduce the chance of the group being assigned to the same slot
-            time_slot = random.choices(list(weight_time_slot.keys()), weights=weight_time_slot.values(), k=10)
+            time_slot = random.choices(list(available_time_slot), weights=weight_time_slot, k=min(10, len(available_time_slot)))
             return time_slot
         print(f"Weighted time slot is empty for module id: {module_id}.")
         return None
     
-    def calculate_weighted_time_slot(self, module_id: int, group_schedule: dict) -> dict:
+    def get_available_group_time_slot(self, module_id: int, group_id: int) -> list:
+        cached_available_time_slot = self.available_group_time_slot_cache.get(group_id)
+        if cached_available_time_slot:
+            return cached_available_time_slot
+        
+        group_schedule = GroupData.get_schedule(group_id)
+        available_time_slot = [timeslot for timeslot, data in self.time_slot_capacity[module_id].items() if group_schedule[timeslot.day][timeslot.shift]]
+        # for timeslot in self.time_slot_capacity[module_id].keys():
+        #     if group_schedule[timeslot.day][timeslot.shift]:
+        #         available_time_slot.append(timeslot)
+        self.available_group_time_slot_cache[group_id] = available_time_slot
+        return available_time_slot
+    
+    def calculate_weighted_time_slot(self, module_id: int) -> dict:
+        cached_weighted_time_slot = self.weighted_cache.get(module_id)
+        if cached_weighted_time_slot:
+            return cached_weighted_time_slot
         weight_time_slot = {}
         for timeslot, data in self.time_slot_capacity[module_id].items():
-            if data["capacity"] < data["max_capacity"] and group_schedule[timeslot.day][timeslot.shift]:
-                # calculate the weight based on the capacity, the closer to the max capacity, the higher the weight
-                weight = 1.0 / (data["max_capacity"] - data["capacity"])
-                if data["capacity"] == 0:
+            # calculate the weight based on the capacity, the closer to the max capacity, the higher the weight
+            max_capacity = data["max_capacity"]
+            capacity = data["capacity"]
+            if max_capacity == capacity:
+                weight_time_slot[timeslot] = 0
+            else:
+                weight = 1.0 / (max_capacity - capacity)
+                if capacity == 0:
                     # Reduce the weight if the capacity is 0, to lessen the chance of the slot being selected, don't wanna the group feels lonely
-                    weight = weight / data["max_capacity"]
+                    weight = weight / (max_capacity * 1.25)
                 weight_time_slot[timeslot] = weight
+        self.weighted_cache[module_id] = weight_time_slot
         return weight_time_slot
+    
+    def update_weighted_time_slot(self, module_id: int, timeslot: TimeSlot):
+        data = self.time_slot_capacity[module_id][timeslot]
+        max_capacity = data["max_capacity"]
+        capacity = data["capacity"]
+        if max_capacity == capacity:
+            self.weighted_cache[module_id][timeslot] = 0
+            return
+        
+        weight = 1.0 / (max_capacity - capacity)
+        if capacity == 0:
+            weight = weight / (max_capacity * 1.25)
+        self.weighted_cache[module_id][timeslot] = weight
+    
+    # def calculate_weighted_time_slot(self, module_id: int, group_id: int) -> dict: 
+    #     group_schedule = GroupData.get_schedule(group_id)
+    #     weight_time_slot = {}
+    #     for timeslot, data in self.time_slot_capacity[module_id].items():
+    #         if data["capacity"] < data["max_capacity"] and group_schedule[timeslot.day][timeslot.shift]:
+    #             # calculate the weight based on the capacity, the closer to the max capacity, the higher the weight
+    #             weight = 1.0 / (data["max_capacity"] - data["capacity"])
+    #             if data["capacity"] == 0:
+    #                 # Reduce the weight if the capacity is 0, to lessen the chance of the slot being selected, don't wanna the group feels lonely
+    #                 weight = weight / data["max_capacity"]
+    #             weight_time_slot[timeslot] = weight 
+    #     return weight_time_slot
         
     
     @staticmethod
@@ -186,10 +241,12 @@ class TimeSlotManager:
             random_date = start_date + timedelta(days=random.randint(0, duration - 1))
         random_days = Constant.days[random_date.weekday()]
         random_shifts = random.choice(Constant.shifts)
+        random_date = random_date.timestamp()
         return TimeSlot(random_date, random_days, random_shifts)
         
     def to_dict(self):
         """Convert the time slot data to json format."""
+        print("Converting time slot data to json format.")
         json_data = {}
         for module_id, data in self.time_slot_capacity.items():
             for timeslot, capacity_data in data.items():
@@ -208,6 +265,33 @@ class TimeSlotManager:
                 if timeslot.date not in json_data:
                     json_data[timeslot.date] = []
                 json_data[timeslot.date].append(time_slot_detail)
+        
+        #count timeslot with empty capacity
+        empty_capacity = 0
+        for module_id, data in self.time_slot_capacity.items():
+            for timeslot, capacity_data in data.items():
+                if capacity_data["capacity"] == 0:
+                    empty_capacity += 1
+        print(f"Empty capacity: {empty_capacity}")
+        
+        #count timeslot with full capacity
+        full_capacity = 0
+        for module_id, data in self.time_slot_capacity.items():
+            for timeslot, capacity_data in data.items():
+                if capacity_data["capacity"] == capacity_data["max_capacity"]:
+                    full_capacity += 1
+                    
+        print(f"Full capacity: {full_capacity}")
+        
+        #count timeslot with partial capacity
+        partial_capacity = 0
+        for module_id, data in self.time_slot_capacity.items():
+            for timeslot, capacity_data in data.items():
+                if 0 < capacity_data["capacity"] < capacity_data["max_capacity"]:
+                    partial_capacity += 1
+        print(f"Partial capacity: {partial_capacity}")
+        
+        print(f"Total timeslot: {empty_capacity + full_capacity + partial_capacity}")
         return json_data
         
         
