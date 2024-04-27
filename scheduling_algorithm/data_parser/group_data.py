@@ -59,7 +59,17 @@ class GroupData:
     
     @classmethod
     @lru_cache(maxsize=None)
-    def get_schedule(cls, id):
+    def get_schedule(cls, id: int) -> dict:
+        """Get the schedule of the group. The schedule is a dictionary with the days as keys and the shifts as values.
+
+        Args:
+            id (int): The id of the group.
+
+        Returns:
+            dict: The schedule of the group. If the group does not exist, return None.
+            dict[day] (dict): The schedule of the group for the day.
+            dict[day][shift] (bool): The availability of the group for the shift.
+        """
         participants_schedule = cls.get_participant_schedule(id)
         if participants_schedule:
             days = participants_schedule[0].keys()

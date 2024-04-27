@@ -13,12 +13,30 @@ class ModuleData:
     
     @classmethod
     @lru_cache(maxsize=None)
-    def get_module(cls, id):
+    def get_module(cls, id: int) -> Module:
+        """Get a module by id, the result is cached.
+
+        Args:
+            id (int): The id of the module.
+
+        Returns:
+            Module: The module with the given id.
+        """
         return Module.objects.get(id=id)
     
     @classmethod
     @lru_cache(maxsize=None)
-    def get_dates(cls, id):
+    def get_dates(cls, id: int) -> ModuleDate:
+        """Get the start date and end date of a module by id.
+
+        Args:
+            id (int): The id of the module.
+
+        Returns:
+            ModuleDate: The start date and end date of the module. If the module does not exist, return None.
+            ModuleDate.start_date (datetime): The start date of the module.
+            ModuleDate.end_date (datetime): The end date of the module.
+        """
         module = cls.get_module(id)
         if module:
             return ModuleDate(module.start_date, module.end_date)

@@ -1,6 +1,6 @@
 import random
 from math import floor
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 #Simple data structure for timeslot
 from collections import namedtuple
@@ -8,6 +8,7 @@ TimeSlot = namedtuple("TimeSlot", ["date", "day", "shift"])
 
 from scheduling_algorithm.structure import Chromosome
 from scheduling_algorithm.data_parser import ModuleData, GroupData, Constant
+from scheduling_algorithm.factory.timeslot_manager import TimeSlotManager
 
 from scheduling_algorithm.operator.repair.base_repair import BaseRepair
 
@@ -21,7 +22,8 @@ class TimeSlotRepair(BaseRepair):
         """
         Repairs the time slots in the given chromosome by checking the availability of time slots for each gene.
         If a time slot is not available, it finds a feasible solution within the start and end dates of the module's schedule.
-        If no feasible solution is found, it try to randomly generate a time slot, if it is somehow not available, then it will return the original time slot.
+        If no feasible solution is found, it try to randomly generate a time slot, if it is somehow not available, 
+        then it will return the original time slot.
 
         Args:
             chromosome (Chromosome): The chromosome to be repaired.
@@ -54,7 +56,7 @@ class TimeSlotRepair(BaseRepair):
                 return time_slot
         return None
     
-    def choose_available_time_slot(self,start_date, end_date, schedule):
+    def choose_available_time_slot(self,start_date: datetime, end_date: datetime, schedule):
         """Choose a random available time slot for the gene"""
         if start_date.weekday() != 0:
             start_date = start_date + timedelta(days=7 - start_date.weekday())
@@ -72,13 +74,13 @@ class TimeSlotRepair(BaseRepair):
     
     def generate_time_slot(self, start_date, end_date):
         """Generate time slots based on the start date, end date, days and shifts"""
-        #if start_date not start from Monday, then start from the next Monday
-        if start_date.weekday() != 0:
-            start_date = start_date + timedelta(days=7 - start_date.weekday())
-        duration = (end_date - start_date).days + 1
-        weeks_duration = floor(duration / 7)
-        random_weeks = random.randint(0, weeks_duration)
-        random_days = random.choice(Constant.days)
-        random_shifts = random.choice(Constant.shifts)
-        random_date = start_date + timedelta(days=random_weeks * 7 + Constant.days.index(random_days))
-        return TimeSlot(random_date, random_days, random_shifts)
+        # #if start_date not start from Monday, then start from the next Monday
+        # if start_date.weekday() != 0:
+        #     start_date = start_date + timedelta(days=7 - start_date.weekday())
+        # duration = (end_date - start_date).days + 1
+        # weeks_duration = floor(duration / 7)
+        # random_weeks = random.randint(0, weeks_duration)
+        # random_days = random.choice(Constant.days)
+        # random_shifts = random.choice(Constant.shifts)
+        # random_date = start_date + timedelta(days=random_weeks * 7 + Constant.days.index(random_days))
+        return TimeSlotManager.generate_random_time_slot(start_date, end_date)

@@ -117,4 +117,5 @@ class GeneticLocalSearch(GeneticAlgorithm):
         elitism_selection = ElitismSelection()
         elitism_size = main_config["elitism_size"]
         local_search = LocalSearchManager.create(local_search_config)
+        print("Local Search Algorithm: ", local_search)
         return cls().configure(factory, fitness_manager, selection_manager, crossover_manager, mutation_manager, repair_manager, elitism_selection, elitism_size, local_search)

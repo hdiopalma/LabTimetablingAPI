@@ -106,7 +106,6 @@ class GeneticAlgorithm:
         return child1, child2
 
     def _evolve_population(self, population: Population):
-
         elitism = self.__elitism(population).copy()
         children = []
 
@@ -130,7 +129,6 @@ class GeneticAlgorithm:
             population.fitness_manager)
 
         for i in range(max_iteration):
-
             population, elitism = self._evolve_population(population)
             population.add_chromosome(elitism)
             population.calculate_fitness()

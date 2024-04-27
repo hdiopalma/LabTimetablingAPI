@@ -3,6 +3,8 @@ from math import ceil, floor
 import random
 from datetime import timedelta
 
+import json
+
 #Simple data structure for timeslot
 from collections import namedtuple
 TimeSlot = namedtuple("TimeSlot", ["date", "day", "shift"])
@@ -10,10 +12,14 @@ TimeSlot = namedtuple("TimeSlot", ["date", "day", "shift"])
 from scheduling_algorithm.structure import Chromosome, Population
 from scheduling_algorithm.fitness_function import FitnessManager, AssistantDistributionFitness, GroupAssignmentConflictFitness
 from scheduling_algorithm.structure import Gene
-from scheduling_algorithm.data_parser import LaboratoryData, ModuleData, ChapterData, GroupData, ParticipantData, AssistantData, Constant
+from scheduling_algorithm.data_parser import *
+
+from .timeslot_manager import TimeSlotManager
 
 class Factory:
-    '''Factory class to generate chromosomes and population. It also contains the data from the database. We can call this class when we need some of'''
+    '''Factory class to generate chromosomes and population. It also contains the data from the database.
+    TODO: Add more methods to generate chromosomes and population based on the selected data from the database. For example, generate solution based on the selected modules, chapters, groups, participants, assistants, and laboratories.
+    '''
     def __init__(self):
         self.laboratories = LaboratoryData
         self.modules = ModuleData
@@ -23,6 +29,7 @@ class Factory:
         self.assistants = AssistantData
         self.constant = Constant
         
+        self.time_slot_manager = TimeSlotManager()
         self.fitness_manager = FitnessManager([GroupAssignmentConflictFitness(), AssistantDistributionFitness()])
 
     def set_fitness_manager(self, fitness_manager: FitnessManager):
@@ -35,19 +42,6 @@ class Factory:
         self.groups = groups
         self.participants = participants
         self.assistants = assistants
-    
-    def generate_time_slot(self, start_date, end_date):
-        """Generate time slots based on the start date, end date, days and shifts"""
-        #if start_date not start from Monday, then start from the next Monday
-        if start_date.weekday() != 0:
-            start_date = start_date + timedelta(days=7 - start_date.weekday())
-        duration = (end_date - start_date).days + 1
-        weeks_duration = floor(duration / 7) # Number of weeks between start date and end date, using floor to make sure that the time slot does not exceed the end date
-        random_weeks = random.randint(0, weeks_duration)
-        random_days = random.choice(self.constant.days)
-        random_shifts = random.choice(self.constant.shifts)
-        random_date = start_date + timedelta(days=random_weeks * 7 + self.constant.days.index(random_days))
-        return TimeSlot(random_date, random_days, random_shifts)
     
     def generate_time_slot_weekly(self, start_date, end_date):
         """Generate time slots based on the start date, end date, days and shifts"""
@@ -62,12 +56,31 @@ class Factory:
         """Generate a chromosome based on data, each group must be assigned to all chapters in a module of appropriate lab"""
         chromosome = Chromosome([])
         for module in self.modules.get_modules():
-            for group in self.modules.get_groups(module.id):
+            #generate empty time slot for each module
+            try:
+                self.time_slot_manager.generate_empty_time_slot(module.start_date, module.end_date, module.id, 3)
+            except Exception as e:
+                print(f"Error generating empty time slot: {e}")
+                break
+            for group in self.modules.get_groups(module.id):  
                 for chapter in self.modules.get_chapters(module.id):
                     laboratory = module.laboratory
                     assistant = random.choice(self.laboratories.get_assistants(laboratory.id))
-                    time_slot = self.generate_time_slot(module.start_date, module.end_date)
+                    try:
+                        time_slot = self.time_slot_manager.generate_available_time_slot(module.id, group.id, randomize=True)
+                    except Exception as e:
+                        print(f"Error generating time slot: {e}")
+                        break
                     chromosome.add_gene(laboratory.id, module.id, chapter.id, group.id, assistant.id, time_slot)
+        
+        data = self.time_slot_manager.to_dict()
+        with open("timeslot.json", "w") as f:
+            json.dump(data, f, indent=4)
+        
+        
+        
+        # print(data)
+        raise ValueError("Not implemented")
         return chromosome
     
     def generate_chromosome_weekly(self) -> Chromosome:
