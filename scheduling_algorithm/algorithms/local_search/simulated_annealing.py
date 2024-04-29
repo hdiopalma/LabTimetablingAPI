@@ -2,6 +2,9 @@
 
 # Simulated Annealing Class
 
+import django
+django.setup()
+
 import math
 import random
 import time
@@ -16,6 +19,8 @@ from scheduling_algorithm.algorithms.neighborhood import RandomSwapNeighborhood,
 from scheduling_algorithm.operator.repair import RepairManager, TimeSlotRepair
 
 from scheduling_algorithm.fitness_function import FitnessManager, GroupAssignmentConflictFitness, AssistantDistributionFitness
+
+import concurrent.futures
 
 class SimulatedAnnealing(BaseSearch):
     def __init__(self):
@@ -79,6 +84,7 @@ class SimulatedAnnealing(BaseSearch):
             neighbors = self.get_neighbors(self.best_chromosome)
             # Calculate the fitness of the neighbors
             self.calculate_fitness(neighbors)
+            # self.calculate_fitness_parallel(neighbors)
             # Select the best neighbor
             best_neighbor = self.select_best_neighbor(neighbors)
             # Check if the best neighbor is better than the current best chromosome
@@ -118,6 +124,19 @@ class SimulatedAnnealing(BaseSearch):
         for neighbor in neighbors:
             self.repair_manager(neighbor)
             neighbor.fitness = self.fitness_manager(neighbor)
+            
+    def calculate_fitness_single(self, neighbor: Chromosome):
+        self.repair_manager(neighbor)
+        return self.fitness_manager(neighbor)
+    
+    def calculate_fitness_parallel(self, neighbors: List[Chromosome]):
+        print("Calculating fitness in parallel")
+        '''Calculate the fitness of the neighbors in parallel'''
+        with concurrent.futures.ProcessPoolExecutor() as executor:
+            future = [executor.submit(self.calculate_fitness_single, neighbor) for neighbor in neighbors]
+            results = [f.result() for f in concurrent.futures.as_completed(future)]
+            for i, neighbor in enumerate(neighbors):
+                neighbor.fitness = results[i]
 
     def get_neighbors(self, chromosome: Chromosome):
         '''Get the neighbors of the chromosome'''

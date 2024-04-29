@@ -39,7 +39,15 @@ class SolutionGenerator:
         local_search_config = self.config.get_local_search_config()
         return GeneticLocalSearch.create(main_config, local_search_config)
     
-    def generate_solution(self):
+    def generate_solution(self) -> Solution:
+        """Generates a timetabling solution using the configured algorithm.
+
+        Raises:
+            e: Any exception that occurs during the solution generation.
+
+        Returns:
+            Solution: The generated solution data.
+        """
         solution = self.create_solution()
         try:
             self.algorithm.run()
@@ -51,7 +59,7 @@ class SolutionGenerator:
             raise e
         return solution
     
-    def create_solution(self):
+    def create_solution(self) -> Solution:
         data = self.config
         
         solution = Solution()
