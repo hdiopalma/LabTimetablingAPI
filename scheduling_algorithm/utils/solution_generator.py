@@ -21,6 +21,12 @@ class SolutionGenerator:
         self.best_chromosome = None
         self.time_elapsed = 0
         
+        self.created_solution = None
+        
+    @classmethod
+    def from_data(cls, data: dict):
+        return cls(ScheduleConfiguration.from_data(data))
+        
     def configure_algorithm(self):
         algorithm = self.config.get_main_algorithm()
         if algorithm == "genetic_algorithm":
@@ -48,7 +54,7 @@ class SolutionGenerator:
         Returns:
             Solution: The generated solution data.
         """
-        solution = self.create_solution()
+        solution = self.created_solution or self.create_solution()
         try:
             self.algorithm.run()
             self.best_chromosome = self.algorithm.log['best_chromosome']
@@ -57,15 +63,21 @@ class SolutionGenerator:
         except Exception as e:
             self.update_solution(solution, status="Failed")
             raise e
+        self.created_solution = None
         return solution
     
     def create_solution(self) -> Solution:
+        """Creates a new solution object in the database. For storing configuration and progress data.
+
+        Returns:
+            Solution: The created solution object.
+        """
         data = self.config
         
         solution = Solution()
         semester_id = data['semester']
         semester_instance = Semester.objects.get(pk=semester_id)
-        solution.name = "Generated on " + str(time.ctime())
+        solution.name = "Solution " + str(time.ctime())
         solution.semester = semester_instance
         solution.fitness = data.get_fitness_config()
         solution.selection = data.get_selection_config()
@@ -79,6 +91,7 @@ class SolutionGenerator:
         solution.population_size = data.get_population_size()
         solution.elitism_size = data.get_elitism_size()
         solution.save()
+        self.created_solution = solution
         return solution
     
     def update_solution(self, solution: Solution, status="Completed"):

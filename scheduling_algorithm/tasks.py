@@ -10,7 +10,7 @@ huey = RedisHuey()
 
 
 @task()
-def generate_timetabling_task(data: dict):
+def generate_timetabling_from_data(data: dict):
     """Generates a timetabling solution and saves it to the database.
 
     Args:
@@ -21,6 +21,29 @@ def generate_timetabling_task(data: dict):
     """
     data = ScheduleConfiguration.from_data(data)
     generator = SolutionGenerator(data)
+    solution_data = generator.create_solution()
+    
+    message = {
+        "status": "success", # "error"
+        "message": "Task submitted successfully",
+        "solution_id": solution_data.id,
+        "solution_name": solution_data.name
+    }
+
+    solution_result = generator.generate_solution()
+
+    return solution_data
+
+@task()
+def generate_timetabling_from_object(generator: SolutionGenerator):
+    """Generates a timetabling solution and saves it to the database.
+
+    Args:
+        generator (SolutionGenerator): The solution generator object.
+
+    Returns:
+        Solution: The generated solution data.
+    """
     solution = generator.generate_solution()
 
     return solution

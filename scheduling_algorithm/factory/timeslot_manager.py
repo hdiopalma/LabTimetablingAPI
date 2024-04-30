@@ -2,6 +2,8 @@
 from collections import namedtuple
 TimeSlot = namedtuple("TimeSlot", ["date", "day", "shift"]) #Simple data structure for timeslot, for reference
 
+import numpy as np
+
 from scheduling_algorithm.data_parser import Constant
 from scheduling_algorithm.data_parser import ModuleData, GroupData
 
@@ -10,6 +12,8 @@ from scheduling_algorithm.structure import Chromosome
 import random
 from datetime import timedelta, datetime
 from math import floor
+
+from functools import lru_cache
 
 
 class TimeSlotManager:
@@ -76,6 +80,7 @@ class TimeSlotManager:
                     if module_id not in self.time_slot_capacity:
                         self.time_slot_capacity[module_id] = {}
                     self.time_slot_capacity[module_id][timeslot] = {"max_capacity": capacity, "capacity": 0, "groups": []}
+        self.calculate_weighted_time_slot(module_id)
         self.capacity_data[module_id] = capacity
         #shuffle the time slot capacity
         return self.time_slot_capacity
@@ -150,17 +155,19 @@ class TimeSlotManager:
     
     def select_time_slot_based_on_capacity(self, module_id: int, group_id: int) -> list:
         available_time_slot = self.get_available_group_time_slot(module_id, group_id)
-        weight_time_slot = [self.calculate_weighted_time_slot(module_id)[timeslot] for timeslot in available_time_slot]
+        # weight_time_slot = [self.calculate_weighted_time_slot(module_id)[timeslot] for timeslot in available_time_slot]
+        weight_time_slot = [self.weighted_cache[module_id][timeslot] for timeslot in available_time_slot]
         if weight_time_slot:
             time_slot = random.choices(list(available_time_slot), weights=weight_time_slot, k=min(10, len(available_time_slot)))
             return time_slot
         print(f"Weighted time slot is empty for module id: {module_id}.")
         return None
     
+    @lru_cache(maxsize=128)
     def get_available_group_time_slot(self, module_id: int, group_id: int) -> list:
-        cached_available_time_slot = self.available_group_time_slot_cache.get(group_id)
-        if cached_available_time_slot:
-            return cached_available_time_slot
+        # cached_available_time_slot = self.available_group_time_slot_cache.get(group_id)
+        # if self.available_group_time_slot_cache.get(group_id):
+        #     return cached_available_time_slot
         
         group_schedule = GroupData.get_schedule(group_id)
         available_time_slot = [timeslot for timeslot, data in self.time_slot_capacity[module_id].items() if group_schedule[timeslot.day][timeslot.shift]]
@@ -172,6 +179,21 @@ class TimeSlotManager:
         if cached_weighted_time_slot:
             return cached_weighted_time_slot
         weight_time_slot = {}
+        # capacity_data = self.time_slot_capacity[module_id]
+        # max_capacity = np.array([data["max_capacity"] for data in capacity_data.values()])
+        # capacity = np.array([data["capacity"] for data in capacity_data.values()])
+        
+        # capacity_diff = max_capacity - capacity
+        # #avoid division by zero
+        # capacity_diff[capacity_diff == 0] = 1
+        # weight = 1.0 / capacity_diff
+        # weight[capacity == 0] = weight[capacity == 0] / (max_capacity[capacity == 0] * 1.25)
+        
+        # for i, timeslot in enumerate(capacity_data.keys()):
+        #     weight_time_slot[timeslot] = weight[i]
+        # self.weighted_cache[module_id] = weight_time_slot
+        # return weight_time_slot
+        
         for timeslot, data in self.time_slot_capacity[module_id].items():
             # calculate the weight based on the capacity, the closer to the max capacity, the higher the weight
             max_capacity = data["max_capacity"]

@@ -20,6 +20,8 @@ from scheduling_algorithm.operator.selection import SelectionManager, ElitismSel
 
 import time
 
+import cProfile
+
 class GeneticLocalSearch(GeneticAlgorithm):
     def __init__(self):
         super().__init__()
@@ -42,8 +44,13 @@ class GeneticLocalSearch(GeneticAlgorithm):
         
         time_start = time.time()
         # Initialize the population
+        # profile = cProfile.Profile()
+        # profile.enable()
         population = self._init_population(population_size)
         print("Population Initialized, time elapsed: ", time.time() - time_start)
+        # profile.disable()
+        # profile.print_stats(sort='time')
+        # raise Exception("Test")
         
         # Calculate the fitness of the population
         population.calculate_fitness()

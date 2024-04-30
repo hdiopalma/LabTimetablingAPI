@@ -7,19 +7,31 @@ from rest_framework.views import APIView
 
 import cProfile
 
-from .tasks import generate_timetabling_task
+from .tasks import generate_timetabling_from_data, generate_timetabling_from_object
 from .config_schema import ScheduleConfiguration
 from .utils.solution_generator import SolutionGenerator
+
+from huey.contrib.djhuey import HUEY
 
 class GenerateTimetabling(APIView):
     permission_classes = [AllowAny]
     
-    #use huey to generate solution
+    # use huey to generate solution
     def post(self, request):
         try:
-            data = request.data
-            generate_timetabling_task(data)
-            return Response({"message": "Task submitted successfully"}, status=status.HTTP_200_OK)
+            generator = SolutionGenerator.from_data(request.data)
+            solution = generator.create_solution()
+            generate_timetabling_from_object(generator)
+            print("Solution: ", solution)
+            
+            message = {
+                "status": "success",
+                "message": "Task submitted successfully",
+                "solution_id": solution.id,
+                "solution_name": solution.name
+            }
+            
+            return Response(message, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
     
@@ -27,11 +39,11 @@ class GenerateTimetabling(APIView):
     #     data = ScheduleConfiguration.from_data(request.data) # Parse and validate the data
     #     generator = SolutionGenerator(data)
     #     try:
-    #         profiler = cProfile.Profile()
-    #         profiler.enable()
+    #         # profiler = cProfile.Profile()
+    #         # profiler.enable()
     #         solution = generator.generate_solution()
-    #         profiler.disable()
-    #         profiler.dump_stats("profile.prof")
+    #         # profiler.disable()
+    #         # profiler.dump_stats("profile.prof")
                 
     #         return Response({
     #             "best_fitness": solution.best_fitness,

@@ -177,6 +177,11 @@ class Solution(models.Model):
     start_time = models.DateTimeField(auto_now_add=True)
     end_time = models.DateTimeField(default=timezone.now)
     status = models.CharField(max_length=32, default="Pending")
+    # solution
+    best_fitness = models.FloatField(null=True, blank=True)
+    time_elapsed = models.FloatField(null=True, blank=True)
+    # best_solution = models.JSONField(null=True, blank=True)
+    gene_count = models.IntegerField(null=True, blank=True)
     #iteration log that contains the fitness value for each iteration
     iteration_log = models.JSONField(default=list)
     # configuration
@@ -191,11 +196,7 @@ class Solution(models.Model):
     max_iteration = models.IntegerField(default=500)
     population_size = models.IntegerField(default=25)
     elitism_size = models.IntegerField(default=2)
-    # solution
-    best_fitness = models.FloatField(null=True, blank=True)
-    time_elapsed = models.FloatField(null=True, blank=True)
-    # best_solution = models.JSONField(null=True, blank=True)
-    gene_count = models.IntegerField(null=True, blank=True)
+    
 
     def save(self, *args, **kwargs):
         self.end_time = timezone.now()
