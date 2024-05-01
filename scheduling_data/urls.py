@@ -2,6 +2,7 @@ from django.urls import path, include
 from rest_framework import routers
 
 from . import views
+from scheduling_algorithm.views import GenerateTimetabling
 
 router = routers.DefaultRouter()
 
@@ -13,6 +14,8 @@ router.register(r'group', views.GroupViewSet)
 router.register(r'participant', views.ParticipantViewSet)
 router.register(r'assistant',views.AssistantViewSet)
 router.register(r'memberships', views.GroupMembershipViewSet)
+router.register(r'solution/schedule_data', views.ScheduleDataViewSet)
+router.register(r'solution', views.SolutionViewSet)
             
 
 urlpatterns = [
@@ -47,4 +50,9 @@ urlpatterns = [
     path('participant/', views.ParticipantViewSet.as_view({'get':'list'})),
     path('assistant/', views.AssistantViewSet.as_view({'get':'list'})),
     path('memberships/', views.GroupMembershipViewSet.as_view({'get':'list'})),
+    
+    #timetable related data
+    
+    path('solution/', views.SolutionViewSet.as_view({'get':'list'})),
+    path('solution/schedule_data/', views.ScheduleDataViewSet.as_view({'get':'list'})),
 ]

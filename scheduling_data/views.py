@@ -253,3 +253,30 @@ class AssistantViewSet(ReadWriteSerializerMixin, viewsets.ModelViewSet):
 class GroupMembershipViewSet(viewsets.ModelViewSet):
     queryset = GroupMembership.objects.all()
     serializer_class = GroupMembershipSerializer
+    
+#Timetabling related views
+class SolutionViewSet(viewsets.ModelViewSet):
+    queryset = Solution.objects.all().order_by('id').reverse()
+    serializer_class = SolutionReadSerializer
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend]
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        data = serializer.data
+        return Response(data, status=status.HTTP_200_OK)
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        try:
+            self.perform_destroy(instance)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'message':'Failed to delete solution'})
+        
+class ScheduleDataViewSet(viewsets.ModelViewSet):
+    queryset = ScheduleData.objects.all()
+    serializer_class = ScheduleDataReadSerializer
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend]

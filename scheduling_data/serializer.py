@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Semester, Laboratory, Module, Chapter, Group, Participant, Assistant, GroupMembership, default_schedule
+from .models import *
 
 
 def validate_schedule(value):
@@ -210,3 +210,24 @@ class GroupMembershipSerializer(serializers.ModelSerializer):
         model = GroupMembership
         id = serializers.ReadOnlyField()
         fields = ['url','participant','group']
+        
+class SolutionReadSerializer(serializers.ModelSerializer):
+    semester = SemesterReadSerializer()
+    class Meta:
+        model = Solution
+        id = serializers.ReadOnlyField()
+        fields = ['id','name','semester','status','best_fitness','time_elapsed', 'gene_count']
+        
+class ScheduleDataReadSerializer(serializers.ModelSerializer):
+    solution = serializers.SerializerMethodField()
+    
+    def get_solution(self, instance):
+        return {
+            'id': instance.solution.id,
+            'name': instance.solution.name,
+            'semester': instance.solution.semester.name
+        }
+    class Meta:
+        model = ScheduleData
+        id = serializers.ReadOnlyField()
+        fields = ['id','solution','date','day','shift','assistant','group','laboratory','module','chapter']
