@@ -45,7 +45,7 @@ default_config = {
         }
     },
     "algorithm": {
-        "main": "genetic_local_search",
+        "algorithm": "genetic_local_search",
         "config": {
             "max_iteration": 500,
             "population_size": 25,

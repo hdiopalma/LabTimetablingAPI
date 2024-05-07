@@ -69,7 +69,7 @@ operator_properties = {
 algorithm_properties = {
     "type": "object",
     "properties": {
-        "main": {
+        "algorithm": {
             "type": "string",
             "enum": [
                 "genetic_algorithm",
@@ -88,7 +88,7 @@ algorithm_properties = {
             "required": ["max_iteration", "population_size", "elitism_size", "fitness", "operator"]
         }
     },
-    "required": ["main", "config"]
+    "required": ["algorithm", "config"]
 }
 
 neighborhood_properties = {

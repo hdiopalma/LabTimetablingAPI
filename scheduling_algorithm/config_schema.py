@@ -105,7 +105,7 @@ class ScheduleConfiguration:
         return self.data['algorithm']
 
     def get_main_algorithm(self):
-        return self.data['algorithm']['main']
+        return self.data['algorithm']['algorithm']
     
     def get_algorithm_config(self):
         return self.data["algorithm"]["config"]

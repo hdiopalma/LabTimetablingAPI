@@ -22,15 +22,11 @@ class GenerateTimetabling(APIView):
             generator = SolutionGenerator.from_data(request.data)
             solution = generator.create_solution()
             generate_timetabling_from_object(generator)
-            print("Solution: ", solution)
-            
             message = {
-                "status": "success",
                 "message": "Task submitted successfully",
                 "solution_id": solution.id,
                 "solution_name": solution.name
             }
-            
             return Response(message, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
