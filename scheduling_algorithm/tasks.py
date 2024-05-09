@@ -2,6 +2,7 @@ from huey import RedisHuey
 from huey.contrib.djhuey import task
 
 from scheduling_algorithm.utils.solution_generator import SolutionGenerator
+from scheduling_data.utils import signals
 from .config_schema import ScheduleConfiguration
 
 import time
@@ -9,7 +10,7 @@ import time
 huey = RedisHuey()
 
 
-@task()
+@task(asynchronous=True)
 def generate_timetabling_from_data(data: dict):
     """Generates a timetabling solution and saves it to the database.
 
@@ -34,7 +35,7 @@ def generate_timetabling_from_data(data: dict):
 
     return solution_data
 
-@task()
+@task(asynchronous=True)
 def generate_timetabling_from_object(generator: SolutionGenerator):
     """Generates a timetabling solution and saves it to the database.
 
@@ -45,5 +46,5 @@ def generate_timetabling_from_object(generator: SolutionGenerator):
         Solution: The generated solution data.
     """
     solution = generator.generate_solution()
-
+    # signals.notify_task(solution)
     return solution
