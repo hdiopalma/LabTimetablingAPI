@@ -13,6 +13,8 @@ from scheduling_data.models import Solution, ScheduleData, Semester
 
 from django.db import transaction
 
+from scheduling_data.utils import signals
+
 class SolutionGenerator:
     def __init__(self, data: ScheduleConfiguration):
         # self.config = ScheduleConfiguration.from_data(data)
@@ -61,7 +63,7 @@ class SolutionGenerator:
             self.create_schedule_data(solution)
             self.update_solution(solution)
         except Exception as e:
-            self.update_solution(solution, status="Failed")
+            self.update_solution(solution, status=Solution.Status.FAILED)
             raise e
         self.created_solution = None
         return solution
@@ -92,14 +94,18 @@ class SolutionGenerator:
         solution.elitism_size = data.get_elitism_size()
         solution.save()
         self.created_solution = solution
+        
+        signals.notify_task(solution)
         return solution
     
-    def update_solution(self, solution: Solution, status="Completed"):
+    def update_solution(self, solution: Solution, status=Solution.Status.COMPLETED):
         solution.status = status
         solution.best_fitness = self.best_chromosome.fitness
         solution.time_elapsed = self.algorithm.log['time_elapsed']
         solution.gene_count = len(self.best_chromosome)
         solution.save()
+        
+        signals.notify_task(solution)
         return solution
     
     def create_schedule_data(self, solution: Solution):
