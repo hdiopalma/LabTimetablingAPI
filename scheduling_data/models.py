@@ -205,6 +205,14 @@ class Solution(models.Model):
     def __str__(self) -> str:
         return f"Solution for {self.semester.name} - {self.name}"
     
+    #constants for status
+    class Status:
+        PENDING = "Pending"
+        RUNNING = "Running"
+        COMPLETED = "Completed"
+        FAILED = "Failed"
+        CANCELLED = "Cancelled"
+    
 class ScheduleData(models.Model):
     '''Model for storing the schedule solution, daily schedule for each semester. Probably will be filled with huge data.'''
     id = models.AutoField(primary_key=True)
