@@ -22,8 +22,9 @@ class NotificationConsumer(AsyncWebsocketConsumer):
 
     async def solution_notification(self, event):
         message = event['message']
-        print('message: ', message)
+        title = event['title']
         await self.send(text_data=json.dumps({
-            'message': message
+            'message': message,
+            'title': title
         }))
 # Path: scheduling_data/utils/consumers.py

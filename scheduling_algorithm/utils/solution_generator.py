@@ -95,7 +95,7 @@ class SolutionGenerator:
         solution.save()
         self.created_solution = solution
         
-        signals.notify_task(solution)
+        # signals.notify_task(solution)
         return solution
     
     def update_solution(self, solution: Solution, status=Solution.Status.COMPLETED):

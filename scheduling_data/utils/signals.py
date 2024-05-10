@@ -45,7 +45,7 @@ def notify_task(solution: Solution):
         {
             'type': 'solution_notification', # Custom function to send the notification
             'message': f'{name} has {status}', # Message to send
-            'status': solution.status,
+            'title': 'Solution Status Update'
         }
     )
 # Path: scheduling_data/utils/signals.py
