@@ -197,7 +197,6 @@ class Solution(models.Model):
     population_size = models.IntegerField(default=25)
     elitism_size = models.IntegerField(default=2)
     
-
     def save(self, *args, **kwargs):
         self.end_time = timezone.now()
         super(Solution, self).save(*args, **kwargs)

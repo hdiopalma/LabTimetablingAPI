@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import *
 
-
+#Helper function to create default schedule structure
 def validate_schedule(value):
     default_structure = default_schedule()
     # Check if the incoming value have the same key (day) as the default structure
@@ -17,6 +17,25 @@ def validate_schedule(value):
         for shift, availability in shifts.items():
             if not isinstance(availability, bool):
                 raise serializers.ValidationError("Invalid schedule structure, must be a boolean value")
+            
+class DynamicFieldsModelSerializer(serializers.ModelSerializer):
+    """
+    A ModelSerializer that takes an additional `fields` argument that
+    controls which fields should be displayed.
+    """
+    def __init__(self, *args, **kwargs):
+        # Don't pass the 'fields' arg up to the superclass
+        
+        fields = kwargs.pop('fields', None)
+        exclude = kwargs.pop('exclude', None)
+        # Instantiate the superclass normally
+        super().__init__(*args, **kwargs)
+        if fields is not None:
+            # Drop any fields that are not specified in the `fields` argument.
+            allowed = set(fields)
+            existing = set(self.fields)
+            for field_name in existing - allowed:
+                self.fields.pop(field_name)
 
 class SemesterWriteSerializer(serializers.ModelSerializer):
     class Meta:
@@ -211,7 +230,7 @@ class GroupMembershipSerializer(serializers.ModelSerializer):
         id = serializers.ReadOnlyField()
         fields = ['url','participant','group']
         
-class SolutionReadSerializer(serializers.ModelSerializer):
+class SolutionReadSerializer(DynamicFieldsModelSerializer):
     semester = SemesterReadSerializer()
     class Meta:
         model = Solution
@@ -231,3 +250,13 @@ class ScheduleDataReadSerializer(serializers.ModelSerializer):
         model = ScheduleData
         id = serializers.ReadOnlyField()
         fields = ['id','solution','date','day','shift','assistant','group','laboratory','module','chapter']
+        
+class SolutionReadDetailSerializer(serializers.ModelSerializer):
+    semester = SemesterReadSerializer()
+    #get the schedule data children of the solution
+    schedule_data = ScheduleDataReadSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model = Solution
+        id = serializers.ReadOnlyField()
+        fields = ['id','name','semester', 'schedule_data']

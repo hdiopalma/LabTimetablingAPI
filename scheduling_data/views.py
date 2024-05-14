@@ -20,6 +20,7 @@ from scheduling_data.models import Semester, Participant, Laboratory, Module, Ch
 #filter
 from scheduling_data.filters import *
 
+
 class CustomPagination(PageNumberPagination):
     page_size = 10
     page_size_query_param = 'page_size'
@@ -258,13 +259,28 @@ class GroupMembershipViewSet(viewsets.ModelViewSet):
 class SolutionViewSet(viewsets.ModelViewSet):
     queryset = Solution.objects.all().order_by('id').reverse()
     serializer_class = SolutionReadSerializer
+    detail_serializer_class = SolutionReadDetailSerializer
     pagination_class = CustomPagination
     filter_backends = [DjangoFilterBackend]
+    
+    #override retrieve method serializer when retrieve data
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            if hasattr(self, 'detail_serializer_class'):
+                return self.detail_serializer_class
+        return super().get_serializer_class()
+    
+    def get_queryset(self):
+        if self.action == 'retrieve':
+            return Solution.objects.prefetch_related('schedule_data').all()
+        return super().get_queryset()
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         data = serializer.data
+        #print the used serializer class
+        print(serializer.__class__.__name__)
         return Response(data, status=status.HTTP_200_OK)
 
     def destroy(self, request, *args, **kwargs):
@@ -276,7 +292,7 @@ class SolutionViewSet(viewsets.ModelViewSet):
             return Response(status=status.HTTP_400_BAD_REQUEST, data={'message':'Failed to delete solution'})
         
 class ScheduleDataViewSet(viewsets.ModelViewSet):
-    queryset = ScheduleData.objects.all()
+    queryset = ScheduleData.objects.all().order_by('date')
     serializer_class = ScheduleDataReadSerializer
     pagination_class = CustomPagination
     filter_backends = [DjangoFilterBackend]
