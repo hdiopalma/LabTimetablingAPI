@@ -20,6 +20,9 @@ from scheduling_data.models import Semester, Participant, Laboratory, Module, Ch
 #filter
 from scheduling_data.filters import *
 
+from itertools import groupby
+from operator import itemgetter
+
 
 class CustomPagination(PageNumberPagination):
     page_size = 10
@@ -279,8 +282,18 @@ class SolutionViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         data = serializer.data
+        
+        #group the data
+        grouped_data = {}
+        for key, solution in groupby(data['schedule_data'], key=itemgetter('date', 'laboratory', 'assistant', 'module', 'chapter', 'shift', 'group')):
+            key = list(key)
+            key[0] = key[0].split('T')[0]
+            grouped_data.setdefault(key[0], {}).setdefault(key[1], {}).setdefault(key[2], {}).setdefault(key[3], {}).setdefault(key[4], {}).setdefault(key[5], []).append(key[6])
+        data['schedule_data'] = grouped_data
+        #initial/first date
+        data['initial_date'] = min(grouped_data.keys()) if len(grouped_data) > 0 else None
+        
         #print the used serializer class
-        print(serializer.__class__.__name__)
         return Response(data, status=status.HTTP_200_OK)
 
     def destroy(self, request, *args, **kwargs):
