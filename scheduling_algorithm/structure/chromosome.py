@@ -30,6 +30,13 @@ class Chromosome:
     def __iter__(self):
         return iter(self._gene_data_list)
     
+    #addition of chromosome
+    def __add__(self, other: "Chromosome"):
+        new_chromosome = Chromosome([])
+        new_chromosome._gene_data_list = self._gene_data_list + other.gene_data
+        new_chromosome.fitness = self.fitness + other.fitness
+        return new_chromosome
+    
     def transform_to_gene_data(self):
         return [self.to_gene_data(gene) for gene in self._gene_data_list]
     
