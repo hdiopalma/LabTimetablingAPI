@@ -57,8 +57,7 @@ class GeneticAlgorithm:
         self.run(max_iteration, population_size)
 
     def _init_population(self, population_size):
-        return self.factory.generate_population(population_size,
-                                                self.fitness_manager)
+        return self.factory.generate_population(population_size=population_size)
 
     def __selection(
         self, population: Population
@@ -122,8 +121,10 @@ class GeneticAlgorithm:
         population_size = args[1] if len(args) > 1 else kwargs.get(
             'population_size', self.population_size)
         time_start = time.time()
-        population = self._init_population(population_size)
+        population = args[2] if len(args) > 2 else kwargs.get(
+            'population', self._init_population(population_size))
         
+        population.set_fitness_manager(self.fitness_manager)
         population.calculate_fitness()
         population = Population(
             sorted(population, key=lambda chromosome: chromosome.fitness),
@@ -138,6 +139,7 @@ class GeneticAlgorithm:
             population = Population(
                 sorted(population, key=lambda chromosome: chromosome.fitness),
                 population.fitness_manager)
+            
             if population[0].fitness == 0:
                 break
         time_end = time.time()
@@ -165,7 +167,6 @@ class GeneticAlgorithm:
         self.crossover_manager = crossover_manager if crossover_manager is not None else self.crossover_manager
         self.mutation_manager = mutation_manager if mutation_manager is not None else self.mutation_manager
         self.repair_manager = repair_manager if repair_manager is not None else self.repair_manager
-
         return self
 
     @classmethod
@@ -185,139 +186,10 @@ class GeneticAlgorithm:
         repair_manager = RepairManager.create(config['operator']['repair'])
         elitism_selection = ElitismSelection()
         elitism_size = config['elitism_size']
-        cls.population_size = config['population_size']
-        cls.iteration = config['max_iteration']
-        
-        return cls().configure(factory, fitness_manager, selection_manager,
-                               crossover_manager, mutation_manager,
-                               repair_manager, elitism_selection, elitism_size)
-
-
-#config schema for reference
-
-algorithm_properties = {
-    "type":
-    "object",
-    "properties": {
-        "max_iteration": {
-            "type": "number"
-        },
-        "population_size": {
-            "type": "number"
-        },
-        "elitism_size": {
-            "type": "number"
-        },
-        "fitness": {
-            "type": "object",
-            "properties": {
-                "group_assignment_conflict": {
-                    "type": "object",
-                    "properties": {
-                        "max_threshold": {
-                            "type": "number"
-                        },
-                        "conflict_penalty": {
-                            "type": "number"
-                        }
-                    }
-                },
-                "assistant_distribution": {
-                    "type": "object",
-                    "properties": {
-                        "max_group_threshold": {
-                            "type": "number"
-                        },
-                        "max_shift_threshold": {
-                            "type": "number"
-                        },
-                        "group_penalty": {
-                            "type": "number"
-                        },
-                        "shift_penalty": {
-                            "type": "number"
-                        }
-                    }
-                }
-            },
-            "required":
-            ["group_assignment_conflict", "assistant_distribution"]
-        },
-        "operator": {
-            "type": "object",
-            "properties": {
-                "selection": {
-                    "type": "object",
-                    "properties": {
-                        "roulette_wheel": {
-                            "type": "boolean"
-                        },
-                        "tournament": {
-                            "type": "boolean"
-                        },
-                        "elitism": {
-                            "type": "boolean"
-                        },
-                        "tournament_size": {
-                            "type": "number"
-                        }
-                    },
-                    "required": ["roulette_wheel", "tournament", "elitism"]
-                },
-                "crossover": {
-                    "type": "object",
-                    "properties": {
-                        "single_point": {
-                            "type": "boolean"
-                        },
-                        "two_point": {
-                            "type": "boolean"
-                        },
-                        "uniform": {
-                            "type": "boolean"
-                        },
-                        "crossover_probability": {
-                            "type": "number"
-                        },
-                        "uniform_probability": {
-                            "type": "number"
-                        }
-                    },
-                    "required": ["single_point", "two_point", "uniform"]
-                },
-                "mutation": {
-                    "type": "object",
-                    "properties": {
-                        "swap": {
-                            "type": "boolean"
-                        },
-                        "shift": {
-                            "type": "boolean"
-                        },
-                        "random": {
-                            "type": "boolean"
-                        },
-                        "mutation_probability": {
-                            "type": "number"
-                        }
-                    },
-                    "required": ["swap", "shift", "random"]
-                },
-                "repair": {
-                    "type": "object",
-                    "properties": {
-                        "time_slot": {
-                            "type": "boolean"
-                        }
-                    },
-                    "required": ["time_slot"]
-                }
-            },
-            "required": ["selection", "crossover", "mutation", "repair"]
-        },
-    },
-    "required": [
-        "max_iteration", "population_size", "elitism_size", "fitness",
-        "operator"
-    ]
-}
+        algorithm_instance = cls()
+        algorithm_instance.population_size = config['population_size']
+        algorithm_instance.iteration = config['max_iteration']
+        algorithm_instance.configure(factory, fitness_manager, selection_manager,
+                                     crossover_manager, mutation_manager,
+                                     repair_manager, elitism_selection, elitism_size)
+        return algorithm_instance

@@ -55,3 +55,6 @@ class Population:
     
     def get_random_chromosome(self):
         return random.choice(self.chromosomes)
+    
+    def set_fitness_manager(self, fitness_manager: FitnessManager):
+        self.fitness_manager = fitness_manager

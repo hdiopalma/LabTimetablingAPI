@@ -1,5 +1,6 @@
 import time
 import datetime
+from math import ceil
 
 #Algorithm
 from ..algorithms import (
@@ -10,10 +11,23 @@ from ..algorithms import (
 from ..config_schema import ScheduleConfiguration
 #Model
 from scheduling_data.models import Solution, ScheduleData, Semester
-
 from django.db import transaction
-
 from scheduling_data.utils import signals
+
+from ..factory import Factory
+
+from ..data_parser import ModuleData
+
+from ..structure.chromosome import Chromosome
+
+from ..factory.factory import WeeklyFactory
+
+def calculate_module_weeks(module_id):
+    module_date = ModuleData.get_dates(module_id)
+    start_date = module_date.start_date
+    end_date = module_date.end_date
+    weeks = ceil((end_date - start_date).days / 7)
+    return weeks
 
 class SolutionGenerator:
     def __init__(self, data: ScheduleConfiguration):
@@ -22,7 +36,6 @@ class SolutionGenerator:
         self.algorithm: GeneticAlgorithm = self.configure_algorithm()
         self.best_chromosome = None
         self.time_elapsed = 0
-        
         self.created_solution = None
         
     @classmethod
@@ -48,6 +61,10 @@ class SolutionGenerator:
         return GeneticLocalSearch.create(main_config, local_search_config)
     
     def generate_solution(self) -> Solution:
+        solution = self.generate_solution_weekly()
+        return solution
+    
+    def generate_solution_normal(self) -> Solution:
         """Generates a timetabling solution using the configured algorithm.
 
         Raises:
@@ -67,6 +84,60 @@ class SolutionGenerator:
             raise e
         self.created_solution = None
         return solution
+    
+    def generate_solution_weekly(self) -> Solution:
+        solution = self.created_solution or self.create_solution()
+        try:
+            self.best_chromosome = Chromosome()
+            modules = ModuleData.get_modules_by_semester(self.config['semester'])
+            for module in modules:
+                num_weeks = calculate_module_weeks(module.id)
+                for week in range(num_weeks):
+                    factory_instance = WeeklyFactory(weeks=num_weeks, week= week + 1, module_id=module.id)
+                    print(f"Generating population for module {module.id} week {week + 1}")
+                    weekly_population = factory_instance.generate_population(population_size=25)
+                    if len(weekly_population) == 0:
+                        print(f"Module {module.id} week {week + 1} has no population, all the remaining chapter are already assigned on previous weeks")
+                        print("Skipping to next module")
+                        break
+                    weekly_chromosome = self.algorithm.run(population=weekly_population)
+                    self.best_chromosome += weekly_chromosome
+            self.create_schedule_data(solution)
+            self.update_solution(solution)
+        except Exception as e:
+            self.update_solution(solution, status=Solution.Status.FAILED)
+            raise e
+        self.created_solution = None
+        return solution
+    
+    def generate_solution_weekly_test(self) -> Solution:
+        try:
+            self.best_chromosome = Chromosome()
+            modules = ModuleData.get_modules_by_semester(self.config['semester'])
+            for module in modules:
+                num_weeks = calculate_module_weeks(module.id)
+                for week in range(num_weeks):
+                    factory_instance = WeeklyFactory(weeks=num_weeks, week= week + 1, module_id=module.id)
+                    print(f"Generating population for module {module.id} week {week + 1}")
+                    weekly_population = factory_instance.generate_population(population_size=25)
+                    if len(weekly_population) == 0:
+                        print(f"Module {module.id} week {week + 1} has no population, all the remaining chapter are already assigned on previous weeks")
+                        print("Skipping to next module")
+                        break
+                    weekly_chromosome = self.algorithm.run(population=weekly_population)
+                    self.best_chromosome += weekly_chromosome
+        except Exception as e:
+            raise e
+        self.created_solution = None
+        return self.best_chromosome
+            
+    def test(self):
+        self.algorithm.run()
+        self.best_chromosome = self.algorithm.log['best_chromosome']
+        return self.best_chromosome
+    
+    def merge_solutions(self, solutions):
+        pass
     
     def create_solution(self) -> Solution:
         """Creates a new solution object in the database. For storing configuration and progress data.
@@ -101,10 +172,9 @@ class SolutionGenerator:
     def update_solution(self, solution: Solution, status=Solution.Status.COMPLETED):
         solution.status = status
         solution.best_fitness = self.best_chromosome.fitness
-        solution.time_elapsed = self.algorithm.log['time_elapsed']
+        solution.time_elapsed = self.algorithm.log['time_elapsed'] if status == Solution.Status.COMPLETED else 0
         solution.gene_count = len(self.best_chromosome)
         solution.save()
-        
         signals.notify_task(solution)
         return solution
     

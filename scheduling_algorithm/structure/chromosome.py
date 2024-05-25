@@ -7,6 +7,9 @@ class Chromosome:
     def __init__(self, genes: list = []):
         self._gene_data_list = [{"laboratory": gene["laboratory"], "module": gene["module"], "chapter": gene["chapter"], "group": gene["group"], "assistant": gene["assistant"], "time_slot": gene["time_slot"]} for gene in genes] if genes else []
         self.fitness = 0
+        
+        #week number, used for tracking the week number of the chromosome when using the weekly based algorithm
+        self.week = 0
 
     @property
     def gene_data(self):
@@ -46,6 +49,7 @@ class Chromosome:
         new_chromosome = Chromosome([])
         new_chromosome._gene_data_list = [copy.copy(gene_data) for gene_data in self._gene_data_list]
         new_chromosome.fitness = self.fitness
+        new_chromosome.week = self.week
         memo[id(self)] = new_chromosome
         return new_chromosome
     
@@ -56,6 +60,7 @@ class Chromosome:
         new_chromosome = Chromosome([])
         new_chromosome._gene_data_list = [gene_data.copy() for gene_data in self._gene_data_list]
         new_chromosome.fitness = self.fitness
+        new_chromosome.week = self.week
         return new_chromosome
 
     def add_gene(self, laboratory: int, module: int, chapter: int, group: int, assistant: int = None, time_slot: TimeSlot = None):
@@ -72,6 +77,9 @@ class Chromosome:
 
     def set_time_slot(self, index, time_slot):
         self._gene_data_list[index]["time_slot"] = time_slot
+        
+    def set_week(self, week: int):
+        self.week = week
 
     def to_json(self):
         return {"gene_data": self._gene_data_list, "fitness": self.fitness}

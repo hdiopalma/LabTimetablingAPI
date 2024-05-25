@@ -1,1 +1,1 @@
-from scheduling_algorithm.factory.factory import Factory
+from scheduling_algorithm.factory.factory import Factory, WeeklyFactory

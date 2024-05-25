@@ -36,11 +36,12 @@ class GeneticLocalSearch(GeneticAlgorithm):
     def run(self,  *args, **kwargs):
         '''Run the hybrid algorithm.
         '''
-        
         max_iteration = args[0] if len(args) > 0 else kwargs.get(
             'max_iteration', self.iteration)
         population_size = args[1] if len(args) > 1 else kwargs.get(
             'population_size', self.population_size)
+        population = args[2] if len(args) > 2 else kwargs.get(
+            'population', self._init_population(population_size))
         
         time_start = time.time()
         # Initialize the population
@@ -66,8 +67,8 @@ class GeneticLocalSearch(GeneticAlgorithm):
             population, elitism = self._evolve_population(population)
 
             # Add the elitism and the local search to the population
-            population.add_chromosome(elitism)
             population.calculate_fitness()
+            population.add_chromosome(elitism)
 
             # Introduction of local search, for possible improvement of previous best chromosome
             local_search = self.local_search(best_chromosome)

@@ -1,15 +1,21 @@
-from scheduling_data.models import Module
+from scheduling_data.models import Module, Semester
 from functools import lru_cache
 
 from collections import namedtuple
 ModuleDate = namedtuple('ModuleDate', ['start_date', 'end_date'])
 
 class ModuleData:
-    
+
     @classmethod
     @lru_cache(maxsize=1)
     def get_modules(cls):
         return Module.objects.all()
+    
+    @classmethod
+    @lru_cache(maxsize=None)
+    def get_modules_by_semester(cls, semester_id):
+        semester = Semester.objects.get(id=semester_id)
+        return semester.modules()
     
     @classmethod
     @lru_cache(maxsize=None)

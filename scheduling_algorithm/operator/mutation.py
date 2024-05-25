@@ -27,6 +27,8 @@ class BaseMutation:
         raise NotImplementedError("Mutation function not implemented")
     
 class SwapMutation(BaseMutation):
+    """SwapMutation class to swap the assistant and time slot of random two genes in a chromosome.
+    """
     def __init__(self):
         super().__init__("SwapMutation")
     

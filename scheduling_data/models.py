@@ -21,6 +21,9 @@ class Semester(models.Model):
         '''
         return sum([lab.module_count() for lab in self.laboratories.all()])
     
+    def modules(self):
+        return [module for lab in self.laboratories.all() for module in lab.modules.all()]
+    
     def group_count(self):
         '''Count the total group in this semester
         '''
@@ -103,7 +106,7 @@ class Module(models.Model):
         return self.chapters.count()
     
     def __str__(self) -> str:
-        return f"{self.name} - {self.laboratory.name} - {self.semester.name}"
+        return f"{self.name} - {self.laboratory.name}"
         #return self.name
 
 class Chapter(models.Model):
