@@ -47,6 +47,14 @@ class SimulatedAnnealing(BaseSearch):
         self.repair_manager = RepairManager([TimeSlotRepair()])
         self.fitness_manager = FitnessManager([GroupAssignmentConflictFitness(), AssistantDistributionFitness()])
 
+    def print_configuration(self):
+        print("Search: ", self.name)
+        print("Initial temperature: ", self.initial_temperature)
+        print("Cooling rate: ", self.cooling_rate)
+        print("Max iteration: ", self.max_iteration)
+        print("Max iteration without improvement: ", self.max_iteration_without_improvement)
+        print("Max time: ", self.max_time)
+
     def __call__(self, chromosome: Chromosome):
         return self.run(chromosome)
     

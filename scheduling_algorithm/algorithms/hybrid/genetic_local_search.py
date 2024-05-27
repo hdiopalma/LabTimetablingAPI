@@ -33,21 +33,18 @@ class GeneticLocalSearch(GeneticAlgorithm):
     def __repr__(self):
         return self.__str__()
     
-    def run(self,  *args, **kwargs):
+    def run(self, population: Population, *args, **kwargs):
         '''Run the hybrid algorithm.
         '''
         max_iteration = args[0] if len(args) > 0 else kwargs.get(
             'max_iteration', self.iteration)
         population_size = args[1] if len(args) > 1 else kwargs.get(
             'population_size', self.population_size)
-        population = args[2] if len(args) > 2 else kwargs.get(
-            'population', self._init_population(population_size))
         
         time_start = time.time()
         # Initialize the population
         # profile = cProfile.Profile()
         # profile.enable()
-        population = self._init_population(population_size)
         print("Population Initialized, time elapsed: ", time.time() - time_start)
         # profile.disable()
         # profile.print_stats(sort='time')

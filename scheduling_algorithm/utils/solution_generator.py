@@ -75,17 +75,52 @@ class SolutionGenerator:
         """
         solution = self.created_solution or self.create_solution()
         try:
-            self.algorithm.run()
-            self.best_chromosome = self.algorithm.log['best_chromosome']
-            self.create_schedule_data(solution)
-            self.update_solution(solution)
+            modules = ModuleData.get_modules_by_semester(self.config['semester'])
+            for module in modules:
+                factory_instance = Factory()
+                print(f"Generating population for module {module.id}")
+                population = factory_instance.generate_population(population_size=self.config.get_population_size(), module_id=module.id)
+                self.algorithm.run(population=population)
+                self.best_chromosome = self.algorithm.log['best_chromosome']
+                self.create_schedule_data(solution)
+                self.update_solution(solution)
         except Exception as e:
             self.update_solution(solution, status=Solution.Status.FAILED)
             raise e
         self.created_solution = None
         return solution
     
+    def generate_solution_normal_test(self) -> Solution:
+        """Generates a timetabling solution using the configured algorithm.
+
+        Raises:
+            e: Any exception that occurs during the solution generation.
+
+        Returns:
+            Solution: The generated solution data.
+        """
+        try:
+            modules = ModuleData.get_modules_by_semester(self.config['semester'])
+            for module in modules:
+                factory_instance = Factory()
+                print(f"Generating population for module {module.id}")
+                population = factory_instance.generate_population(population_size=self.config.get_population_size(), module_id=module.id)
+                self.algorithm.run(population=population)
+                self.best_chromosome = self.algorithm.log['best_chromosome']
+        except Exception as e:
+            raise e
+        self.created_solution = None
+        return self.best_chromosome
+    
     def generate_solution_weekly(self) -> Solution:
+        """Generates a timetabling solution using the configured algorithm, segmented by weeks.
+
+        Raises:
+            e: _description_
+
+        Returns:
+            Solution: _description_
+        """
         solution = self.created_solution or self.create_solution()
         try:
             self.best_chromosome = Chromosome()
@@ -93,9 +128,9 @@ class SolutionGenerator:
             for module in modules:
                 num_weeks = calculate_module_weeks(module.id)
                 for week in range(num_weeks):
-                    factory_instance = WeeklyFactory(weeks=num_weeks, week= week + 1, module_id=module.id)
+                    factory_instance = WeeklyFactory(weeks=num_weeks, week= week + 1)
                     print(f"Generating population for module {module.id} week {week + 1}")
-                    weekly_population = factory_instance.generate_population(population_size=25)
+                    weekly_population = factory_instance.generate_population(population_size=self.config.get_population_size(), module_id=module.id)
                     if len(weekly_population) == 0:
                         print(f"Module {module.id} week {week + 1} has no population, all the remaining chapter are already assigned on previous weeks")
                         print("Skipping to next module")
@@ -117,12 +152,12 @@ class SolutionGenerator:
             for module in modules:
                 num_weeks = calculate_module_weeks(module.id)
                 for week in range(num_weeks):
-                    factory_instance = WeeklyFactory(weeks=num_weeks, week= week + 1, module_id=module.id)
+                    factory_instance = WeeklyFactory(weeks=num_weeks, week= week + 1)
                     print(f"Generating population for module {module.id} week {week + 1}")
-                    weekly_population = factory_instance.generate_population(population_size=25)
+                    weekly_population = factory_instance.generate_population(population_size=self.config.get_population_size(), module_id=module.id)
                     if len(weekly_population) == 0:
                         print(f"Module {module.id} week {week + 1} has no population, all the remaining chapter are already assigned on previous weeks")
-                        print("Skipping to next module")
+                        print("Starting the schedule generation algorithm...")
                         break
                     weekly_chromosome = self.algorithm.run(population=weekly_population)
                     self.best_chromosome += weekly_chromosome

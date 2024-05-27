@@ -1,6 +1,6 @@
 #Genetic Algorithm Class
 
-from scheduling_algorithm.factory import Factory
+from scheduling_algorithm.factory import Factory, WeeklyFactory
 
 #Structure
 from scheduling_algorithm.structure import Chromosome, Population
@@ -23,8 +23,6 @@ class GeneticAlgorithm:
 
         self.population_size = 25
         self.iteration = 100
-
-        self.factory = Factory()
         self.fitness_manager = FitnessManager(
             [GroupAssignmentConflictFitness(),
              AssistantDistributionFitness()])
@@ -55,9 +53,6 @@ class GeneticAlgorithm:
 
     def __call__(self, max_iteration: int, population_size: int):
         self.run(max_iteration, population_size)
-
-    def _init_population(self, population_size):
-        return self.factory.generate_population(population_size=population_size)
 
     def __selection(
         self, population: Population
@@ -115,15 +110,13 @@ class GeneticAlgorithm:
 
         return Population(children, population.fitness_manager), elitism
 
-    def run(self, *args, **kwargs):
+    def run(self, population: Population, *args, **kwargs):
         max_iteration = args[0] if len(args) > 0 else kwargs.get(
             'max_iteration', self.iteration)
         population_size = args[1] if len(args) > 1 else kwargs.get(
             'population_size', self.population_size)
-        time_start = time.time()
-        population = args[2] if len(args) > 2 else kwargs.get(
-            'population', self._init_population(population_size))
         
+        time_start = time.time()
         population.set_fitness_manager(self.fitness_manager)
         population.calculate_fitness()
         population = Population(

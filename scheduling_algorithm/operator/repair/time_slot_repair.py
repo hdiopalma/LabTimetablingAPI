@@ -8,7 +8,7 @@ TimeSlot = namedtuple("TimeSlot", ["date", "day", "shift"])
 
 from scheduling_algorithm.structure import Chromosome
 from scheduling_algorithm.data_parser import ModuleData, GroupData, Constant
-from scheduling_algorithm.factory.timeslot_manager import TimeSlotManager
+from scheduling_algorithm.factory.timeslot_manager_backup import TimeSlotManager
 
 from scheduling_algorithm.operator.repair.base_repair import BaseRepair
 
@@ -17,8 +17,6 @@ class TimeSlotRepair(BaseRepair):
         super().__init__("RepairTimeSlot")
         self.module_data = ModuleData
         self.group_data = GroupData
-        
-        self.time_slot_manager = TimeSlotManager()
     
     def __call__(self, chromosome: Chromosome):
         """

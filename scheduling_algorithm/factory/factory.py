@@ -30,7 +30,9 @@ class Factory:
         self.assistants = AssistantData
         self.constant = Constant
         
-        self.time_slot_manager = TimeSlotManager()
+        self.module = None
+        
+        self.time_slot_manager = None
         self.fitness_manager = FitnessManager([GroupAssignmentConflictFitness(), AssistantDistributionFitness()])
 
     def set_fitness_manager(self, fitness_manager: FitnessManager):
@@ -39,27 +41,24 @@ class Factory:
     def generate_chromosome(self) -> Chromosome:
         """Generate a chromosome based on data, each group must be assigned to all chapters in a module of appropriate lab"""
         chromosome = Chromosome([])
-        for module in self.modules.get_modules():
-            try:
-                self.time_slot_manager.generate_empty_time_slot(module.start_date, module.end_date, module.id, 3)
-            except Exception as e:
-                print(f"Error generating empty time slot: {e}")
-                break
-            for group in self.modules.get_groups(module.id):  
-                for chapter in self.modules.get_chapters(module.id):
-                    laboratory = module.laboratory
-                    assistant = random.choice(self.laboratories.get_assistants(laboratory.id))
-                    try:
-                        time_slot = self.time_slot_manager.generate_available_time_slot(module.id, group.id, randomize=True)
-                    except Exception as e:
-                        print(f"Error generating time slot: {e}")
-                        break
-                    chromosome.add_gene(laboratory.id, module.id, chapter.id, group.id, assistant.id, time_slot)
+        module = self.module
+        for group in self.modules.get_groups(module.id):  
+            for chapter in self.modules.get_chapters(module.id):
+                laboratory = module.laboratory
+                assistant = random.choice(self.laboratories.get_assistants(laboratory.id))
+                try:
+                    time_slot = self.time_slot_manager.generate_time_slot(chapter_id=chapter.id, assistant_id=assistant.id, group_id=group.id)
+                except Exception as e:
+                    print(f"Error generating time slot: {e}")
+                    break
+                chromosome.add_gene(laboratory.id, module.id, chapter.id, group.id, assistant.id, time_slot)
         self.time_slot_manager.clear()
         return chromosome
     
-    def generate_population(self, population_size: int, fitness_manager: FitnessManager = None) -> Population:
+    def generate_population(self, population_size: int, module_id:int, fitness_manager: FitnessManager = None) -> Population:
         """Generate a population based on the population size"""
+        self.module = self.modules.get_module(module_id)
+        self.time_slot_manager = TimeSlotManager(start_date=self.module.start_date, end_date=self.module.end_date, max_capacity=3)
         if fitness_manager:
             self.fitness_manager = fitness_manager
         return Population([self.generate_chromosome() for _ in range(population_size)], self.fitness_manager)
@@ -67,25 +66,27 @@ class Factory:
 class WeeklyFactory(Factory):
     """Factory class to generate chromosomes and population in a weekly basis. 
     """
-    def __init__(self, weeks, week, module_id):
+    def __init__(self, weeks, week):
         super().__init__()
         self.weeks = weeks
         self.week = week
-        self.module = self.modules.get_module(module_id)
+        self.module = None
+        self.start_date = None
+        self.end_date = None
+        self.time_slot_manager = None
         
     def generate_chromosome(self, weeks, week) -> Chromosome:
         chromosome = Chromosome([])
         module = self.module
-        start_date = module.start_date + timedelta(weeks=week - 1)
-        end_date = start_date + timedelta(weeks=1)
         for group in self.modules.get_groups(module.id):
             for chapter in self.slice_chapters(weeks, week, module.id):
                 laboratory = module.laboratory
                 assistant = random.choice(self.laboratories.get_assistants(laboratory.id))
-                time_slot = self.time_slot_manager.generate_random_time_slot(start_date=start_date, end_date=end_date)
+                time_slot = self.time_slot_manager.generate_time_slot(chapter_id=chapter.id, assistant_id=assistant.id, group_id=group.id)
                 chromosome.add_gene(laboratory.id, module.id, chapter.id, group.id, assistant.id, time_slot)
                 chromosome.set_week(week)
         self.time_slot_manager.clear()
+        #stop the algorithm for testing
         return chromosome
     
     #slice chapters evenly into weeks
@@ -109,8 +110,15 @@ class WeeklyFactory(Factory):
         end_index = min(week * chapter_per_week, chapter_count) # Example: min(4 * 2, 12) = 8
         return chapters[start_index:end_index]
 
-    def generate_population(self, population_size: int, fitness_manager: FitnessManager = None) -> Population:
+    def generate_population(self, population_size: int, module_id:int, fitness_manager: FitnessManager = None) -> Population:
         """Generate a population based on the population size"""
+        
+        #initialize the factory
+        self.module = self.modules.get_module(module_id)
+        self.start_date = self.module.start_date + timedelta(weeks=self.week - 1)
+        self.end_date = self.start_date + timedelta(weeks=1)
+        self.time_slot_manager = TimeSlotManager(start_date=self.start_date, end_date=self.end_date, max_capacity=3)
+        
         if fitness_manager:
             self.fitness_manager = fitness_manager
         chromosomes = []
