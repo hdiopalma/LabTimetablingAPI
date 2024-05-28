@@ -133,6 +133,9 @@ class GeneticAlgorithm:
                 sorted(population, key=lambda chromosome: chromosome.fitness),
                 population.fitness_manager)
             
+            if len(population) > population_size:
+                population.pop()
+            
             if population[0].fitness == 0:
                 break
         time_end = time.time()

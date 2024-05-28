@@ -25,6 +25,7 @@ class NotificationConsumer(AsyncWebsocketConsumer):
         title = event['title']
         await self.send(text_data=json.dumps({
             'message': message,
-            'title': title
+            'title': title,
+            'type': 'solution_update'
         }))
 # Path: scheduling_data/utils/consumers.py

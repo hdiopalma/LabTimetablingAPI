@@ -42,15 +42,7 @@ class GeneticLocalSearch(GeneticAlgorithm):
             'population_size', self.population_size)
         
         time_start = time.time()
-        # Initialize the population
-        # profile = cProfile.Profile()
-        # profile.enable()
-        print("Population Initialized, time elapsed: ", time.time() - time_start)
-        # profile.disable()
-        # profile.print_stats(sort='time')
-        # raise Exception("Test")
-        
-        # Calculate the fitness of the population
+        # Calculate the fitness of the initial population
         population.calculate_fitness()
         # Sort the population based on fitness
         population = Population(sorted(population, key=lambda chromosome: chromosome.fitness), population.fitness_manager)
@@ -60,21 +52,21 @@ class GeneticLocalSearch(GeneticAlgorithm):
         iteration = 0
         # Start the hybrid algorithm
         while iteration < max_iteration and best_chromosome.fitness > 0:
-            # Evolve the population, crossover and mutation happens inside this function
-            population, elitism = self._evolve_population(population)
+            # Evolve the population, crossover and mutation happens inside this function (This is the genetic algorithm part)
+            offspring, elitism = self._evolve_population(population)
 
             # Add the elitism and the local search to the population
-            population.calculate_fitness()
-            population.add_chromosome(elitism)
-
+            offspring.add_chromosome(elitism)
+            offspring.calculate_fitness()
             # Introduction of local search, for possible improvement of previous best chromosome
             local_search = self.local_search(best_chromosome)
-            population.add_chromosome(local_search)
+            offspring.add_chromosome(local_search)
 
             # Sort the population based on fitness
             population = Population(sorted(population, key=lambda chromosome: chromosome.fitness), population.fitness_manager)
             #remove the worst chromosome, so the population size is still the same
-            population.pop()
+            if len(population) > population_size:
+                population.pop()
             # Check if the best chromosome is better than the current best chromosome
             if population[0].fitness < best_chromosome.fitness:
                 best_chromosome = population[0].copy()

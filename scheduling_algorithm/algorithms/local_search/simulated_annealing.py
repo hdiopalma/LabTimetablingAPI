@@ -129,7 +129,7 @@ class SimulatedAnnealing(BaseSearch):
     def calculate_fitness(self, neighbors: List[Chromosome]):
         '''Calculate the fitness of the neighbors'''
         for neighbor in neighbors:
-            # self.repair_manager(neighbor)
+            self.repair_manager(neighbor)
             neighbor.fitness = self.fitness_manager(neighbor)
 
     def get_neighbors(self, chromosome: Chromosome):

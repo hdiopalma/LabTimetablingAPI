@@ -122,7 +122,9 @@ class SolutionGenerator:
             Solution: _description_
         """
         solution = self.created_solution or self.create_solution()
+        
         try:
+            time_start = time.time()
             self.best_chromosome = Chromosome()
             modules = ModuleData.get_modules_by_semester(self.config['semester'])
             for module in modules:
@@ -137,6 +139,7 @@ class SolutionGenerator:
                         break
                     weekly_chromosome = self.algorithm.run(population=weekly_population)
                     self.best_chromosome += weekly_chromosome
+            self.time_elapsed = time.time() - time_start
             self.create_schedule_data(solution)
             self.update_solution(solution)
         except Exception as e:
@@ -207,7 +210,7 @@ class SolutionGenerator:
     def update_solution(self, solution: Solution, status=Solution.Status.COMPLETED):
         solution.status = status
         solution.best_fitness = self.best_chromosome.fitness
-        solution.time_elapsed = self.algorithm.log['time_elapsed'] if status == Solution.Status.COMPLETED else 0
+        solution.time_elapsed = self.time_elapsed
         solution.gene_count = len(self.best_chromosome)
         solution.save()
         signals.notify_task(solution)
