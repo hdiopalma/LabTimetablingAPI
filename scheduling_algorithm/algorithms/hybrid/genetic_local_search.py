@@ -1,7 +1,6 @@
 #Hybrid Algorithm Class
 # Create a hybrid algorithm class that combine the genetic algorithm and tabu search, the genetic algorithm will be used to generate the initial solution and focus on the exploration, while the tabu search will be used to improve the solution and focus on the exploitation.
 
-from re import S
 from scheduling_algorithm.structure import Chromosome, Population
 
 from scheduling_algorithm.algorithms.global_search.genetic_algorithm import GeneticAlgorithm
@@ -55,10 +54,12 @@ class GeneticLocalSearch(GeneticAlgorithm):
             # Evolve the population, crossover and mutation happens inside this function (This is the genetic algorithm part)
             offspring, elitism = self._evolve_population(population)
 
-            # Add the elitism and the local search to the population
+            # Add the elitism back to the population
             offspring.add_chromosome(elitism)
             offspring.calculate_fitness()
+            
             # Introduction of local search, for possible improvement of previous best chromosome
+            # Note: Don't set the iteration or time too high, this is not the main algorithm.
             local_search = self.local_search(best_chromosome)
             offspring.add_chromosome(local_search)
 
@@ -70,14 +71,14 @@ class GeneticLocalSearch(GeneticAlgorithm):
             # Check if the best chromosome is better than the current best chromosome
             if population[0].fitness < best_chromosome.fitness:
                 best_chromosome = population[0].copy()
-
             iteration += 1
+            
         time_end = time.time()
         self.log['time_elapsed'] = time_end - time_start
         self.log['best_chromosome'] = best_chromosome
         return best_chromosome
     
-    def configure(self, factory: Factory = None, fitness_manager: FitnessManager = None, selection_manager: SelectionManager = None, crossover_manager: CrossoverManager = None, mutation_manager: MutationManager = None, repair_manager: RepairManager = None, elitism_selection: ElitismSelection = None, elitism_size: int = 1, local_search: TabuSearch = None):
+    def configure(self, factory: Factory = None, fitness_manager: FitnessManager = None, selection_manager: SelectionManager = None, crossover_manager: CrossoverManager = None, mutation_manager: MutationManager = None, repair_manager: RepairManager = None, elitism_selection: ElitismSelection = None, elitism_size: int = 1, local_search = None):
         '''Configure the hybrid algorithm, use None to use the default value.
         '''
         self.elitism_size = elitism_size or self.elitism_size
