@@ -1,13 +1,21 @@
-from assistant_data import AssistantData
-from group_data import GroupData
-
-from collections import namedtuple
-ModuleDate = namedtuple('ModuleDate', ['start_date', 'end_date'])
+from scheduling_algorithm.data_parser.assistant_data import AssistantData
+from scheduling_algorithm.data_parser.group_data import GroupData
+from functools import lru_cache
     
 class CommonData:
     
     @classmethod
-    def get_available_schedule(cls, id_assistant, id_group):
+    @lru_cache(maxsize=256)
+    def get_schedule(cls, id_assistant:int, id_group:int) -> dict:
+        """Merges the schedule of the assistant and the group.
+
+        Args:
+            id_assistant (int): ID of the assistant.
+            id_group (int): ID of the group.
+
+        Returns:
+            dict: The merged schedule.
+        """
         assistants_schedule = AssistantData.get_schedule(id_assistant)
         groups_schedule = GroupData.get_schedule(id_group)
         if assistants_schedule and groups_schedule:

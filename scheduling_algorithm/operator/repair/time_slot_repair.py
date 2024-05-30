@@ -5,36 +5,13 @@ from collections import namedtuple
 from functools import lru_cache
 
 from scheduling_algorithm.structure import Chromosome
-from scheduling_algorithm.data_parser import ModuleData, GroupData, Constant
-from scheduling_algorithm.factory.timeslot_manager_backup import TimeSlotManager
+from scheduling_algorithm.data_parser import ModuleData, GroupData, Constant, CommonData
 from scheduling_algorithm.operator.repair.base_repair import BaseRepair
+
+from scheduling_algorithm.factory import timeslot_manager
 
 # Simple data structure for timeslot
 TimeSlot = namedtuple("TimeSlot", ["date", "day", "shift"])
-
-#Global cache for available time slots to avoid redundant computation
-@lru_cache(maxsize=256)
-def generate_available_time_slots(start_date, end_date, group_id):
-    available_time_slots = []
-    schedule = GroupData.get_schedule(group_id)
-    week_duration = max(1, floor(((end_date - start_date).days + 1) / 7))
-    for week in range(week_duration):
-        for day, shifts in schedule.items():
-            for shift, available in shifts.items():
-                if available:
-                    date = start_date + timedelta(days=week * 7 + Constant.days.index(day))
-                    available_time_slots.append(TimeSlot(date.timestamp(), day, shift))
-    return available_time_slots
-
-@lru_cache(maxsize=24)
-def get_date_range(module_id, week):
-    start_date = ModuleData.get_dates(module_id).start_date
-    if week > 0:
-        start_date += timedelta(weeks=week - 1)
-        end_date = start_date + timedelta(weeks=1)
-    else:
-        end_date = ModuleData.get_dates(module_id).end_date
-    return start_date, end_date
 
 class TimeSlotRepair(BaseRepair):
     def __init__(self):
@@ -54,34 +31,22 @@ class TimeSlotRepair(BaseRepair):
         """
         week = chromosome.week
         for index, gene in enumerate(chromosome):
-            start_date, end_date = get_date_range(gene['module'], week)
-            schedule = self.group_data.get_schedule(gene['group'])
-            if not self._is_time_slot_available(gene['time_slot'], schedule):
-                time_slot = self._find_feasible_solution(start_date, end_date, schedule, gene['group'])
-                if time_slot is None:
-                    time_slot = gene['time_slot']
+            start_date, end_date = timeslot_manager.get_date_range(gene['module'], week)
+            schedule = CommonData.get_schedule(gene['assistant'], gene['group'])
+            if not schedule[gene['time_slot'].day][gene['time_slot'].shift]:
+                time_slot = self._choose_available_time_slot(start_date, end_date, gene['group'], gene['assistant'])
                 chromosome.set_time_slot(index, time_slot)
         return chromosome
 
-    def _is_time_slot_available(self, time_slot: TimeSlot, schedule=None):
-        return schedule and schedule[time_slot.day][time_slot.shift]
-
-    def _find_feasible_solution(self, start_date, end_date, schedule, group_id, max_iteration=100):
-        for _ in range(max_iteration):
-            time_slot = self._choose_available_time_slot(start_date, end_date, group_id)
-            if self._is_time_slot_available(time_slot, schedule):
-                return time_slot
-        return None
-
-    def _choose_available_time_slot(self, start_date: datetime, end_date: datetime, group_id):
+    def _choose_available_time_slot(self, start_date: datetime, end_date: datetime, group_id:int, assistant_id:int = None):
         if start_date.weekday() != 0:
             start_date += timedelta(days=7 - start_date.weekday())
-        available_time_slots = generate_available_time_slots(start_date, end_date, group_id)
+        available_time_slots = timeslot_manager.generate_available_time_slots(start_date, end_date, group_id, assistant_id)
         if not available_time_slots:
-            return self._generate_time_slot(start_date, end_date)
+            return self._random_time_slot(start_date, end_date)
         return random.choice(available_time_slots)
 
-    def _generate_time_slot(self, start_date, end_date):
+    def _random_time_slot(self, start_date, end_date):
         if start_date.weekday() != 0:
             start_date += timedelta(days=7 - start_date.weekday())
         random_date = self._get_random_date(start_date, end_date)

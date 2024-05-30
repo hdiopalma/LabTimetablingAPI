@@ -1,23 +1,83 @@
 
 from collections import namedtuple
 TimeSlot = namedtuple("TimeSlot", ["date", "day", "shift"]) #Simple data structure for timeslot, for reference
-
 import numpy as np
-
 from scheduling_algorithm.data_parser import Constant
-from scheduling_algorithm.data_parser import ModuleData, GroupData
-
+from scheduling_algorithm.data_parser import ModuleData, GroupData, CommonData
 from scheduling_algorithm.structure import Chromosome
-
 import random
 from datetime import timedelta, datetime
 from math import floor
 from collections import defaultdict
-
 import numpy as np
+from functools import lru_cache
+
+@lru_cache(maxsize=24)
+def generate_empty_time_slots(start_date: datetime, end_date: datetime) -> list:
+    """Returns a list of empty time slots based on the start and end date.
+    Args:
+        start_date (datetime): The start date of the time slot range.
+        end_date (datetime): The end date of the time slot range.
+        chapter_id (int): The chapter ID.
+        assistant_id (int): The assistant ID.
+    Returns:
+        list: The available time slots.
+    """
+    empty_time_slots = []
+    weeks_duration = max(1, floor(((end_date - start_date).days + 1) / 7))
+    for week in range(weeks_duration):
+        for day in Constant.days:
+            for shift in Constant.shifts:
+                date = (start_date + timedelta(days=week * 7 + Constant.days.index(day))).timestamp()
+                timeslot = TimeSlot(date, day, shift)
+                empty_time_slots.append(timeslot)
+    return empty_time_slots
+
+#Global cache for available time slots to avoid redundant computation
+@lru_cache(maxsize=256)
+def generate_available_time_slots(start_date:datetime, end_date:datetime, group_id:int, assistant_id:int = None) -> list:
+    """Generates the available time slots based on the group schedule.
+
+    Args:
+        start_date (datetime): The start date of the time slot range.
+        end_date (datetime): The end date of the time slot range.
+        group_id (int): The group ID.
+        assistant_id (int): The assistant ID. Optional. If provided, the function will also check the assistant's schedule.
+
+    Returns:
+        list: The available time slots.
+    """
+    empty_time_slots = generate_empty_time_slots(start_date, end_date)
+    schedule = CommonData.get_schedule(assistant_id, group_id) if assistant_id else GroupData.get_schedule(group_id)
+    available_time_slots = []
+    for time_slot in empty_time_slots:
+        if schedule[time_slot.day][time_slot.shift]:
+            available_time_slots.append(time_slot)
+    return available_time_slots
+
+@lru_cache(maxsize=24)
+def get_date_range(module_id:int, week:int = 0) -> tuple:
+    """Returns the date range based on the module and the current week index.
+
+    Args:
+        module_id (int): The module ID.
+        week (int): The week index.
+
+    Returns:
+        tuple: The date range.
+    """
+    start_date = ModuleData.get_dates(module_id).start_date
+    if week > 0:
+        start_date += timedelta(weeks=week - 1)
+        end_date = start_date + timedelta(weeks=1)
+    else:
+        end_date = ModuleData.get_dates(module_id).end_date
+    return start_date, end_date
 
 class TimeSlotManager:
     def __init__(self,start_date: datetime, end_date: datetime, max_capacity: int) -> None:
+        self.start_date = start_date
+        self.end_date = end_date
         self.max_capacity = max_capacity
         self.empty_time_slots = {}
         
@@ -29,7 +89,7 @@ class TimeSlotManager:
         #group_time_slots[timeslot] = [group_id]
         self.group_time_slots = defaultdict(list)
         
-        self.generate_empty_time_slots(start_date, end_date)
+        self.empty_time_slots = generate_empty_time_slots(start_date, end_date)
         
     def generate_time_slot(self, chapter_id, assistant_id, group_id) -> TimeSlot:
         """Generates a time slot based on the availability of the assistant and the capacity of the time slot.
@@ -52,7 +112,7 @@ class TimeSlotManager:
                     if group_id not in self.group_time_slots[time_slot]:
                         self.add_group_to_time_slot(time_slot, chapter_id, group_id, assistant_id)
                         return time_slot
-        time_slot = self.get_random_time_slot(group_id)
+        time_slot = self.get_random_time_slot(group_id, assistant_id)
         self.add_group_to_time_slot(time_slot, chapter_id, group_id, assistant_id)
         return time_slot
     
@@ -69,34 +129,9 @@ class TimeSlotManager:
             bool: The success of adding the group to the time slot.
         """
         self.time_slot_capacities[assistant_id][chapter_id][time_slot] += 1
-        self.group_time_slots[time_slot].append(group_id)    
+        self.group_time_slots[time_slot].append(group_id)
     
-    def generate_empty_time_slots(self, start_date: datetime, end_date: datetime) -> list:
-        """Returns the available time slots based on the chapter and assistant.
-
-        Args:
-            start_date (datetime): The start date of the time slot range.
-            end_date (datetime): The end date of the time slot range.
-            chapter_id (int): The chapter ID.
-            assistant_id (int): The assistant ID.
-
-        Returns:
-            list: The available time slots.
-        """
-        available_time_slots = []
-        duration = (end_date - start_date).days + 1
-        weeks_duration = floor(duration / 7)
-        if weeks_duration == 0:
-            weeks_duration = 1
-        for week in range(weeks_duration):
-            for day in Constant.days:
-                for shift in Constant.shifts:
-                    date = (start_date + timedelta(days=week * 7 + Constant.days.index(day))).timestamp()
-                    timeslot = TimeSlot(date, day, shift)
-                    available_time_slots.append(timeslot)
-        self.empty_time_slots = available_time_slots
-    
-    def get_random_time_slot(self, group_id: int, max_iterations: int = 50) -> TimeSlot:
+    def get_random_time_slot(self, group_id: int, assistant_id:int = None) -> TimeSlot:
         """Returns a random time slot based on the chapter and assistant.
 
         Args:
@@ -106,24 +141,11 @@ class TimeSlotManager:
         Returns:
             TimeSlot: The random time slot.
         """
-        for _ in range(max_iterations):
-            time_slot = random.choice(self.empty_time_slots)
-            if self.check_availibility(time_slot, group_id):
-                return time_slot
-        return random.choice(self.empty_time_slots)
-    
-    def check_availibility(self, time_slot: TimeSlot, group_id: int) -> bool:
-        """Checks the availability of the time slot based on the group schedule.
+        available_time_slots = generate_available_time_slots(self.start_date, self.end_date, group_id, assistant_id)
+        if not available_time_slots:
+            return random.choice(self.empty_time_slots)
+        return random.choice(available_time_slots)
 
-        Args:
-            time_slot (TimeSlot): The time slot to be checked.
-            group_id (int): The group ID.
-
-        Returns:
-            bool: The availability of the time slot.
-        """
-        group_schedule = GroupData.get_schedule(group_id)
-        return group_schedule[time_slot.day][time_slot.shift]
     
     def clear(self):
         """Clear the time slot capacities and group time slots.
