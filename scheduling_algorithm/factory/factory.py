@@ -82,7 +82,8 @@ class WeeklyFactory(Factory):
             for chapter in self.slice_chapters(weeks, week, module.id):
                 laboratory = module.laboratory
                 assistant = random.choice(self.laboratories.get_assistants(laboratory.id))
-                time_slot = self.time_slot_manager.generate_time_slot(chapter_id=chapter.id, assistant_id=assistant.id, group_id=group.id)
+                # time_slot = self.time_slot_manager.generate_time_slot(chapter_id=chapter.id, assistant_id=assistant.id, group_id=group.id)
+                time_slot = self.time_slot_manager.get_random_time_slot(group_id=group.id, assistant_id=assistant.id)
                 chromosome.add_gene(laboratory.id, module.id, chapter.id, group.id, assistant.id, time_slot)
                 chromosome.set_week(week)
         self.time_slot_manager.clear()

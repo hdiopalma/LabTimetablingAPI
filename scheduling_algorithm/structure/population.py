@@ -4,6 +4,8 @@ from typing import List
 from scheduling_algorithm.structure import Chromosome
 from scheduling_algorithm.fitness_function import FitnessManager
 
+import concurrent.futures
+
 class Population:
     def __init__(self, chromosomes: List[Chromosome], fitness_manager: FitnessManager):
         self.chromosomes = chromosomes
@@ -39,6 +41,22 @@ class Population:
     def calculate_fitness(self):
         for chromosome in self.chromosomes:
             chromosome.fitness = self.fitness_manager(chromosome)
+            
+    def calculate_fitness_parallel(self):
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            # Submit fitness calculations as tasks
+            future_to_chromosome = {
+                executor.submit(self.fitness_manager, chromosome): chromosome 
+                for chromosome in self.chromosomes
+            }
+            
+            # Retrieve results as they become available
+            for future in concurrent.futures.as_completed(future_to_chromosome):
+                chromosome = future_to_chromosome[future]
+                try:
+                    chromosome.fitness = future.result()
+                except Exception as exc:
+                    print(f"Fitness calculation generated an exception: {exc}")
     
     def add_chromosome(self, chromosome: Chromosome):
         #if chromosome is list, add all chromosomes in the list

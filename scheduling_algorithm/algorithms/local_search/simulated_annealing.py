@@ -2,15 +2,12 @@
 
 # Simulated Annealing Class
 
-import django
-django.setup()
-
 import math
 import random
 import time
 from typing import List
 
-from scheduling_algorithm.structure import Chromosome
+from scheduling_algorithm.structure import Chromosome, Population
 
 from scheduling_algorithm.algorithms.local_search.base_search import BaseSearch
 
@@ -23,7 +20,7 @@ from scheduling_algorithm.fitness_function import FitnessManager, GroupAssignmen
 class SimulatedAnnealing(BaseSearch):
     def __init__(self):
         super().__init__("SimulatedAnnealing")
-        self.neighborhood = RandomSwapNeighborhood()
+        self.neighborhood_algorithm = RandomSwapNeighborhood()
         self.initial_temperature = 100
         self.temperature = 100
         self.temperature_threshold = 0.1
@@ -45,7 +42,7 @@ class SimulatedAnnealing(BaseSearch):
         self.termination_reason = None
 
         self.repair_manager = RepairManager([TimeSlotRepair()])
-        self.fitness_manager = FitnessManager([GroupAssignmentConflictFitness(), AssistantDistributionFitness()])
+        self.fitness_manager = None
 
     def print_configuration(self):
         print("Search: ", self.name)
@@ -63,7 +60,7 @@ class SimulatedAnnealing(BaseSearch):
             #Print the initial chromosome and configuration
             print("Search: ", self.name)
             print("Initial fitness: ", self.fitness_manager(chromosome))
-            print("Neighborhood: ", self.neighborhood)
+            print("Neighborhood: ", self.neighborhood_algorithm)
             print("Initial temperature: ", self.initial_temperature)
             print("Cooling rate: ", self.cooling_rate)
             print("Max iteration: ", self.max_iteration)
@@ -87,22 +84,22 @@ class SimulatedAnnealing(BaseSearch):
             self.log.append({"iteration": self.iteration, "time": self.time, "fitness": self.best_fitness})
             self.log_detail.append({"iteration": self.iteration, "time": self.time, "fitness": self.best_fitness, "chromosome": self.best_chromosome})
             # Get the neighbors
-            neighbors = self.get_neighbors(self.best_chromosome)
+            neighbors = Population(self.get_neighbors(self.best_chromosome), self.fitness_manager)
             # Calculate the fitness of the neighbors
-            self.calculate_fitness(neighbors)
+            neighbors.calculate_fitness()
             # Select the best neighbor
-            best_neighbor = self.select_best_neighbor(neighbors)
+            best_neighbor = self.select_best_neighbor(neighbors.chromosomes)
             # Check if the best neighbor is better than the current best chromosome
             if best_neighbor.fitness < self.best_fitness:
                 self.best_chromosome = best_neighbor.copy()
                 self.best_fitness = best_neighbor.fitness
+                self.iteration_without_improvement = 0
             else:
                 # Calculate the probability of accepting the worse neighbor
                 probability = self.calculate_probability(best_neighbor.fitness)
                 if random.random() < probability:
                     self.best_chromosome = best_neighbor.copy()
                     self.best_fitness = best_neighbor.fitness
-                    self.iteration_without_improvement = 0
                 else:
                     self.iteration_without_improvement += 1
             # Cool down the temperature
@@ -113,7 +110,6 @@ class SimulatedAnnealing(BaseSearch):
         # Return the best chromosome
         self.information = {"iteration": self.iteration, "time": self.time, "fitness": self.best_fitness, "chromosome": self.best_chromosome, "termination_reason": self.termination_reason}
         self.repair_manager(self.best_chromosome)
-        self.fitness_manager(self.best_chromosome)
         return self.best_chromosome
     
     def awake(self) -> bool:
@@ -128,13 +124,14 @@ class SimulatedAnnealing(BaseSearch):
     
     def calculate_fitness(self, neighbors: List[Chromosome]):
         '''Calculate the fitness of the neighbors'''
+        
         for neighbor in neighbors:
             self.repair_manager(neighbor)
             neighbor.fitness = self.fitness_manager(neighbor)
 
     def get_neighbors(self, chromosome: Chromosome):
         '''Get the neighbors of the chromosome'''
-        return self.neighborhood(chromosome)
+        return self.neighborhood_algorithm(chromosome)
     
     def select_best_neighbor(self, neighbors: List[Chromosome]):
         '''Select the best neighbor from the neighbors'''
@@ -145,13 +142,17 @@ class SimulatedAnnealing(BaseSearch):
         return best_neighbor
     
     def calculate_probability(self, neighbor_fitness: float):
-        '''Calculate the probability of accepting the worse neighbor'''
-        return math.exp((self.best_fitness - neighbor_fitness) / self.temperature)
+        """Calculate the probability of accepting a worse neighbor."""
+        delta_e = self.best_fitness - neighbor_fitness  # Change in energy (fitness)
+        if delta_e >= 0:  # If the neighbor is better, always accept
+            return 1.0
+        else:
+            exponent = delta_e / self.temperature  
+            return math.exp(exponent)  # Boltzmann probability
     
     def cool_down(self):
         '''Cool down the temperature'''
         self.temperature *= 1 - self.cooling_rate
-
 
     def configure(self, fitness_manager: FitnessManager = None, neighborhood: BaseNeighborhood = None, initial_temperature: float = None, cooling_rate: float = None, max_iteration: int = None, max_iteration_without_improvement: int = None, max_time: int = None):
         '''Configure the search
@@ -165,13 +166,17 @@ class SimulatedAnnealing(BaseSearch):
             max_time: int'''
         
         self.fitness_manager = fitness_manager or self.fitness_manager
-        self.neighborhood = neighborhood or self.neighborhood
+        self.neighborhood_algorithm = neighborhood or self.neighborhood_algorithm
         self.initial_temperature = initial_temperature or self.initial_temperature
         self.temperature = initial_temperature or self.initial_temperature
         self.cooling_rate = cooling_rate or self.cooling_rate
         self.max_iteration = max_iteration or self.max_iteration
         self.max_time = max_time or self.max_time
         self.max_iteration_without_improvement = max_iteration_without_improvement or self.max_iteration_without_improvement
+
+        print("Configuration:")
+        print("Fitness Manager: ", self.fitness_manager)
+        self.print_configuration()
 
         return self
     
@@ -191,23 +196,12 @@ class SimulatedAnnealing(BaseSearch):
         max_iteration = config["max_iteration"]
         max_iteration_without_improvement = config["max_iteration_without_improvement"]
         max_time = config["max_time"]
-        
-        return cls().configure(fitness_manager, neighborhood, initial_temperature, cooling_rate, max_iteration, max_iteration_without_improvement, max_time)
-    
+        instance = cls()
+        instance.configure(fitness_manager, neighborhood, initial_temperature, cooling_rate, max_iteration, max_iteration_without_improvement, max_time)
+        return instance
     
     def get_log(self):
         return self.log
     
     def get_log_detail(self):
         return self.log_detail
-
-simulated_annealing_properties = {
-    "type": "object",
-    "properties": {
-        "initial_temperature": {"type": "number"},
-        "cooling_rate": {"type": "number"},
-        "max_iteration": {"type": "number"},
-        "max_time": {"type": "number"},
-        "max_iteration_without_improvement": {"type": "number"}
-    }
-}

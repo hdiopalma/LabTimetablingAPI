@@ -5,11 +5,11 @@ from ...fitness_function import FitnessManager
 
 class LocalSearchManager:
     @staticmethod
-    def create(config: dict):
+    def create(config: dict, fitness_manager: FitnessManager):
         '''Create the local search algorithm
         '''
         
-        fitness = FitnessManager.create(config["config"]["fitness"])
+        fitness = fitness_manager
         neighborhood = NeighborhoodManager.create(config["config"]["neighborhood"])
         
         algorithm = config["algorithm"]

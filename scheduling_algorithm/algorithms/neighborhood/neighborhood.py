@@ -88,11 +88,9 @@ class RandomSwapNeighborhood(BaseNeighborhood):
         neighbors = []
         for _ in range(self.neighborhood_size):
             neighbor = chromosome.copy()
-            i = random.randint(0, len(chromosome) - 1)
-            j = random.randint(0, len(chromosome) - 1)
+            i, j = random.sample(range(len(chromosome)), 2)
             neighbor[i]['time_slot'], neighbor[j]['time_slot'] = neighbor[j]['time_slot'], neighbor[i]['time_slot']
-            if neighbor[i]['module'] == neighbor[j]['module']:
-                neighbor[i]['assistant'], neighbor[j]['assistant'] = neighbor[j]['assistant'], neighbor[i]['assistant']
+            neighbor[i]['assistant'], neighbor[j]['assistant'] = neighbor[j]['assistant'], neighbor[i]['assistant']
             neighbors.append(neighbor)
         return neighbors
     
@@ -102,7 +100,9 @@ class RandomSwapNeighborhood(BaseNeighborhood):
     
     @classmethod
     def create(cls, config: dict):
-        return cls().configure(**config)
+        instance = cls()
+        instance.configure(**config)
+        return instance
     
 class RandomRangeSwapNeighborhood(BaseNeighborhood):
     def __init__(self):
@@ -133,7 +133,9 @@ class RandomRangeSwapNeighborhood(BaseNeighborhood):
     
     @classmethod
     def create(cls, config: dict):
-        return cls().configure(**config)
+        instance = cls()
+        instance.configure(**config)
+        return instance
     
 class DistanceSwapNeighborhood(BaseNeighborhood):
     def __init__(self):
@@ -189,7 +191,9 @@ class DistanceSwapNeighborhood(BaseNeighborhood):
     
     @classmethod
     def create(cls, config: dict):
-        return cls().configure(**config)
+        instance = cls()
+        instance.configure(**config)
+        return instance
     
 class NeighborhoodManager:
     def __init__(self, neighborhood: BaseNeighborhood):
@@ -227,32 +231,3 @@ class NeighborhoodManager:
             raise ValueError(f"Neighborhood {algorithm} not found")
         print(f"Creating NeighborhoodManager with neighborhood: {selected_neighborhood}")
         return selected_neighborhood
-        
-        
-#Config schema for reference
-neighborhood_properties = {
-    "type": "object",
-    "properties": {
-        "algorithm": {
-            "type": "string",
-            "enum": ["swap", "random_swap", "random_range_swap", "distance_swap"]
-        },
-        "random_swap": {
-            "type": "object",
-            "properties": {"neighborhood_size": {"type": "number"}},
-            "required": ["neighborhood_size"]
-        },
-        "random_range_swap": {
-            "type": "object",
-            "properties": {"neighborhood_size_factor": {"type": "number"}, "range_size_factor": {"type": "number"}},
-            "required": ["neighborhood_size_factor", "range_size_factor"]
-        },
-        "distance_swap": {
-            "type": "object",
-            "properties": {"distance_percentage": {"type": "number"}},
-            "required": ["distance_percentage"]
-        },
-        "swap": {"type": "boolean", "default": False}
-    },
-    "required": ["algorithm"]
-}

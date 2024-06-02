@@ -19,7 +19,10 @@ class FitnessManager:
     
     def __call__(self, chromosome: Chromosome) -> int:
         '''Return the total fitness value of the chromosome'''
-        return sum([fitness_function(chromosome) for fitness_function in self.fitness_functions])
+        total_fitness = 0
+        for fitness_function in self.fitness_functions:
+            total_fitness += fitness_function(chromosome)
+        return total_fitness
     
     def configure(self, fitness_functions: List[BaseFitness]):
         """Configure the fitness manager
@@ -44,29 +47,5 @@ class FitnessManager:
         if not fitness_functions:
             raise ValueError("No fitness functions found in configuration")
         print("Creating FitnessManager with fitness functions: ", fitness_functions)
-        return cls(fitness_functions)
-    
-
-config_schema = {
-    # Fitness configuration, for reference only
-    "type": "object",
-    "properties": {
-        "group_assignment_conflict": {
-            "type": "object",
-            "properties": {
-                "max_threshold": {"type": "number"},
-                "conflict_penalty": {"type": "number"}
-            }
-        },
-        "assistant_distribution": {
-            "type": "object",
-            "properties": {
-                "max_group_threshold": {"type": "number"},
-                "max_shift_threshold": {"type": "number"},
-                "group_penalty": {"type": "number"},
-                "shift_penalty": {"type": "number"}
-            }
-        },
-    },
-    "required": ["group_assignment_conflict", "assistant_distribution"]
-}
+        instance = cls(fitness_functions)
+        return instance

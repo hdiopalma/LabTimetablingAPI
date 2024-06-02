@@ -135,17 +135,8 @@ class MutationManager:
         if not mutation_functions:
             raise ValueError("At least one mutation function must be enabled")
         print("Configuring mutation operator: ", mutation_functions)
-        return MutationManager(mutation_functions).configure(config["mutation_probability"])
+        
+        instance = cls(mutation_functions)
+        instance.configure(config["mutation_probability"])
+        return instance
     
-
-config_schema = {
-    # Selection configuration, for reference only
-    "type": "object",
-    "properties": {
-        "swap": {"type": "boolean"},
-        "shift": {"type": "boolean"},
-        "random": {"type": "boolean"},
-        "mutation_probability": {"type": "number"}
-    },
-    "required": ["swap", "shift", "random"]
-}

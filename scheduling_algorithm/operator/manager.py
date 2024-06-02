@@ -58,51 +58,5 @@ class OperatorManager:
         crossover_manager = CrossoverManager.create(config.get("crossover"))
         mutation_manager = MutationManager.create(config.get("mutation"))
         selection_manager = SelectionManager.create(config.get("selection"))
-        return cls(repair_manager, crossover_manager, mutation_manager, selection_manager)
-    
-
-#config_schema, for reference
-config_schema = {
-    "type":"object",
-        "properties": {
-            "selection": {
-                "type": "object",
-                "properties": {
-                    "roulette_wheel": {"type": "boolean"},
-                    "tournament": {"type": "boolean"},
-                    "elitism": {"type": "boolean"},
-                    "tournament_size": {"type": "number"}
-                },
-                "required": ["roulette_wheel", "tournament", "elitism"]
-            },
-            "crossover": {
-                "type": "object",
-                "properties": {
-                    "single_point": {"type": "boolean"},
-                    "two_point": {"type": "boolean"},
-                    "uniform": {"type": "boolean"},
-                    "crossover_probability": {"type": "number"},
-                    "uniform_probability": {"type": "number"}
-                },
-                "required": ["single_point", "two_point", "uniform"]
-            },
-            "mutation": {
-                "type": "object",
-                "properties": {
-                    "swap": {"type": "boolean"},
-                    "shift": {"type": "boolean"},
-                    "random": {"type": "boolean"},
-                    "mutation_probability": {"type": "number"}
-                },
-                "required": ["swap", "shift", "random"]
-            },
-            "repair": {
-                "type": "object",
-                "properties": {
-                    "time_slot": {"type": "boolean"}
-                },
-                "required": ["time_slot"]
-            } 
-        },
-        "required": ["selection", "crossover", "mutation", "repair"]
-}
+        instance = cls(repair_manager, crossover_manager, mutation_manager, selection_manager)
+        return instance

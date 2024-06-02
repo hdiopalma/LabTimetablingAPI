@@ -38,9 +38,8 @@ class RouletteWheelSelection(BaseSelection):
     def __call__(self, population: Population):
         # Calculate the total fitness
         total_fitness = sum([chromosome.fitness for chromosome in population])
-        # Calculate the probability of each chromosome being selected
-        probabilities = [chromosome.fitness / total_fitness for chromosome in population]
-        # Select a chromosome based on the probability
+        probabilities = [ 1 - (chromosome.fitness / total_fitness) for chromosome in population] # Inverse the fitness value, so the smaller fitness value has higher probability
+        # probabilities = [chromosome.fitness / total_fitness for chromosome in population]
         return random.choices(population, weights=probabilities)[0] # random.choices return a list, so we need to get the first element
     
     @classmethod
@@ -68,8 +67,9 @@ class TournamentSelection(BaseSelection):
 
     @classmethod
     def create(cls, config):
-        cls.tournament_size = config["tournament_size"]
-        return cls()
+        instance = cls()
+        instance.tournament_size = config["tournament_size"]
+        return instance
 
 class ElitismSelection(BaseSelection):
     def __init__(self):
@@ -91,8 +91,9 @@ class ElitismSelection(BaseSelection):
 
     @classmethod
     def create(cls, config):
-        cls.elitism_size = config["elitism_size"]
-        return cls()
+        instance = cls()
+        instance.elitism_size = config["elitism_size"]
+        return instance
 
 class DynamicSelection(BaseSelection):
     def __init__(self, name, selection_function):
@@ -142,18 +143,5 @@ class SelectionManager:
         if not selection_functions:
             raise ValueError("At least one selection function must be enabled")
         print("Configured selection functions: ", selection_functions)
-        return cls(selection_functions)
-
-
-config_schema = {
-    # Selection configuration, for reference only
-    "type": "object",
-    "properties": {
-        "roulette_wheel": {"type": "boolean"},
-        "tournament": {"type": "boolean"},
-        "elitism": {"type": "boolean"},
-        "tournament_size": {"type": "number"},
-        "elitism_size": {"type": "number"}
-    },
-    "required": ["roulette_wheel", "tournament", "elitism"]
-}
+        instance = cls(selection_functions)
+        return instance

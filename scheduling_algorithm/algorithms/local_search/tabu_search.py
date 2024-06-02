@@ -2,6 +2,7 @@ import time
 from typing import List
 
 from scheduling_algorithm.structure.tabu_list import TabuList, Chromosome
+from scheduling_algorithm.structure.population import Population
 
 from scheduling_algorithm.algorithms.local_search.base_search import BaseSearch
 
@@ -65,10 +66,11 @@ class TabuSearch(BaseSearch):
         # Start the search
         start = time.time()
         while self.iteration < self.max_iteration and self.time < self.max_time and self.iteration_without_improvement < self.max_iteration_without_improvement and self.time_without_improvement < self.max_time_without_improvement:
-            neighbors = self.get_neighbors(self.best_chromosome)
-            self.calculate_fitness(neighbors)
+            neighbors = Population(self.get_neighbors(self.best_chromosome), self.fitness_manager)
+             # Calculate the fitness of the neighbors
+            neighbors.calculate_fitness()
             # Select the best neighbor
-            best_neighbor = self.select_best_neighbor(neighbors)
+            best_neighbor = self.select_best_neighbor(neighbors.chromosomes)
             # Check if the best neighbor is better than the current best chromosome
             if best_neighbor.fitness < self.best_fitness:
                 self.best_chromosome = best_neighbor.copy()
@@ -136,7 +138,8 @@ class TabuSearch(BaseSearch):
         max_time = config["max_time"]
         max_iteration_without_improvement = config["max_iteration_without_improvement"]
         max_time_without_improvement = config["max_time_without_improvement"]
-        return cls().configure(fitness_manager, tabu_list, neighborhood, max_iteration, max_time, max_iteration_without_improvement, max_time_without_improvement)
+        instance = cls().configure(fitness_manager, tabu_list, neighborhood, max_iteration, max_time, max_iteration_without_improvement, max_time_without_improvement)
+        return instance
         
 #reference
 tabu_search_properties = {

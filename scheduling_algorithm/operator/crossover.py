@@ -127,16 +127,6 @@ class CrossoverManager:
         if not crossover_functions:
             raise ValueError("At least one crossover function must be enabled")
         print("Configuring crossover operator: ", crossover_functions)
-        return CrossoverManager(crossover_functions).configure(config.get("crossover_probability", 0.1))
-    
-config_schema = {
-    # Crossover configuration, for reference only
-    "type": "object",
-    "properties": {
-        "single_point": {"type": "boolean"},
-        "two_point": {"type": "boolean"},
-        "uniform": {"type": "boolean"},
-        "uniform_probability": {"type": "number"},
-        "crossover_probability": {"type": "number"}
-    }
-}
+        instance = cls(crossover_functions)
+        instance.configure(config.get("crossover_probability", 0.1))
+        return instance

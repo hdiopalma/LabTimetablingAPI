@@ -285,7 +285,7 @@ class SolutionViewSet(viewsets.ModelViewSet):
         
         #group the data
         grouped_data = {}
-        for key, solution in groupby(data['schedule_data'], key=itemgetter('date', 'laboratory','module', 'assistant', 'chapter', 'shift', 'group')):
+        for key, solution in groupby(data['schedule_data'], key=itemgetter('date', 'laboratory','module', 'chapter', 'assistant', 'shift', 'group')):
             key = list(key)
             key[0] = key[0].split('T')[0]
             grouped_data.setdefault(key[0], {}).setdefault(key[1], {}).setdefault(key[2], {}).setdefault(key[3], {}).setdefault(key[4], {}).setdefault(key[5], []).append(key[6])

@@ -26,9 +26,6 @@ class GroupAssignmentConflictFitness(BaseFitness):
     def __call__(self, chromosome: Chromosome):
         self._conflicts.clear()
         for gene in chromosome:
-            #gene = chromosome.to_gene_data(gene)
-            #self._conflicts[gene.laboratory][gene.module][gene.time_slot].append(gene.group)
-            #self._conflicts[gene["gene"].laboratory][gene["gene"].module][gene["time_slot"]].append(gene["gene"].group)
             self._conflicts[gene["laboratory"]][gene["module"]][gene["time_slot"]].append(gene["group"])
         
         total_penalty = 0
@@ -62,5 +59,5 @@ class GroupAssignmentConflictFitness(BaseFitness):
                 "conflict_penalty": 1
             }
         """
-        fitness = cls()
-        return fitness.configure(**config)
+        fitness = cls().configure(**config)
+        return fitness
