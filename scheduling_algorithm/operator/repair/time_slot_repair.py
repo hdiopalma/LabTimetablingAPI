@@ -8,7 +8,7 @@ from scheduling_algorithm.structure import Chromosome
 from scheduling_algorithm.data_parser import ModuleData, GroupData, Constant, CommonData
 from scheduling_algorithm.operator.repair.base_repair import BaseRepair
 
-from scheduling_algorithm.factory import timeslot_manager
+from scheduling_algorithm.factory import timeslot_generator, timeslot_manager
 
 # Simple data structure for timeslot
 TimeSlot = namedtuple("TimeSlot", ["date", "day", "shift"])
@@ -33,15 +33,16 @@ class TimeSlotRepair(BaseRepair):
         for index, gene in enumerate(chromosome):
             start_date, end_date = timeslot_manager.get_date_range(gene['module'], week)
             schedule = CommonData.get_schedule(gene['assistant'], gene['group'])
-            if not schedule[gene['time_slot'].day][gene['time_slot'].shift]:
-                time_slot = self._choose_available_time_slot(start_date, end_date, gene['group'], gene['assistant'])
-                chromosome.set_time_slot(index, time_slot)
+            timeslot = gene['time_slot']
+            if not schedule[timeslot.day][timeslot.shift]:
+                available_time_slot = self._choose_available_time_slot(start_date, end_date, gene['group'], gene['assistant'])
+                chromosome.set_time_slot(index, available_time_slot)
         return chromosome
 
     def _choose_available_time_slot(self, start_date: datetime, end_date: datetime, group_id:int, assistant_id:int = None):
         if start_date.weekday() != 0:
             start_date += timedelta(days=7 - start_date.weekday())
-        available_time_slots = timeslot_manager.generate_available_time_slots(start_date, end_date, group_id, assistant_id)
+        available_time_slots = timeslot_generator.generate_available_time_slots(start_date, end_date, group_id, assistant_id)
         if not available_time_slots:
             return self._random_time_slot(start_date, end_date)
         return random.choice(available_time_slots)

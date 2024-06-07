@@ -89,8 +89,13 @@ class RandomSwapNeighborhood(BaseNeighborhood):
         for _ in range(self.neighborhood_size):
             neighbor = chromosome.copy()
             i, j = random.sample(range(len(chromosome)), 2)
-            neighbor[i]['time_slot'], neighbor[j]['time_slot'] = neighbor[j]['time_slot'], neighbor[i]['time_slot']
-            neighbor[i]['assistant'], neighbor[j]['assistant'] = neighbor[j]['assistant'], neighbor[i]['assistant']
+            
+            # Swap the genes data, since there's two indepentent variables, the swap is decided using probability.
+            if random.random() < 0.5:
+                neighbor[i]['time_slot'], neighbor[j]['time_slot'] = neighbor[j]['time_slot'], neighbor[i]['time_slot']
+            else:
+                neighbor[i]['assistant'], neighbor[j]['assistant'] = neighbor[j]['assistant'], neighbor[i]['assistant']
+                
             neighbors.append(neighbor)
         return neighbors
     

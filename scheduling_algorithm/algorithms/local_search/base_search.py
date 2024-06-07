@@ -1,11 +1,11 @@
 from scheduling_algorithm.structure import Chromosome
 
-from scheduling_algorithm.fitness_function import FitnessManager, GroupAssignmentConflictFitness, AssistantDistributionFitness
+from scheduling_algorithm.fitness_function import FitnessManager, GroupAssignmentCapacityFitness, AssistantDistributionFitness
 
 class BaseSearch:
     def __init__(self, name):
         self.name = name
-        self.fitness_manager = FitnessManager([GroupAssignmentConflictFitness(), AssistantDistributionFitness()])
+        self.fitness_manager = FitnessManager([GroupAssignmentCapacityFitness(), AssistantDistributionFitness()])
     
     def __str__(self):
         return f"Search(name={self.name})"

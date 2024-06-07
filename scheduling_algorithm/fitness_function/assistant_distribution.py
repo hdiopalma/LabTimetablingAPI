@@ -8,41 +8,25 @@ import numpy as np
 class AssistantDistributionFitness(BaseFitness):
     def __init__(self):
         super().__init__("AssistantDistributionFitness")
-        self.max_group_threshold = None # Maximum number of groups that can be assigned to a single assistant
-        self.max_shift_threshold = None # Maximum number of shifts that can be assigned to a single assistant
-        self.group_penalty = 1 # Penalty for each group that exceeds the maximum threshold
-        self.shift_penalty = 1 # Penalty for each shift that exceeds the maximum threshold
-
-        #groups[assistant][module] = [groups]
-        self._groups = self.default_middle_dict()
-        #shifts[assistant][module] = [shifts]
-        self._shifts = self.default_middle_dict()
-
-    def default_inner_dict(self):
-        return defaultdict(set)
-    
-    def default_middle_dict(self):
-        return defaultdict(self.default_inner_dict)
-    
-    def default_outer_dict(self):
-        return defaultdict(self.default_middle_dict)
-    
-    def __call__(self, chromosome: Chromosome):
-        self._groups.clear()
-        self._shifts.clear()
-        for gene in chromosome:
-            self._groups[gene["assistant"]][gene["module"]].add(gene["group"])
-            self._shifts[gene["assistant"]][gene["module"]].add(gene["time_slot"])
+        self.max_group_threshold = None
+        self.max_shift_threshold = None
+        self.group_penalty = 1
+        self.shift_penalty = 1
         
+    def __str__(self):
+        message = f"Fitness(name={self.name}, max_group_threshold={self.max_group_threshold}, max_shift_threshold={self.max_shift_threshold}, group_penalty={self.group_penalty}, shift_penalty={self.shift_penalty})"
+        return message
+
+    def calculate_penalty(self, groups, shifts):
         total_penalty = 0
-        for assistant in self._groups:
-            for module in self._groups[assistant]:
-                groups = self._groups[assistant][module]
-                shifts = self._shifts[assistant][module]
-                if len(groups) > self.max_group_threshold:
-                    total_penalty += (len(groups) - self.max_group_threshold) * self.group_penalty
-                if len(shifts) > self.max_shift_threshold:
-                    total_penalty += (len(shifts) - self.max_shift_threshold) * self.shift_penalty
+        for assistant in groups:
+            for module in groups[assistant]:
+                group_count = len(groups[assistant][module])
+                shift_count = len(shifts[assistant][module])
+                if group_count > self.max_group_threshold:
+                    total_penalty += (group_count - self.max_group_threshold) * self.group_penalty
+                if shift_count > self.max_shift_threshold:
+                    total_penalty += (shift_count - self.max_shift_threshold) * self.shift_penalty
         return total_penalty
     
     # def __call__(self, chromosome: Chromosome):

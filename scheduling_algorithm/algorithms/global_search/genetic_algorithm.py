@@ -6,7 +6,7 @@ from scheduling_algorithm.factory import Factory, WeeklyFactory
 from scheduling_algorithm.structure import Chromosome, Population
 
 #Fitness
-from scheduling_algorithm.fitness_function import FitnessManager, GroupAssignmentConflictFitness, AssistantDistributionFitness
+from scheduling_algorithm.fitness_function import FitnessManager, GroupAssignmentCapacityFitness, AssistantDistributionFitness
 
 #operator
 from scheduling_algorithm.operator.selection import SelectionManager, RouletteWheelSelection, TournamentSelection, ElitismSelection
@@ -24,7 +24,7 @@ class GeneticAlgorithm:
         self.population_size = 25
         self.iteration = 100
         self.fitness_manager = FitnessManager(
-            [GroupAssignmentConflictFitness(),
+            [GroupAssignmentCapacityFitness(),
              AssistantDistributionFitness()])
         self.selection_manager = SelectionManager([
             RouletteWheelSelection(),
@@ -81,20 +81,16 @@ class GeneticAlgorithm:
         parent2 = self.__selection(population).copy()
 
         # Crossover
-        child1, child2 = self.__crossover(
-            parent1, parent2
-        )  # Crossover is done using deep copy, so we need to assign it back to the variable since it not modify the original chromosome
+        child1, child2 = self.__crossover(parent1, parent2)
 
         # Mutation
-        self.__mutation(
-            child1
-        )  # Mutation is done in place, so we don't need to assign it back to the variable
+        # The chromosome is mutable, so we don't need to assign it back to the variable
+        self.__mutation(child1)
         self.__mutation(child2)
 
-        #Repair
-        self.__repair(
-            child1
-        )  # Repair is done in place, so we don't need to assign it back to the variable
+        #Repair,
+        #The chromosome is mutable, so we don't need to assign it back to the variable
+        self.__repair(child1)
         self.__repair(child2)
 
         return child1, child2
@@ -115,8 +111,9 @@ class GeneticAlgorithm:
             'max_iteration', self.iteration)
         population_size = args[1] if len(args) > 1 else kwargs.get(
             'population_size', self.population_size)
-        
+
         time_start = time.time()
+        self.log['iteration_fitness'] = []
         population.set_fitness_manager(self.fitness_manager)
         population.calculate_fitness()
         population = Population(
@@ -132,10 +129,11 @@ class GeneticAlgorithm:
             population = Population(
                 sorted(population, key=lambda chromosome: chromosome.fitness),
                 population.fitness_manager)
-            
+
             if len(population) > population_size:
                 population.pop()
-            
+
+            self.log['iteration_fitness'].append((i, population[0].fitness))
             if population[0].fitness == 0:
                 break
         time_end = time.time()
@@ -170,7 +168,6 @@ class GeneticAlgorithm:
         '''Create a genetic algorithm object from the configuration file.
         '''
         # factory = Factory.create(config)
-        print("Creating Genetic Algorithm Object from Configuration File")
         factory = Factory()
         fitness_manager = FitnessManager.create(config['fitness'])
         selection_manager = SelectionManager.create(
@@ -185,7 +182,13 @@ class GeneticAlgorithm:
         algorithm_instance = cls()
         algorithm_instance.population_size = config['population_size']
         algorithm_instance.iteration = config['max_iteration']
-        algorithm_instance.configure(factory, fitness_manager, selection_manager,
-                                     crossover_manager, mutation_manager,
-                                     repair_manager, elitism_selection, elitism_size)
+
+        print("Creating Genetic Algorithm Object from Configuration File")
+        print("Population Size: ", config['population_size'])
+        print("Max Iteration: ", config['max_iteration'])
+
+        algorithm_instance.configure(factory, fitness_manager,
+                                     selection_manager, crossover_manager,
+                                     mutation_manager, repair_manager,
+                                     elitism_selection, elitism_size)
         return algorithm_instance

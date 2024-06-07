@@ -16,6 +16,13 @@ fitness_properties = {
                 "group_penalty": {"type": "number"},
                 "shift_penalty": {"type": "number"}
             }
+        },
+        "timeslot_conflict": {
+            "type": "object",
+            "properties": {
+                "assistant_conflict_penalty": {"type": "number"},
+                "group_conflict_penalty": {"type": "number"}
+            }
         }
     },
     "required": ["group_assignment_conflict", "assistant_distribution"]

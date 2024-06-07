@@ -60,6 +60,10 @@ default_config = {
                     "max_shift_threshold": 50,
                     "group_penalty": 1,
                     "shift_penalty": 1
+                },
+                "timeslot_conflict": {
+                    "assistant_conflict_penalty": 2,
+                    "group_conflict_penalty": 1
                 }
             },
             "operator": {

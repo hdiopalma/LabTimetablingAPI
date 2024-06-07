@@ -12,6 +12,8 @@ TimeSlot = namedtuple("TimeSlot", ["date", "day", "shift"])
 from scheduling_algorithm.structure import Chromosome
 from scheduling_algorithm.data_parser import LaboratoryData, ModuleData, Constant
 
+import scheduling_algorithm.factory.timeslot_generator as timeslot_generator
+
 class BaseMutation:
     def __init__(self, name, probability_weight=1):
         self.name = name
@@ -67,26 +69,11 @@ class RandomMutation(BaseMutation):
     def __call__(self, chromosome: Chromosome):
         # Randomly select a gene
         gene_data = random.choice(chromosome)
-        module_date = self.modules.get_dates(gene_data['module'])
-        time_slot = self.generate_time_slot(module_date.start_date, module_date.end_date)
         assistant = random.choice(self.laboratories.get_assistants(gene_data['laboratory'])).id
         # Change the gene
-        gene_data['time_slot'] = time_slot
+        gene_data['time_slot'] = timeslot_generator.get_random_time_slot(gene_data['module'], gene_data['group'], assistant)
         gene_data['assistant'] = assistant
         return chromosome
-    
-    def generate_time_slot(self, start_date, end_date):
-        """Generate time slots based on the start date, end date, days and shifts"""
-        #if start_date not start from Monday, then start from the next Monday
-        if start_date.weekday() != 0:
-            start_date = start_date + timedelta(days=7 - start_date.weekday())
-        duration = (end_date - start_date).days + 1
-        weeks_duration = floor(duration / 7)
-        random_weeks = random.randint(0, weeks_duration)
-        random_days = random.choice(self.constant.days)
-        random_shifts = random.choice(self.constant.shifts)
-        random_date = start_date + timedelta(days=random_weeks * 7 + self.constant.days.index(random_days))
-        return TimeSlot(random_date, random_days, random_shifts)
     
 class DynamicMutation(BaseMutation):
     def __init__(self, name, mutation_function):

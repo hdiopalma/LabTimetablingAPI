@@ -10,7 +10,7 @@ from scheduling_algorithm.algorithms.neighborhood import BaseNeighborhood, Rando
 
 from scheduling_algorithm.operator.repair import RepairManager, TimeSlotRepair
 
-from scheduling_algorithm.fitness_function import FitnessManager, GroupAssignmentConflictFitness, AssistantDistributionFitness
+from scheduling_algorithm.fitness_function import FitnessManager, GroupAssignmentCapacityFitness, AssistantDistributionFitness
 
 class TabuSearch(BaseSearch):
     def __init__(self):
@@ -34,7 +34,7 @@ class TabuSearch(BaseSearch):
         self.debug = False
 
         self.repair_manager = RepairManager([TimeSlotRepair()])
-        self.fitness_manager = FitnessManager([GroupAssignmentConflictFitness(), AssistantDistributionFitness()])
+        self.fitness_manager = FitnessManager([GroupAssignmentCapacityFitness(), AssistantDistributionFitness()])
 
     def __call__(self, chromosome: Chromosome):
         return self.run(chromosome)

@@ -15,7 +15,7 @@ from scheduling_algorithm.algorithms.neighborhood import RandomSwapNeighborhood,
 
 from scheduling_algorithm.operator.repair import RepairManager, TimeSlotRepair
 
-from scheduling_algorithm.fitness_function import FitnessManager, GroupAssignmentConflictFitness, AssistantDistributionFitness
+from scheduling_algorithm.fitness_function import FitnessManager, GroupAssignmentCapacityFitness, AssistantDistributionFitness
 
 class SimulatedAnnealing(BaseSearch):
     def __init__(self):
@@ -89,19 +89,14 @@ class SimulatedAnnealing(BaseSearch):
             neighbors.calculate_fitness()
             # Select the best neighbor
             best_neighbor = self.select_best_neighbor(neighbors.chromosomes)
-            # Check if the best neighbor is better than the current best chromosome
-            if best_neighbor.fitness < self.best_fitness:
+            # Calculate the probability of accepting the neighbor
+            probability = self.calculate_probability(best_neighbor.fitness)
+            if random.random() < probability:
                 self.best_chromosome = best_neighbor.copy()
                 self.best_fitness = best_neighbor.fitness
                 self.iteration_without_improvement = 0
             else:
-                # Calculate the probability of accepting the worse neighbor
-                probability = self.calculate_probability(best_neighbor.fitness)
-                if random.random() < probability:
-                    self.best_chromosome = best_neighbor.copy()
-                    self.best_fitness = best_neighbor.fitness
-                else:
-                    self.iteration_without_improvement += 1
+                self.iteration_without_improvement += 1
             # Cool down the temperature
             self.cool_down()
             self.iteration += 1
@@ -152,6 +147,9 @@ class SimulatedAnnealing(BaseSearch):
     
     def cool_down(self):
         '''Cool down the temperature'''
+        # Method used: Exponential cooling
+        # Example: 90 * 1 - 0.09 = 81
+        # Example: 81 * 1 - 0.09 = 72.9
         self.temperature *= 1 - self.cooling_rate
 
     def configure(self, fitness_manager: FitnessManager = None, neighborhood: BaseNeighborhood = None, initial_temperature: float = None, cooling_rate: float = None, max_iteration: int = None, max_iteration_without_improvement: int = None, max_time: int = None):
