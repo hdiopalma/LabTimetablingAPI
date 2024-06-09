@@ -38,6 +38,7 @@ class GeneticAlgorithm:
         self.mutation_manager = MutationManager(
             [SwapMutation(), ShiftMutation(),
              RandomMutation()])
+    
         self.repair_manager = RepairManager([TimeSlotRepair()])
         self.elitism_size = 2
         self.elitism_selection = ElitismSelection()
@@ -119,6 +120,10 @@ class GeneticAlgorithm:
         population = Population(
             sorted(population, key=lambda chromosome: chromosome.fitness),
             population.fitness_manager)
+        
+        stagnation_counter = 0
+        last_fitness = population[0].fitness
+        initial_mutation_probability = self.mutation_manager.mutation_probability
 
         for i in range(max_iteration):
             population, elitism = self._evolve_population(population)
@@ -134,7 +139,21 @@ class GeneticAlgorithm:
                 population.pop()
 
             self.log['iteration_fitness'].append((i, population[0].fitness))
-            print(f"Iteration {i}: {population[0].fitness}")
+            
+            # Stagnation Counter Section
+            if population[0].fitness == last_fitness:
+                stagnation_counter += 1
+            else:
+                stagnation_counter = 0
+                self.mutation_manager.mutation_probability = initial_mutation_probability
+            last_fitness = population[0].fitness
+            if stagnation_counter > 50:
+                pass
+            elif stagnation_counter > 15:
+                self.mutation_manager.mutation_probability *= 1.25
+            
+            # End of Stagnation Counter Section
+            
             if population[0].fitness == 0:
                 break
         time_end = time.time()

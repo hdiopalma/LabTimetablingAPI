@@ -35,7 +35,9 @@ class SwapMutation(BaseMutation):
         gene1 = random.choice(chromosome)
         gene2 = random.choice(chromosome)
         gene1['assistant'], gene2['assistant'] = gene2['assistant'], gene1['assistant']
-        gene1['time_slot'], gene2['time_slot'] = gene2['time_slot'], gene1['time_slot']
+        gene1['time_slot_date'], gene2['time_slot_date'] = gene2['time_slot_date'], gene1['time_slot_date']
+        gene1['time_slot_day'], gene2['time_slot_day'] = gene2['time_slot_day'], gene1['time_slot_day']
+        gene1['time_slot_shift'], gene2['time_slot_shift'] = gene2['time_slot_shift'], gene1['time_slot_shift']
         return chromosome
     
 class ShiftMutation(BaseMutation):
@@ -45,7 +47,7 @@ class ShiftMutation(BaseMutation):
     
     def __call__(self, chromosome: Chromosome):
         gene = random.choice(chromosome)
-        gene['time_slot'] = self.shift_time_slot(gene['time_slot'])
+        gene['time_slot_date'], gene['time_slot_day'], gene['time_slot_shift'] = self.shift_time_slot((gene['time_slot_date'], gene['time_slot_day'], gene['time_slot_shift']))
 
         return chromosome
     
@@ -67,7 +69,7 @@ class RandomMutation(BaseMutation):
         gene_data = random.choice(chromosome)
         assistant = random.choice(self.laboratories.get_assistants(gene_data['laboratory'])).id
         # Change the gene
-        gene_data['time_slot'] = timeslot_generator.get_random_time_slot(gene_data['module'], gene_data['group'], assistant)
+        gene_data['time_slot_date'], gene_data['time_slot_day'], gene_data['time_slot_shift'] = timeslot_generator.get_random_time_slot(gene_data['module'], gene_data['group'], assistant)
         gene_data['assistant'] = assistant
         return chromosome
     
@@ -84,7 +86,7 @@ class MutationManager:
     '''Class to manage multiple mutation functions.'''
     def __init__(self, mutation_functions: List[BaseMutation]):
         self.mutation_functions = mutation_functions
-        self.mutation_probability = 0.1
+        self.mutation_probability = None
     
     def __str__(self):
         return f"MutationManager(mutation_functions={self.mutation_functions})"

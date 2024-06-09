@@ -68,7 +68,9 @@ class SwapNeighborhood(BaseNeighborhood):
         for i in range(len(chromosome)):
             for j in range(i + 1, len(chromosome)):
                 neighbor = chromosome.copy()
-                neighbor[i]['time_slot'], neighbor[j]['time_slot'] = neighbor[j]['time_slot'], neighbor[i]['time_slot']
+                neighbor[i]['time_slot_date'], neighbor[j]['time_slot_date'] = neighbor[j]['time_slot_date'], neighbor[i]['time_slot_date']
+                neighbor[i]['time_slot_day'], neighbor[j]['time_slot_day'] = neighbor[j]['time_slot_day'], neighbor[i]['time_slot_day']
+                neighbor[i]['time_slot_shift'], neighbor[j]['time_slot_shift'] = neighbor[j]['time_slot_shift'], neighbor[i]['time_slot_shift']
                 if neighbor[i]['module'] == neighbor[j]['module']:
                     neighbor[i]['assistant'], neighbor[j]['assistant'] = neighbor[j]['assistant'], neighbor[i]['assistant']
                 neighbors.append(neighbor)
@@ -92,7 +94,9 @@ class RandomSwapNeighborhood(BaseNeighborhood):
             
             # Swap the genes data, since there's two indepentent variables, the swap is decided using probability.
             if random.random() < 0.5:
-                neighbor[i]['time_slot'], neighbor[j]['time_slot'] = neighbor[j]['time_slot'], neighbor[i]['time_slot']
+                neighbor[i]['time_slot_date'], neighbor[j]['time_slot_date'] = neighbor[j]['time_slot_date'], neighbor[i]['time_slot_date']
+                neighbor[i]['time_slot_day'], neighbor[j]['time_slot_day'] = neighbor[j]['time_slot_day'], neighbor[i]['time_slot_day']
+                neighbor[i]['time_slot_shift'], neighbor[j]['time_slot_shift'] = neighbor[j]['time_slot_shift'], neighbor[i]['time_slot_shift']
             else:
                 neighbor[i]['assistant'], neighbor[j]['assistant'] = neighbor[j]['assistant'], neighbor[i]['assistant']
                 
@@ -124,7 +128,9 @@ class RandomRangeSwapNeighborhood(BaseNeighborhood):
             neighbor = chromosome.copy()
             i = random.randint(0, len(chromosome) - range_size)
             j = random.randint(i, i + range_size)
-            neighbor[i:j]['time_slot'] = neighbor[j:i]['time_slot']
+            neighbor[i:j]['time_slot_date'] = neighbor[j:i]['time_slot_date']
+            neighbor[i:j]['time_slot_day'] = neighbor[j:i]['time_slot_day']
+            neighbor[i:j]['time_slot_shift'] = neighbor[j:i]['time_slot_shift']
             if neighbor[i]['module'] == neighbor[j]['module']:
                 neighbor[i:j]['assistant'] = neighbor[j:i]['assistant']
             neighbors.append(neighbor)
@@ -179,14 +185,16 @@ class DistanceSwapNeighborhood(BaseNeighborhood):
     
     def calculate_distance(self, gene1: dict, gene2: dict) -> int:
         '''Calculate the distance between 2 genes'''
-        date_difference = abs((gene1['time_slot'].date - gene2['time_slot'].date).days)
-        day_difference = abs(Constant.days.index(gene1['time_slot'].day) - Constant.days.index(gene2['time_slot'].day))
-        shift_difference = abs(Constant.shifts.index(gene1['time_slot'].shift) - Constant.shifts.index(gene2['time_slot'].shift))
+        date_difference = abs((gene1['time_slot_date'] - gene2['time_slot_date']).days)
+        day_difference = abs(Constant.days.index(gene1['time_slot_day']) - Constant.days.index(gene2['time_slot_day']))
+        shift_difference = abs(Constant.shifts.index(gene1['time_slot_shift']) - Constant.shifts.index(gene2['time_slot_shift']))
         return date_difference + day_difference + shift_difference
     
     def swap_gene(self, chromosome: Chromosome, index1: int, index2: int):
         '''Swap 2 genes in the chromosome'''
-        chromosome[index1]['time_slot'], chromosome[index2]['time_slot'] = chromosome[index2]['time_slot'], chromosome[index1]['time_slot']
+        chromosome[index1]['time_slot_date'], chromosome[index2]['time_slot_date'] = chromosome[index2]['time_slot_date'], chromosome[index1]['time_slot_date']
+        chromosome[index1]['time_slot_day'], chromosome[index2]['time_slot_day'] = chromosome[index2]['time_slot_day'], chromosome[index1]['time_slot_day']
+        chromosome[index1]['time_slot_shift'], chromosome[index2]['time_slot_shift'] = chromosome[index2]['time_slot_shift'], chromosome[index1]['time_slot_shift']
         if chromosome[index1]['module'] == chromosome[index2]['module']:
             chromosome[index1]['assistant'], chromosome[index2]['assistant'] = chromosome[index2]['assistant'], chromosome[index1]['assistant']
 

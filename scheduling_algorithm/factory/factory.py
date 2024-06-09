@@ -84,7 +84,6 @@ class WeeklyFactory(Factory):
                 # time_slot = self.time_slot_manager.generate_time_slot(chapter_id=chapter.id, assistant_id=assistant.id, group_id=group.id)
                 time_slot = self.time_slot_generator.get_random_time_slot(group_id=group.id, assistant_id=assistant.id)
                 gene.append({"laboratory": laboratory.id, "module": module.id, "chapter": chapter.id, "group": group.id, "assistant": assistant.id, "time_slot": time_slot})
-             
         chromosome = Chromosome(gene)      
         self.time_slot_generator.clear()
         chromosome.set_week(week)

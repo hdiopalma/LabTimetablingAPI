@@ -17,26 +17,24 @@ class TimeSlotRepair(BaseRepair):
     def __call__(self, chromosome: Chromosome):
         week = chromosome.week
         
-        timeslots = chromosome['time_slot']
+        timeslot_days = chromosome['time_slot_day']
+        timeslot_shifts = chromosome['time_slot_shift']
         assistants = chromosome['assistant']
         groups = chromosome['group']
         
-        # Use boolean indexing to filter the chromosome for conflicting timeslots
         conflicting_timeslots_mask = np.array([
-            not CommonData.get_schedule(assistants[i], groups[i])[timeslot[1]][timeslot[2]]
-            for i, timeslot in enumerate(timeslots)
+            not CommonData.get_schedule(assistants[i], groups[i])[timeslot_days[i]][timeslot_shifts[i]]
+            for i in range(len(timeslot_days))
         ])
         
         # Filter the chromosome for only the genes with conflicting timeslots
-        conflicting_genes = chromosome.gene_data[conflicting_timeslots_mask]
+        conflicting_indices = np.where(conflicting_timeslots_mask)[0]
         
-        for gene in conflicting_genes:
-            # Get the original index of the gene in chromosome._gene_data_list by finding where it occurs
-            original_index = np.where(chromosome._gene_data_list == gene)[0][0]
-            start_date, end_date = timeslot_manager.get_date_range(gene['module'], week)
-            available_time_slot = self._choose_available_time_slot(start_date, end_date, gene['group'], gene['assistant'])
-            # Directly set the new timeslot using the original index
-            chromosome._gene_data_list[original_index]['time_slot'] = available_time_slot
+        for index in conflicting_indices:
+            gene = chromosome.gene_data[index]
+            start_date, end_date = timeslot_manager.get_date_range(gene["module"], week)
+            available_time_slot = self._choose_available_time_slot(start_date, end_date, gene["group"], gene["assistant"])
+            chromosome.set_time_slot(index, available_time_slot)
         
         return chromosome
 
