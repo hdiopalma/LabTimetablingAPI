@@ -50,7 +50,7 @@ def generate_available_time_slots(start_date:datetime, end_date:datetime, group_
     available_time_slots = [time_slot for time_slot in empty_time_slots if schedule[time_slot[1]][time_slot[2]]]
     return available_time_slots
 
-def get_random_time_slot(module_id:int, group_id:int, assistant_id:int = None) -> tuple:
+def get_random_time_slot(module_id:int, group_id:int, assistant_id:int = None, week:int = 0) -> tuple:
     """Returns a random time slot based on the module and group.
 
     Args:
@@ -61,7 +61,7 @@ def get_random_time_slot(module_id:int, group_id:int, assistant_id:int = None) -
     Returns:
         tuple: The random time slot.
     """
-    start_date, end_date = timeslot_manager.get_date_range(module_id)
+    start_date, end_date = timeslot_manager.get_date_range(module_id, week)
     available_time_slots = generate_available_time_slots(start_date, end_date, group_id, assistant_id)
     if not available_time_slots:
         return random.choice(timeslot_manager.get_all_time_slots())

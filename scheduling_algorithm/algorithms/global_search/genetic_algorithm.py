@@ -126,14 +126,14 @@ class GeneticAlgorithm:
         initial_mutation_probability = self.mutation_manager.mutation_probability
 
         for i in range(max_iteration):
-            population, elitism = self._evolve_population(population)
-            population.add_chromosome(elitism)
-            population.calculate_fitness()
+            offspring, elitism = self._evolve_population(population)
+            offspring.add_chromosome(elitism)
+            offspring.calculate_fitness()
 
             # Sort the population based on fitness
             population = Population(
-                sorted(population, key=lambda chromosome: chromosome.fitness),
-                population.fitness_manager)
+                sorted(offspring, key=lambda chromosome: chromosome.fitness),
+                self.fitness_manager)
 
             if len(population) > population_size:
                 population.pop()

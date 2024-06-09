@@ -93,11 +93,17 @@ class RandomSwapNeighborhood(BaseNeighborhood):
             i, j = random.sample(range(len(chromosome)), 2)
             
             # Swap the genes data, since there's two indepentent variables, the swap is decided using probability.
-            if random.random() < 0.5:
+            if random.random() < 0.25:
+                neighbor[i]['time_slot_date'], neighbor[j]['time_slot_date'] = neighbor[j]['time_slot_date'], neighbor[i]['time_slot_date']
+                neighbor[i]['time_slot_day'], neighbor[j]['time_slot_day'] = neighbor[j]['time_slot_day'], neighbor[i]['time_slot_day']
+            elif random.random() < 0.50:
+                neighbor[i]['assistant'], neighbor[j]['assistant'] = neighbor[j]['assistant'], neighbor[i]['assistant']
+            elif random.random() < 0.75:
+                neighbor[i]['time_slot_shift'], neighbor[j]['time_slot_shift'] = neighbor[j]['time_slot_shift'], neighbor[i]['time_slot_shift']
+            else:
                 neighbor[i]['time_slot_date'], neighbor[j]['time_slot_date'] = neighbor[j]['time_slot_date'], neighbor[i]['time_slot_date']
                 neighbor[i]['time_slot_day'], neighbor[j]['time_slot_day'] = neighbor[j]['time_slot_day'], neighbor[i]['time_slot_day']
                 neighbor[i]['time_slot_shift'], neighbor[j]['time_slot_shift'] = neighbor[j]['time_slot_shift'], neighbor[i]['time_slot_shift']
-            else:
                 neighbor[i]['assistant'], neighbor[j]['assistant'] = neighbor[j]['assistant'], neighbor[i]['assistant']
                 
             neighbors.append(neighbor)
@@ -128,11 +134,20 @@ class RandomRangeSwapNeighborhood(BaseNeighborhood):
             neighbor = chromosome.copy()
             i = random.randint(0, len(chromosome) - range_size)
             j = random.randint(i, i + range_size)
-            neighbor[i:j]['time_slot_date'] = neighbor[j:i]['time_slot_date']
-            neighbor[i:j]['time_slot_day'] = neighbor[j:i]['time_slot_day']
-            neighbor[i:j]['time_slot_shift'] = neighbor[j:i]['time_slot_shift']
-            if neighbor[i]['module'] == neighbor[j]['module']:
-                neighbor[i:j]['assistant'] = neighbor[j:i]['assistant']
+            # Swap the genes data,
+            if random.random() < 0.25:
+                neighbor[i]['time_slot_date'], neighbor[j]['time_slot_date'] = neighbor[j]['time_slot_date'], neighbor[i]['time_slot_date']
+                neighbor[i]['time_slot_day'], neighbor[j]['time_slot_day'] = neighbor[j]['time_slot_day'], neighbor[i]['time_slot_day']
+            elif random.random() < 0.50:
+                neighbor[i]['assistant'], neighbor[j]['assistant'] = neighbor[j]['assistant'], neighbor[i]['assistant']
+            elif random.random() < 0.75:
+                neighbor[i]['time_slot_shift'], neighbor[j]['time_slot_shift'] = neighbor[j]['time_slot_shift'], neighbor[i]['time_slot_shift']
+            else:
+                neighbor[i]['time_slot_date'], neighbor[j]['time_slot_date'] = neighbor[j]['time_slot_date'], neighbor[i]['time_slot_date']
+                neighbor[i]['time_slot_day'], neighbor[j]['time_slot_day'] = neighbor[j]['time_slot_day'], neighbor[i]['time_slot_day']
+                neighbor[i]['time_slot_shift'], neighbor[j]['time_slot_shift'] = neighbor[j]['time_slot_shift'], neighbor[i]['time_slot_shift']
+                neighbor[i]['assistant'], neighbor[j]['assistant'] = neighbor[j]['assistant'], neighbor[i]['assistant']
+                
             neighbors.append(neighbor)
         return neighbors
     

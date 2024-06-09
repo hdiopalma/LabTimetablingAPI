@@ -68,8 +68,9 @@ class RandomMutation(BaseMutation):
         # Randomly select a gene
         gene_data = random.choice(chromosome)
         assistant = random.choice(self.laboratories.get_assistants(gene_data['laboratory'])).id
+        week = chromosome.week
         # Change the gene
-        gene_data['time_slot_date'], gene_data['time_slot_day'], gene_data['time_slot_shift'] = timeslot_generator.get_random_time_slot(gene_data['module'], gene_data['group'], assistant)
+        gene_data['time_slot_date'], gene_data['time_slot_day'], gene_data['time_slot_shift'] = timeslot_generator.get_random_time_slot(gene_data['module'], gene_data['group'], assistant, week)
         gene_data['assistant'] = assistant
         return chromosome
     

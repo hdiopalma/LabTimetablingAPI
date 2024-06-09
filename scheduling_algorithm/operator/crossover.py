@@ -61,10 +61,8 @@ class UniformCrossover(BaseCrossover):
         child1 = parent1
         child2 = parent2
         #swap a section of the chromosome between the 2 points
-        count = 0
         for i in range(len(child1)):
             if random.random() < self.uniform_probability:
-                count += 1
                 child1.gene_data[i], child2.gene_data[i] = child2.gene_data[i], child1.gene_data[i]
         
         return child1, child2

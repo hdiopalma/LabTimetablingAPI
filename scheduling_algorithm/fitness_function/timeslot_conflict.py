@@ -29,12 +29,12 @@ class TimeslotConflict(BaseFitness):
         message = f"Fitness(name={self.name}, assistant_conflict_penalty={self.assistant_conflict_penalty}, group_conflict_penalty={self.group_conflict_penalty})"
         return message
 
-    def __call__(self, timeslot_dates, timeslot_days, timeslot_shifts,  entity_ids, penalty):
+    def __call__(self, timeslot_dates, timeslot_shifts,  entity_ids, penalty):
         
         total_penalty = 0
         seen_combinations = set()
         for i in range(len(timeslot_dates)):
-            combination = (timeslot_dates[i], timeslot_days[i], timeslot_shifts[i], entity_ids[i])
+            combination = (timeslot_dates[i], timeslot_shifts[i], entity_ids[i])
             if combination in seen_combinations:
                 total_penalty += penalty  # Penalize duplicate
             else:
@@ -52,9 +52,9 @@ class TimeslotConflict(BaseFitness):
                 total_penalty += (count - 1) * penalty
         return total_penalty
     
-    def calculate_penalty(self, assistants, groups, timeslot_dates, timeslot_days, timeslot_shifts):
-        assistant_penalty = self(timeslot_dates, timeslot_days, timeslot_shifts, assistants, self.assistant_conflict_penalty)
-        group_penalty = self(timeslot_dates, timeslot_days, timeslot_shifts, groups, self.group_conflict_penalty)
+    def calculate_penalty(self, assistants, groups, timeslot_dates, timeslot_shifts):
+        assistant_penalty = self(timeslot_dates, timeslot_shifts, assistants, self.assistant_conflict_penalty)
+        group_penalty = self(timeslot_dates, timeslot_shifts, groups, self.group_conflict_penalty)
         return assistant_penalty + group_penalty
     
     def configure(self, assistant_conflict_penalty, group_conflict_penalty):

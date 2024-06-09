@@ -29,11 +29,11 @@ class GroupAssignmentCapacityFitness(BaseFitness):
         message = f"Fitness(name={self.name}, max_threshold={self.max_threshold}, conflict_penalty={self.conflict_penalty})"
         return message
 
-    def calculate_penalty(self, labs, modules, assistants, timeslot_dates, timeslot_days, timeslot_shifts):
+    def calculate_penalty(self, labs, modules, assistants, timeslot_dates, timeslot_shifts):
         total_penalty = 0
         seen_combinations = set()
         for i in range(len(labs)):
-            combination = (labs[i], modules[i], assistants[i], timeslot_dates[i], timeslot_days[i], timeslot_shifts[i])
+            combination = (labs[i], modules[i], assistants[i], timeslot_dates[i], timeslot_shifts[i])
             if combination in seen_combinations:
                 total_penalty += self.conflict_penalty
             else:

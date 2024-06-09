@@ -20,14 +20,13 @@ class AssistantDistributionFitness(BaseFitness):
         message = f"Fitness(name={self.name}, max_group_threshold={self.max_group_threshold}, max_shift_threshold={self.max_shift_threshold}, group_penalty={self.group_penalty}, shift_penalty={self.shift_penalty})"
         return message
 
-    def calculate_penalty(self, modules, assistants, groups, timeslot_date, timeslot_day, timeslot_shift):
+    def calculate_penalty(self, modules, assistants, groups, timeslot_date, timeslot_shift):
         total_penalty = 0
         for assistant in np.unique(assistants):
             assistant_mask = assistants == assistant
             assistant_modules = modules[assistant_mask]
             assistant_groups = groups[assistant_mask]
             assistant_timeslot_dates = timeslot_date[assistant_mask]
-            assistant_timeslot_days = timeslot_day[assistant_mask]
             assistant_timeslot_shifts = timeslot_shift[assistant_mask]
    
             group_set = set()
@@ -35,7 +34,7 @@ class AssistantDistributionFitness(BaseFitness):
             
             for i in range(assistant_mask.sum()):
                 group_set.add((assistant_modules[i], assistant_groups[i]))
-                shift_set.add((assistant_modules[i], assistant_timeslot_dates[i], assistant_timeslot_days[i], assistant_timeslot_shifts[i]))
+                shift_set.add((assistant_modules[i], assistant_timeslot_dates[i], assistant_timeslot_shifts[i]))
             
             group_count = len(group_set)
             shift_count = len(shift_set)
@@ -44,12 +43,6 @@ class AssistantDistributionFitness(BaseFitness):
             shift_penalty = max(0, shift_count - self.max_shift_threshold) * self.shift_penalty
             total_penalty += shift_penalty + group_penalty
         return total_penalty
-    
-    def get_groups(self):
-        return self._groups
-    
-    def get_shifts(self):
-        return self._shifts
     
     def configure(self, max_group_threshold, max_shift_threshold, group_penalty, shift_penalty):
         """Configure the fitness function

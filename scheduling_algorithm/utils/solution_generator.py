@@ -162,7 +162,6 @@ class SolutionGenerator:
                         print(f"Module {module.id} week {week + 1} has no population, all the remaining chapter are already assigned on previous weeks")
                         print("Starting the schedule generation algorithm...")
                         break
-                    self.algorithm.factory = factory_instance
                     weekly_chromosome = self.algorithm.run(population=weekly_population)
                     self.best_chromosome += weekly_chromosome
         except Exception as e:
