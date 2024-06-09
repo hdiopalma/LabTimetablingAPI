@@ -1,17 +1,12 @@
 import random
-from math import floor
+import numpy as np
 from datetime import timedelta, datetime
-from collections import namedtuple
-from functools import lru_cache
 
 from scheduling_algorithm.structure import Chromosome
 from scheduling_algorithm.data_parser import ModuleData, GroupData, Constant, CommonData
 from scheduling_algorithm.operator.repair.base_repair import BaseRepair
 
 from scheduling_algorithm.factory import timeslot_generator, timeslot_manager
-
-# Simple data structure for timeslot
-TimeSlot = namedtuple("TimeSlot", ["date", "day", "shift"])
 
 class TimeSlotRepair(BaseRepair):
     def __init__(self):
@@ -20,23 +15,29 @@ class TimeSlotRepair(BaseRepair):
         self.group_data = GroupData
 
     def __call__(self, chromosome: Chromosome):
-        """
-        Repairs the time slots in the given chromosome by checking the availability of time slots based on the schedule of the group.
-
-        Args:
-            chromosome (Chromosome): The chromosome to be repaired.
-
-        Returns:
-            Chromosome: The repaired chromosome.
-        """
         week = chromosome.week
-        for index, gene in enumerate(chromosome):
+        
+        timeslots = chromosome['time_slot']
+        assistants = chromosome['assistant']
+        groups = chromosome['group']
+        
+        # Use boolean indexing to filter the chromosome for conflicting timeslots
+        conflicting_timeslots_mask = np.array([
+            not CommonData.get_schedule(assistants[i], groups[i])[timeslot[1]][timeslot[2]]
+            for i, timeslot in enumerate(timeslots)
+        ])
+        
+        # Filter the chromosome for only the genes with conflicting timeslots
+        conflicting_genes = chromosome.gene_data[conflicting_timeslots_mask]
+        
+        for gene in conflicting_genes:
+            # Get the original index of the gene in chromosome._gene_data_list by finding where it occurs
+            original_index = np.where(chromosome._gene_data_list == gene)[0][0]
             start_date, end_date = timeslot_manager.get_date_range(gene['module'], week)
-            schedule = CommonData.get_schedule(gene['assistant'], gene['group'])
-            timeslot = gene['time_slot']
-            if not schedule[timeslot.day][timeslot.shift]:
-                available_time_slot = self._choose_available_time_slot(start_date, end_date, gene['group'], gene['assistant'])
-                chromosome.set_time_slot(index, available_time_slot)
+            available_time_slot = self._choose_available_time_slot(start_date, end_date, gene['group'], gene['assistant'])
+            # Directly set the new timeslot using the original index
+            chromosome._gene_data_list[original_index]['time_slot'] = available_time_slot
+        
         return chromosome
 
     def _choose_available_time_slot(self, start_date: datetime, end_date: datetime, group_id:int, assistant_id:int = None):
@@ -53,7 +54,7 @@ class TimeSlotRepair(BaseRepair):
         random_date = self._get_random_date(start_date, end_date)
         random_days = Constant.days[random_date.weekday()]
         random_shifts = random.choice(Constant.shifts)
-        return TimeSlot(random_date.timestamp(), random_days, random_shifts)
+        return (random_date.timestamp(), random_days, random_shifts)
 
     def _get_random_date(self, start_date, end_date):
         duration = (end_date - start_date).days

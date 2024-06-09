@@ -1,4 +1,4 @@
-from collections import defaultdict
+from collections import Counter, defaultdict
 from scheduling_algorithm.structure.chromosome import Chromosome
 from scheduling_algorithm.fitness_function.base_fitness import BaseFitness
 
@@ -17,42 +17,19 @@ class AssistantDistributionFitness(BaseFitness):
         message = f"Fitness(name={self.name}, max_group_threshold={self.max_group_threshold}, max_shift_threshold={self.max_shift_threshold}, group_penalty={self.group_penalty}, shift_penalty={self.shift_penalty})"
         return message
 
-    def calculate_penalty(self, groups, shifts):
+    def calculate_penalty(self, modules, assistants, groups, timeslots):
         total_penalty = 0
-        for assistant in groups:
-            for module in groups[assistant]:
-                group_count = len(groups[assistant][module])
-                shift_count = len(shifts[assistant][module])
-                if group_count > self.max_group_threshold:
-                    total_penalty += (group_count - self.max_group_threshold) * self.group_penalty
-                if shift_count > self.max_shift_threshold:
-                    total_penalty += (shift_count - self.max_shift_threshold) * self.shift_penalty
-        return total_penalty
-    
-    # def __call__(self, chromosome: Chromosome):
-    #     #convert chromosome data to numpy array
-    #     assistant = np.array([gene["assistant"] for gene in chromosome])
-    #     module = np.array([gene["module"] for gene in chromosome])
-    #     group = np.array([gene["group"] for gene in chromosome])
-    #     time_slot = np.array([gene["time_slot"] for gene in chromosome])
-        
-    #     total_penalty = 0
-        
-    #     #count the number of groups and shifts assigned to each assistant
-    #     for assistant_id in np.unique(assistant):
-    #         for module_id in np.unique(module[assistant == assistant_id]):
-    #             mask = (assistant == assistant_id) & (module == module_id)
-    #             unique_groups = np.unique(group[mask])
-    #             unique_shifts = np.unique(time_slot[mask])
-                
-    #             group_penalty = max(0, len(unique_groups) - self.max_group_threshold) * self.group_penalty
-    #             shift_penalty = max(0, len(unique_shifts) - self.max_shift_threshold) * self.shift_penalty
-                
-    #             total_penalty += group_penalty + shift_penalty
-        
-    #     return total_penalty
+        for assistant in np.unique(assistants):
+            assistant_mask = assistants == assistant
+            assistant_modules = modules[assistant_mask]
+            # assistant_groups = groups[assistant_mask]
+            assistant_timeslots = timeslots[assistant_mask]
             
-        
+            shift_counts = Counter(zip(assistant_modules, assistant_timeslots))
+            
+            shift_penalty = max(0, (len(shift_counts) - self.max_shift_threshold) * self.shift_penalty)
+            total_penalty += shift_penalty
+        return total_penalty
     
     def get_groups(self):
         return self._groups

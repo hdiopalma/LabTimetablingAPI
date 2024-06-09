@@ -5,10 +5,6 @@ from math import floor
 from datetime import timedelta
 from typing import List
 
-#Simple data structure for timeslot
-from collections import namedtuple
-TimeSlot = namedtuple("TimeSlot", ["date", "day", "shift"])
-
 from scheduling_algorithm.structure import Chromosome
 from scheduling_algorithm.data_parser import LaboratoryData, ModuleData, Constant
 
@@ -53,11 +49,11 @@ class ShiftMutation(BaseMutation):
 
         return chromosome
     
-    def shift_time_slot(self, time_slot: TimeSlot) -> TimeSlot:
+    def shift_time_slot(self, time_slot: tuple) -> tuple:
         # Shift the time slot by 1 day
-        if time_slot.day == self.constant.days[-1]:
-            return TimeSlot(time_slot.date + timedelta(days=2), self.constant.days[0], time_slot.shift)
-        return TimeSlot(time_slot.date + timedelta(days=1), self.constant.days[self.constant.days.index(time_slot.day) + 1], time_slot.shift)
+        if time_slot[1] == self.constant.days[-1]:
+            return (time_slot[0] + timedelta(days=2), self.constant.days[0], time_slot[2])
+        return (time_slot[0] + timedelta(days=1), self.constant.days[self.constant.days.index(time_slot[1]) + 1], time_slot[2])
     
 class RandomMutation(BaseMutation):
     def __init__(self):

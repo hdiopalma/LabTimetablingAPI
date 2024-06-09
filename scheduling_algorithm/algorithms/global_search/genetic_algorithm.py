@@ -134,11 +134,13 @@ class GeneticAlgorithm:
                 population.pop()
 
             self.log['iteration_fitness'].append((i, population[0].fitness))
+            print(f"Iteration {i}: {population[0].fitness}")
             if population[0].fitness == 0:
                 break
         time_end = time.time()
         self.log['time_elapsed'] = (time_end - time_start)
         self.log['best_chromosome'] = population[0]
+        print(f"Fittest Chromosome: {self.fitness_manager(population[0])}")
         return population[0]
 
     def configure(self,

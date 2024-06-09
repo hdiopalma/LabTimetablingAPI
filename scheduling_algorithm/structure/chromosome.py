@@ -1,13 +1,10 @@
 import copy
 import numpy as np
-#Simple data structure for timeslot
-from collections import namedtuple
-TimeSlot = namedtuple("TimeSlot", ["date", "day", "shift"])
 
 class Chromosome:
     def __init__(self, genes: list = []):
         # data = [{"laboratory": gene["laboratory"], "module": gene["module"], "chapter": gene["chapter"], "group": gene["group"], "assistant": gene["assistant"], "time_slot": gene["time_slot"]} for gene in genes] if genes else []
-        data = [(gene["laboratory"], gene["module"], gene["chapter"], gene["group"], gene["assistant"], TimeSlot(gene["time_slot"].date, gene["time_slot"].day, gene["time_slot"].shift)) for gene in genes] if genes else []
+        data = [(gene["laboratory"], gene["module"], gene["chapter"], gene["group"], gene["assistant"], gene["time_slot"]) for gene in genes] if genes else []
         self._gene_data_list = np.array(
             data,
             dtype=[
@@ -16,7 +13,7 @@ class Chromosome:
                 ("chapter", np.int32),
                 ("group", np.int32),
                 ("assistant", np.int32),  # Assuming assistant IDs are integers
-                ("time_slot", TimeSlot)
+                ("time_slot", object)
             ]
         )
         self.fitness = 0
@@ -76,7 +73,7 @@ class Chromosome:
         new_chromosome.week = self.week
         return new_chromosome
 
-    def add_gene(self, laboratory: int, module: int, chapter: int, group: int, assistant: int = None, time_slot: TimeSlot = None):
+    def add_gene(self, laboratory: int, module: int, chapter: int, group: int, assistant: int = None, time_slot: tuple = None):
         self._gene_data_list = np.append(self._gene_data_list, np.array([(laboratory, module, chapter, group, assistant, time_slot)], dtype=self._gene_data_list.dtype))
         # self._gene_data_list.append({"laboratory": laboratory, "module": module, "chapter": chapter, "group": group, "assistant": assistant, "time_slot": time_slot})
 

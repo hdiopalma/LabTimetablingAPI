@@ -1,6 +1,3 @@
-
-from collections import namedtuple
-TimeSlot = namedtuple("TimeSlot", ["date", "day", "shift"]) #Simple data structure for timeslot, for reference
 import numpy as np
 from scheduling_algorithm.data_parser import Constant
 from scheduling_algorithm.data_parser import ModuleData, GroupData, CommonData
@@ -31,7 +28,7 @@ def generate_empty_time_slots(start_date: datetime, end_date: datetime) -> list:
         for day in Constant.days:
             for shift in Constant.shifts:
                 date = (start_date + timedelta(days=week * 7 + Constant.days.index(day))).timestamp()
-                timeslot = TimeSlot(date, day, shift)
+                timeslot = (date, day, shift)
                 empty_time_slots.append(timeslot)
     return empty_time_slots
 
@@ -50,10 +47,10 @@ def generate_available_time_slots(start_date:datetime, end_date:datetime, group_
     """
     empty_time_slots = generate_empty_time_slots(start_date, end_date)
     schedule = CommonData.get_schedule(assistant_id, group_id) if assistant_id else GroupData.get_schedule(group_id)
-    available_time_slots = [time_slot for time_slot in empty_time_slots if schedule[time_slot.day][time_slot.shift]]
+    available_time_slots = [time_slot for time_slot in empty_time_slots if schedule[time_slot[1]][time_slot[2]]]
     return available_time_slots
 
-def get_random_time_slot(module_id:int, group_id:int, assistant_id:int = None) -> TimeSlot:
+def get_random_time_slot(module_id:int, group_id:int, assistant_id:int = None) -> tuple:
     """Returns a random time slot based on the module and group.
 
     Args:
@@ -62,7 +59,7 @@ def get_random_time_slot(module_id:int, group_id:int, assistant_id:int = None) -
         assistant_id (int): The assistant ID. Optional. If provided, the function will also check the assistant's schedule.
 
     Returns:
-        TimeSlot: The random time slot.
+        tuple: The random time slot.
     """
     start_date, end_date = timeslot_manager.get_date_range(module_id)
     available_time_slots = generate_available_time_slots(start_date, end_date, group_id, assistant_id)
@@ -87,7 +84,7 @@ class TimeSlotGenerator:
         
         self.empty_time_slots = generate_empty_time_slots(self.start_date, self.end_date)
         
-    def generate_time_slot(self, chapter_id, assistant_id, group_id) -> TimeSlot:
+    def generate_time_slot(self, chapter_id, assistant_id, group_id) -> tuple:
         """Generates a time slot based on the availability of the assistant and the capacity of the time slot.
         Biased towards the data that has the same assistant and chapter.
         Args:
@@ -96,7 +93,7 @@ class TimeSlotGenerator:
             max_capacity (int): The maximum capacity of the time slot.
 
         Returns:
-            TimeSlot: The generated time slot.
+            tuple: The time slot.
         """
         if self.time_slot_capacities[assistant_id][chapter_id]:
             time_slots = list(self.time_slot_capacities[assistant_id][chapter_id].keys())
@@ -112,11 +109,11 @@ class TimeSlotGenerator:
         self.add_group_to_time_slot(time_slot, chapter_id, group_id, assistant_id)
         return time_slot
     
-    def add_group_to_time_slot(self, time_slot: TimeSlot, chapter_id: int, group_id: int, assistant_id: int) -> bool:
+    def add_group_to_time_slot(self, time_slot: tuple, chapter_id: int, group_id: int, assistant_id: int) -> bool:
         """Adds a group to the time slot capacity.
 
         Args:
-            time_slot (TimeSlot): The time slot.
+            time_slot (tuple): The time slot.
             group_id (int): The group ID.
             chapter_id (int): The chapter ID.
             assistant_id (int): The assistant ID.
@@ -127,7 +124,7 @@ class TimeSlotGenerator:
         self.time_slot_capacities[assistant_id][chapter_id][time_slot] += 1
         self.group_time_slots[time_slot].append(group_id)
     
-    def get_random_time_slot(self, group_id: int, assistant_id:int = None) -> TimeSlot:
+    def get_random_time_slot(self, group_id: int, assistant_id:int = None) -> tuple:
         """Returns a random time slot based on the chapter and assistant.
 
         Args:
@@ -135,7 +132,7 @@ class TimeSlotGenerator:
             assistant_id (int): The assistant ID.
 
         Returns:
-            TimeSlot: The random time slot.
+            tuple: The random time slot.
         """
         available_time_slots = generate_available_time_slots(self.start_date, self.end_date, group_id, assistant_id)
         if not available_time_slots:

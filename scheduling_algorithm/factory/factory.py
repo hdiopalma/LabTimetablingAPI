@@ -8,12 +8,9 @@ from functools import lru_cache
 import json
 
 #Simple data structure for timeslot
-from collections import namedtuple
-TimeSlot = namedtuple("TimeSlot", ["date", "day", "shift"])
 
 from scheduling_algorithm.structure import Chromosome, Population
 from scheduling_algorithm.fitness_function import FitnessManager, AssistantDistributionFitness, GroupAssignmentCapacityFitness
-from scheduling_algorithm.structure import Gene
 from scheduling_algorithm.data_parser import *
 
 from scheduling_algorithm.factory.timeslot_generator import TimeSlotGenerator
