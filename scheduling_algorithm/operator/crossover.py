@@ -2,6 +2,7 @@
 
 import random
 from typing import List
+import numpy as np
 
 from scheduling_algorithm.structure import Chromosome
 
@@ -29,7 +30,11 @@ class SinglePointCrossover(BaseCrossover):
         child1 = parent1 # already deepcopy in the selection part of the algorithm
         child2 = parent2
         #swap that point onwards
-        child1.gene_data[point:], child2.gene_data[point:] = child2.gene_data[point:], child1.gene_data[point:]
+        # child1.gene_data[point:], child2.gene_data[point:] = child2.gene_data[point:], child1.gene_data[point:]
+        #The structure is changed into a numpy array, so the above code will not work
+        temp = np.copy(child1.gene_data[point:])
+        child1.gene_data[point:] = child2.gene_data[point:]
+        child2.gene_data[point:] = temp
 
         return child1, child2
     
@@ -47,7 +52,10 @@ class TwoPointCrossover(BaseCrossover):
         #swap a section of the chromosome between the 2 points
         if point1 > point2:
             point1, point2 = point2, point1
-        child1.gene_data[point1:point2], child2.gene_data[point1:point2] = child2.gene_data[point1:point2], child1.gene_data[point1:point2]
+        # child1.gene_data[point1:point2], child2.gene_data[point1:point2] = child2.gene_data[point1:point2], child1.gene_data[point1:point2]
+        temp = np.copy(child1.gene_data[point1:point2])
+        child1.gene_data[point1:point2] = child2.gene_data[point1:point2]
+        child2.gene_data[point1:point2] = temp
 
         return child1, child2
     
@@ -61,9 +69,18 @@ class UniformCrossover(BaseCrossover):
         child1 = parent1
         child2 = parent2
         #swap a section of the chromosome between the 2 points
-        for i in range(len(child1)):
-            if random.random() < self.uniform_probability:
-                child1.gene_data[i], child2.gene_data[i] = child2.gene_data[i], child1.gene_data[i]
+        # for i in range(len(child1)):
+        #     if random.random() < self.uniform_probability:
+        #         # child1.gene_data[i], child2.gene_data[i] = child2.gene_data[i], child1.gene_data[i]
+        #         temp = np.copy(child1.gene_data[i])
+        #         child1.gene_data[i] = child2.gene_data[i]
+        #         child2.gene_data[i] = temp
+                
+        mask = np.random.choice([True, False], size=len(child1), p=[self.uniform_probability, 1 - self.uniform_probability])
+        # swap the genes based on the mask
+        temp = np.copy(child1.gene_data[mask])
+        child1.gene_data[mask] = child2.gene_data[mask]
+        child2.gene_data[mask] = temp
         
         return child1, child2
     

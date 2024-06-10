@@ -134,6 +134,9 @@ class TimeSlotGenerator:
         Returns:
             tuple: The random time slot.
         """
+        
+        # return random.choice(self.empty_time_slots)
+        
         available_time_slots = generate_available_time_slots(self.start_date, self.end_date, group_id, assistant_id)
         if not available_time_slots:
             return random.choice(self.empty_time_slots)

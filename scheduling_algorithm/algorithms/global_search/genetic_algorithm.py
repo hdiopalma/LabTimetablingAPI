@@ -117,23 +117,23 @@ class GeneticAlgorithm:
         self.log['iteration_fitness'] = []
         population.set_fitness_manager(self.fitness_manager)
         population.calculate_fitness()
-        population = Population(
-            sorted(population, key=lambda chromosome: chromosome.fitness),
-            population.fitness_manager)
+        population.sort_best()
         
         stagnation_counter = 0
         last_fitness = population[0].fitness
         initial_mutation_probability = self.mutation_manager.mutation_probability
 
         for i in range(max_iteration):
-            offspring, elitism = self._evolve_population(population)
-            offspring.add_chromosome(elitism)
-            offspring.calculate_fitness()
+            population, elitism = self._evolve_population(population)
+            population.add_chromosome(elitism)
+            population.calculate_fitness()
 
             # Sort the population based on fitness
-            population = Population(
-                sorted(offspring, key=lambda chromosome: chromosome.fitness),
-                self.fitness_manager)
+            # population = Population(
+            #     sorted(offspring, key=lambda chromosome: chromosome.fitness),
+            #     self.fitness_manager)
+            
+            population.sort_best()
 
             if len(population) > population_size:
                 population.pop()
@@ -147,12 +147,16 @@ class GeneticAlgorithm:
                 stagnation_counter = 0
                 self.mutation_manager.mutation_probability = initial_mutation_probability
             last_fitness = population[0].fitness
+            if stagnation_counter > 100:
+                print("Stagnation Counter Exceeded 100, Exiting the Loop")
+                break
             if stagnation_counter > 50:
                 pass
             elif stagnation_counter > 15:
                 self.mutation_manager.mutation_probability *= 1.25
             
             # End of Stagnation Counter Section
+            print(f"Iteration: {i}, Fittest Chromosome: {self.fitness_manager(population[0])}")
             
             if population[0].fitness == 0:
                 break

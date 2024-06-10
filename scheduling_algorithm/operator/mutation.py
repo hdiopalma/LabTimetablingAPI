@@ -52,10 +52,16 @@ class ShiftMutation(BaseMutation):
         return chromosome
     
     def shift_time_slot(self, time_slot: tuple) -> tuple:
-        # Shift the time slot by 1 day
-        if time_slot[1] == self.constant.days[-1]:
-            return (time_slot[0] + timedelta(days=2), self.constant.days[0], time_slot[2])
-        return (time_slot[0] + timedelta(days=1), self.constant.days[self.constant.days.index(time_slot[1]) + 1], time_slot[2])
+        if random.random() < 0.5:
+            # Shift the time slot by 1 day
+            if time_slot[1] == self.constant.days[-1]:
+                return (time_slot[0] + timedelta(days=2), self.constant.days[0], time_slot[2])
+            return (time_slot[0] + timedelta(days=1), self.constant.days[self.constant.days.index(time_slot[1]) + 1], time_slot[2])
+        else:
+            # Shift the time slot by 1 shift
+            if time_slot[2] == self.constant.shifts[-1]:
+                return (time_slot[0] + timedelta(days=1), time_slot[1], self.constant.shifts[0])
+            return (time_slot[0], time_slot[1], self.constant.shifts[self.constant.shifts.index(time_slot[2]) + 1])
     
 class RandomMutation(BaseMutation):
     def __init__(self):

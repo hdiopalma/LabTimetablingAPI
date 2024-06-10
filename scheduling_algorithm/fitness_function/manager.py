@@ -15,7 +15,7 @@ class FitnessManager:
         """Calculate the fitness of a chromosome"""
         labs = chromosome["laboratory"]
         modules = chromosome["module"]
-        # chapters = chromosome["chapter"]
+        chapters = chromosome["chapter"]
         timeslot_dates = chromosome["time_slot_date"]
         # timeslot_days = chromosome["time_slot_day"]
         timeslot_shifts = chromosome["time_slot_shift"]
@@ -30,7 +30,7 @@ class FitnessManager:
             elif isinstance(fitness_function, AssistantDistributionFitness):
                 total_fitness += fitness_function.calculate_penalty(modules, assistants, groups, timeslot_dates, timeslot_shifts)
             elif isinstance(fitness_function, TimeslotConflict):
-                total_fitness += fitness_function.calculate_penalty(assistants, groups, timeslot_dates, timeslot_shifts)
+                total_fitness += fitness_function.calculate_penalty(assistants, groups, chapters, timeslot_dates, timeslot_shifts)
         return total_fitness
     
     def configure(self, fitness_functions: List[BaseFitness]):

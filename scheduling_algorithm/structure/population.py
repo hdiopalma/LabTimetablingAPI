@@ -41,22 +41,6 @@ class Population:
     def calculate_fitness(self):
         for chromosome in self.chromosomes:
             chromosome.fitness = self.fitness_manager(chromosome)
-            
-    def calculate_fitness_parallel(self):
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            # Submit fitness calculations as tasks
-            future_to_chromosome = {
-                executor.submit(self.fitness_manager, chromosome): chromosome 
-                for chromosome in self.chromosomes
-            }
-            
-            # Retrieve results as they become available
-            for future in concurrent.futures.as_completed(future_to_chromosome):
-                chromosome = future_to_chromosome[future]
-                try:
-                    chromosome.fitness = future.result()
-                except Exception as exc:
-                    print(f"Fitness calculation generated an exception: {exc}")
     
     def add_chromosome(self, chromosome: Chromosome):
         #if chromosome is list, add all chromosomes in the list
@@ -65,8 +49,9 @@ class Population:
         else:
             self.chromosomes.append(chromosome)
 
-    def remove_chromosome(self, chromosome: Chromosome):
-        self.chromosomes.remove(chromosome)
+    def remove_worst(self, slice_size):
+        self.chromosomes = self.chromosomes[:slice_size]
+        
 
     def pop(self):
         return self.chromosomes.pop()

@@ -107,7 +107,7 @@ class SelectionManager:
     '''Class to manage multiple selection functions.'''
     def __init__(self, selection_functions: List[BaseSelection]):
         self.selection_functions = selection_functions
-        self.selection_probability = 0.1
+        self.selection_probability = 0.5
     
     def __str__(self):
         return f"SelectionManager(selection_functions={self.selection_functions})"

@@ -52,7 +52,7 @@ class TimeslotConflict(BaseFitness):
                 total_penalty += (count - 1) * penalty
         return total_penalty
     
-    def calculate_penalty(self, assistants, groups, timeslot_dates, timeslot_shifts):
+    def calculate_penalty(self, assistants, groups, chapters, timeslot_dates, timeslot_shifts):
         assistant_penalty = self(timeslot_dates, timeslot_shifts, assistants, self.assistant_conflict_penalty)
         group_penalty = self(timeslot_dates, timeslot_shifts, groups, self.group_conflict_penalty)
         return assistant_penalty + group_penalty
