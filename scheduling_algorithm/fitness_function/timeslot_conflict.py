@@ -1,5 +1,5 @@
 #GroupAssignmentConflictPenalty
-from collections import Counter
+from collections import defaultdict
 from scheduling_algorithm.structure.chromosome import Chromosome
 from scheduling_algorithm.fitness_function.base_fitness import BaseFitness
 
@@ -29,32 +29,36 @@ class TimeslotConflict(BaseFitness):
         message = f"Fitness(name={self.name}, assistant_conflict_penalty={self.assistant_conflict_penalty}, group_conflict_penalty={self.group_conflict_penalty})"
         return message
 
-    def __call__(self, timeslot_dates, timeslot_shifts,  entity_ids, penalty):
-        
+    def __call__(self, timeslot_dates, timeslot_shifts, entity_ids, chapters, penalty, is_assistant=False):
         total_penalty = 0
-        seen_combinations = set()
-        for i in range(len(timeslot_dates)):
-            combination = (timeslot_dates[i], timeslot_shifts[i], entity_ids[i])
-            if combination in seen_combinations:
-                total_penalty += penalty  # Penalize duplicate
-            else:
-                seen_combinations.add(combination)
-        return total_penalty
+        seen_combinations = defaultdict(set)
         
-        #-------------------#
-        # return calculate_penalty_numba(timeslot_dates, timeslot_days, timeslot_shifts, entity_ids, penalty)
-        total_penalty = 0
-        # combined_data = np.column_stack((timeslot_dates, timeslot_days, timeslot_shifts, entity_ids))
-        combined_data = np.concatenate((timeslot_dates.reshape(-1, 1), timeslot_days.reshape(-1, 1), timeslot_shifts.reshape(-1, 1), entity_ids.reshape(-1, 1)), axis=1)
-        unique_combinations, counts = np.unique(combined_data, return_counts=True, axis=0)
-        for count in counts:
-            if count > 1:
-                total_penalty += (count - 1) * penalty
+        if is_assistant:
+            # Check for conflicts where the same assistant is assigned the same timeslot for different chapters
+            for i in range(len(timeslot_dates)):
+                combination = (timeslot_dates[i], timeslot_shifts[i], entity_ids[i])
+                if combination in seen_combinations and chapters[i] not in seen_combinations[combination]:
+                    total_penalty += penalty  # Penalize duplicate
+                else:
+                    seen_combinations[combination].add(chapters[i])
+        else:
+            # Check for conflicts where the same group is assigned the same timeslot
+            for i in range(len(timeslot_dates)):
+                combination = (timeslot_dates[i], timeslot_shifts[i], entity_ids[i])
+                if combination in seen_combinations:
+                    total_penalty += penalty  # Penalize duplicate
+                else:
+                    seen_combinations[combination].add(chapters[i])
+        
         return total_penalty
     
     def calculate_penalty(self, assistants, groups, chapters, timeslot_dates, timeslot_shifts):
-        assistant_penalty = self(timeslot_dates, timeslot_shifts, assistants, self.assistant_conflict_penalty)
-        group_penalty = self(timeslot_dates, timeslot_shifts, groups, self.group_conflict_penalty)
+        # Check for assistant conflicts
+        assistant_penalty = self(timeslot_dates, timeslot_shifts, assistants, chapters, self.assistant_conflict_penalty, is_assistant=True)
+        
+        # Check for group conflicts
+        group_penalty = self(timeslot_dates, timeslot_shifts, groups, chapters, self.group_conflict_penalty, is_assistant=False)
+        
         return assistant_penalty + group_penalty
     
     def configure(self, assistant_conflict_penalty, group_conflict_penalty):
