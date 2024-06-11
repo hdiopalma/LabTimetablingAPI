@@ -1,5 +1,5 @@
 #GroupAssignmentConflictPenalty
-from collections import Counter
+from collections import defaultdict
 from scheduling_algorithm.fitness_function.base_fitness import BaseFitness
 import numpy as np
 import numba
@@ -24,20 +24,22 @@ class GroupAssignmentCapacityFitness(BaseFitness):
         super().__init__("GroupAssignmentCapacityFitness")
         self.max_threshold = None
         self.conflict_penalty = None
-        
-    def __str__(self):
-        message = f"Fitness(name={self.name}, max_threshold={self.max_threshold}, conflict_penalty={self.conflict_penalty})"
-        return message
 
-    def calculate_penalty(self, labs, modules, assistants, timeslot_dates, timeslot_shifts):
+    def __str__(self):
+        return (f"Fitness(name={self.name}, max_threshold={self.max_threshold}, conflict_penalty={self.conflict_penalty})")
+
+    def calculate_penalty(self, modules, assistants, timeslot_dates, timeslot_shifts):
+        assistant_timeslot_count = defaultdict(int)
         total_penalty = 0
-        seen_combinations = set()
-        for i in range(len(labs)):
-            combination = (labs[i], modules[i], assistants[i], timeslot_dates[i], timeslot_shifts[i])
-            if combination in seen_combinations:
-                total_penalty += self.conflict_penalty
-            else:
-                seen_combinations.add(combination)
+
+        for i in range(len(modules)):
+            combination = (modules[i], assistants[i], timeslot_dates[i], timeslot_shifts[i])
+            assistant_timeslot_count[combination] += 1
+
+        for count in assistant_timeslot_count.values():
+            if count > self.max_threshold:
+                total_penalty += (count - self.max_threshold) * self.conflict_penalty
+
         return total_penalty
         
         #-------------------#

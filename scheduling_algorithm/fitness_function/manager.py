@@ -26,7 +26,7 @@ class FitnessManager:
         total_fitness = 0
         for fitness_function in self.fitness_functions:
             if isinstance(fitness_function, GroupAssignmentCapacityFitness):
-                total_fitness += fitness_function.calculate_penalty(labs, modules, assistants, timeslot_dates, timeslot_shifts)
+                total_fitness += fitness_function.calculate_penalty(modules, assistants, timeslot_dates, timeslot_shifts)
             elif isinstance(fitness_function, AssistantDistributionFitness):
                 total_fitness += fitness_function.calculate_penalty(modules, assistants, groups, timeslot_dates, timeslot_shifts)
             elif isinstance(fitness_function, TimeslotConflict):
