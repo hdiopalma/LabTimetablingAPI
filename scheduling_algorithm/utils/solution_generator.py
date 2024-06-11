@@ -114,12 +114,15 @@ class SolutionGenerator:
     
     def generate_solution_weekly(self) -> Solution:
         """Generates a timetabling solution using the configured algorithm, segmented by weeks.
+        (Proses generasi jadwal dibagi menjadi perminggu, dan per modul untuk mempersempit ruang pencarian. 
+        Chapter yang diajarkan perminggu tergantung pada durasi module dan banyaknya chapter pada module)
+        
 
         Raises:
-            e: _description_
+            e: Any exception that occurs during the solution generation.
 
         Returns:
-            Solution: _description_
+            Solution: The generated solution data.
         """
         solution = self.created_solution or self.create_solution()
         

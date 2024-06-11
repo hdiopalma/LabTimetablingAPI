@@ -9,6 +9,11 @@ from scheduling_algorithm.operator.repair.base_repair import BaseRepair
 from scheduling_algorithm.factory import timeslot_generator, timeslot_manager
 
 class TimeSlotRepair(BaseRepair):
+    """Kelas untuk memperbaiki timeslot yang bertabrakan pada jadwal asisten dan grup.
+
+    Args:
+        BaseRepair (class): Kelas dasar untuk fungsi repair.
+    """
     def __init__(self):
         super().__init__("RepairTimeSlot")
         self.module_data = ModuleData

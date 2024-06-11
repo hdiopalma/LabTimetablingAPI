@@ -78,7 +78,7 @@ class ElitismSelection(BaseSelection):
     
     def __call__(self, population: Population):
         # Sort the population based on fitness
-        population = sorted(population, key=lambda chromosome: chromosome.fitness)
+        # population = sorted(population, key=lambda chromosome: chromosome.fitness) #Not needed, since the population is already sorted in the main algorithm
         # Select the best chromosome
 
         if self.elitism_size == 1:
