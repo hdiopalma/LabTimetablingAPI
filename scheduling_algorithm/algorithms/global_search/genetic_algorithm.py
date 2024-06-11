@@ -104,8 +104,11 @@ class GeneticAlgorithm:
             child1, child2 = self.__evolve(population)
             children.append(child1)
             children.append(child2)
+            
+        offspring = Population(children, population.fitness_manager)
+        offspring.add_chromosome(elitism)
 
-        return Population(children, population.fitness_manager), elitism
+        return offspring
 
     def run(self, population: Population, *args, **kwargs):
         max_iteration = args[0] if len(args) > 0 else kwargs.get(
@@ -124,21 +127,11 @@ class GeneticAlgorithm:
         initial_mutation_probability = self.mutation_manager.mutation_probability
 
         for i in range(max_iteration):
-            population, elitism = self._evolve_population(population)
-            population.add_chromosome(elitism)
+            population = self._evolve_population(population)
             population.calculate_fitness()
-
-            # Sort the population based on fitness
-            # population = Population(
-            #     sorted(offspring, key=lambda chromosome: chromosome.fitness),
-            #     self.fitness_manager)
-            
             population.sort_best()
-
             if len(population) > population_size:
                 population.pop()
-
-            self.log['iteration_fitness'].append((i, population[0].fitness))
             
             # Stagnation Counter Section
             if population[0].fitness == last_fitness:
@@ -147,8 +140,8 @@ class GeneticAlgorithm:
                 stagnation_counter = 0
                 self.mutation_manager.mutation_probability = initial_mutation_probability
             last_fitness = population[0].fitness
-            if stagnation_counter > 100:
-                print("Stagnation Counter Exceeded 100, Exiting the Loop")
+            if stagnation_counter > self.iteration // 2:
+                print("Stagnation Counter Exceeded Half of the Iteration, Halting the Algorithm")
                 break
             if stagnation_counter > 50:
                 pass
@@ -157,6 +150,7 @@ class GeneticAlgorithm:
             
             # End of Stagnation Counter Section
             print(f"Iteration: {i}, Fittest Chromosome: {self.fitness_manager(population[0])}")
+            self.log['iteration_fitness'].append((i, population[0].fitness))
             
             if population[0].fitness == 0:
                 break
