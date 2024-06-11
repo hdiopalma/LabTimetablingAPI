@@ -51,10 +51,16 @@ class Population:
 
     def remove_worst(self, slice_size):
         self.chromosomes = self.chromosomes[:slice_size]
-        
 
-    def pop(self):
+    def pop(self, size=1):
         return self.chromosomes.pop()
+    
+    def replace_worst(self, chromosome: Chromosome):
+        if isinstance(chromosome, list):
+            for i in range(len(chromosome)):
+                self.chromosomes[-(i+1)] = chromosome[i]
+        else:
+            self.chromosomes[-1] = chromosome
     
     def get_random_chromosome(self):
         return random.choice(self.chromosomes)
