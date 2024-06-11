@@ -45,9 +45,11 @@ class GeneticLocalSearch(GeneticAlgorithm):
         # Calculate the fitness of the initial population
         population.set_fitness_manager(self.fitness_manager)
         population.calculate_fitness()
-        # Sort the population based on fitness
-        population = Population(sorted(population, key=lambda chromosome: chromosome.fitness), population.fitness_manager)
-        # Initialize the best chromosome
+        population.sort_best()
+
+        stagnation_counter = 0
+        last_fitness = population[0].fitness
+        initial_mutation_probability = self.mutation_manager.mutation_probability
         best_chromosome = population[0].copy()
         # Initialize the iteration
         iteration = 0
@@ -55,10 +57,7 @@ class GeneticLocalSearch(GeneticAlgorithm):
         # Start the hybrid algorithm
         while iteration < max_iteration and best_chromosome.fitness > 0:
             # Evolve the population, crossover and mutation happens inside this function (This is the genetic algorithm part)
-            offspring, elitism = self._evolve_population(population)
-
-            # Add the elitism back to the population
-            offspring.add_chromosome(elitism)
+            offspring = self._evolve_population(population)
             offspring.calculate_fitness()
             
             # Introduction of local search, for possible improvement of previous best chromosome
@@ -69,7 +68,7 @@ class GeneticLocalSearch(GeneticAlgorithm):
             offspring.add_chromosome(local_search_result)
 
             # Sort the population based on fitness
-            population = Population(sorted(offspring, key=lambda chromosome: chromosome.fitness), population.fitness_manager)
+            population.sort_best()
             #remove the worst chromosome, so the population size is still the same
             if len(population) > population_size:
                 population.pop()
