@@ -6,9 +6,11 @@ class GroupData:
     @classmethod
     @lru_cache(maxsize=1)
     def get_groups(cls):
-        return Group.objects.all()
+        # return Group.objects.all()
+        return list(Group.objects.all())
     
     @classmethod
+    @lru_cache(maxsize=100)
     def get_group(cls, id):
         return Group.objects.get(id=id)
     
@@ -26,14 +28,10 @@ class GroupData:
     @classmethod
     @lru_cache(maxsize=None)
     def get_participants(cls, id):
-        group = cls.get_group(id)
-        if group:
-            group_memberships = group.group_memberships.all()
-            participants = []
-            for group_membership in group_memberships:
-                participants.append(group_membership.participant)
-            return participants
-        return []
+        # group = cls.get_group(id)
+        # return [m.participant for m in group.group_memberships.all()]
+        group = Group.objects.prefetch_related('group_memberships__participant').get(id=id)
+        return [m.participant for m in group.group_memberships.all()]
     
     @classmethod
     def get_assistants(cls, id):
