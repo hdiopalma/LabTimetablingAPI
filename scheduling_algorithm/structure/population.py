@@ -8,7 +8,7 @@ import concurrent.futures
 
 class Population:
     def __init__(self, chromosomes: List[Chromosome], fitness_manager: FitnessManager):
-        self.chromosomes = chromosomes
+        self.chromosomes = sorted(chromosomes, key=lambda x: x.fitness)
         self.fitness_manager = fitness_manager
     
     def __str__(self):
@@ -39,8 +39,16 @@ class Population:
         self.chromosomes.sort(key=lambda chromosome: chromosome.fitness, reverse=True)
     
     def calculate_fitness(self):
-        for chromosome in self.chromosomes:
-            chromosome.fitness = self.fitness_manager(chromosome)
+        """Optimized fitness calculation with parallel processing"""
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            futures = []
+            for chromo in self.chromosomes:
+                futures.append(executor.submit(self.fitness_manager, chromo))
+            
+            for future, chromo in zip(futures, self.chromosomes):
+                chromo.fitness = future.result()
+        
+        self.sort_best()
     
     def add_chromosome(self, chromosome: Chromosome):
         #if chromosome is list, add all chromosomes in the list
@@ -55,12 +63,13 @@ class Population:
     def pop(self, size=1):
         return self.chromosomes.pop()
     
-    def replace_worst(self, chromosome: Chromosome):
-        if isinstance(chromosome, list):
-            for i in range(len(chromosome)):
-                self.chromosomes[-(i+1)] = chromosome[i]
-        else:
-            self.chromosomes[-1] = chromosome
+    def replace_worst(self, new_chromosomes: List[Chromosome]):
+        """Replace worst chromosomes while maintaining population size"""
+        self.sort_worst()
+        replace_count = min(len(new_chromosomes), len(self))
+        for i in range(replace_count):
+            self.chromosomes[-(i+1)] = new_chromosomes[i]
+        self.sort_best()
     
     def get_random_chromosome(self):
         return random.choice(self.chromosomes)
