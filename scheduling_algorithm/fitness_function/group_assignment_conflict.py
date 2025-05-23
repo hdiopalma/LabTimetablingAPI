@@ -4,19 +4,6 @@
 from collections import defaultdict
 from scheduling_algorithm.fitness_function.base_fitness import BaseFitness
 import numpy as np
-import numba
-
-@numba.jit(nopython=True)
-def calculate_penalty_numba(labs, modules, assistants, timeslot_dates, timeslot_days, timeslot_shifts, penalty):
-    total_penalty = 0
-    seen = set()
-    for i in range(len(labs)):
-        key = (labs[i], modules[i], assistants[i], timeslot_dates[i], timeslot_days[i], timeslot_shifts[i])
-        if key in seen:
-            total_penalty += penalty
-        else:
-            seen.add(key)
-    return total_penalty
 
 class GroupAssignmentCapacityFitness(BaseFitness):
     def __init__(self):
@@ -33,27 +20,15 @@ class GroupAssignmentCapacityFitness(BaseFitness):
     def calculate_penalty(self, modules, assistants, timeslot_dates, timeslot_shifts):
         assistant_timeslot_count = defaultdict(int)
         total_penalty = 0
-
-        for i in range(len(modules)):
-            combination = (modules[i], assistants[i], timeslot_dates[i], timeslot_shifts[i])
+    
+        for i in range(len(assistants)):
+            combination = (assistants[i], timeslot_dates[i], timeslot_shifts[i])  # Hapus modules[i]
             assistant_timeslot_count[combination] += 1
-
+    
         for count in assistant_timeslot_count.values():
             if count > self.max_threshold:
                 total_penalty += (count - self.max_threshold) * self.conflict_penalty
-
-        return total_penalty
-        
-        #-------------------#
-        # return calculate_penalty_numba(labs, modules, assistants, timeslot_dates, timeslot_days, timeslot_shifts, self.conflict_penalty)
-        total_penalty = 0
-        # combined_data = np.column_stack((labs, modules, assistants, timeslot_dates, timeslot_days, timeslot_shifts))
-        combined_data = np.concatenate((labs.reshape(-1, 1), modules.reshape(-1, 1), assistants.reshape(-1, 1), timeslot_dates.reshape(-1, 1), timeslot_days.reshape(-1, 1), timeslot_shifts.reshape(-1, 1)), axis=1)
-        unique_combinations, counts = np.unique(combined_data, return_counts=True, axis=0)
-        for count in counts:
-            if count > self.max_threshold:
-                excess = count - self.max_threshold
-                total_penalty += excess * self.conflict_penalty
+    
         return total_penalty
     
     def configure(self, max_threshold, conflict_penalty):
