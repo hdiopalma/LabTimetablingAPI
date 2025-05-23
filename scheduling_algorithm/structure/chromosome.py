@@ -21,6 +21,7 @@ class Chromosome:
                 ("time_slot_day", 'U10'),  # 'U10' is a 10-character Unicode string
                 ("time_slot_shift", 'U6')
             ])
+        self._violations = {}  # for storing violations
         self.fitness = 0
 
         #week number, used for tracking the week number of the chromosome when using the weekly based algorithm
@@ -109,6 +110,15 @@ class Chromosome:
 
     def set_week(self, week: int):
         self.week = week
+        
+    def add_violation(self, constraint_name: str, penalty: float):
+        self._violations[constraint_name] = self._violations.get(constraint_name, 0.0) + penalty
+    
+    def get_violations(self):
+        return self._violations.copy()
+    
+    def reset_violations(self):
+        self._violations.clear()
 
     def to_json(self):
         genes = []
