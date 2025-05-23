@@ -1,4 +1,6 @@
 #GroupAssignmentConflictPenalty
+#path: scheduling_algorithm/fitness_function/group_assignment_conflict.py
+
 from collections import defaultdict
 from scheduling_algorithm.fitness_function.base_fitness import BaseFitness
 import numpy as np

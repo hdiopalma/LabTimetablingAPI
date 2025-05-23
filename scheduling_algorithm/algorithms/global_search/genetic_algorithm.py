@@ -147,10 +147,11 @@ class GeneticAlgorithm:
                 pass
             elif stagnation_counter > 15:
                 self.mutation_manager.mutation_probability *= 1.25
-            
             # End of Stagnation Counter Section
-            print(f"Iteration: {i}, Fittest Chromosome: {self.fitness_manager(population[0])}")
+            
             self.log['iteration_fitness'].append((i, population[0].fitness))
+            if i % 50 == 0:
+                print(f"Iteration: {i}, Fittest Chromosome: {self.fitness_manager(population[0])}")
             
             if population[0].fitness == 0:
                 break

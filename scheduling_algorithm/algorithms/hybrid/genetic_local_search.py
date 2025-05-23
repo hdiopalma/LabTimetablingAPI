@@ -1,6 +1,8 @@
 #Hybrid Algorithm Class
 # Create a hybrid algorithm class that combine the genetic algorithm and tabu search, the genetic algorithm will be used to generate the initial solution and focus on the exploration, while the tabu search will be used to improve the solution and focus on the exploitation.
 
+#path: scheduling_algorithm/algorithms/hybrid/genetic_local_search.py
+
 from scheduling_algorithm.structure import Population
 
 from scheduling_algorithm.algorithms.global_search.genetic_algorithm import GeneticAlgorithm
@@ -62,10 +64,10 @@ class GeneticLocalSearch(GeneticAlgorithm):
             
             # Introduction of local search, for possible improvement of previous best chromosome
             # Note: Don't set the iteration or time too high, this is not the main algorithm.
-            local_search_result = self.local_search(best_chromosome)
-            if local_search_result.fitness < best_chromosome.fitness:
-                self.log['local_search_improvements'].append((iteration, best_chromosome.fitness, local_search_result.fitness))
-            offspring.add_chromosome(local_search_result)
+            # local_search_result = self.local_search(best_chromosome)
+            # if local_search_result.fitness < best_chromosome.fitness:
+            #     self.log['local_search_improvements'].append((iteration, best_chromosome.fitness, local_search_result.fitness))
+            # offspring.add_chromosome(local_search_result)
 
             # Sort the population based on fitness
             population.sort_best()
@@ -78,6 +80,9 @@ class GeneticLocalSearch(GeneticAlgorithm):
                 best_chromosome = population[0].copy()
             self.log['iteration_fitness'].append((iteration, best_chromosome.fitness))
             iteration += 1
+            
+        #Run local search after the genetic algorithm
+        best_chromosome = self.local_search(best_chromosome)
             
         time_end = time.time()
         self.log['time_elapsed'] = time_end - time_start

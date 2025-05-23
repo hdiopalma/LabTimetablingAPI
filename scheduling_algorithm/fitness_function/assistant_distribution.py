@@ -1,3 +1,5 @@
+#path: scheduling_algorithm/fitness_function/assistant_distribution.py
+
 from collections import Counter, defaultdict
 from scheduling_algorithm.structure.chromosome import Chromosome
 from scheduling_algorithm.fitness_function.base_fitness import BaseFitness

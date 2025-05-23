@@ -1,4 +1,6 @@
 #GroupAssignmentConflictPenalty
+#path: scheduling_algorithm/fitness_function/timeslot_conflict.py
+
 from collections import defaultdict
 from scheduling_algorithm.structure.chromosome import Chromosome
 from scheduling_algorithm.fitness_function.base_fitness import BaseFitness

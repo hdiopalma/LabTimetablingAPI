@@ -1,4 +1,5 @@
 #Fitness Manager
+#path: scheduling_algorithm/fitness_function/manager.py
 
 from typing import List
 from scheduling_algorithm.structure import Chromosome

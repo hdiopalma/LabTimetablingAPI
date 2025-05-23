@@ -8,13 +8,9 @@ import time
 from typing import List
 
 from scheduling_algorithm.structure import Chromosome, Population
-
 from scheduling_algorithm.algorithms.local_search.base_search import BaseSearch
-
 from scheduling_algorithm.algorithms.neighborhood import RandomSwapNeighborhood, BaseNeighborhood
-
 from scheduling_algorithm.operator.repair import RepairManager, TimeSlotRepair
-
 from scheduling_algorithm.fitness_function import FitnessManager, GroupAssignmentCapacityFitness, AssistantDistributionFitness
 
 class SimulatedAnnealing(BaseSearch):
@@ -102,6 +98,11 @@ class SimulatedAnnealing(BaseSearch):
             self.iteration += 1
             self.time = time.time() - start
 
+        #Check if the best chromosome is better than the initial chromosome
+        if self.best_fitness > chromosome.fitness:
+            self.best_chromosome = chromosome.copy()
+            self.best_fitness = chromosome.fitness
+        
         # Return the best chromosome
         self.information = {"iteration": self.iteration, "time": self.time, "fitness": self.best_fitness, "chromosome": self.best_chromosome, "termination_reason": self.termination_reason}
         self.repair_manager(self.best_chromosome)
@@ -109,13 +110,25 @@ class SimulatedAnnealing(BaseSearch):
     
     def awake(self) -> bool:
         '''Check if the search should continue'''
-        reached_max_iteration = self.iteration >= self.max_iteration
-        reached_max_time = self.time >= self.max_time
-        reached_max_iteration_without_improvement = self.iteration_without_improvement >= self.max_iteration_without_improvement
+        # reached_max_iteration = self.iteration >= self.max_iteration
+        # reached_max_time = self.time >= self.max_time
+        # reached_max_iteration_without_improvement = self.iteration_without_improvement >= self.max_iteration_without_improvement
         reached_temperature_threshold = self.temperature <= self.temperature_threshold
         reached_best_fitness = self.best_fitness == 0
-        self.termination_reason = "Reached max iteration" if reached_max_iteration else "Reached max time" if reached_max_time else "Reached max iteration without improvement" if reached_max_iteration_without_improvement else "Reached temperature threshold" if reached_temperature_threshold else "Reached best fitness" if reached_best_fitness else None
-        return (not reached_max_iteration and not reached_max_time and not reached_max_iteration_without_improvement and not reached_temperature_threshold) and not reached_best_fitness
+        # self.termination_reason =   \
+        #                         "Reached max iteration" if reached_max_iteration else \
+        #                         "Reached max time" if reached_max_time else \
+        #                         "Reached max iteration without improvement" if reached_max_iteration_without_improvement else \
+        #                         "Reached temperature threshold" if reached_temperature_threshold else \
+        #                         "Reached best fitness" if reached_best_fitness else \
+        #                         None
+        return (
+                # not reached_max_iteration and \
+                # not reached_max_time and \
+                # not reached_max_iteration_without_improvement and \
+                not reached_temperature_threshold
+                ) and \
+                not reached_best_fitness
     
     def calculate_fitness(self, neighbors: List[Chromosome]):
         '''Calculate the fitness of the neighbors'''
@@ -138,8 +151,8 @@ class SimulatedAnnealing(BaseSearch):
     
     def calculate_probability(self, neighbor_fitness: float):
         """Calculate the probability of accepting a worse neighbor."""
-        delta_e = self.best_fitness - neighbor_fitness  # Change in energy (fitness)
-        if delta_e >= 0:  # If the neighbor is better, always accept
+        delta_e = neighbor_fitness - self.best_fitness
+        if delta_e < 0:
             return 1.0
         else:
             exponent = delta_e / self.temperature  
