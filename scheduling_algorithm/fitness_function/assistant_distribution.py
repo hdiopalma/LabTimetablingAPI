@@ -23,34 +23,28 @@ class AssistantDistributionFitness(BaseFitness):
         return message
 
     def calculate_penalty(self, modules, assistants, groups, timeslot_date, timeslot_shift):
-    # Convert to NumPy arrays for vectorized operations
-        modules = np.asarray(modules)
-        groups = np.asarray(groups)
-        timeslot_date = np.asarray(timeslot_date)
-        timeslot_shift = np.asarray(timeslot_shift)
-        assistants = np.asarray(assistants)
-    
-        # Precompute unique identifiers for groups and shifts
-        group_pairs = np.core.records.fromarrays([modules, groups], names='module,group')
-        shift_triplets = np.core.records.fromarrays([modules, timeslot_date, timeslot_shift], names='module,date,shift')
-    
-        # Get unique assistants and prepare masks
-        unique_assistants, assistant_indices = np.unique(assistants, return_inverse=True)
-        n_assistants = len(unique_assistants)
-    
-        # Vectorized counting of unique entries per assistant
-        group_counts = np.empty(n_assistants, dtype=int)
-        shift_counts = np.empty(n_assistants, dtype=int)
-    
-        for i in range(n_assistants):
-            mask = (assistant_indices == i)
-            group_counts[i] = np.unique(group_pairs[mask]).size
-            shift_counts[i] = np.unique(shift_triplets[mask]).size
-    
-        # Calculate penalties
-        group_over = np.maximum(group_counts - self.max_group_threshold, 0)
-        shift_over = np.maximum(shift_counts - self.max_shift_threshold, 0)
-        return np.sum(group_over * self.group_penalty + shift_over * self.shift_penalty)
+        total_penalty = 0
+        for assistant in np.unique(assistants):
+            assistant_mask = assistants == assistant
+            assistant_modules = modules[assistant_mask]
+            assistant_groups = groups[assistant_mask]
+            assistant_timeslot_dates = timeslot_date[assistant_mask]
+            assistant_timeslot_shifts = timeslot_shift[assistant_mask]
+   
+            group_set = set()
+            shift_set = set()
+            
+            for i in range(assistant_mask.sum()):
+                group_set.add((assistant_modules[i], assistant_groups[i]))
+                shift_set.add((assistant_modules[i], assistant_timeslot_dates[i], assistant_timeslot_shifts[i]))
+            
+            group_count = len(group_set)
+            shift_count = len(shift_set)
+            
+            group_penalty = max(0, group_count - self.max_group_threshold) * self.group_penalty
+            shift_penalty = max(0, shift_count - self.max_shift_threshold) * self.shift_penalty
+            total_penalty += shift_penalty + group_penalty
+        return total_penalty
     
     def configure(self, max_group_threshold, max_shift_threshold, group_penalty, shift_penalty):
         """Configure the fitness function
