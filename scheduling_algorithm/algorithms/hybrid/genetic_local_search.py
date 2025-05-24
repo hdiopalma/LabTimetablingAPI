@@ -1,135 +1,181 @@
-#Hybrid Algorithm Class
-# Create a hybrid algorithm class that combine the genetic algorithm and tabu search, the genetic algorithm will be used to generate the initial solution and focus on the exploration, while the tabu search will be used to improve the solution and focus on the exploitation.
-
-#path: scheduling_algorithm/algorithms/hybrid/genetic_local_search.py
-
-from scheduling_algorithm.structure import Population
-
 from scheduling_algorithm.algorithms.global_search.genetic_algorithm import GeneticAlgorithm
-
 from scheduling_algorithm.algorithms.local_search.manager import LocalSearchManager
-from scheduling_algorithm.algorithms.local_search.tabu_search import TabuSearch
-from scheduling_algorithm.algorithms.local_search.simulated_annealing import SimulatedAnnealing
-
-from scheduling_algorithm.factory.factory import Factory
-
-from scheduling_algorithm.fitness_function import FitnessManager
-from scheduling_algorithm.operator.crossover import CrossoverManager
-from scheduling_algorithm.operator.mutation import MutationManager
-from scheduling_algorithm.operator.repair import RepairManager
-from scheduling_algorithm.operator.selection import SelectionManager, ElitismSelection
-
+from scheduling_algorithm.structure import Population, Chromosome
 import time
-
-import cProfile
+import copy
 
 class GeneticLocalSearch(GeneticAlgorithm):
     def __init__(self):
         super().__init__()
-        self.local_search = SimulatedAnnealing()
-        self.log['local_search_improvements'] = []
-    
-    def __str__(self):
-        return f"GeneticLocalSearch(factory={self.factory}, selection_manager={self.selection_manager}, crossover_manager={self.crossover_manager}, mutation_manager={self.mutation_manager}, repair_manager={self.repair_manager}, elitism_size={self.elitism_size}, local_search={self.local_search})"
-    
-    def __repr__(self):
-        return self.__str__()
-    
+        self.local_search = None
+        self.local_search_config = {}
+        self.local_search_type = None
+        
+        # Hybrid parameters
+        self.local_search_frequency = 5
+        self.num_local_search_candidates = 5
+        self.adaptive_local_search = True
+        
+        self.log = {
+            'iteration_fitness': [],
+            'time_elapsed': 0,
+            'best_chromosome': None,
+            'stagnation_counter': 0
+        }
+
+    def configure(self, factory=None, fitness_manager=None, selection_manager=None, 
+                 crossover_manager=None, mutation_manager=None, repair_manager=None,
+                 elitism_selection=None, elitism_size=1, local_search=None):
+        super().configure(factory, fitness_manager, selection_manager, crossover_manager,
+                         mutation_manager, repair_manager, elitism_selection, elitism_size)
+        return self
+
     def run(self, population: Population, *args, **kwargs):
-        '''Run the hybrid algorithm.
-        '''
-        max_iteration = args[0] if len(args) > 0 else kwargs.get(
-            'max_iteration', self.iteration)
-        population_size = args[1] if len(args) > 1 else kwargs.get(
-            'population_size', self.population_size)
+        max_iteration = kwargs.get('max_iteration', self.iteration)
+        population_size = kwargs.get('population_size', self.population_size)
         
         time_start = time.time()
-        # Calculate the fitness of the initial population
         population.set_fitness_manager(self.fitness_manager)
         population.calculate_fitness()
         population.sort_best()
 
-        stagnation_counter = 0
-        last_fitness = population[0].fitness
-        initial_mutation_probability = self.mutation_manager.mutation_probability
         best_chromosome = population[0].copy()
-        # Initialize the iteration
-        iteration = 0
-        self.log['iteration_fitness'] = []
-        # Start the hybrid algorithm
-        while iteration < max_iteration and best_chromosome.fitness > 0:
-            # Evolve the population, crossover and mutation happens inside this function (This is the genetic algorithm part)
-            offspring = self._evolve_population(population)
-            offspring.calculate_fitness()
-            
-            # Introduction of local search, for possible improvement of previous best chromosome
-            # Note: Don't set the iteration or time too high, this is not the main algorithm.
-            # local_search_result = self.local_search(best_chromosome)
-            # if local_search_result.fitness < best_chromosome.fitness:
-            #     self.log['local_search_improvements'].append((iteration, best_chromosome.fitness, local_search_result.fitness))
-            # offspring.add_chromosome(local_search_result)
+        stagnation_counter = 0
+        initial_mutation_prob = self.mutation_manager.mutation_probability
 
-            # Sort the population based on fitness
+        for iteration in range(max_iteration):
+            # Standard GA evolution
+            population = self._evolve_population(population)
+            
+
+            # Adaptive local search
+            if iteration % self.local_search_frequency == 0:
+                population = self._apply_local_search(
+                    population, 
+                    stagnation_counter
+                )
+                
+                
+            # Calculate fitness and sort
+            population.calculate_fitness()
             population.sort_best()
-            #remove the worst chromosome, so the population size is still the same
-            if len(population) > population_size:
-                population.pop()
-            # Check if the best chromosome is better than the current best chromosome
-            
-            if population[0].fitness < best_chromosome.fitness:
-                best_chromosome = population[0].copy()
+
+            # Update best solution
+            current_best = population[0]
+            if current_best.fitness < best_chromosome.fitness:
+                best_chromosome = current_best.copy()
+                stagnation_counter = 0
+                self.mutation_manager.mutation_probability = initial_mutation_prob
+            else:
+                stagnation_counter += 1
+                self._adapt_parameters(stagnation_counter)
+
+            # Early stopping
+            if stagnation_counter > 50 or best_chromosome.fitness == 0:
+                break
+
+            # Logging
             self.log['iteration_fitness'].append((iteration, best_chromosome.fitness))
-            iteration += 1
-            
-        #Run local search after the genetic algorithm
-        best_chromosome = self.local_search(best_chromosome)
-            
+            print(f"Iteration {iteration}: Best Fitness {best_chromosome.fitness}")
+
+        # Final intensification
+        best_chromosome = self._intensify_search(best_chromosome)
+        
         time_end = time.time()
-        self.log['time_elapsed'] = time_end - time_start
-        self.log['best_chromosome'] = best_chromosome
-        print("Best Fitness: ", best_chromosome.fitness)
+        self.log.update({
+            'time_elapsed': time_end - time_start,
+            'best_chromosome': best_chromosome,
+            'stagnation_counter': stagnation_counter
+        })
         return best_chromosome
-    
-    def configure(self, factory: Factory = None, fitness_manager: FitnessManager = None, selection_manager: SelectionManager = None, crossover_manager: CrossoverManager = None, mutation_manager: MutationManager = None, repair_manager: RepairManager = None, elitism_selection: ElitismSelection = None, elitism_size: int = 1, local_search = None):
-        '''Configure the hybrid algorithm, use None to use the default value.
-        '''
-        self.elitism_size = elitism_size or self.elitism_size
-        self.elitism_selection = elitism_selection or self.elitism_selection
-        self.factory = factory or self.factory
-        self.fitness_manager = fitness_manager or self.fitness_manager
-        self.selection_manager = selection_manager or self.selection_manager
-        self.crossover_manager = crossover_manager or self.crossover_manager
-        self.mutation_manager = mutation_manager or self.mutation_manager
-        self.repair_manager = repair_manager or self.repair_manager
-        self.local_search = local_search or self.local_search
-        return self
-    
+
+    def _apply_local_search(self, population: Population, stagnation: int):
+        """Apply local search with adaptive parameters"""
+        # Get algorithm-specific config
+        algorithm_config = self.local_search_config['config'][self.local_search_type]
+        
+        # Create temp config with adaptive parameters
+        temp_config = copy.deepcopy(self.local_search_config)
+        temp_config['config'][self.local_search_type] = self._get_adaptive_config(
+            algorithm_config, 
+            stagnation
+        )
+        
+        # Create temporary local search instance
+        temp_ls = LocalSearchManager.create(temp_config, self.fitness_manager)
+        
+        # Apply to top candidates
+        improved = []
+        for candidate in population[:self.num_local_search_candidates]:
+            improved_candidate = temp_ls(candidate.copy())
+            if improved_candidate.fitness < candidate.fitness:
+                improved.append(improved_candidate)
+        
+        # Replace worst solutions
+        if improved:
+            population.replace_worst(improved)
+        
+        return population
+
+    def _get_adaptive_config(self, base_config: dict, stagnation: int):
+        """Generate adaptive configuration based on stagnation"""
+        adapted_config = copy.deepcopy(base_config)
+        
+        # Increase intensity based on stagnation
+        intensity = 1.0 + (stagnation // 10)
+        
+        # Algorithm-specific adaptations
+        if self.local_search_type == "simulated_annealing":
+            adapted_config["max_iteration"] = int(base_config["max_iteration"] * intensity)
+            adapted_config["cooling_rate"] = base_config["cooling_rate"] ** (1/intensity)
+        elif self.local_search_type == "tabu_search":
+            adapted_config["max_iteration"] = int(base_config["max_iteration"] * intensity)
+            adapted_config["tabu_list_size"] = int(base_config["tabu_list_size"] * intensity)
+        
+        return adapted_config
+
+    def _intensify_search(self, chromosome: Chromosome):
+        """Final intensification phase"""
+        # Double the iteration count
+        intensify_config = copy.deepcopy(self.local_search_config)
+        intensify_config['config'][self.local_search_type]["max_iteration"] *= 2
+        
+        # Create intensified searcher
+        intensifier = LocalSearchManager.create(intensify_config, self.fitness_manager)
+        return intensifier(chromosome)
+
+    def _adapt_parameters(self, stagnation: int):
+        """Adapt GA parameters based on stagnation"""
+        if self.adaptive_local_search:
+            # Increase mutation probability
+            self.mutation_manager.mutation_probability = min(
+                0.8, 
+                self.mutation_manager.mutation_probability * (1 + stagnation/20)
+            )
+            
+            # Adjust local search frequency
+            self.local_search_frequency = max(
+                3, 
+                self.local_search_frequency - (stagnation // 20)
+            )
+
     @classmethod
     def create(cls, main_config: dict, local_search_config: dict):
-        """_summary_
-
-        Args:
-            main_config (dict): The main configuration for the genetic algorithm such as max_iteration, population_size, etc.
-            local_search_config (dict): The configuration for the local search algorithm such as tabu_search or simulated_annealing
-
-        Returns:
-            GeneticLocalSearch: The configured genetic local search algorithm
-        """
-        # factory = Factory.create(config)
-        print("Creating Genetic Local Search Algorithm from configuration")
-        print("Population Size: ", main_config['population_size'])
-        print("Max Iteration: ", main_config['max_iteration'])
-        factory = Factory()
-        fitness_manager = FitnessManager.create(main_config["fitness"])
-        selection_manager = SelectionManager.create(main_config["operator"]["selection"])
-        crossover_manager = CrossoverManager.create(main_config["operator"]["crossover"])
-        mutation_manager = MutationManager.create(main_config["operator"]["mutation"])
-        repair_manager = RepairManager.create(main_config["operator"]["repair"])
-        elitism_selection = ElitismSelection()
-        elitism_size = main_config["elitism_size"]
-        local_search = LocalSearchManager.create(local_search_config, fitness_manager)
-        print("Local Search Algorithm: ", local_search)
-        instance = cls().configure(factory, fitness_manager, selection_manager, crossover_manager, mutation_manager, repair_manager, elitism_selection, elitism_size, local_search)
-        instance.population_size = main_config['population_size']
-        instance.iteration = main_config['max_iteration']
+        instance = super().create(main_config)
+        
+        # Store config and algorithm type
+        instance.local_search_config = local_search_config
+        instance.local_search_type = local_search_config["algorithm"]
+        
+        # Initialize base local search
+        instance.local_search = LocalSearchManager.create(
+            local_search_config, 
+            instance.fitness_manager
+        )
+        
+        # Configure hybrid parameters
+        instance.local_search_frequency = main_config.get("local_search_frequency", 10)
+        instance.num_local_search_candidates = main_config.get("num_local_search_candidates", 1)
+        instance.adaptive_local_search = main_config.get("adaptive_local_search", False)
+        
         return instance
