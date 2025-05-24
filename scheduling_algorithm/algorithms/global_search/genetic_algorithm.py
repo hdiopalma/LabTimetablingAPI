@@ -21,8 +21,8 @@ class GeneticAlgorithm:
 
     def __init__(self):
 
-        self.population_size = 25
-        self.iteration = 100
+        self.population_size = 50
+        self.iteration = 500
         self.fitness_manager = FitnessManager(
             [GroupAssignmentCapacityFitness(),
              AssistantDistributionFitness()])
@@ -77,89 +77,99 @@ class GeneticAlgorithm:
         self.elitism_selection.elitism_size = self.elitism_size
         return self.elitism_selection(population)
 
-    def __evolve(self, population: Population):
-        parent1 = self.__selection(population).copy()
-        parent2 = self.__selection(population).copy()
-
-        # Crossover
-        child1, child2 = self.__crossover(parent1, parent2)
-
-        # Mutation
-        # The chromosome is mutable, so we don't need to assign it back to the variable
-        self.__mutation(child1)
-        self.__mutation(child2)
-
-        #Repair,
-        #The chromosome is mutable, so we don't need to assign it back to the variable
-        self.__repair(child1)
-        self.__repair(child2)
-
-        return child1, child2
-
     def _evolve_population(self, population: Population):
-        elitism = self.__elitism(population).copy()
-        children = []
-
-        while len(children) < len(population) - self.elitism_size:
-            child1, child2 = self.__evolve(population)
-            children.append(child1)
-            children.append(child2)
+        """Evolve population with improved elitism handling"""
+        # Pilih elitism dari populasi saat ini
+        elites = self.__elitism(population).copy()
+        
+        # Bangun offspring tanpa elitism
+        offspring = []
+        while len(offspring) < (self.population_size - len(elites)):
+            parent1 = self.__selection(population).copy()
+            parent2 = self.__selection(population).copy()
             
-        offspring = Population(children, population.fitness_manager)
-        offspring.add_chromosome(elitism)
-
-        return offspring
+            child1, child2 = self.__crossover(parent1, parent2)
+            self.__mutation(child1)
+            self.__mutation(child2)
+            self.__repair(child1)
+            self.__repair(child2)
+            
+            offspring.extend([child1, child2])
+        
+        # Gabungkan elites dan offspring
+        new_population = Population(offspring[:self.population_size - len(elites)], population.fitness_manager)
+        new_population.add_chromosome(elites)
+        return new_population
+    
+    #init the log
+    def init_log(self):
+        self.log = {
+            'iteration_fitness': [],
+            'time_elapsed': 0,
+            'best_chromosome': None,
+            'stagnation_counter': 0
+        }
+        return self.log
 
     def run(self, population: Population, *args, **kwargs):
-        max_iteration = args[0] if len(args) > 0 else kwargs.get(
-            'max_iteration', self.iteration)
-        population_size = args[1] if len(args) > 1 else kwargs.get(
-            'population_size', self.population_size)
-
+        '''Run the genetic algorithm with the given population.
+        Args:
+            population (Population): The initial population.
+            max_iteration (int): The maximum number of iterations.
+            population_size (int): The size of the population.
+        '''
+        self.init_log()
+        max_iteration = kwargs.get('max_iteration', self.iteration)
+        population_size = kwargs.get('population_size', self.population_size)
+        
+        
         time_start = time.time()
-        self.log['iteration_fitness'] = []
         population.set_fitness_manager(self.fitness_manager)
         population.calculate_fitness()
         population.sort_best()
         
+        best_chromosome = population[0].copy()
         stagnation_counter = 0
-        last_fitness = population[0].fitness
-        initial_mutation_probability = self.mutation_manager.mutation_probability
-
-        for i in range(max_iteration):
+        initial_mutation_prob = self.mutation_manager.mutation_probability
+        
+        for iteration in range(max_iteration):
+            # Evolusi populasi
             population = self._evolve_population(population)
             population.calculate_fitness()
             population.sort_best()
-            if len(population) > population_size:
-                population.pop()
             
-            # Stagnation Counter Section
-            if population[0].fitness == last_fitness:
-                stagnation_counter += 1
-            else:
+            # Update best solution
+            current_best = population[0]
+            if current_best.fitness < best_chromosome.fitness:
+                best_chromosome = current_best.copy()
                 stagnation_counter = 0
-                self.mutation_manager.mutation_probability = initial_mutation_probability
-            last_fitness = population[0].fitness
-            if stagnation_counter > self.iteration // 2:
-                print("Stagnation Counter Exceeded Half of the Iteration, Halting the Algorithm")
-                break
-            if stagnation_counter > 50:
-                pass
-            elif stagnation_counter > 15:
-                self.mutation_manager.mutation_probability *= 1.25
-            # End of Stagnation Counter Section
+                self.mutation_manager.mutation_probability = initial_mutation_prob
+            else:
+                stagnation_counter += 1
             
-            self.log['iteration_fitness'].append((i, population[0].fitness))
-            if i % 50 == 0:
-                print(f"Iteration: {i}, Fittest Chromosome: {self.fitness_manager(population[0])}")
+            # Adaptive mutation
+            if stagnation_counter > 15:
+                self.mutation_manager.mutation_probability = min(
+                    initial_mutation_prob * 2.0,  # Maksimum 2x probabilitas awal
+                    0.8  # Batas atas 80%
+                )
             
-            if population[0].fitness == 0:
+            # Early stopping
+            if stagnation_counter > 50 or best_chromosome.fitness == 0:
                 break
+            
+            # Logging
+            self.log['iteration_fitness'].append((iteration, best_chromosome.fitness))
+            if iteration % 50 == 0:
+                print(f"Iteration {iteration}: Best Fitness {best_chromosome.fitness}")
+        
         time_end = time.time()
-        self.log['time_elapsed'] = (time_end - time_start)
-        self.log['best_chromosome'] = population[0]
-        print(f"Fittest Chromosome: {self.fitness_manager(population[0])}")
-        return population[0]
+        self.log.update({
+            'time_elapsed': time_end - time_start,
+            'best_chromosome': best_chromosome,
+            'stagnation_counter': stagnation_counter
+        })
+        return best_chromosome
 
     def configure(self,
                   factory: Factory = None,
