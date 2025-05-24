@@ -108,7 +108,7 @@ class SwapNeighborhood(BaseNeighborhood):
 class RandomSwapNeighborhood(BaseNeighborhood):
     def __init__(self):
         super().__init__("RandomSwapNeighborhood")
-        self.neighborhood_size = 100
+        self.neighborhood_size = 50
     
     def __call__(self, chromosome: Chromosome):
         '''Generate a set of neighbor solutions by swapping 2 elements in the chromosome.'''
@@ -251,5 +251,5 @@ class NeighborhoodManager:
             selected_neighborhood = DistanceSwapNeighborhood.create(neighborhood_config['distance_swap'])
         else:
             raise ValueError(f"Neighborhood {algorithm} not found")
-        print(f"Creating NeighborhoodManager with neighborhood: {selected_neighborhood}")
+        # print(f"Creating NeighborhoodManager with neighborhood: {selected_neighborhood}")
         return selected_neighborhood
