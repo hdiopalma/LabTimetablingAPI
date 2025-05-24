@@ -14,10 +14,10 @@ class LocalSearchManager:
         
         algorithm = config["algorithm"]
         if algorithm == "simulated_annealing":
-            print("Creating Simulated Annealing")
+            # print("Creating Simulated Annealing")
             return SimulatedAnnealing.create(fitness, neighborhood, config["config"]["simulated_annealing"])
         elif algorithm == "tabu_search":
-            print("Creating Tabu Search")
+            # print("Creating Tabu Search")
             return TabuSearch.create(fitness, neighborhood, config["config"]["tabu_search"])
         else:
             raise ValueError(f"Invalid local search algorithm: {algorithm}")
