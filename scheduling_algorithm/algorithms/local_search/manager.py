@@ -8,16 +8,14 @@ class LocalSearchManager:
     def create(config: dict, fitness_manager: FitnessManager):
         '''Create the local search algorithm
         '''
-        
         fitness = fitness_manager
-        neighborhood = NeighborhoodManager.create(config["config"]["neighborhood"])
-        
         algorithm = config["algorithm"]
         if algorithm == "simulated_annealing":
             # print("Creating Simulated Annealing")
+            neighborhood = NeighborhoodManager.create(config["config"]["neighborhood"])
             return SimulatedAnnealing.create(fitness, neighborhood, config["config"]["simulated_annealing"])
         elif algorithm == "tabu_search":
-            # print("Creating Tabu Search")
+            neighborhood = NeighborhoodManager.create(config["config"]["neighborhood"], is_tabu=True)
             return TabuSearch.create(fitness, neighborhood, config["config"]["tabu_search"])
         else:
             raise ValueError(f"Invalid local search algorithm: {algorithm}")
