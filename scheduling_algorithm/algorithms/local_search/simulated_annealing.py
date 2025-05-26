@@ -22,7 +22,6 @@ class SimulatedAnnealing(BaseSearch):
         self.cooling_rate = 0.95
         self.min_temperature = 1.0
         self.max_iteration = 500
-        self.neighborhood_size = 50
         
         # State
         self.temperature = self.initial_temperature
@@ -94,15 +93,13 @@ class SimulatedAnnealing(BaseSearch):
                  neighborhood: BaseNeighborhood,
                  initial_temperature: float,
                  cooling_rate: float,
-                 max_iteration: int,
-                 neighborhood_size: int = 50):
+                 max_iteration: int):
         
         self.fitness_manager = fitness_manager
         self.neighborhood = neighborhood
         self.initial_temperature = initial_temperature
         self.cooling_rate = cooling_rate
         self.max_iteration = max_iteration
-        self.neighborhood_size = neighborhood_size
         self.repair_manager = RepairManager([TimeSlotRepair()])
         return self
 
@@ -115,5 +112,4 @@ class SimulatedAnnealing(BaseSearch):
             initial_temperature=config["initial_temperature"],
             cooling_rate=config["cooling_rate"],
             max_iteration=config["max_iteration"],
-            neighborhood_size=config.get("neighborhood_size", 50)
         )
