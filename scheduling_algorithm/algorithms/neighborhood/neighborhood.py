@@ -4,38 +4,13 @@ from typing import List
 from scheduling_algorithm.structure import Chromosome
 from scheduling_algorithm.data_parser import Constant
 
-def swap_gene(chromosome: Chromosome, index1: int, index2: int):
-    '''Swap 2 genes in the chromosome'''
-    swap_type = ['date_day', 'assistant', 'shift', 'all', 'date_day_shift']
-    swap = random.choice(swap_type)
-    
-    # Template buat nanti kalo misalkan generasi jadwal ngga dibagi per module tapi sekaligus.
-            # while True:
-            #     if neighbor[i]['module'] == neighbor[j]['module']:
-            #         pass
-            
-            # Swap the genes data, since there's two indepentent variables, the swap is decided using probability.
-    
-    if swap == 'date_day':
-        chromosome[index1]['time_slot_date'], chromosome[index2]['time_slot_date'] = chromosome[index2]['time_slot_date'], chromosome[index1]['time_slot_date']
-        chromosome[index1]['time_slot_day'], chromosome[index2]['time_slot_day'] = chromosome[index2]['time_slot_day'], chromosome[index1]['time_slot_day']
-    elif swap == 'assistant':
-        chromosome[index1]['assistant'], chromosome[index2]['assistant'] = chromosome[index2]['assistant'], chromosome[index1]['assistant']
-    elif swap == 'shift':
-        chromosome[index1]['time_slot_shift'], chromosome[index2]['time_slot_shift'] = chromosome[index2]['time_slot_shift'], chromosome[index1]['time_slot_shift']
-    elif swap == 'date_day_shift':
-        chromosome[index1]['time_slot_date'], chromosome[index2]['time_slot_date'] = chromosome[index2]['time_slot_date'], chromosome[index1]['time_slot_date']
-        chromosome[index1]['time_slot_day'], chromosome[index2]['time_slot_day'] = chromosome[index2]['time_slot_day'], chromosome[index1]['time_slot_day']
-        chromosome[index1]['time_slot_shift'], chromosome[index2]['time_slot_shift'] = chromosome[index2]['time_slot_shift'], chromosome[index1]['time_slot_shift']
-    else:
-        chromosome[index1]['time_slot_date'], chromosome[index2]['time_slot_date'] = chromosome[index2]['time_slot_date'], chromosome[index1]['time_slot_date']
-        chromosome[index1]['time_slot_day'], chromosome[index2]['time_slot_day'] = chromosome[index2]['time_slot_day'], chromosome[index1]['time_slot_day']
-        chromosome[index1]['time_slot_shift'], chromosome[index2]['time_slot_shift'] = chromosome[index2]['time_slot_shift'], chromosome[index1]['time_slot_shift']
-        chromosome[index1]['assistant'], chromosome[index2]['assistant'] = chromosome[index2]['assistant'], chromosome[index1]['assistant']
+import random
+from typing import Dict, List
 
 class BaseNeighborhood:
-    def __init__(self, name):
+    def __init__(self, name: str):
         self.name = name
+        self.track_moves = False
     
     def __str__(self):
         return f"Neighborhood(name={self.name})"
@@ -46,91 +21,64 @@ class BaseNeighborhood:
     def __call__(self, chromosome: Chromosome):
         raise NotImplementedError("Neighborhood function not implemented")
     
+    def with_moves(self) -> 'BaseNeighborhood':
+        '''Track the moves made by the neighborhood
+        '''
+
+        new_instance = self.__class__()
+        new_instance.__dict__ = self.__dict__.copy()
+        new_instance.track_moves = True
+        return new_instance
+    
+    def swap_gene(self, chromosome: Chromosome, index1: int, index2: int):
+        """Swap 2 genes in the chromosome based on a randomly chosen swap type."""
+        swap_types = {
+            'date_day': ['time_slot_date', 'time_slot_day'],
+            'assistant': ['assistant'],
+            'shift': ['time_slot_shift'],
+            'date_day_shift': ['time_slot_date', 'time_slot_day', 'time_slot_shift'],
+            'all': ['time_slot_date', 'time_slot_day', 'time_slot_shift', 'assistant']
+        }
+        
+        swap = random.choice(list(swap_types.keys()))
+        
+        for key in swap_types[swap]:
+            chromosome[index1][key], chromosome[index2][key] = chromosome[index2][key], chromosome[index1][key]
+    
     def configure(self, **kwargs):
         '''Configure the neighborhood'''
         raise NotImplementedError("Neighborhood configuration not implemented")
     
-class NeighborhoodManager:
-    def __init__(self, neighborhood: BaseNeighborhood):
-        self.neighborhood = neighborhood
+class SwapNeighborhood(BaseNeighborhood):
+    def __init__(self, name: str = "SwapNeighborhood"):
+        super().__init__(name)
+        self.neighborhood_size = 50  # Default neighborhood size
+        
+    def _generate_swap(self, chromosome: Chromosome):
+        """Generate a random swap between two genes in the chromosome."""
+        i, j = random.sample(range(len(chromosome)), 2)
+        neighbor = chromosome.copy()
+        self.swap_gene(neighbor, i, j)  # Swap the genes in place
+        return neighbor, (i, j)
     
     def __call__(self, chromosome: Chromosome):
-        return self.neighborhood(chromosome)
+        results = []
+        for _ in range(self.neighborhood_size):
+            neighbor, move = self._generate_swap(chromosome)
+            if self.track_moves:
+                results.append((neighbor, move))
+            else:
+                results.append(neighbor)
+        return results
     
-    def configure(self, **kwargs):
-        self.neighborhood.configure(**kwargs)
+    def configure(self, neighborhood_size=None):
+        if neighborhood_size:
+            self.neighborhood_size = neighborhood_size
         return self
     
-    def __str__(self):
-        return f"NeighborhoodManager(neighborhood={self.neighborhood})"
-    
-    def __repr__(self):
-        return self.__str__()
-    
-    @classmethod
-    def create(cls, neighborhood_config: dict):
-        '''Create the neighborhood
-        args:
-            neighborhood_config: dict'''
-        neighborhood = neighborhood_config['neighborhood']
-        if neighborhood == "SwapNeighborhood":
-            return SwapNeighborhood()
-        elif neighborhood == "RandomSwapNeighborhood":
-            return RandomSwapNeighborhood()
-        elif neighborhood == "RandomRangeSwapNeighborhood":
-            return RandomRangeSwapNeighborhood()
-        elif neighborhood == "DistanceSwapNeighborhood":
-            return DistanceSwapNeighborhood()
-        else:
-            raise ValueError(f"Neighborhood {neighborhood} not found")
-    
-class SwapNeighborhood(BaseNeighborhood):
-    def __init__(self):
-        super().__init__("SwapNeighborhood")
-    
-    def __call__(self, chromosome: Chromosome):
-        '''Generate a set of neighbor solutions by swapping 2 elements in the chromosome.
-        The time complexity is O(n^2) where n is the number of genes in the chromosome.
-        The space complexity is O(n^2) where n is the number of genes in the chromosome.
-        Hella slow and expensive.'''
-        neighbors = []
-        for i in range(len(chromosome)):
-            for j in range(i + 1, len(chromosome)):
-                neighbor = chromosome.copy()
-                swap_gene(neighbor, i, j) # Swap the genes in place
-                neighbors.append(neighbor)
-        return neighbors
-    
-    @classmethod
-    def create(cls, config: dict):
-        return cls()
-    
-class RandomSwapNeighborhood(BaseNeighborhood):
+class RandomSwapNeighborhood(SwapNeighborhood):
     def __init__(self):
         super().__init__("RandomSwapNeighborhood")
-        self.neighborhood_size = 50
-    
-    def __call__(self, chromosome: Chromosome):
-        '''Generate a set of neighbor solutions by swapping 2 elements in the chromosome.'''
-        neighbors = []
-        for _ in range(self.neighborhood_size):
-            neighbor = chromosome.copy()
-            i, j = random.sample(range(len(chromosome)), 2)
-            
-            swap_gene(neighbor, i, j) # Swap the genes in place
-                
-            neighbors.append(neighbor)
-        return neighbors
-    
-    def configure(self, neighborhood_size = None):
-        self.neighborhood_size = neighborhood_size or self.neighborhood_size
-        return self
-    
-    @classmethod
-    def create(cls, config: dict):
-        instance = cls()
-        instance.configure(**config)
-        return instance
     
 class RandomRangeSwapNeighborhood(BaseNeighborhood):
     def __init__(self):
@@ -148,9 +96,11 @@ class RandomRangeSwapNeighborhood(BaseNeighborhood):
             i = random.randint(0, len(chromosome) - range_size)
             j = random.randint(i, i + range_size)
             # Swap the genes data,
-            swap_gene(neighbor, i, j)
-                
-            neighbors.append(neighbor)
+            self.swap_gene(neighbor, i, j)
+            if self.track_moves:
+                neighbors.append((neighbor, (i, j)))
+            else:
+                neighbors.append(neighbor)
         return neighbors
     
     
@@ -187,8 +137,11 @@ class DistanceSwapNeighborhood(BaseNeighborhood):
         # Swap the genes
         for distance in selected_distance:
             neighbor = chromosome.copy()
-            swap_gene(neighbor, distance[0], distance[1])
-            neighbors.append(neighbor)
+            self.swap_gene(neighbor, distance[0], distance[1])
+            if self.track_moves:
+                neighbors.append((neighbor, (distance[0], distance[1])))
+            else:
+                neighbors.append(neighbor)
         return neighbors
     
     def calculate_distance_matrix(self, chromosome: Chromosome) -> List[List[int]]:
@@ -217,39 +170,37 @@ class DistanceSwapNeighborhood(BaseNeighborhood):
         instance.configure(**config)
         return instance
     
+    
 class NeighborhoodManager:
-    def __init__(self, neighborhood: BaseNeighborhood):
-        self.neighborhood = neighborhood
+    _ALGORITHM_MAP = {
+        "swap": SwapNeighborhood,
+        "random_swap": RandomSwapNeighborhood,
+        "random_range_swap": RandomRangeSwapNeighborhood,
+        "distance_swap": DistanceSwapNeighborhood
+    }
     
-    def __call__(self, chromosome: Chromosome):
-        return self.neighborhood(chromosome)
-    
-    def configure(self, **kwargs):
-        self.neighborhood.configure(**kwargs)
-        return self
-    
-    def __str__(self):
-        return f"NeighborhoodManager(neighborhood={self.neighborhood})"
-    
-    def __repr__(self):
-        return self.__str__()
-    
-    @staticmethod
-    def create(neighborhood_config: dict):
+    @classmethod
+    def create(cls, config: dict, is_tabu: bool = False) -> BaseNeighborhood:
         '''Create the neighborhood
         args:
-            neighborhood_config: dict'''
-        algorithm = neighborhood_config['algorithm']
-        selected_neighborhood = None
-        if algorithm == "swap":
-            selected_neighborhood = SwapNeighborhood.create(neighborhood_config['swap'])
-        elif algorithm == "random_swap":
-            selected_neighborhood = RandomSwapNeighborhood.create(neighborhood_config['random_swap'])
-        elif algorithm == "random_range_swap":
-            selected_neighborhood = RandomRangeSwapNeighborhood.create(neighborhood_config['random_range_swap'])
-        elif algorithm == "distance_swap":
-            selected_neighborhood = DistanceSwapNeighborhood.create(neighborhood_config['distance_swap'])
+            neighborhood_config: dict
+            is_tabu: bool = False
+            '''
+            
+        
+            
+        algorithm = config['algorithm']
+        neighborhood_class = cls._ALGORITHM_MAP[algorithm]
+        if is_tabu and hasattr(neighborhood_class, 'with_moves'):
+            
+            neighborhood = neighborhood_class().with_moves()
+            
+           
         else:
-            raise ValueError(f"Neighborhood {algorithm} not found")
-        # print(f"Creating NeighborhoodManager with neighborhood: {selected_neighborhood}")
-        return selected_neighborhood
+            neighborhood = neighborhood_class()
+            
+        config_key = algorithm
+        
+        return neighborhood.configure(**config.get(config_key, {}))
+        
+        
