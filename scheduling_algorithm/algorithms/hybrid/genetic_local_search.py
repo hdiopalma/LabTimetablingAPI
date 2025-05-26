@@ -130,7 +130,7 @@ class GeneticLocalSearch(GeneticAlgorithm):
             adapted_config["cooling_rate"] = base_config["cooling_rate"] ** (1/intensity)
         elif self.local_search_type == "tabu_search":
             adapted_config["max_iteration"] = int(base_config["max_iteration"] * intensity)
-            adapted_config["tabu_list_size"] = int(base_config["tabu_list_size"] * intensity)
+            adapted_config["tabu_size"] = int(base_config["tabu_size"] * intensity)
         
         return adapted_config
 
@@ -173,9 +173,17 @@ class GeneticLocalSearch(GeneticAlgorithm):
             instance.fitness_manager
         )
         
-        # Configure hybrid parameters
-        instance.local_search_frequency = main_config.get("local_search_frequency", 10)
-        instance.num_local_search_candidates = main_config.get("num_local_search_candidates", 1)
-        instance.adaptive_local_search = main_config.get("adaptive_local_search", False)
+        print("Hybrid parameters:")
         
+        try:
+            instance.local_search_frequency = main_config["local_search_frequency"]
+            instance.num_local_search_candidates = main_config["num_local_search_candidates"]
+            instance.adaptive_local_search = main_config["adaptive_local_search"]
+        except KeyError as e:
+            print(f"Error in local search configuration: {e}")
+            raise ValueError("Invalid local search configuration. Please check the parameters.")
+        print(f"Local Search Frequency: {instance.local_search_frequency}")
+        print(f"Number of Local Search Candidates: {instance.num_local_search_candidates}")
+        print(f"Adaptive Local Search: {instance.adaptive_local_search}")
+       
         return instance

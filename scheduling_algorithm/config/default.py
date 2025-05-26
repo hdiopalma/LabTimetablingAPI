@@ -5,7 +5,7 @@ default_config = {
             "neighborhood": {
                 "algorithm": "random_swap",
                 "random_swap": {
-                    "neighborhood_size": 100
+                    "neighborhood_size": 50
                 },
                 "random_range_swap": {
                     "neighborhood_size_factor": 0.1,
@@ -32,15 +32,12 @@ default_config = {
                 "initial_temperature": 100,
                 "cooling_rate": 0.1,
                 "max_iteration": 1000,
-                "max_time": 60,
-                "max_iteration_without_improvement": 100,
             },
             "tabu_search": {
-                "tabu_list_size": 50,
+                "tabu_size": 50,
                 "max_iteration": 1000,
-                "max_time": 60,
-                "max_iteration_without_improvement": 100,
-                "max_time_without_improvement": 5
+                "max_stagnation": 100,
+                
             }
         }
     },
@@ -50,6 +47,9 @@ default_config = {
             "max_iteration": 500,
             "population_size": 25,
             "elitism_size": 2,
+            "local_search_frequency": 10,
+            "num_local_search_candidates": 1,
+            "adaptive_local_search": False,
             "fitness": {
                 "group_assignment_conflict": {
                     "max_threshold": 3,
