@@ -131,6 +131,9 @@ algorithm_properties = {
                 "max_iteration": {
                     "type": "number"
                 },
+                "max_stagnation": {
+                    "type": "number"
+                },
                 "population_size": {
                     "type": "number"
                 },

@@ -23,6 +23,7 @@ class GeneticAlgorithm:
 
         self.population_size = 50
         self.iteration = 500
+        self.max_stagnation = 100
         self.fitness_manager = FitnessManager(
             [GroupAssignmentCapacityFitness(),
              AssistantDistributionFitness()])
@@ -155,7 +156,8 @@ class GeneticAlgorithm:
                 )
             
             # Early stopping
-            if stagnation_counter > 50 or best_chromosome.fitness == 0:
+            if stagnation_counter > self.max_stagnation or \
+                best_chromosome.fitness == 0:
                 break
             
             # Logging
@@ -209,13 +211,16 @@ class GeneticAlgorithm:
         repair_manager = RepairManager.create(config['operator']['repair'])
         elitism_selection = ElitismSelection()
         elitism_size = config['elitism_size']
+        
         algorithm_instance = cls()
         algorithm_instance.population_size = config['population_size']
         algorithm_instance.iteration = config['max_iteration']
+        algorithm_instance.max_stagnation = config['max_stagnation']
 
         print("Creating Genetic Algorithm Object from Configuration File")
         print("Population Size: ", config['population_size'])
         print("Max Iteration: ", config['max_iteration'])
+        print("Max Stagnation: ", config['max_stagnation'])
 
         algorithm_instance.configure(factory, fitness_manager,
                                      selection_manager, crossover_manager,

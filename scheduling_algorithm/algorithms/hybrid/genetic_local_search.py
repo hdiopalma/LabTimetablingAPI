@@ -71,7 +71,8 @@ class GeneticLocalSearch(GeneticAlgorithm):
                 self._adapt_parameters(stagnation_counter)
 
             # Early stopping
-            if stagnation_counter > 50 or best_chromosome.fitness == 0:
+            if stagnation_counter > self.max_stagnation or \
+                best_chromosome.fitness == 0:
                 break
 
             # Logging

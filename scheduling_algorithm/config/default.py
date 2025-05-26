@@ -47,6 +47,8 @@ default_config = {
             "max_iteration": 500,
             "population_size": 25,
             "elitism_size": 2,
+            "max_stagnation": 100,
+            #hybrid parameters
             "local_search_frequency": 10,
             "num_local_search_candidates": 1,
             "adaptive_local_search": False,
