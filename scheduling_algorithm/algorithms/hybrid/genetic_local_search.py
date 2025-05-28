@@ -77,12 +77,15 @@ class GeneticLocalSearch(GeneticAlgorithm):
 
             # Logging
             self.log['iteration_fitness'].append((iteration, best_chromosome.fitness))
-            print(f"Iteration {iteration}: Best Fitness {best_chromosome.fitness}")
+            # print(f"Iteration {iteration}: Best Fitness {best_chromosome.fitness}")
+            if iteration % 50 == 0:
+                print(f"Iteration {iteration}: Best Fitness {best_chromosome.fitness}")
 
         # Final intensification
         best_chromosome = self._intensify_search(best_chromosome)
         
         time_end = time.time()
+        self.fitness_manager(best_chromosome, track_violations=True)
         self.log.update({
             'time_elapsed': time_end - time_start,
             'best_chromosome': best_chromosome,

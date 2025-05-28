@@ -12,7 +12,7 @@ class FitnessManager:
     def __init__(self, fitness_functions: List[BaseFitness]):
         self.fitness_functions = fitness_functions
 
-    def __call__(self, chromosome: Chromosome) -> int:
+    def __call__(self, chromosome: Chromosome, track_violations: bool = False):
         """Calculate the fitness of a chromosome"""
         labs = chromosome["laboratory"]
         modules = chromosome["module"]
@@ -25,13 +25,44 @@ class FitnessManager:
             
         # Calculate total fitness
         total_fitness = 0
+        if track_violations:
+            chromosome.clear_violations()
+            chromosome.clear_grouped_fitness()
+            
         for fitness_function in self.fitness_functions:
             if isinstance(fitness_function, GroupAssignmentCapacityFitness):
-                total_fitness += fitness_function.calculate_penalty(modules, assistants, timeslot_dates, timeslot_shifts)
+                if track_violations:
+                    penalty, violations = fitness_function.calculate_penalty_with_violations(
+                        modules, assistants, timeslot_dates, timeslot_shifts)
+                    chromosome.add_violation(fitness_function.name, violations)
+                    chromosome.add_grouped_fitness(fitness_function.name, penalty)
+                else:
+                    penalty = fitness_function.calculate_penalty(modules, assistants, timeslot_dates, timeslot_shifts)
+                
+                total_fitness += penalty
+                
             elif isinstance(fitness_function, AssistantDistributionFitness):
-                total_fitness += fitness_function.calculate_penalty(modules, assistants, groups, timeslot_dates, timeslot_shifts)
+                # total_fitness += fitness_function.calculate_penalty(modules, assistants, groups, timeslot_dates, timeslot_shifts)
+                if track_violations:
+                    penalty, violations = fitness_function.calculate_penalty_with_violations(
+                        modules, assistants, groups, timeslot_dates, timeslot_shifts)
+                    chromosome.add_violation(fitness_function.name, violations)
+                    chromosome.add_grouped_fitness(fitness_function.name, penalty)
+                else:
+                    penalty = fitness_function.calculate_penalty(modules, assistants, groups, timeslot_dates, timeslot_shifts)
+                total_fitness += penalty
+                
             elif isinstance(fitness_function, TimeslotConflict):
-                total_fitness += fitness_function.calculate_penalty(assistants, groups, chapters, timeslot_dates, timeslot_shifts)
+                # total_fitness += fitness_function.calculate_penalty(assistants, groups, chapters, timeslot_dates, timeslot_shifts)
+                if track_violations:
+                    penalty, violations = fitness_function.calculate_penalty_with_violations(
+                        assistants, groups, chapters, timeslot_dates, timeslot_shifts)
+                    chromosome.add_violation(fitness_function.name, violations)
+                    chromosome.add_grouped_fitness(fitness_function.name, penalty)
+                else:
+                    penalty = fitness_function.calculate_penalty(assistants, groups, chapters, timeslot_dates, timeslot_shifts)
+                total_fitness += penalty
+                
         return total_fitness
     
     def configure(self, fitness_functions: List[BaseFitness]):

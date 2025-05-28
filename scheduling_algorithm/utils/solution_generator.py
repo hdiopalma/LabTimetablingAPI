@@ -142,6 +142,11 @@ class SolutionGenerator:
                         break
                     weekly_chromosome = self.algorithm.run(population=weekly_population)
                     self.best_chromosome += weekly_chromosome
+                    
+        
+            for key, value in self.best_chromosome.get_grouped_fitness().items():
+                print(f"Grouped fitness for {key}: {value}")
+                    
             self.time_elapsed = time.time() - time_start
             self.create_schedule_data(solution)
             self.update_solution(solution)

@@ -1,5 +1,6 @@
 import copy
 import numpy as np
+from collections import defaultdict
 
 
 class Chromosome:
@@ -16,13 +17,15 @@ class Chromosome:
                 ("module", np.int32),
                 ("chapter", np.int32),
                 ("group", np.int32),
-                ("assistant", np.int32),  # Assuming assistant IDs are integers
+                ("assistant", np.int32), 
                 ("time_slot_date", np.float64),
                 ("time_slot_day", 'U10'),  # 'U10' is a 10-character Unicode string
                 ("time_slot_shift", 'U6')
             ])
-        self._violations = {}  # for storing violations
+        self._violations = defaultdict(dict)  # Using defaultdict to handle missing keys gracefully
         self.fitness = 0
+        #grouped fitness, fitness_name: fitness_value
+        self.grouped_fitness = defaultdict(float)
 
         #week number, used for tracking the week number of the chromosome when using the weekly based algorithm
         self.week = 0
@@ -53,8 +56,22 @@ class Chromosome:
     def __add__(self, other: "Chromosome"):
         new_chromosome = Chromosome([])
         new_chromosome._gene_data_list = np.concatenate(
-            (self._gene_data_list, other.gene_data))
+            (self._gene_data_list, other.gene_data)
+        )
         new_chromosome.fitness = self.fitness + other.fitness
+
+        # Merge violations
+        new_chromosome._violations = defaultdict(dict)
+        for src in (self._violations, other._violations):
+            for key, value in src.items():
+                new_chromosome._violations[key].update(value)
+
+        # Merge grouped fitness
+        new_chromosome.grouped_fitness = defaultdict(float)
+        for src in (self.grouped_fitness, other.grouped_fitness):
+            for key, value in src.items():
+                new_chromosome.grouped_fitness[key] += value
+
         return new_chromosome
 
     def transform_to_gene_data(self):
@@ -111,15 +128,42 @@ class Chromosome:
     def set_week(self, week: int):
         self.week = week
         
-    def add_violation(self, constraint_name: str, penalty: float):
-        self._violations[constraint_name] = self._violations.get(constraint_name, 0.0) + penalty
+    def add_violation(self, fitness_name: str, violation_data: dict):
+        """        Adds a violation to the chromosome.
+        Args:
+            fitness_name (str): The name of the fitness function.
+            violation_data (dict): A dictionary containing the violation data.
+        """
+        self._violations[fitness_name].update(violation_data)
+        
+    def get_violations(self) -> dict:
+        """Returns the violations of the chromosome."""
+        return copy.deepcopy(self._violations)
     
-    def get_violations(self):
-        return self._violations.copy()
+    def get_violation(self, fitness_name: str) -> dict:
+        """Returns the violations of the chromosome for a specific fitness function."""
+        return copy.deepcopy(self._violations.get(fitness_name, {}))
     
-    def reset_violations(self):
+    def clear_violations(self):
+        """Clears all violations of the chromosome."""
         self._violations.clear()
-
+        
+    def add_grouped_fitness(self, fitness_name: str, fitness_value: float):
+        """Adds a grouped fitness value to the chromosome.
+        Args:
+            fitness_name (str): The name of the fitness function.
+            fitness_value (float): The value of the fitness function.
+        """
+        self.grouped_fitness[fitness_name] += fitness_value
+        
+    def get_grouped_fitness(self) -> dict:
+        """Returns the grouped fitness values of the chromosome."""
+        return copy.deepcopy(self.grouped_fitness)
+    
+    def clear_grouped_fitness(self):
+        """Clears all grouped fitness values of the chromosome."""
+        self.grouped_fitness.clear()
+        
     def to_json(self):
         genes = []
         for gene in self._gene_data_list:

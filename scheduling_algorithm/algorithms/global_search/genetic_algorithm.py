@@ -166,6 +166,18 @@ class GeneticAlgorithm:
                 print(f"Iteration {iteration}: Best Fitness {best_chromosome.fitness}")
         
         time_end = time.time()
+        
+        
+        
+        # Calculate final detailed fitness and violations
+        self.fitness_manager(best_chromosome, track_violations=True)
+        # print(f"Final fitness: {best_chromosome.fitness}")
+        # # for key, value in best_chromosome.get_violations().items():
+        # #     print(f"Violations for {key}: {value}")
+        
+        # for key, value in best_chromosome.get_grouped_fitness().items():
+        #     print(f"Grouped fitness for {key}: {value}")
+        
         self.log.update({
             'time_elapsed': time_end - time_start,
             'best_chromosome': best_chromosome,

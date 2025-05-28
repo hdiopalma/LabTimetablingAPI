@@ -6,8 +6,10 @@ from scheduling_algorithm.fitness_function.base_fitness import BaseFitness
 
 import numpy as np
 
+
 #Maximize the utilization of assistants by distributing tasks evenly among them. Each assistant should be assigned to a balanced number of groups and shift to avoid overloading.
 class AssistantDistributionFitness(BaseFitness):
+
     def __init__(self):
         """Fitness function to penalize conflicts in assistant distribution. (e.g. an assistant is assigned to too many groups or shifts)
         (Jumlah maksimal kelompok dan shift yang diambil oleh assistent dalam satu periode)
@@ -17,12 +19,13 @@ class AssistantDistributionFitness(BaseFitness):
         self.max_shift_threshold = None
         self.group_penalty = 1
         self.shift_penalty = 1
-        
+
     def __str__(self):
         message = f"Fitness(name={self.name}, max_group_threshold={self.max_group_threshold}, max_shift_threshold={self.max_shift_threshold}, group_penalty={self.group_penalty}, shift_penalty={self.shift_penalty})"
         return message
 
-    def calculate_penalty(self, modules, assistants, groups, timeslot_date, timeslot_shift):
+    def calculate_penalty(self, modules, assistants, groups, timeslot_date,
+                          timeslot_shift):
         total_penalty = 0
         for assistant in np.unique(assistants):
             assistant_mask = assistants == assistant
@@ -30,23 +33,56 @@ class AssistantDistributionFitness(BaseFitness):
             assistant_groups = groups[assistant_mask]
             assistant_timeslot_dates = timeslot_date[assistant_mask]
             assistant_timeslot_shifts = timeslot_shift[assistant_mask]
-   
+
             group_set = set()
             shift_set = set()
-            
+
             for i in range(assistant_mask.sum()):
                 group_set.add((assistant_modules[i], assistant_groups[i]))
-                shift_set.add((assistant_modules[i], assistant_timeslot_dates[i], assistant_timeslot_shifts[i]))
-            
+                shift_set.add(
+                    (assistant_modules[i], assistant_timeslot_dates[i],
+                     assistant_timeslot_shifts[i]))
+
             group_count = len(group_set)
             shift_count = len(shift_set)
-            
-            group_penalty = max(0, group_count - self.max_group_threshold) * self.group_penalty
-            shift_penalty = max(0, shift_count - self.max_shift_threshold) * self.shift_penalty
+
+            group_penalty = max(
+                0, group_count - self.max_group_threshold) * self.group_penalty
+            shift_penalty = max(
+                0, shift_count - self.max_shift_threshold) * self.shift_penalty
             total_penalty += shift_penalty + group_penalty
         return total_penalty
-    
-    def configure(self, max_group_threshold, max_shift_threshold, group_penalty, shift_penalty):
+
+    def calculate_penalty_with_violations(self, modules, assistants, groups,
+                                          timeslot_date,
+                                          timeslot_shift) -> tuple:
+        """Detailed calculation with violation tracking"""
+        total = 0
+        violations = {"group_over": {}, "shift_over": {}}
+
+        for assistant in np.unique(assistants):
+            mask = assistants == assistant
+            mod_groups = np.column_stack((modules[mask], groups[mask]))
+            mod_dates_shifts = np.column_stack(
+                (modules[mask], timeslot_date[mask], timeslot_shift[mask]))
+
+            group_count = len(np.unique(mod_groups, axis=0))
+            shift_count = len(np.unique(mod_dates_shifts, axis=0))
+
+            if group_count > self.max_group_threshold:
+                over = group_count - self.max_group_threshold
+                violations["group_over"][assistant] = over
+                total += over * self.group_penalty
+
+            if shift_count > self.max_shift_threshold:
+                over = shift_count - self.max_shift_threshold
+                violations["shift_over"][assistant] = over
+                total += over * self.shift_penalty
+
+        return total, violations
+
+    def configure(self, max_group_threshold, max_shift_threshold,
+                  group_penalty, shift_penalty):
         """Configure the fitness function
         Args:
             max_group_threshold (int): Maximum number of groups that can be assigned to a single assistant
@@ -58,7 +94,7 @@ class AssistantDistributionFitness(BaseFitness):
         self.group_penalty = group_penalty
         self.shift_penalty = shift_penalty
         return self
-    
+
     @classmethod
     def create(cls, config):
         """Create AssistantDistributionFitness instance from configuration

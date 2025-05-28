@@ -47,10 +47,8 @@ class Population:
             futures = []
             for chromo in self.chromosomes:
                 futures.append(executor.submit(self.fitness_manager, chromo))
-            
             for future, chromo in zip(futures, self.chromosomes):
                 chromo.fitness = future.result()
-        
         self.sort_best()
     
     def add_chromosome(self, chromosome: Chromosome):
