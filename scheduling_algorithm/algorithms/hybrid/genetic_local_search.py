@@ -31,6 +31,7 @@ class GeneticLocalSearch(GeneticAlgorithm):
         return self
 
     def run(self, population: Population, *args, **kwargs):
+        iteration_log = []
         max_iteration = kwargs.get('max_iteration', self.iteration)
         population_size = kwargs.get('population_size', self.population_size)
         
@@ -74,6 +75,15 @@ class GeneticLocalSearch(GeneticAlgorithm):
             if stagnation_counter > self.max_stagnation or \
                 best_chromosome.fitness == 0:
                 break
+            
+            log_entry = {
+                "iteration": iteration,
+                "best_fitness": best_chromosome.fitness,
+                "module_id": None,  # Akan diisi di generate_solution_weekly
+                "week": None
+            }
+            
+            iteration_log.append(log_entry)
 
             # Logging
             self.log['iteration_fitness'].append((iteration, best_chromosome.fitness))
@@ -91,7 +101,7 @@ class GeneticLocalSearch(GeneticAlgorithm):
             'best_chromosome': best_chromosome,
             'stagnation_counter': stagnation_counter
         })
-        return best_chromosome
+        return best_chromosome, iteration_log
 
     def _apply_local_search(self, population: Population, stagnation: int):
         """Apply local search with adaptive parameters"""

@@ -46,6 +46,7 @@ class GeneticAlgorithm:
 
         self.initial_solution = None
         self.log = {}
+        
 
     def __str__(self):
         return f"GeneticAlgorithm(factory={self.factory}, selection_manager={self.selection_manager}, crossover_manager={self.crossover_manager}, mutation_manager={self.mutation_manager}, repair_manager={self.repair_manager}, elitism_size={self.elitism_size})"
@@ -120,6 +121,7 @@ class GeneticAlgorithm:
             population_size (int): The size of the population.
         '''
         self.init_log()
+        iteration_log = []
         max_iteration = kwargs.get('max_iteration', self.iteration)
         population_size = kwargs.get('population_size', self.population_size)
         
@@ -160,15 +162,21 @@ class GeneticAlgorithm:
                 best_chromosome.fitness == 0:
                 break
             
+            log_entry = {
+                "iteration": iteration,
+                "best_fitness": best_chromosome.fitness,
+                "module_id": None,  # Akan diisi di generate_solution_weekly
+                "week": None
+            }
+            
+            iteration_log.append(log_entry)
+            
             # Logging
             self.log['iteration_fitness'].append((iteration, best_chromosome.fitness))
-            if iteration % 50 == 0:
-                print(f"Iteration {iteration}: Best Fitness {best_chromosome.fitness}")
+            # if iteration % 50 == 0:
+            #     print(f"Iteration {iteration}: Best Fitness {best_chromosome.fitness}")
         
         time_end = time.time()
-        
-        
-        
         # Calculate final detailed fitness and violations
         self.fitness_manager(best_chromosome, track_violations=True)
         # print(f"Final fitness: {best_chromosome.fitness}")
@@ -183,7 +191,7 @@ class GeneticAlgorithm:
             'best_chromosome': best_chromosome,
             'stagnation_counter': stagnation_counter
         })
-        return best_chromosome
+        return best_chromosome, iteration_log
 
     def configure(self,
                   factory: Factory = None,

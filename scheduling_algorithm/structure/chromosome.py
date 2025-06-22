@@ -168,11 +168,17 @@ class Chromosome:
         genes = []
         for gene in self._gene_data_list:
             genes.append({
-                "laboratory": gene["laboratory"],
-                "module": gene["module"],
-                "chapter": gene["chapter"],
-                "group": gene["group"],
-                "assistant": gene["assistant"],
-                "time_slot": (gene["time_slot_date"], gene["time_slot_day"], gene["time_slot_shift"])
+                "laboratory": gene["laboratory"].item(),
+                "module": gene["module"].item(),
+                "chapter": gene["chapter"].item(),
+                "group": gene["group"].item(),
+                "assistant": gene["assistant"].item() if gene["assistant"] is not None else None,
+                "time_slot": (
+                    gene["time_slot_date"].item(),
+                    str(gene["time_slot_day"]),
+                    str(gene["time_slot_shift"])
+                )
             })
-        return {"genes": genes, "fitness": self.fitness}
+        return {
+            "genes": genes,
+    }

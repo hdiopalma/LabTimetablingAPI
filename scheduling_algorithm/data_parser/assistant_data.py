@@ -53,3 +53,11 @@ class AssistantData:
         if assistant:
             return assistant.regular_schedule
         return None
+    
+    #get schedule by assistant name
+    @classmethod
+    def get_schedule_by_name(cls, name):
+        assistant = Assistant.objects.get(name=name)
+        if assistant:
+            return assistant.regular_schedule
+        return None

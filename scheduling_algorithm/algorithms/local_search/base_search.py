@@ -16,5 +16,8 @@ class BaseSearch:
     def __call__(self, chromosome: Chromosome):
         raise NotImplementedError("Search function not implemented")
     
+    def run(self, chromosome: Chromosome):
+        raise NotImplementedError("Run function not implemented")
+    
     def configure(self, fitness_manager: FitnessManager):
         raise NotImplementedError("Configure function not implemented")

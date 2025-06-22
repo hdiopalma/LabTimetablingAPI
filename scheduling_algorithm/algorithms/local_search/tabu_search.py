@@ -103,8 +103,8 @@ class TabuSearch(BaseSearch):
             max_stagnation (int): Maximum number of iterations without improvement.
         '''
         
-        print("Configuring Tabu Search with parameters:")
-        print(f"Tabu Size: {tabu_size}, Max Iteration: {max_iteration}, Max Stagnation: {max_stagnation}")
+        # print("Configuring Tabu Search with parameters:")
+        # print(f"Tabu Size: {tabu_size}, Max Iteration: {max_iteration}, Max Stagnation: {max_stagnation}")
         
         self.fitness_manager = fitness_manager
         self.neighborhood = neighborhood

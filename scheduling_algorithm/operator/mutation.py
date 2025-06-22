@@ -46,22 +46,48 @@ class ShiftMutation(BaseMutation):
         self.constant = Constant
     
     def __call__(self, chromosome: Chromosome):
-        gene = random.choice(chromosome)
+        gene_idx = random.randint(0, len(chromosome)-1)  #untuk menghindari reference issue
+        gene = chromosome[gene_idx]
         gene['time_slot_date'], gene['time_slot_day'], gene['time_slot_shift'] = self.shift_time_slot((gene['time_slot_date'], gene['time_slot_day'], gene['time_slot_shift']))
 
         return chromosome
     
     def shift_time_slot(self, time_slot: tuple) -> tuple:
+        # time_slot: (timestamp, day_name, shift_name)
+        timestamp, day_name, shift_name = time_slot
+        days = self.constant.days
+        shifts = self.constant.shifts
+
+        def next_day(day):
+            day_idx = days.index(day)
+            new_day_idx = (day_idx + 1) % len(days)
+            new_day = days[new_day_idx]
+            # If the next day is Sunday, skip to Monday
+            if new_day.lower() == "sunday":
+                new_day_idx = (new_day_idx + 1) % len(days)
+                new_day = days[new_day_idx]
+            return new_day
+
         if random.random() < 0.5:
-            # Shift the time slot by 1 day
-            if time_slot[1] == self.constant.days[-1]:
-                return (time_slot[0] + timedelta(days=2), self.constant.days[0], time_slot[2])
-            return (time_slot[0] + timedelta(days=1), self.constant.days[self.constant.days.index(time_slot[1]) + 1], time_slot[2])
+            # Shift by 1 day
+            # print(f"Shifting time slot {time_slot} by 1 day")
+            new_day = next_day(day_name)
+            # Add 1 day (86400 seconds) to timestamp
+            new_timestamp = timestamp + 86400
+            return (new_timestamp, new_day, shift_name)
         else:
-            # Shift the time slot by 1 shift
-            if time_slot[2] == self.constant.shifts[-1]:
-                return (time_slot[0] + timedelta(days=1), time_slot[1], self.constant.shifts[0])
-            return (time_slot[0], time_slot[1], self.constant.shifts[self.constant.shifts.index(time_slot[2]) + 1])
+            # Shift by 1 shift
+            # print(f"Shifting time slot {time_slot} by 1 shift")
+            shift_idx = shifts.index(shift_name)
+            if shift_idx == len(shifts) - 1:
+                # Last shift, move to first shift and next day
+                new_shift = shifts[0]
+                new_day = next_day(day_name)
+                new_timestamp = timestamp + 86400
+                return (new_timestamp, new_day, new_shift)
+            else:
+                new_shift = shifts[shift_idx + 1]
+                return (timestamp, day_name, new_shift)
     
 class RandomMutation(BaseMutation):
     def __init__(self):

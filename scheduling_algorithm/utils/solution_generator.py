@@ -125,7 +125,7 @@ class SolutionGenerator:
             Solution: The generated solution data.
         """
         solution = self.created_solution or self.create_solution()
-        
+        all_iteration_logs = []
         try:
             time_start = time.time()
             self.best_chromosome = Chromosome()
@@ -140,13 +140,21 @@ class SolutionGenerator:
                         print(f"Module {module.id} week {week + 1} has no population, all the remaining chapter are already assigned on previous weeks")
                         print("Skipping to next module")
                         break
-                    weekly_chromosome = self.algorithm.run(population=weekly_population)
+                    weekly_chromosome, weekly_log = self.algorithm.run(population=weekly_population)
                     self.best_chromosome += weekly_chromosome
+                    for entry in weekly_log:
+                        entry.update({
+                            "module_id": module.id,
+                            "week": week + 1
+                        })
+                    all_iteration_logs.extend(weekly_log)                  
+                    
                     
         
             for key, value in self.best_chromosome.get_grouped_fitness().items():
                 print(f"Grouped fitness for {key}: {value}")
-                    
+            
+            solution.iteration_log = all_iteration_logs
             self.time_elapsed = time.time() - time_start
             self.create_schedule_data(solution)
             self.update_solution(solution)
@@ -157,7 +165,9 @@ class SolutionGenerator:
         return solution
     
     def generate_solution_weekly_test(self) -> Solution:
+        all_iteration_logs = []
         try:
+            time_start = time.time()
             self.best_chromosome = Chromosome()
             modules = ModuleData.get_modules_by_semester(self.config['semester'])
             for module in modules:
@@ -168,14 +178,24 @@ class SolutionGenerator:
                     weekly_population = factory_instance.generate_population(population_size=self.config.get_population_size(), module_id=module.id)
                     if len(weekly_population) == 0:
                         print(f"Module {module.id} week {week + 1} has no population, all the remaining chapter are already assigned on previous weeks")
-                        print("Starting the schedule generation algorithm...")
+                        print("Skipping to next module")
                         break
-                    weekly_chromosome = self.algorithm.run(population=weekly_population)
+                    weekly_chromosome, weekly_log = self.algorithm.run(population=weekly_population)
                     self.best_chromosome += weekly_chromosome
+                    for entry in weekly_log:
+                        entry.update({
+                            "module_id": module.id,
+                            "week": week + 1
+                        })
+                    all_iteration_logs.extend(weekly_log)                  
+
+            for key, value in self.best_chromosome.get_grouped_fitness().items():
+                print(f"Grouped fitness for {key}: {value}")
+            self.time_elapsed = time.time() - time_start
         except Exception as e:
             raise e
         self.created_solution = None
-        return self.best_chromosome
+        return self.best_chromosome, all_iteration_logs
             
     def test(self):
         self.algorithm.run()
@@ -204,7 +224,7 @@ class SolutionGenerator:
         solution.mutation = data.get_mutation_config()
         solution.repair = data.get_repair_config()
         solution.neighborhood = data.get_neighborhood_config()
-        solution.algorithm = data.get_algorithm()
+        solution.algorithm = data.get_main_algorithm()
         solution.local_search = data.get_local_search()
         solution.max_iteration = data.get_max_iteration()
         solution.population_size = data.get_population_size()
