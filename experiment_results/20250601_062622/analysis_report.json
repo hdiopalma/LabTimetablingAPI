@@ -1,0 +1,164 @@
+{
+  "summary": [
+    {
+      "algorithm": "genetic_algorithm",
+      "MBF": 13.516666666666664,
+      "MBF_std": 2.3413941224795134,
+      "AES": 18331.666666666668,
+      "SR": 3.3333333333333335,
+      "avg_time": 23.27700071334839,
+      "time_std": 3.0474681679140856
+    },
+    {
+      "algorithm": "genetic_local_search_sa",
+      "MBF": 19.16,
+      "MBF_std": 2.839815438393476,
+      "AES": 19308.333333333332,
+      "SR": 0.0,
+      "avg_time": 50.298770229021706,
+      "time_std": 6.501146801468022
+    },
+    {
+      "algorithm": "genetic_local_search_tabu",
+      "MBF": 19.266666666666666,
+      "MBF_std": 3.2840611247759033,
+      "AES": 18275.0,
+      "SR": 0.0,
+      "avg_time": 37.76944383780162,
+      "time_std": 4.83978506098184
+    }
+  ],
+  "detailed_data": {
+    "fitness_stats": {
+      "count": {
+        "genetic_algorithm": 30.0,
+        "genetic_local_search_sa": 30.0,
+        "genetic_local_search_tabu": 30.0
+      },
+      "mean": {
+        "genetic_algorithm": 13.516666666666664,
+        "genetic_local_search_sa": 19.16,
+        "genetic_local_search_tabu": 19.266666666666666
+      },
+      "std": {
+        "genetic_algorithm": 2.3413941224795134,
+        "genetic_local_search_sa": 2.839815438393476,
+        "genetic_local_search_tabu": 3.2840611247759033
+      },
+      "min": {
+        "genetic_algorithm": 9.8,
+        "genetic_local_search_sa": 13.8,
+        "genetic_local_search_tabu": 12.799999999999999
+      },
+      "25%": {
+        "genetic_algorithm": 12.2,
+        "genetic_local_search_sa": 17.325,
+        "genetic_local_search_tabu": 17.2
+      },
+      "50%": {
+        "genetic_algorithm": 12.8,
+        "genetic_local_search_sa": 19.450000000000003,
+        "genetic_local_search_tabu": 19.799999999999997
+      },
+      "75%": {
+        "genetic_algorithm": 15.149999999999999,
+        "genetic_local_search_sa": 20.975,
+        "genetic_local_search_tabu": 21.275
+      },
+      "max": {
+        "genetic_algorithm": 19.3,
+        "genetic_local_search_sa": 24.199999999999996,
+        "genetic_local_search_tabu": 24.4
+      }
+    },
+    "time_stats": {
+      "count": {
+        "genetic_algorithm": 30.0,
+        "genetic_local_search_sa": 30.0,
+        "genetic_local_search_tabu": 30.0
+      },
+      "mean": {
+        "genetic_algorithm": 23.27700071334839,
+        "genetic_local_search_sa": 50.298770229021706,
+        "genetic_local_search_tabu": 37.76944383780162
+      },
+      "std": {
+        "genetic_algorithm": 3.0474681679140856,
+        "genetic_local_search_sa": 6.501146801468022,
+        "genetic_local_search_tabu": 4.83978506098184
+      },
+      "min": {
+        "genetic_algorithm": 15.680907011032104,
+        "genetic_local_search_sa": 36.086326122283936,
+        "genetic_local_search_tabu": 26.743810892105103
+      },
+      "25%": {
+        "genetic_algorithm": 21.615679562091827,
+        "genetic_local_search_sa": 47.79451102018356,
+        "genetic_local_search_tabu": 36.07105773687363
+      },
+      "50%": {
+        "genetic_algorithm": 23.21669852733612,
+        "genetic_local_search_sa": 50.11863076686859,
+        "genetic_local_search_tabu": 37.42446315288544
+      },
+      "75%": {
+        "genetic_algorithm": 25.40587705373764,
+        "genetic_local_search_sa": 53.197316348552704,
+        "genetic_local_search_tabu": 40.368598103523254
+      },
+      "max": {
+        "genetic_algorithm": 28.969866514205933,
+        "genetic_local_search_sa": 64.03862237930298,
+        "genetic_local_search_tabu": 49.62837600708008
+      }
+    },
+    "convergence_stats": {
+      "count": {
+        "genetic_algorithm": 30.0,
+        "genetic_local_search_sa": 30.0,
+        "genetic_local_search_tabu": 30.0
+      },
+      "mean": {
+        "genetic_algorithm": 366.6333333333333,
+        "genetic_local_search_sa": 386.1666666666667,
+        "genetic_local_search_tabu": 365.5
+      },
+      "std": {
+        "genetic_algorithm": 69.72828216250085,
+        "genetic_local_search_sa": 63.45679134510421,
+        "genetic_local_search_tabu": 51.94609274742556
+      },
+      "min": {
+        "genetic_algorithm": 220.0,
+        "genetic_local_search_sa": 248.0,
+        "genetic_local_search_tabu": 241.0
+      },
+      "25%": {
+        "genetic_algorithm": 312.75,
+        "genetic_local_search_sa": 341.25,
+        "genetic_local_search_tabu": 337.0
+      },
+      "50%": {
+        "genetic_algorithm": 359.0,
+        "genetic_local_search_sa": 371.0,
+        "genetic_local_search_tabu": 363.5
+      },
+      "75%": {
+        "genetic_algorithm": 410.5,
+        "genetic_local_search_sa": 421.5,
+        "genetic_local_search_tabu": 391.25
+      },
+      "max": {
+        "genetic_algorithm": 499.0,
+        "genetic_local_search_sa": 499.0,
+        "genetic_local_search_tabu": 472.0
+      }
+    }
+  },
+  "plots": [
+    "fitness_comparison.png",
+    "time_comparison.png",
+    "convergence_comparison.png"
+  ]
+}

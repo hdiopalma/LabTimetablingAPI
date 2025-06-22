@@ -1,0 +1,120 @@
+
+            <html>
+            <head>
+                <title>Report - GA</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        margin: 40px;
+                        line-height: 1.6;
+                    }
+                    h1 {
+                        color: #2c3e50;
+                    }
+                    table {
+                        border-collapse: collapse;
+                        width: 100%;
+                        margin-top: 20px;
+                        margin-bottom: 30px;
+                    }
+                    th, td {
+                        border: 1px solid #ddd;
+                        padding: 8px;
+                        text-align: center;
+                    }
+                    th {
+                        background-color: #3498db;
+                        color: white;
+                    }
+                    tr:nth-child(even) { background-color: #f2f2f2; }
+                    img {
+                        max-width: 100%;
+                        height: auto;
+                        margin-top: 20px;
+                    }
+                    .note {
+                        font-size: 0.9em;
+                        color: gray;
+                    }
+                </style>
+            </head>
+            <body>
+                <h1>Algorithm Report: GA</h1>
+                <p><strong>Total Trials:</strong> 30</p>
+                <p><strong>Success Rate:</strong> 20.00%</p>
+                <h2>Summary Statistics</h2>
+                <table class="dataframe stats">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>trial</th>
+      <th>final_fitness</th>
+      <th>computation_time</th>
+      <th>total_iterations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>30.000000</td>
+      <td>30.000000</td>
+      <td>30.000000</td>
+      <td>30.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>15.500000</td>
+      <td>12.003333</td>
+      <td>24.558194</td>
+      <td>1158.366667</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>8.803408</td>
+      <td>2.739051</td>
+      <td>2.516310</td>
+      <td>131.524872</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>6.200000</td>
+      <td>19.509365</td>
+      <td>879.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>8.250000</td>
+      <td>10.300000</td>
+      <td>22.944164</td>
+      <td>1072.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>15.500000</td>
+      <td>12.050000</td>
+      <td>24.078696</td>
+      <td>1151.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>22.750000</td>
+      <td>13.825000</td>
+      <td>26.578822</td>
+      <td>1227.750000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>30.000000</td>
+      <td>18.200000</td>
+      <td>29.386854</td>
+      <td>1420.000000</td>
+    </tr>
+  </tbody>
+</table>
+                <h2>Fitness Convergence</h2>
+                <img src="GA_convergence.png" alt="Convergence Graph">
+                <p class="note">Lines in gray = individual trials, blue = average.</p>
+            </body>
+            </html>
+            

@@ -1,0 +1,10062 @@
+{
+  "solution": {
+    "genes": [
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 1,
+        "assistant": 1,
+        "time_slot": [
+          1663054200.53,
+          "Tuesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 1,
+        "assistant": 1,
+        "time_slot": [
+          1663399800.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 2,
+        "assistant": 4,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 2,
+        "assistant": 3,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 3,
+        "assistant": 6,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 3,
+        "assistant": 6,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 4,
+        "assistant": 2,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 4,
+        "assistant": 1,
+        "time_slot": [
+          1663399800.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 5,
+        "assistant": 2,
+        "time_slot": [
+          1663399800.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 5,
+        "assistant": 2,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 6,
+        "assistant": 6,
+        "time_slot": [
+          1663399800.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 6,
+        "assistant": 2,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 7,
+        "assistant": 5,
+        "time_slot": [
+          1662967800.53,
+          "Monday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 7,
+        "assistant": 6,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 8,
+        "assistant": 3,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 8,
+        "assistant": 4,
+        "time_slot": [
+          1663313400.53,
+          "Friday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 9,
+        "assistant": 4,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 9,
+        "assistant": 4,
+        "time_slot": [
+          1663313400.53,
+          "Friday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 10,
+        "assistant": 1,
+        "time_slot": [
+          1663054200.53,
+          "Tuesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 10,
+        "assistant": 1,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 11,
+        "assistant": 2,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 11,
+        "assistant": 3,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 12,
+        "assistant": 6,
+        "time_slot": [
+          1662967800.53,
+          "Monday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 12,
+        "assistant": 1,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 13,
+        "assistant": 6,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 13,
+        "assistant": 5,
+        "time_slot": [
+          1663313400.53,
+          "Friday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 14,
+        "assistant": 2,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 14,
+        "assistant": 6,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 15,
+        "assistant": 5,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 15,
+        "assistant": 1,
+        "time_slot": [
+          1662967800.53,
+          "Monday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 16,
+        "assistant": 4,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 16,
+        "assistant": 2,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 17,
+        "assistant": 1,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 17,
+        "assistant": 1,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 18,
+        "assistant": 2,
+        "time_slot": [
+          1663399800.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 18,
+        "assistant": 3,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 19,
+        "assistant": 3,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 19,
+        "assistant": 4,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 20,
+        "assistant": 4,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 20,
+        "assistant": 4,
+        "time_slot": [
+          1663313400.53,
+          "Friday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 21,
+        "assistant": 3,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 21,
+        "assistant": 3,
+        "time_slot": [
+          1662967800.53,
+          "Monday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 22,
+        "assistant": 3,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 22,
+        "assistant": 3,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 23,
+        "assistant": 3,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 23,
+        "assistant": 3,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 24,
+        "assistant": 1,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 24,
+        "assistant": 4,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 25,
+        "assistant": 1,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 25,
+        "assistant": 5,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 26,
+        "assistant": 4,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 26,
+        "assistant": 4,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 27,
+        "assistant": 4,
+        "time_slot": [
+          1663399800.53,
+          "Saturday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 27,
+        "assistant": 1,
+        "time_slot": [
+          1662967800.53,
+          "Monday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 28,
+        "assistant": 6,
+        "time_slot": [
+          1662967800.53,
+          "Monday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 28,
+        "assistant": 5,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 29,
+        "assistant": 4,
+        "time_slot": [
+          1663399800.53,
+          "Saturday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 29,
+        "assistant": 5,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 30,
+        "assistant": 4,
+        "time_slot": [
+          1663313400.53,
+          "Friday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 30,
+        "assistant": 4,
+        "time_slot": [
+          1663313400.53,
+          "Friday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 31,
+        "assistant": 1,
+        "time_slot": [
+          1663054200.53,
+          "Tuesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 31,
+        "assistant": 5,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 32,
+        "assistant": 2,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 32,
+        "assistant": 2,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 33,
+        "assistant": 5,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 33,
+        "assistant": 2,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 34,
+        "assistant": 5,
+        "time_slot": [
+          1662967800.53,
+          "Monday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 34,
+        "assistant": 6,
+        "time_slot": [
+          1663227000.53,
+          "Thursday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 35,
+        "assistant": 6,
+        "time_slot": [
+          1663399800.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 35,
+        "assistant": 6,
+        "time_slot": [
+          1662967800.53,
+          "Monday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 1,
+        "group": 36,
+        "assistant": 3,
+        "time_slot": [
+          1663140600.53,
+          "Wednesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 2,
+        "group": 36,
+        "assistant": 3,
+        "time_slot": [
+          1662967800.53,
+          "Monday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 1,
+        "assistant": 6,
+        "time_slot": [
+          1663918200.53,
+          "Friday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 1,
+        "assistant": 6,
+        "time_slot": [
+          1664004600.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 2,
+        "assistant": 6,
+        "time_slot": [
+          1663659000.53,
+          "Tuesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 2,
+        "assistant": 6,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 3,
+        "assistant": 3,
+        "time_slot": [
+          1664004600.53,
+          "Saturday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 3,
+        "assistant": 4,
+        "time_slot": [
+          1663831800.53,
+          "Thursday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 4,
+        "assistant": 4,
+        "time_slot": [
+          1663918200.53,
+          "Friday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 4,
+        "assistant": 4,
+        "time_slot": [
+          1663831800.53,
+          "Thursday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 5,
+        "assistant": 2,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 5,
+        "assistant": 1,
+        "time_slot": [
+          1664004600.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 6,
+        "assistant": 3,
+        "time_slot": [
+          1664004600.53,
+          "Saturday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 6,
+        "assistant": 3,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 7,
+        "assistant": 5,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 7,
+        "assistant": 5,
+        "time_slot": [
+          1663572600.53,
+          "Monday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 8,
+        "assistant": 4,
+        "time_slot": [
+          1663831800.53,
+          "Thursday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 8,
+        "assistant": 3,
+        "time_slot": [
+          1663918200.53,
+          "Friday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 9,
+        "assistant": 1,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 9,
+        "assistant": 3,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 10,
+        "assistant": 5,
+        "time_slot": [
+          1663831800.53,
+          "Thursday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 10,
+        "assistant": 3,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 11,
+        "assistant": 1,
+        "time_slot": [
+          1664004600.53,
+          "Saturday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 11,
+        "assistant": 1,
+        "time_slot": [
+          1663918200.53,
+          "Friday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 12,
+        "assistant": 2,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 12,
+        "assistant": 3,
+        "time_slot": [
+          1663831800.53,
+          "Thursday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 13,
+        "assistant": 4,
+        "time_slot": [
+          1663831800.53,
+          "Thursday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 13,
+        "assistant": 6,
+        "time_slot": [
+          1663918200.53,
+          "Friday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 14,
+        "assistant": 5,
+        "time_slot": [
+          1664004600.53,
+          "Saturday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 14,
+        "assistant": 2,
+        "time_slot": [
+          1663831800.53,
+          "Thursday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 15,
+        "assistant": 2,
+        "time_slot": [
+          1663918200.53,
+          "Friday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 15,
+        "assistant": 3,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 16,
+        "assistant": 1,
+        "time_slot": [
+          1664004600.53,
+          "Saturday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 16,
+        "assistant": 1,
+        "time_slot": [
+          1664004600.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 17,
+        "assistant": 6,
+        "time_slot": [
+          1663659000.53,
+          "Tuesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 17,
+        "assistant": 6,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 18,
+        "assistant": 1,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 18,
+        "assistant": 6,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 19,
+        "assistant": 5,
+        "time_slot": [
+          1663572600.53,
+          "Monday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 19,
+        "assistant": 5,
+        "time_slot": [
+          1663572600.53,
+          "Monday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 20,
+        "assistant": 2,
+        "time_slot": [
+          1663918200.53,
+          "Friday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 20,
+        "assistant": 6,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 21,
+        "assistant": 6,
+        "time_slot": [
+          1663659000.53,
+          "Tuesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 21,
+        "assistant": 4,
+        "time_slot": [
+          1663831800.53,
+          "Thursday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 22,
+        "assistant": 4,
+        "time_slot": [
+          1663831800.53,
+          "Thursday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 22,
+        "assistant": 6,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 23,
+        "assistant": 5,
+        "time_slot": [
+          1664004600.53,
+          "Saturday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 23,
+        "assistant": 6,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 24,
+        "assistant": 4,
+        "time_slot": [
+          1663918200.53,
+          "Friday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 24,
+        "assistant": 6,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 25,
+        "assistant": 4,
+        "time_slot": [
+          1663918200.53,
+          "Friday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 25,
+        "assistant": 4,
+        "time_slot": [
+          1663659000.53,
+          "Tuesday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 26,
+        "assistant": 1,
+        "time_slot": [
+          1664004600.53,
+          "Saturday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 26,
+        "assistant": 6,
+        "time_slot": [
+          1663918200.53,
+          "Friday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 27,
+        "assistant": 5,
+        "time_slot": [
+          1663572600.53,
+          "Monday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 27,
+        "assistant": 6,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 28,
+        "assistant": 2,
+        "time_slot": [
+          1664004600.53,
+          "Saturday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 28,
+        "assistant": 2,
+        "time_slot": [
+          1663659000.53,
+          "Tuesday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 29,
+        "assistant": 2,
+        "time_slot": [
+          1664004600.53,
+          "Saturday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 29,
+        "assistant": 6,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 30,
+        "assistant": 4,
+        "time_slot": [
+          1663831800.53,
+          "Thursday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 30,
+        "assistant": 3,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 31,
+        "assistant": 5,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 31,
+        "assistant": 3,
+        "time_slot": [
+          1663918200.53,
+          "Friday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 32,
+        "assistant": 1,
+        "time_slot": [
+          1664004600.53,
+          "Saturday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 32,
+        "assistant": 1,
+        "time_slot": [
+          1663918200.53,
+          "Friday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 33,
+        "assistant": 5,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 33,
+        "assistant": 1,
+        "time_slot": [
+          1663918200.53,
+          "Friday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 34,
+        "assistant": 2,
+        "time_slot": [
+          1664004600.53,
+          "Saturday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 34,
+        "assistant": 2,
+        "time_slot": [
+          1663831800.53,
+          "Thursday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 35,
+        "assistant": 1,
+        "time_slot": [
+          1663745400.53,
+          "Wednesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 35,
+        "assistant": 1,
+        "time_slot": [
+          1664004600.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 3,
+        "group": 36,
+        "assistant": 5,
+        "time_slot": [
+          1664004600.53,
+          "Saturday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 4,
+        "group": 36,
+        "assistant": 3,
+        "time_slot": [
+          1663831800.53,
+          "Thursday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 1,
+        "assistant": 2,
+        "time_slot": [
+          1664177400.53,
+          "Monday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 1,
+        "assistant": 3,
+        "time_slot": [
+          1664523000.53,
+          "Friday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 2,
+        "assistant": 6,
+        "time_slot": [
+          1664436600.53,
+          "Thursday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 2,
+        "assistant": 6,
+        "time_slot": [
+          1664263800.53,
+          "Tuesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 3,
+        "assistant": 2,
+        "time_slot": [
+          1664350200.53,
+          "Wednesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 3,
+        "assistant": 5,
+        "time_slot": [
+          1664523000.53,
+          "Friday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 4,
+        "assistant": 4,
+        "time_slot": [
+          1664436600.53,
+          "Thursday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 4,
+        "assistant": 5,
+        "time_slot": [
+          1664523000.53,
+          "Friday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 5,
+        "assistant": 6,
+        "time_slot": [
+          1664609400.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 5,
+        "assistant": 5,
+        "time_slot": [
+          1664350200.53,
+          "Wednesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 6,
+        "assistant": 6,
+        "time_slot": [
+          1664436600.53,
+          "Thursday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 6,
+        "assistant": 6,
+        "time_slot": [
+          1664523000.53,
+          "Friday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 7,
+        "assistant": 4,
+        "time_slot": [
+          1664177400.53,
+          "Monday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 7,
+        "assistant": 1,
+        "time_slot": [
+          1664523000.53,
+          "Friday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 8,
+        "assistant": 6,
+        "time_slot": [
+          1664436600.53,
+          "Thursday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 8,
+        "assistant": 6,
+        "time_slot": [
+          1664523000.53,
+          "Friday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 9,
+        "assistant": 1,
+        "time_slot": [
+          1664350200.53,
+          "Wednesday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 9,
+        "assistant": 4,
+        "time_slot": [
+          1664523000.53,
+          "Friday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 10,
+        "assistant": 6,
+        "time_slot": [
+          1664436600.53,
+          "Thursday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 10,
+        "assistant": 5,
+        "time_slot": [
+          1664523000.53,
+          "Friday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 11,
+        "assistant": 3,
+        "time_slot": [
+          1664436600.53,
+          "Thursday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 11,
+        "assistant": 6,
+        "time_slot": [
+          1664609400.53,
+          "Saturday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 12,
+        "assistant": 2,
+        "time_slot": [
+          1664436600.53,
+          "Thursday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 12,
+        "assistant": 3,
+        "time_slot": [
+          1664436600.53,
+          "Thursday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 13,
+        "assistant": 1,
+        "time_slot": [
+          1664436600.53,
+          "Thursday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 13,
+        "assistant": 6,
+        "time_slot": [
+          1664177400.53,
+          "Monday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 14,
+        "assistant": 4,
+        "time_slot": [
+          1664436600.53,
+          "Thursday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 14,
+        "assistant": 2,
+        "time_slot": [
+          1664609400.53,
+          "Saturday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 15,
+        "assistant": 2,
+        "time_slot": [
+          1664177400.53,
+          "Monday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 15,
+        "assistant": 1,
+        "time_slot": [
+          1664523000.53,
+          "Friday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 16,
+        "assistant": 1,
+        "time_slot": [
+          1664350200.53,
+          "Wednesday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 16,
+        "assistant": 3,
+        "time_slot": [
+          1664609400.53,
+          "Saturday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 17,
+        "assistant": 6,
+        "time_slot": [
+          1664436600.53,
+          "Thursday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 17,
+        "assistant": 3,
+        "time_slot": [
+          1664609400.53,
+          "Saturday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 18,
+        "assistant": 6,
+        "time_slot": [
+          1664609400.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 18,
+        "assistant": 6,
+        "time_slot": [
+          1664263800.53,
+          "Tuesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 19,
+        "assistant": 2,
+        "time_slot": [
+          1664177400.53,
+          "Monday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 19,
+        "assistant": 2,
+        "time_slot": [
+          1664609400.53,
+          "Saturday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 20,
+        "assistant": 4,
+        "time_slot": [
+          1664436600.53,
+          "Thursday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 20,
+        "assistant": 6,
+        "time_slot": [
+          1664523000.53,
+          "Friday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 21,
+        "assistant": 1,
+        "time_slot": [
+          1664263800.53,
+          "Tuesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 21,
+        "assistant": 1,
+        "time_slot": [
+          1664523000.53,
+          "Friday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 22,
+        "assistant": 1,
+        "time_slot": [
+          1664263800.53,
+          "Tuesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 22,
+        "assistant": 5,
+        "time_slot": [
+          1664177400.53,
+          "Monday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 23,
+        "assistant": 4,
+        "time_slot": [
+          1664177400.53,
+          "Monday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 23,
+        "assistant": 4,
+        "time_slot": [
+          1664263800.53,
+          "Tuesday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 24,
+        "assistant": 2,
+        "time_slot": [
+          1664350200.53,
+          "Wednesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 24,
+        "assistant": 6,
+        "time_slot": [
+          1664609400.53,
+          "Saturday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 25,
+        "assistant": 3,
+        "time_slot": [
+          1664523000.53,
+          "Friday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 25,
+        "assistant": 5,
+        "time_slot": [
+          1664350200.53,
+          "Wednesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 26,
+        "assistant": 6,
+        "time_slot": [
+          1664609400.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 26,
+        "assistant": 6,
+        "time_slot": [
+          1664523000.53,
+          "Friday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 27,
+        "assistant": 4,
+        "time_slot": [
+          1664177400.53,
+          "Monday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 27,
+        "assistant": 4,
+        "time_slot": [
+          1664263800.53,
+          "Tuesday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 28,
+        "assistant": 1,
+        "time_slot": [
+          1664263800.53,
+          "Tuesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 28,
+        "assistant": 6,
+        "time_slot": [
+          1664263800.53,
+          "Tuesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 29,
+        "assistant": 4,
+        "time_slot": [
+          1664436600.53,
+          "Thursday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 29,
+        "assistant": 5,
+        "time_slot": [
+          1664177400.53,
+          "Monday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 30,
+        "assistant": 6,
+        "time_slot": [
+          1664263800.53,
+          "Tuesday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 30,
+        "assistant": 3,
+        "time_slot": [
+          1664523000.53,
+          "Friday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 31,
+        "assistant": 1,
+        "time_slot": [
+          1664436600.53,
+          "Thursday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 31,
+        "assistant": 2,
+        "time_slot": [
+          1664609400.53,
+          "Saturday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 32,
+        "assistant": 4,
+        "time_slot": [
+          1664436600.53,
+          "Thursday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 32,
+        "assistant": 5,
+        "time_slot": [
+          1664177400.53,
+          "Monday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 33,
+        "assistant": 5,
+        "time_slot": [
+          1664350200.53,
+          "Wednesday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 33,
+        "assistant": 5,
+        "time_slot": [
+          1664350200.53,
+          "Wednesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 34,
+        "assistant": 3,
+        "time_slot": [
+          1664436600.53,
+          "Thursday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 34,
+        "assistant": 2,
+        "time_slot": [
+          1664609400.53,
+          "Saturday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 35,
+        "assistant": 3,
+        "time_slot": [
+          1664523000.53,
+          "Friday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 35,
+        "assistant": 2,
+        "time_slot": [
+          1664609400.53,
+          "Saturday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 5,
+        "group": 36,
+        "assistant": 6,
+        "time_slot": [
+          1664436600.53,
+          "Thursday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 6,
+        "group": 36,
+        "assistant": 6,
+        "time_slot": [
+          1664177400.53,
+          "Monday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 1,
+        "assistant": 4,
+        "time_slot": [
+          1665041400.53,
+          "Thursday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 1,
+        "assistant": 3,
+        "time_slot": [
+          1665127800.53,
+          "Friday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 2,
+        "assistant": 1,
+        "time_slot": [
+          1664782200.53,
+          "Monday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 2,
+        "assistant": 1,
+        "time_slot": [
+          1664955000.53,
+          "Wednesday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 3,
+        "assistant": 4,
+        "time_slot": [
+          1664868600.53,
+          "Tuesday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 3,
+        "assistant": 1,
+        "time_slot": [
+          1665214200.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 4,
+        "assistant": 6,
+        "time_slot": [
+          1665041400.53,
+          "Thursday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 4,
+        "assistant": 5,
+        "time_slot": [
+          1665127800.53,
+          "Friday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 5,
+        "assistant": 3,
+        "time_slot": [
+          1665214200.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 5,
+        "assistant": 5,
+        "time_slot": [
+          1664955000.53,
+          "Wednesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 6,
+        "assistant": 2,
+        "time_slot": [
+          1665041400.53,
+          "Thursday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 6,
+        "assistant": 2,
+        "time_slot": [
+          1665214200.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 7,
+        "assistant": 3,
+        "time_slot": [
+          1665214200.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 7,
+        "assistant": 5,
+        "time_slot": [
+          1665041400.53,
+          "Thursday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 8,
+        "assistant": 4,
+        "time_slot": [
+          1665041400.53,
+          "Thursday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 8,
+        "assistant": 4,
+        "time_slot": [
+          1665127800.53,
+          "Friday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 9,
+        "assistant": 5,
+        "time_slot": [
+          1664955000.53,
+          "Wednesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 9,
+        "assistant": 1,
+        "time_slot": [
+          1664955000.53,
+          "Wednesday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 10,
+        "assistant": 1,
+        "time_slot": [
+          1664955000.53,
+          "Wednesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 10,
+        "assistant": 3,
+        "time_slot": [
+          1664955000.53,
+          "Wednesday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 11,
+        "assistant": 6,
+        "time_slot": [
+          1664955000.53,
+          "Wednesday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 11,
+        "assistant": 1,
+        "time_slot": [
+          1665214200.53,
+          "Saturday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 12,
+        "assistant": 2,
+        "time_slot": [
+          1665041400.53,
+          "Thursday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 12,
+        "assistant": 5,
+        "time_slot": [
+          1665041400.53,
+          "Thursday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 13,
+        "assistant": 3,
+        "time_slot": [
+          1665041400.53,
+          "Thursday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 13,
+        "assistant": 3,
+        "time_slot": [
+          1664955000.53,
+          "Wednesday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 14,
+        "assistant": 3,
+        "time_slot": [
+          1665041400.53,
+          "Thursday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 14,
+        "assistant": 3,
+        "time_slot": [
+          1665214200.53,
+          "Saturday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 15,
+        "assistant": 1,
+        "time_slot": [
+          1664782200.53,
+          "Monday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 15,
+        "assistant": 3,
+        "time_slot": [
+          1665127800.53,
+          "Friday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 16,
+        "assistant": 2,
+        "time_slot": [
+          1665041400.53,
+          "Thursday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 16,
+        "assistant": 2,
+        "time_slot": [
+          1665214200.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 17,
+        "assistant": 1,
+        "time_slot": [
+          1664955000.53,
+          "Wednesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 17,
+        "assistant": 3,
+        "time_slot": [
+          1664955000.53,
+          "Wednesday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 18,
+        "assistant": 2,
+        "time_slot": [
+          1665127800.53,
+          "Friday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 18,
+        "assistant": 2,
+        "time_slot": [
+          1664955000.53,
+          "Wednesday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 19,
+        "assistant": 4,
+        "time_slot": [
+          1665041400.53,
+          "Thursday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 19,
+        "assistant": 3,
+        "time_slot": [
+          1665127800.53,
+          "Friday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 20,
+        "assistant": 6,
+        "time_slot": [
+          1664955000.53,
+          "Wednesday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 20,
+        "assistant": 6,
+        "time_slot": [
+          1665127800.53,
+          "Friday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 21,
+        "assistant": 4,
+        "time_slot": [
+          1665127800.53,
+          "Friday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 21,
+        "assistant": 5,
+        "time_slot": [
+          1664955000.53,
+          "Wednesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 22,
+        "assistant": 2,
+        "time_slot": [
+          1664868600.53,
+          "Tuesday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 22,
+        "assistant": 5,
+        "time_slot": [
+          1665127800.53,
+          "Friday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 23,
+        "assistant": 6,
+        "time_slot": [
+          1665127800.53,
+          "Friday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 23,
+        "assistant": 3,
+        "time_slot": [
+          1665214200.53,
+          "Saturday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 24,
+        "assistant": 3,
+        "time_slot": [
+          1665214200.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 24,
+        "assistant": 3,
+        "time_slot": [
+          1664955000.53,
+          "Wednesday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 25,
+        "assistant": 5,
+        "time_slot": [
+          1664782200.53,
+          "Monday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 25,
+        "assistant": 5,
+        "time_slot": [
+          1665127800.53,
+          "Friday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 26,
+        "assistant": 4,
+        "time_slot": [
+          1665041400.53,
+          "Thursday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 26,
+        "assistant": 5,
+        "time_slot": [
+          1664782200.53,
+          "Monday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 27,
+        "assistant": 4,
+        "time_slot": [
+          1665041400.53,
+          "Thursday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 27,
+        "assistant": 6,
+        "time_slot": [
+          1664868600.53,
+          "Tuesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 28,
+        "assistant": 4,
+        "time_slot": [
+          1664868600.53,
+          "Tuesday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 28,
+        "assistant": 4,
+        "time_slot": [
+          1665127800.53,
+          "Friday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 29,
+        "assistant": 2,
+        "time_slot": [
+          1664868600.53,
+          "Tuesday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 29,
+        "assistant": 2,
+        "time_slot": [
+          1665041400.53,
+          "Thursday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 30,
+        "assistant": 3,
+        "time_slot": [
+          1665041400.53,
+          "Thursday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 30,
+        "assistant": 3,
+        "time_slot": [
+          1664955000.53,
+          "Wednesday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 31,
+        "assistant": 5,
+        "time_slot": [
+          1664782200.53,
+          "Monday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 31,
+        "assistant": 5,
+        "time_slot": [
+          1664955000.53,
+          "Wednesday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 32,
+        "assistant": 5,
+        "time_slot": [
+          1664955000.53,
+          "Wednesday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 32,
+        "assistant": 5,
+        "time_slot": [
+          1664782200.53,
+          "Monday",
+          "Shift1"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 33,
+        "assistant": 4,
+        "time_slot": [
+          1665127800.53,
+          "Friday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 33,
+        "assistant": 2,
+        "time_slot": [
+          1664955000.53,
+          "Wednesday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 34,
+        "assistant": 2,
+        "time_slot": [
+          1665127800.53,
+          "Friday",
+          "Shift6"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 34,
+        "assistant": 2,
+        "time_slot": [
+          1665041400.53,
+          "Thursday",
+          "Shift5"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 35,
+        "assistant": 2,
+        "time_slot": [
+          1664868600.53,
+          "Tuesday",
+          "Shift4"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 35,
+        "assistant": 2,
+        "time_slot": [
+          1665214200.53,
+          "Saturday",
+          "Shift3"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 7,
+        "group": 36,
+        "assistant": 1,
+        "time_slot": [
+          1664782200.53,
+          "Monday",
+          "Shift2"
+        ]
+      },
+      {
+        "laboratory": 1,
+        "module": 1,
+        "chapter": 8,
+        "group": 36,
+        "assistant": 3,
+        "time_slot": [
+          1665214200.53,
+          "Saturday",
+          "Shift2"
+        ]
+      }
+    ]
+  },
+  "iteration_log": [
+    {
+      "iteration": 0,
+      "best_fitness": 28.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 1,
+      "best_fitness": 27.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 2,
+      "best_fitness": 27.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 3,
+      "best_fitness": 26.400000000000002,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 4,
+      "best_fitness": 26.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 5,
+      "best_fitness": 25.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 6,
+      "best_fitness": 25.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 7,
+      "best_fitness": 24.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 8,
+      "best_fitness": 24.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 9,
+      "best_fitness": 24.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 10,
+      "best_fitness": 24.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 11,
+      "best_fitness": 24.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 12,
+      "best_fitness": 24.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 13,
+      "best_fitness": 22.099999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 14,
+      "best_fitness": 22.099999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 15,
+      "best_fitness": 21.799999999999997,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 16,
+      "best_fitness": 21.799999999999997,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 17,
+      "best_fitness": 21.099999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 18,
+      "best_fitness": 21.099999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 19,
+      "best_fitness": 21.099999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 20,
+      "best_fitness": 20.199999999999996,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 21,
+      "best_fitness": 19.499999999999996,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 22,
+      "best_fitness": 19.499999999999996,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 23,
+      "best_fitness": 19.499999999999996,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 24,
+      "best_fitness": 18.9,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 25,
+      "best_fitness": 17.7,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 26,
+      "best_fitness": 17.099999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 27,
+      "best_fitness": 17.099999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 28,
+      "best_fitness": 17.099999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 29,
+      "best_fitness": 17.099999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 30,
+      "best_fitness": 16.5,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 31,
+      "best_fitness": 16.5,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 32,
+      "best_fitness": 16.5,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 33,
+      "best_fitness": 16.3,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 34,
+      "best_fitness": 15.999999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 35,
+      "best_fitness": 15.999999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 36,
+      "best_fitness": 15.999999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 37,
+      "best_fitness": 15.399999999999999,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 38,
+      "best_fitness": 15.399999999999999,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 39,
+      "best_fitness": 14.999999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 40,
+      "best_fitness": 14.399999999999999,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 41,
+      "best_fitness": 14.399999999999999,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 42,
+      "best_fitness": 14.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 43,
+      "best_fitness": 13.799999999999997,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 44,
+      "best_fitness": 13.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 45,
+      "best_fitness": 13.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 46,
+      "best_fitness": 13.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 47,
+      "best_fitness": 12.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 48,
+      "best_fitness": 12.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 49,
+      "best_fitness": 12.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 50,
+      "best_fitness": 12.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 51,
+      "best_fitness": 12.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 52,
+      "best_fitness": 12.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 53,
+      "best_fitness": 12.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 54,
+      "best_fitness": 12.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 55,
+      "best_fitness": 12.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 56,
+      "best_fitness": 11.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 57,
+      "best_fitness": 11.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 58,
+      "best_fitness": 11.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 59,
+      "best_fitness": 11.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 60,
+      "best_fitness": 11.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 61,
+      "best_fitness": 11.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 62,
+      "best_fitness": 11.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 63,
+      "best_fitness": 11.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 64,
+      "best_fitness": 11.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 65,
+      "best_fitness": 11.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 66,
+      "best_fitness": 11.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 67,
+      "best_fitness": 11.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 68,
+      "best_fitness": 11.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 69,
+      "best_fitness": 11.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 70,
+      "best_fitness": 11.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 71,
+      "best_fitness": 11.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 72,
+      "best_fitness": 11.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 73,
+      "best_fitness": 11.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 74,
+      "best_fitness": 11.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 75,
+      "best_fitness": 11.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 76,
+      "best_fitness": 10.399999999999999,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 77,
+      "best_fitness": 10.399999999999999,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 78,
+      "best_fitness": 10.399999999999999,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 79,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 80,
+      "best_fitness": 9.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 81,
+      "best_fitness": 9.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 82,
+      "best_fitness": 9.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 83,
+      "best_fitness": 9.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 84,
+      "best_fitness": 9.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 85,
+      "best_fitness": 9.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 86,
+      "best_fitness": 9.399999999999999,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 87,
+      "best_fitness": 9.399999999999999,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 88,
+      "best_fitness": 9.399999999999999,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 89,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 90,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 91,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 92,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 93,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 94,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 95,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 96,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 97,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 98,
+      "best_fitness": 8.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 99,
+      "best_fitness": 8.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 100,
+      "best_fitness": 8.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 101,
+      "best_fitness": 8.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 102,
+      "best_fitness": 8.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 103,
+      "best_fitness": 8.599999999999998,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 104,
+      "best_fitness": 7.999999999999999,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 105,
+      "best_fitness": 7.999999999999999,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 106,
+      "best_fitness": 7.3999999999999995,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 107,
+      "best_fitness": 7.3999999999999995,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 108,
+      "best_fitness": 7.3999999999999995,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 109,
+      "best_fitness": 7.3999999999999995,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 110,
+      "best_fitness": 7.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 111,
+      "best_fitness": 7.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 112,
+      "best_fitness": 7.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 113,
+      "best_fitness": 7.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 114,
+      "best_fitness": 6.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 115,
+      "best_fitness": 6.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 116,
+      "best_fitness": 6.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 117,
+      "best_fitness": 6.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 118,
+      "best_fitness": 6.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 119,
+      "best_fitness": 6.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 120,
+      "best_fitness": 6.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 121,
+      "best_fitness": 6.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 122,
+      "best_fitness": 6.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 123,
+      "best_fitness": 6.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 124,
+      "best_fitness": 6.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 125,
+      "best_fitness": 6.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 126,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 127,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 128,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 129,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 130,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 131,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 132,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 133,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 134,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 135,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 136,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 137,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 138,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 139,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 140,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 141,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 142,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 143,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 144,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 145,
+      "best_fitness": 6.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 146,
+      "best_fitness": 6.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 147,
+      "best_fitness": 6.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 148,
+      "best_fitness": 6.0,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 149,
+      "best_fitness": 5.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 150,
+      "best_fitness": 5.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 151,
+      "best_fitness": 5.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 152,
+      "best_fitness": 5.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 153,
+      "best_fitness": 5.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 154,
+      "best_fitness": 5.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 155,
+      "best_fitness": 5.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 156,
+      "best_fitness": 5.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 157,
+      "best_fitness": 5.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 158,
+      "best_fitness": 5.6000000000000005,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 159,
+      "best_fitness": 5.6000000000000005,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 160,
+      "best_fitness": 5.6000000000000005,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 161,
+      "best_fitness": 5.6000000000000005,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 162,
+      "best_fitness": 5.6000000000000005,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 163,
+      "best_fitness": 5.6000000000000005,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 164,
+      "best_fitness": 5.6000000000000005,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 165,
+      "best_fitness": 5.6000000000000005,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 166,
+      "best_fitness": 5.6000000000000005,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 167,
+      "best_fitness": 5.6000000000000005,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 168,
+      "best_fitness": 5.6000000000000005,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 169,
+      "best_fitness": 5.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 170,
+      "best_fitness": 5.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 171,
+      "best_fitness": 5.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 172,
+      "best_fitness": 5.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 173,
+      "best_fitness": 5.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 174,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 175,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 176,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 177,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 178,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 179,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 180,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 181,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 182,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 183,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 184,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 185,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 186,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 187,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 188,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 189,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 190,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 191,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 192,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 193,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 194,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 195,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 196,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 197,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 198,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 199,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 200,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 201,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 202,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 203,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 204,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 205,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 206,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 207,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 208,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 209,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 210,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 211,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 212,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 213,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 214,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 215,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 216,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 217,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 218,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 219,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 220,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 221,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 222,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 223,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 224,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 225,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 226,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 227,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 228,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 229,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 230,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 231,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 232,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 233,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 234,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 235,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 236,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 237,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 238,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 239,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 240,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 241,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 242,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 243,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 244,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 245,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 246,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 247,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 248,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 249,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 250,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 251,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 252,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 253,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 254,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 255,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 256,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 257,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 258,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 259,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 260,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 261,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 262,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 263,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 264,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 265,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 266,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 267,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 268,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 269,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 270,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 271,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 272,
+      "best_fitness": 3.6,
+      "module_id": 1,
+      "week": 1
+    },
+    {
+      "iteration": 0,
+      "best_fitness": 28.9,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 1,
+      "best_fitness": 28.200000000000003,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 2,
+      "best_fitness": 28.200000000000003,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 3,
+      "best_fitness": 26.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 4,
+      "best_fitness": 26.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 5,
+      "best_fitness": 26.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 6,
+      "best_fitness": 26.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 7,
+      "best_fitness": 26.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 8,
+      "best_fitness": 25.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 9,
+      "best_fitness": 24.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 10,
+      "best_fitness": 24.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 11,
+      "best_fitness": 24.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 12,
+      "best_fitness": 23.799999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 13,
+      "best_fitness": 23.200000000000003,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 14,
+      "best_fitness": 23.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 15,
+      "best_fitness": 22.400000000000002,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 16,
+      "best_fitness": 20.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 17,
+      "best_fitness": 20.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 18,
+      "best_fitness": 20.599999999999998,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 19,
+      "best_fitness": 20.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 20,
+      "best_fitness": 19.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 21,
+      "best_fitness": 19.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 22,
+      "best_fitness": 19.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 23,
+      "best_fitness": 18.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 24,
+      "best_fitness": 18.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 25,
+      "best_fitness": 18.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 26,
+      "best_fitness": 18.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 27,
+      "best_fitness": 17.599999999999998,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 28,
+      "best_fitness": 17.599999999999998,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 29,
+      "best_fitness": 17.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 30,
+      "best_fitness": 17.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 31,
+      "best_fitness": 16.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 32,
+      "best_fitness": 16.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 33,
+      "best_fitness": 16.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 34,
+      "best_fitness": 16.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 35,
+      "best_fitness": 16.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 36,
+      "best_fitness": 16.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 37,
+      "best_fitness": 15.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 38,
+      "best_fitness": 15.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 39,
+      "best_fitness": 15.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 40,
+      "best_fitness": 15.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 41,
+      "best_fitness": 15.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 42,
+      "best_fitness": 14.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 43,
+      "best_fitness": 14.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 44,
+      "best_fitness": 14.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 45,
+      "best_fitness": 14.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 46,
+      "best_fitness": 14.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 47,
+      "best_fitness": 14.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 48,
+      "best_fitness": 14.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 49,
+      "best_fitness": 14.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 50,
+      "best_fitness": 14.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 51,
+      "best_fitness": 13.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 52,
+      "best_fitness": 13.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 53,
+      "best_fitness": 13.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 54,
+      "best_fitness": 13.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 55,
+      "best_fitness": 13.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 56,
+      "best_fitness": 13.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 57,
+      "best_fitness": 13.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 58,
+      "best_fitness": 12.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 59,
+      "best_fitness": 12.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 60,
+      "best_fitness": 12.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 61,
+      "best_fitness": 12.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 62,
+      "best_fitness": 12.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 63,
+      "best_fitness": 12.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 64,
+      "best_fitness": 12.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 65,
+      "best_fitness": 12.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 66,
+      "best_fitness": 12.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 67,
+      "best_fitness": 12.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 68,
+      "best_fitness": 11.7,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 69,
+      "best_fitness": 11.7,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 70,
+      "best_fitness": 11.7,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 71,
+      "best_fitness": 11.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 72,
+      "best_fitness": 11.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 73,
+      "best_fitness": 11.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 74,
+      "best_fitness": 11.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 75,
+      "best_fitness": 11.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 76,
+      "best_fitness": 11.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 77,
+      "best_fitness": 11.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 78,
+      "best_fitness": 11.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 79,
+      "best_fitness": 11.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 80,
+      "best_fitness": 11.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 81,
+      "best_fitness": 11.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 82,
+      "best_fitness": 11.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 83,
+      "best_fitness": 11.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 84,
+      "best_fitness": 11.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 85,
+      "best_fitness": 11.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 86,
+      "best_fitness": 10.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 87,
+      "best_fitness": 10.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 88,
+      "best_fitness": 10.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 89,
+      "best_fitness": 10.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 90,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 91,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 92,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 93,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 94,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 95,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 96,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 97,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 98,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 99,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 100,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 101,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 102,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 103,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 104,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 105,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 106,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 107,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 108,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 109,
+      "best_fitness": 9.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 110,
+      "best_fitness": 9.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 111,
+      "best_fitness": 9.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 112,
+      "best_fitness": 9.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 113,
+      "best_fitness": 9.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 114,
+      "best_fitness": 9.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 115,
+      "best_fitness": 9.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 116,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 117,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 118,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 119,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 120,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 121,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 122,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 123,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 124,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 125,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 126,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 127,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 128,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 129,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 130,
+      "best_fitness": 9.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 131,
+      "best_fitness": 8.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 132,
+      "best_fitness": 8.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 133,
+      "best_fitness": 8.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 134,
+      "best_fitness": 8.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 135,
+      "best_fitness": 8.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 136,
+      "best_fitness": 8.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 137,
+      "best_fitness": 8.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 138,
+      "best_fitness": 8.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 139,
+      "best_fitness": 8.4,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 140,
+      "best_fitness": 8.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 141,
+      "best_fitness": 8.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 142,
+      "best_fitness": 8.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 143,
+      "best_fitness": 8.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 144,
+      "best_fitness": 8.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 145,
+      "best_fitness": 8.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 146,
+      "best_fitness": 8.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 147,
+      "best_fitness": 8.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 148,
+      "best_fitness": 8.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 149,
+      "best_fitness": 8.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 150,
+      "best_fitness": 8.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 151,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 152,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 153,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 154,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 155,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 156,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 157,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 158,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 159,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 160,
+      "best_fitness": 7.200000000000001,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 161,
+      "best_fitness": 7.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 162,
+      "best_fitness": 7.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 163,
+      "best_fitness": 7.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 164,
+      "best_fitness": 7.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 165,
+      "best_fitness": 7.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 166,
+      "best_fitness": 7.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 167,
+      "best_fitness": 7.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 168,
+      "best_fitness": 7.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 169,
+      "best_fitness": 7.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 170,
+      "best_fitness": 7.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 171,
+      "best_fitness": 7.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 172,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 173,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 174,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 175,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 176,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 177,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 178,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 179,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 180,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 181,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 182,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 183,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 184,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 185,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 186,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 187,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 188,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 189,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 190,
+      "best_fitness": 6.5,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 191,
+      "best_fitness": 6.5,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 192,
+      "best_fitness": 6.5,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 193,
+      "best_fitness": 6.5,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 194,
+      "best_fitness": 6.5,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 195,
+      "best_fitness": 6.5,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 196,
+      "best_fitness": 6.5,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 197,
+      "best_fitness": 6.5,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 198,
+      "best_fitness": 6.5,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 199,
+      "best_fitness": 6.5,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 200,
+      "best_fitness": 6.5,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 201,
+      "best_fitness": 6.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 202,
+      "best_fitness": 6.0,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 203,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 204,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 205,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 206,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 207,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 208,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 209,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 210,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 211,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 212,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 213,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 214,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 215,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 216,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 217,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 218,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 219,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 220,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 221,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 222,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 223,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 224,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 225,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 226,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 227,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 228,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 229,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 230,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 231,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 232,
+      "best_fitness": 5.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 233,
+      "best_fitness": 5.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 234,
+      "best_fitness": 5.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 235,
+      "best_fitness": 5.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 236,
+      "best_fitness": 5.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 237,
+      "best_fitness": 5.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 238,
+      "best_fitness": 5.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 239,
+      "best_fitness": 5.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 240,
+      "best_fitness": 5.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 241,
+      "best_fitness": 5.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 242,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 243,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 244,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 245,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 246,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 247,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 248,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 249,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 250,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 251,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 252,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 253,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 254,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 255,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 256,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 257,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 258,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 259,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 260,
+      "best_fitness": 5.199999999999999,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 261,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 262,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 263,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 264,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 265,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 266,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 267,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 268,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 269,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 270,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 271,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 272,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 273,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 274,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 275,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 276,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 277,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 278,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 279,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 280,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 281,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 282,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 283,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 284,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 285,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 286,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 287,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 288,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 289,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 290,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 291,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 292,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 293,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 294,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 295,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 296,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 297,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 298,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 299,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 300,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 301,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 302,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 303,
+      "best_fitness": 4.8,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 304,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 305,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 306,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 307,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 308,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 309,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 310,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 311,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 312,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 313,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 314,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 315,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 316,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 317,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 318,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 319,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 320,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 321,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 322,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 323,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 324,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 325,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 326,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 327,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 328,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 329,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 330,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 331,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 332,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 333,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 334,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 335,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 336,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 337,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 338,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 339,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 340,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 341,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 342,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 343,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 344,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 345,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 346,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 347,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 348,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 349,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 350,
+      "best_fitness": 4.6,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 351,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 352,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 353,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 354,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 355,
+      "best_fitness": 4.2,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 356,
+      "best_fitness": 3.5999999999999996,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 357,
+      "best_fitness": 3.5999999999999996,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 358,
+      "best_fitness": 3.5999999999999996,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 359,
+      "best_fitness": 3.5999999999999996,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 360,
+      "best_fitness": 3.5999999999999996,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 361,
+      "best_fitness": 3.5999999999999996,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 362,
+      "best_fitness": 3.5999999999999996,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 363,
+      "best_fitness": 3.5999999999999996,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 364,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 365,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 366,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 367,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 368,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 369,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 370,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 371,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 372,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 373,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 374,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 375,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 376,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 377,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 378,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 379,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 380,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 381,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 382,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 383,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 384,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 385,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 386,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 387,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 388,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 389,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 390,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 391,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 392,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 393,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 394,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 395,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 396,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 397,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 398,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 399,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 400,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 401,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 402,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 403,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 404,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 405,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 406,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 407,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 408,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 409,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 410,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 411,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 412,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 413,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 414,
+      "best_fitness": 3.1999999999999997,
+      "module_id": 1,
+      "week": 2
+    },
+    {
+      "iteration": 0,
+      "best_fitness": 22.8,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 1,
+      "best_fitness": 22.8,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 2,
+      "best_fitness": 21.599999999999998,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 3,
+      "best_fitness": 21.0,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 4,
+      "best_fitness": 20.2,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 5,
+      "best_fitness": 19.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 6,
+      "best_fitness": 18.2,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 7,
+      "best_fitness": 17.799999999999997,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 8,
+      "best_fitness": 17.799999999999997,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 9,
+      "best_fitness": 17.799999999999997,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 10,
+      "best_fitness": 17.199999999999996,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 11,
+      "best_fitness": 17.199999999999996,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 12,
+      "best_fitness": 17.199999999999996,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 13,
+      "best_fitness": 16.599999999999998,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 14,
+      "best_fitness": 16.2,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 15,
+      "best_fitness": 15.999999999999998,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 16,
+      "best_fitness": 15.599999999999998,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 17,
+      "best_fitness": 14.999999999999998,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 18,
+      "best_fitness": 13.799999999999999,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 19,
+      "best_fitness": 13.799999999999999,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 20,
+      "best_fitness": 13.799999999999999,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 21,
+      "best_fitness": 13.799999999999999,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 22,
+      "best_fitness": 13.799999999999999,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 23,
+      "best_fitness": 13.799999999999999,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 24,
+      "best_fitness": 13.7,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 25,
+      "best_fitness": 13.1,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 26,
+      "best_fitness": 12.5,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 27,
+      "best_fitness": 12.5,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 28,
+      "best_fitness": 11.9,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 29,
+      "best_fitness": 11.6,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 30,
+      "best_fitness": 11.5,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 31,
+      "best_fitness": 11.5,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 32,
+      "best_fitness": 11.5,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 33,
+      "best_fitness": 11.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 34,
+      "best_fitness": 11.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 35,
+      "best_fitness": 11.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 36,
+      "best_fitness": 11.2,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 37,
+      "best_fitness": 11.2,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 38,
+      "best_fitness": 11.2,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 39,
+      "best_fitness": 10.7,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 40,
+      "best_fitness": 10.7,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 41,
+      "best_fitness": 10.7,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 42,
+      "best_fitness": 10.1,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 43,
+      "best_fitness": 10.1,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 44,
+      "best_fitness": 10.1,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 45,
+      "best_fitness": 9.5,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 46,
+      "best_fitness": 9.5,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 47,
+      "best_fitness": 9.5,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 48,
+      "best_fitness": 9.5,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 49,
+      "best_fitness": 9.5,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 50,
+      "best_fitness": 9.1,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 51,
+      "best_fitness": 9.1,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 52,
+      "best_fitness": 9.1,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 53,
+      "best_fitness": 8.1,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 54,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 55,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 56,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 57,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 58,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 59,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 60,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 61,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 62,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 63,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 64,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 65,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 66,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 67,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 68,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 69,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 70,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 71,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 72,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 73,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 74,
+      "best_fitness": 7.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 75,
+      "best_fitness": 7.2,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 76,
+      "best_fitness": 7.2,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 77,
+      "best_fitness": 7.2,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 78,
+      "best_fitness": 7.2,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 79,
+      "best_fitness": 7.2,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 80,
+      "best_fitness": 7.2,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 81,
+      "best_fitness": 7.2,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 82,
+      "best_fitness": 7.2,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 83,
+      "best_fitness": 7.2,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 84,
+      "best_fitness": 7.2,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 85,
+      "best_fitness": 7.2,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 86,
+      "best_fitness": 7.2,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 87,
+      "best_fitness": 6.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 88,
+      "best_fitness": 6.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 89,
+      "best_fitness": 6.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 90,
+      "best_fitness": 6.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 91,
+      "best_fitness": 6.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 92,
+      "best_fitness": 6.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 93,
+      "best_fitness": 6.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 94,
+      "best_fitness": 6.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 95,
+      "best_fitness": 6.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 96,
+      "best_fitness": 6.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 97,
+      "best_fitness": 6.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 98,
+      "best_fitness": 6.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 99,
+      "best_fitness": 6.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 100,
+      "best_fitness": 6.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 101,
+      "best_fitness": 6.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 102,
+      "best_fitness": 6.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 103,
+      "best_fitness": 6.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 104,
+      "best_fitness": 6.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 105,
+      "best_fitness": 6.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 106,
+      "best_fitness": 6.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 107,
+      "best_fitness": 6.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 108,
+      "best_fitness": 6.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 109,
+      "best_fitness": 6.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 110,
+      "best_fitness": 6.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 111,
+      "best_fitness": 6.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 112,
+      "best_fitness": 6.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 113,
+      "best_fitness": 6.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 114,
+      "best_fitness": 6.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 115,
+      "best_fitness": 6.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 116,
+      "best_fitness": 6.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 117,
+      "best_fitness": 6.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 118,
+      "best_fitness": 6.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 119,
+      "best_fitness": 6.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 120,
+      "best_fitness": 6.4,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 121,
+      "best_fitness": 6.000000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 122,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 123,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 124,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 125,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 126,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 127,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 128,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 129,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 130,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 131,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 132,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 133,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 134,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 135,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 136,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 137,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 138,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 139,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 140,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 141,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 142,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 143,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 144,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 145,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 146,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 147,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 148,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 149,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 150,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 151,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 152,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 153,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 154,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 155,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 156,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 157,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 158,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 159,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 160,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 161,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 162,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 163,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 164,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 165,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 166,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 167,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 168,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 169,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 170,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 171,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 172,
+      "best_fitness": 5.800000000000001,
+      "module_id": 1,
+      "week": 3
+    },
+    {
+      "iteration": 0,
+      "best_fitness": 28.799999999999997,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 1,
+      "best_fitness": 27.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 2,
+      "best_fitness": 26.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 3,
+      "best_fitness": 25.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 4,
+      "best_fitness": 24.7,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 5,
+      "best_fitness": 23.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 6,
+      "best_fitness": 22.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 7,
+      "best_fitness": 22.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 8,
+      "best_fitness": 21.599999999999998,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 9,
+      "best_fitness": 20.999999999999996,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 10,
+      "best_fitness": 20.999999999999996,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 11,
+      "best_fitness": 20.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 12,
+      "best_fitness": 20.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 13,
+      "best_fitness": 19.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 14,
+      "best_fitness": 19.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 15,
+      "best_fitness": 19.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 16,
+      "best_fitness": 19.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 17,
+      "best_fitness": 18.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 18,
+      "best_fitness": 18.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 19,
+      "best_fitness": 18.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 20,
+      "best_fitness": 18.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 21,
+      "best_fitness": 18.000000000000004,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 22,
+      "best_fitness": 17.400000000000002,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 23,
+      "best_fitness": 16.8,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 24,
+      "best_fitness": 16.8,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 25,
+      "best_fitness": 16.8,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 26,
+      "best_fitness": 16.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 27,
+      "best_fitness": 16.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 28,
+      "best_fitness": 15.799999999999999,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 29,
+      "best_fitness": 15.799999999999997,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 30,
+      "best_fitness": 15.399999999999997,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 31,
+      "best_fitness": 15.399999999999997,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 32,
+      "best_fitness": 14.999999999999998,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 33,
+      "best_fitness": 14.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 34,
+      "best_fitness": 14.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 35,
+      "best_fitness": 13.799999999999999,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 36,
+      "best_fitness": 13.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 37,
+      "best_fitness": 13.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 38,
+      "best_fitness": 12.799999999999999,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 39,
+      "best_fitness": 12.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 40,
+      "best_fitness": 12.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 41,
+      "best_fitness": 12.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 42,
+      "best_fitness": 12.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 43,
+      "best_fitness": 12.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 44,
+      "best_fitness": 11.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 45,
+      "best_fitness": 11.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 46,
+      "best_fitness": 11.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 47,
+      "best_fitness": 11.5,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 48,
+      "best_fitness": 10.600000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 49,
+      "best_fitness": 10.600000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 50,
+      "best_fitness": 10.600000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 51,
+      "best_fitness": 10.600000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 52,
+      "best_fitness": 10.600000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 53,
+      "best_fitness": 10.600000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 54,
+      "best_fitness": 10.600000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 55,
+      "best_fitness": 10.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 56,
+      "best_fitness": 10.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 57,
+      "best_fitness": 10.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 58,
+      "best_fitness": 10.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 59,
+      "best_fitness": 10.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 60,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 61,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 62,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 63,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 64,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 65,
+      "best_fitness": 10.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 66,
+      "best_fitness": 9.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 67,
+      "best_fitness": 9.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 68,
+      "best_fitness": 9.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 69,
+      "best_fitness": 9.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 70,
+      "best_fitness": 9.1,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 71,
+      "best_fitness": 9.1,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 72,
+      "best_fitness": 9.1,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 73,
+      "best_fitness": 9.1,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 74,
+      "best_fitness": 9.1,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 75,
+      "best_fitness": 8.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 76,
+      "best_fitness": 8.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 77,
+      "best_fitness": 8.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 78,
+      "best_fitness": 8.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 79,
+      "best_fitness": 8.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 80,
+      "best_fitness": 8.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 81,
+      "best_fitness": 8.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 82,
+      "best_fitness": 8.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 83,
+      "best_fitness": 8.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 84,
+      "best_fitness": 8.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 85,
+      "best_fitness": 8.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 86,
+      "best_fitness": 8.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 87,
+      "best_fitness": 8.2,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 88,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 89,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 90,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 91,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 92,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 93,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 94,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 95,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 96,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 97,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 98,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 99,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 100,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 101,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 102,
+      "best_fitness": 7.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 103,
+      "best_fitness": 7.199999999999999,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 104,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 105,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 106,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 107,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 108,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 109,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 110,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 111,
+      "best_fitness": 6.6,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 112,
+      "best_fitness": 6.199999999999999,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 113,
+      "best_fitness": 6.199999999999999,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 114,
+      "best_fitness": 6.199999999999999,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 115,
+      "best_fitness": 6.199999999999999,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 116,
+      "best_fitness": 6.199999999999999,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 117,
+      "best_fitness": 6.199999999999999,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 118,
+      "best_fitness": 6.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 119,
+      "best_fitness": 6.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 120,
+      "best_fitness": 6.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 121,
+      "best_fitness": 6.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 122,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 123,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 124,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 125,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 126,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 127,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 128,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 129,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 130,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 131,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 132,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 133,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 134,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 135,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 136,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 137,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 138,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 139,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 140,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 141,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 142,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 143,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 144,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 145,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 146,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 147,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 148,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 149,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 150,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 151,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 152,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 153,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 154,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 155,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 156,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 157,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 158,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 159,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 160,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 161,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 162,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 163,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 164,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 165,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 166,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 167,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 168,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 169,
+      "best_fitness": 5.4,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 170,
+      "best_fitness": 5.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 171,
+      "best_fitness": 5.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 172,
+      "best_fitness": 5.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 173,
+      "best_fitness": 5.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 174,
+      "best_fitness": 5.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 175,
+      "best_fitness": 5.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 176,
+      "best_fitness": 5.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 177,
+      "best_fitness": 5.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 178,
+      "best_fitness": 5.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 179,
+      "best_fitness": 5.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 180,
+      "best_fitness": 5.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 181,
+      "best_fitness": 5.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 182,
+      "best_fitness": 5.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 183,
+      "best_fitness": 5.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 184,
+      "best_fitness": 5.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 185,
+      "best_fitness": 5.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 186,
+      "best_fitness": 5.0,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 187,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 188,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 189,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 190,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 191,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 192,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 193,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 194,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 195,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 196,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 197,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 198,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 199,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 200,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 201,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 202,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 203,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 204,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 205,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 206,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 207,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 208,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 209,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 210,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 211,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 212,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 213,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 214,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 215,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 216,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 217,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 218,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 219,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 220,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 221,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 222,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 223,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 224,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 225,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 226,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 227,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 228,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 229,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 230,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 231,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 232,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 233,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 234,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 235,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 236,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    },
+    {
+      "iteration": 237,
+      "best_fitness": 4.800000000000001,
+      "module_id": 1,
+      "week": 4
+    }
+  ],
+  "computation_time": 23.17123794555664,
+  "final_fitness": 17.400000000000002,
+  "algorithm": "genetic_algorithm",
+  "timestamp": "2025-06-01T06:31:28.324208"
+}

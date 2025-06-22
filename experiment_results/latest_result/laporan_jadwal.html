@@ -1,0 +1,904 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Laporan Analisis Jadwal Praktikum</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 40px; }
+            h1, h2, h3 { color: #2c3e50; }
+            .section { 
+                margin-bottom: 30px; 
+                padding: 20px; 
+                border-radius: 10px; 
+                background-color: #f9f9f9; 
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            .conflict { color: #e74c3c; font-weight: bold; }
+            .warning { color: #e67e22; }
+            .visualization { 
+                margin: 20px 0; 
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                padding: 10px;
+                background: white;
+            }
+            table { 
+                border-collapse: collapse; 
+                width: 100%; 
+                margin: 15px 0;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            }
+            th, td { 
+                border: 1px solid #ddd; 
+                padding: 12px; 
+                text-align: left; 
+            }
+            th { 
+                background-color: #3498db; 
+                color: white; 
+                position: sticky;
+                top: 0;
+            }
+            tr:nth-child(even) { background-color: #f5f9fc; }
+            tr:hover { background-color: #f1f7fd; }
+            .header {
+                background: linear-gradient(135deg, #3498db, #2c3e50);
+                color: white;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 30px;
+            }
+            .summary-card {
+                display: flex;
+                justify-content: space-around;
+                margin: 20px 0;
+                flex-wrap: wrap;
+            }
+            .card {
+                background: white;
+                border-radius: 10px;
+                padding: 15px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                min-width: 200px;
+                text-align: center;
+                margin: 10px;
+            }
+            .card.conflict { background-color: #ffebee; }
+            .card.warning { background-color: #fff3e0; }
+            .card.success { background-color: #e8f5e9; }
+            .card h3 { margin-top: 0; color: #2c3e50; }
+            .card .value {
+                font-size: 24px;
+                font-weight: bold;
+            }
+            .conflict .value { color: #e74c3c; }
+            .warning .value { color: #e67e22; }
+            .success .value { color: #2ecc71; }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Laporan Analisis Jadwal Praktikum</h1>
+            <p>Tanggal laporan: 2025-06-02 15:05:14</p>
+        </div>
+        
+        <div class="summary-card">
+            <div class="card success">
+                <h3>Total Sesi</h3>
+                <p class="value">288</p>
+            </div>
+            <div class="card success">
+                <h3>Asisten</h3>
+                <p class="value">6</p>
+            </div>
+            <div class="card success">
+                <h3>Kelompok</h3>
+                <p class="value">36</p>
+            </div>
+            <div class="card success">
+                <h3>Konflik Asisten</h3>
+                <p class="value">0</p>
+            </div>
+            <div class="card success">
+                <h3>Konflik Grup</h3>
+                <p class="value">0</p>
+            </div>
+            <div class="card success">
+                <h3>Pelanggaran Kapasitas</h3>
+                <p class="value">0</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Konflik Jadwal Asisten</h2>
+            <p>Terjadi ketika asisten mengajar lebih dari satu chapter berbeda dalam shift yang sama</p>
+            <p>Tidak ada konflik asisten</p>
+            
+            <h2>Konflik Jadwal Grup</h2>
+            <p>Terjadi ketika grup memiliki lebih dari satu sesi dalam shift yang sama</p>
+            <p>Tidak ada konflik grup</p>
+            
+            <h2>Pelanggaran Kapasitas Asisten</h2>
+            <p>Terjadi ketika asisten mengajar lebih dari 2 grup dalam satu shift</p>
+            <p>Tidak ada pelanggaran kapasitas</p>
+        </div>
+        
+        <div class="section">
+            <h2>Coverage Chapter per Kelompok</h2>
+            <p>Setiap kelompok harus memiliki 8 chapter unik (U-1 hingga U-8):</p>
+            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Group</th>
+      <th>Unique Chapters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>26</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>27</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>29</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>31</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>32</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>33</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>36</td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+            <div class="visualization">
+                <iframe src="visualizations\group_coverage.html" width="100%" height="500px"></iframe>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Distribusi Shift</h2>
+            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Shift</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Shift5</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <td>Shift6</td>
+      <td>52</td>
+    </tr>
+    <tr>
+      <td>Shift3</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <td>Shift1</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <td>Shift2</td>
+      <td>44</td>
+    </tr>
+    <tr>
+      <td>Shift4</td>
+      <td>36</td>
+    </tr>
+  </tbody>
+</table>
+            <div class="visualization">
+                <iframe src="visualizations\shift_distribution.html" width="100%" height="500px"></iframe>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Analisis Beban Kerja Asisten</h2>
+            <h3>Ringkasan Beban Kerja</h3>
+            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Assistant</th>
+      <th>Total_Sessions</th>
+      <th>Groups_Handled</th>
+      <th>Shifts_Handled</th>
+      <th>Days_Worked</th>
+      <th>Chapters_Handled</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Amel</td>
+      <td>46</td>
+      <td>25</td>
+      <td>6</td>
+      <td>13</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>Andi</td>
+      <td>55</td>
+      <td>26</td>
+      <td>6</td>
+      <td>12</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>Bowo</td>
+      <td>49</td>
+      <td>25</td>
+      <td>6</td>
+      <td>15</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>Fatimah</td>
+      <td>47</td>
+      <td>23</td>
+      <td>5</td>
+      <td>16</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>Rafli</td>
+      <td>44</td>
+      <td>24</td>
+      <td>6</td>
+      <td>15</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>Rahmat</td>
+      <td>47</td>
+      <td>25</td>
+      <td>6</td>
+      <td>12</td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+            
+            <h3>Shift per Hari per Asisten</h3>
+            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Assistant</th>
+      <th>Date</th>
+      <th>Shifts_Per_Day</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Amel</td>
+      <td>2022-09-14</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Amel</td>
+      <td>2022-09-15</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Amel</td>
+      <td>2022-09-16</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Amel</td>
+      <td>2022-09-19</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Amel</td>
+      <td>2022-09-21</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Amel</td>
+      <td>2022-09-22</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Amel</td>
+      <td>2022-09-27</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Amel</td>
+      <td>2022-09-28</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Amel</td>
+      <td>2022-09-29</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Amel</td>
+      <td>2022-09-30</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Amel</td>
+      <td>2022-10-04</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Amel</td>
+      <td>2022-10-06</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Amel</td>
+      <td>2022-10-08</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Andi</td>
+      <td>2022-09-13</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Andi</td>
+      <td>2022-09-14</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Andi</td>
+      <td>2022-09-15</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Andi</td>
+      <td>2022-09-16</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Andi</td>
+      <td>2022-09-19</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Andi</td>
+      <td>2022-09-23</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Andi</td>
+      <td>2022-09-27</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Andi</td>
+      <td>2022-09-28</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Andi</td>
+      <td>2022-09-29</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Andi</td>
+      <td>2022-09-30</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Andi</td>
+      <td>2022-10-05</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Andi</td>
+      <td>2022-10-07</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Bowo</td>
+      <td>2022-09-13</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Bowo</td>
+      <td>2022-09-15</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Bowo</td>
+      <td>2022-09-17</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Bowo</td>
+      <td>2022-09-20</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Bowo</td>
+      <td>2022-09-21</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Bowo</td>
+      <td>2022-09-22</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Bowo</td>
+      <td>2022-09-23</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Bowo</td>
+      <td>2022-09-27</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Bowo</td>
+      <td>2022-09-28</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Bowo</td>
+      <td>2022-09-29</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Bowo</td>
+      <td>2022-09-30</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Bowo</td>
+      <td>2022-10-04</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Bowo</td>
+      <td>2022-10-06</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Bowo</td>
+      <td>2022-10-07</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Bowo</td>
+      <td>2022-10-08</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Fatimah</td>
+      <td>2022-09-12</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Fatimah</td>
+      <td>2022-09-14</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Fatimah</td>
+      <td>2022-09-16</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Fatimah</td>
+      <td>2022-09-19</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Fatimah</td>
+      <td>2022-09-21</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Fatimah</td>
+      <td>2022-09-23</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Fatimah</td>
+      <td>2022-09-24</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Fatimah</td>
+      <td>2022-09-26</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Fatimah</td>
+      <td>2022-09-27</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Fatimah</td>
+      <td>2022-09-28</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Fatimah</td>
+      <td>2022-09-29</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Fatimah</td>
+      <td>2022-09-30</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Fatimah</td>
+      <td>2022-10-03</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Fatimah</td>
+      <td>2022-10-05</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Fatimah</td>
+      <td>2022-10-07</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Fatimah</td>
+      <td>2022-10-08</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Rafli</td>
+      <td>2022-09-12</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Rafli</td>
+      <td>2022-09-14</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Rafli</td>
+      <td>2022-09-15</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Rafli</td>
+      <td>2022-09-17</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Rafli</td>
+      <td>2022-09-19</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Rafli</td>
+      <td>2022-09-21</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Rafli</td>
+      <td>2022-09-24</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Rafli</td>
+      <td>2022-09-26</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Rafli</td>
+      <td>2022-09-28</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Rafli</td>
+      <td>2022-09-29</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Rafli</td>
+      <td>2022-09-30</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Rafli</td>
+      <td>2022-10-01</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Rafli</td>
+      <td>2022-10-05</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Rafli</td>
+      <td>2022-10-06</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Rafli</td>
+      <td>2022-10-07</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Rahmat</td>
+      <td>2022-09-14</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Rahmat</td>
+      <td>2022-09-15</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Rahmat</td>
+      <td>2022-09-17</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Rahmat</td>
+      <td>2022-09-21</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Rahmat</td>
+      <td>2022-09-22</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Rahmat</td>
+      <td>2022-09-24</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Rahmat</td>
+      <td>2022-09-28</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Rahmat</td>
+      <td>2022-09-29</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Rahmat</td>
+      <td>2022-10-01</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Rahmat</td>
+      <td>2022-10-05</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Rahmat</td>
+      <td>2022-10-06</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Rahmat</td>
+      <td>2022-10-08</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+            
+            <div class="visualization">
+                <iframe src="visualizations\assistant_workload.html" width="100%" height="500px"></iframe>
+            </div>
+            <div class="visualization">
+                <iframe src="visualizations\groups_handled.html" width="100%" height="500px"></iframe>
+            </div>
+            <div class="visualization">
+                <iframe src="visualizations\workload_heatmap.html" width="100%" height="500px"></iframe>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Distribusi Harian</h2>
+            <div class="visualization">
+                <iframe src="visualizations\daily_sessions.html" width="100%" height="500px"></iframe>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Distribusi per Hari dalam Minggu</h2>
+            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Day</th>
+      <th>Sessions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Wednesday</td>
+      <td>99</td>
+    </tr>
+    <tr>
+      <td>Thursday</td>
+      <td>65</td>
+    </tr>
+    <tr>
+      <td>Friday</td>
+      <td>56</td>
+    </tr>
+    <tr>
+      <td>Saturday</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <td>Tuesday</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <td>Monday</td>
+      <td>18</td>
+    </tr>
+  </tbody>
+</table>
+            <div class="visualization">
+                <iframe src="visualizations\day_distribution.html" width="100%" height="500px"></iframe>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Distribusi Penggunaan Laboratorium</h2>
+            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Lab</th>
+      <th>Sessions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Dasar Elektro</td>
+      <td>288</td>
+    </tr>
+  </tbody>
+</table>
+            <div class="visualization">
+                <iframe src="visualizations\lab_distribution.html" width="100%" height="500px"></iframe>
+            </div>
+        </div>
+    </body>
+    </html>
+    
